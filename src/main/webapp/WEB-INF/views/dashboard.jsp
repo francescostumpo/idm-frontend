@@ -35,5 +35,6 @@
 
 </body>
  	<jsp:include page="subviews/scripts.jsp"></jsp:include>
+    <script src="./webapp/AngularJS/controllers/"></script>
 
 </html>

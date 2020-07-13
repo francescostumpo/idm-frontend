@@ -24,45 +24,112 @@
     <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
 </nav>
 
-<div id="wrapper">
+<div id="wrapper" ng-controller="garaOverviewController">
     <div id="content-wrapper" class="d-flex flex-column" >
         <!-- Header Section -->
-        <div style="background-color: white">
+        <div class="header-section">
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                    <p>Breadcrumbing placeholder</p>
-                    <h3>Mega titolo gigante</h3>
-                    <div class="row mt-4">
-                        <div class="col-lg-2 col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label style="font-size: 10px">SOCIETA'</label>
-                                <p>Stogit</p>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Bandi di Gara</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Servizio di manutenzione e riparazione di compressori aria...</li>
+                        </ol>
+                    </nav>
+                    <h3 class="font-bold">Mega titolo gigante</h3>
+                    <div class="col-lg-6 col-md-6 col-sm-6 mb-2" style="padding-left: 0rem !important;">
+                        <div class="row mt-4">
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label class="label-item">SOCIETA'</label>
+                                    <p class="font-bold">Stogit</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label style="font-size: 10px">CIG</label>
-                                <p>789456123</p>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label class="label-item">CIG</label>
+                                    <p class="font-bold">789456123</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label style="font-size: 10px">CHIUSURA GARA</label>
-                                <p>06/07/2020</p>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label class="label-item">CHIUSURA GARA</label>
+                                    <p class="font-bold">06/07/2020</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-12">
-                            <div class="form-group">
-                                <label style="font-size: 10px">FINE LAVORAZIONE</label>
-                                <p>31/07/2020</p>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <label class="label-item">FINE LAVORAZIONE</label>
+                                    <p class="font-bold">31/07/2020</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
+        <!-- End Header Section -->
+        <!-- Main Section -->
+        <div class="container-fluid">
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <p class="nav-link active" id="pills-supplier-tab" data-toggle="pill"  role="tab" aria-controls="pills-suppliers" aria-selected="true" ng-click="makeVisibleTab('pills-supplier', 'pills-challenge')">Caricamenti Fornitori</p>
+                    </li>
+                    <li class="nav-item">
+                        <p class="nav-link" id="pills-challenge-tab" data-toggle="pill"  role="tab" aria-controls="pills-challenge" aria-selected="false" ng-click="makeVisibleTab('pills-challenge', 'pills-supplier')">Documentazione di gara</p>
+                    </li>
+                </ul>
+                <div class="row mt-2">
+                    <div class="col-lg-10 col-md-10 col-sm-12">
+                        <p>6 FORNITORI CARICATI</p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12">
+                        <button class="btn button-neutral-compare-advise">
+                            <i class="fa fa-plus"></i>
+                            <span class="ml-2">AGGIUNGI FORNITORE</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="tab-content mt-2" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-supplier" role="tabpanel" aria-labelledby="pills-supplier-tab">
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 mt-3" ng-repeat="supplier in suppliers">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                                AZ
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9">
+                                                <p class="font-bold">{{supplier.name}}</p>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-sm-1">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer" style="background-color: white; padding-bottom: 0">
+                                        <div class="row mb-3">
+                                            <div class="col-lg-10 col-md-10 col-sm-10">6/8 documenti</div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">Alert</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="progress" style="height: 6px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-challenge" role="tabpanel" aria-labelledby="pills-challenge-tab">Documenti</div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Main Section -->
     </div>
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -71,5 +138,6 @@
 
 </body>
 <jsp:include page="subviews/scripts.jsp"></jsp:include>
+<script type="text/javascript" src="webapp/AngularJS/controllers/garaOverviewController.js"></script>
 
 </html>

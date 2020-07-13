@@ -1549,3 +1549,40 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
 .fc th {
     text-transform: uppercase;
 }
+
+.breadcrumb{
+    background-color: transparent;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    padding-bottom: 0.25rem;
+}
+
+.label-item{
+    font-size: 12px;
+}
+
+.font-bold{
+    font-weight: bold;
+}
+
+.breadcrumb-item+.breadcrumb-item {
+    padding-left: 0rem;
+}
+
+.header-section{
+    background-color: white;
+    border-bottom: 1px solid darkgray;
+}
+
+.nav-pills .nav-link{
+    border-radius: 0rem;
+    border-bottom: 1px solid darkgray;
+    cursor: pointer;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #004B9C;
+    background-color: transparent;
+    border-bottom: 2px solid #004B9C;
+    font-weight: bold;
+}
