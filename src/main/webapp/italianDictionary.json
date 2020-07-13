@@ -1,0 +1,289 @@
+closeButton:Chiudi
+continueButton:Analizza
+analyzeButton:Analizza
+compareButton:Confronta
+goButton:VAI AL DOCUMENTO
+headerAnalyze:Analizza
+headerCompare:Confronta
+headerSearch:Cerca
+idContract:ID Contratto
+homepageDescriptionFirstRow:Accelera i processi decisionali tagliando il tempo speso nell'analisi documentale.
+homepageDescriptionSecondRow:Aumenta il core model e ottieni più valore dai tuoi documenti
+homepageDescriptionThirdRow:utilizzando un raffinato sistema di analisi cognitiva.
+homepageSearchContract:Cerca Contratto
+homepageSearchContractButton:Cerca
+labelOtherContractObject:Altri contratti con lo stesso oggetto
+homepageAnalyzeContract:Analizza Contratto
+homepageAnalyzeContractButton:Analizza
+homepageCompareContract:Confronta Contratti
+labelNoContractFound:Nessun contratto trovato
+labelNoContractPresent:Nessun contratto presente
+homepageCompareContractButton:Confronta
+modalAnalyzeContractTitle:Analizza Documento
+modalAnalyzeContractUpload:Sottometti qui il tuo contratto:
+modalAnalyzeContractSupportedFileType:Le tipologie di file supportati sono PDF, Word, File immagine.
+modalAnalyzeContractSearchButton:Ricerca Documenti
+modalAnalyzeContractSelectLanguage:Lingua del contratto da caricare:
+modalSearchWriteId:Inserisci l'id del contratto da analizzare:
+modalCompareContractTitle:Confronta documenti
+modalCompareContractBaseDocument:Documento Base
+modalCompareContractUpload:Sottometti qui il tuo documento
+modalCompareContractComparisonDocument:Documento di Confronto
+modalCompareContractSnamTemplate:Standard SNAM
+analyzeLoading:Caricamento contratto in corso...
+analyzeShowFilters:Mostra Filtri
+analyzeResetFilters:Resetta Filtri
+analyzeElementScrollbar:Elemento
+analyzeDocumentButton:Documento
+analyzeSelectionButton:Sintesi
+analyzeLoadButton:Leggi
+analyzeShow:Mostra
+analyzeHide:Nascondi
+analyzeFilters:FILTRI
+analyzeLeftNavbarCategories:CATEGORIA
+analyzeLeftNavbarNatures:NATURA
+analyzeLeftNavbarParties:PARTE COINVOLTA
+analyzeLeftNavbarAttributes:ATTRIBUTI
+analyzeLeftNavbarNoCategoriesFound:Nessuna categoria trovata
+analyzeLeftNavbarNoNaturesFound:Nessuna natura trovata
+analyzeLeftNavbarNoPartiesFound:Nessuna parte coinvolta trovata
+analyzeLeftNavbarNoAttributesFound:Nessun attributo trovato
+analyzeRightNavbarElementDetails:DETTAGLIO ELEMENTO
+analyzeRightNavbarEntitiesFound:Filtri trovati nell'elemento:
+analyzeRightNavbarNoEntities:Nessun filtro trovato nell'elemento.
+analyzeRightNavbarDefinitions:DEFINIZIONE
+analyzeRightNavbarContacts:CONTATTI
+analyzeRightNavbarDates:DATE/DURATE
+analyzeRightNavbarInvolvedParties: PARTI COINVOLTE
+analyzeRightNavbarType:Tipo:
+analyzeRightNavbarNoCategories:Nessuna categoria trovata nell'elemento
+analyzeRightNavbarNoDefinitions:Nessuna definizione trovata nel contratto
+analyzeRightNavbarNoContacts:Nessun contatto trovato nel contratto
+analyzeRightNavbarNoDates:Nessuna data o durata trovata nel contratto
+searchTitleMine:Cerca tra i miei
+searchTitleAll:Cerca
+searchLoading:Ricerca contratti in corso...
+searchParties:Parti:
+contractDetailModalInvolvedParties:Parti coinvolte
+searchContractType:Tipologia Contratto:
+searchGoverningLaw:Legge Governativa:
+searchContractInForce:Lingua:
+searchTableCreationDate:Caricato il
+searchTableCreationUser:Caricato da
+searchTableDocName:Nome Documento
+searchTableParties:Parti Coinvolte
+searchTableContractType:Tipologia
+searchTableGoverningLaw:Legislazione Applicabile
+searchTableEffectiveDate:Data Entrata in Vigore
+searchTableContractInForce:In vigore
+searchTableGo:VEDI
+searchTableActionContract:Modifica
+searchForContract:Cerca Contratto
+searchForContractButton:Cerca Documento
+settingsTitle:Impostazioni
+settingsMenuLang:Lingua
+settingsMenuApp:Visualizzazione
+settingsLanguagePersonalization:Personalizza lingua
+settingsGlobalLanguage:Lingua applicazione
+settingsChangeButton:Applica modifiche
+settingsLanguage:Lingua:
+settingsDocumentsLanguage:Lingua caricamento documenti
+settingsTextVisualization:VIsualizzazione Testo
+settingsFont:Font del testo
+settingsDimension:Dimensione del testo
+settingsDocumentSelection:Selezione Documento
+settingsColorPalette:Palette Colori
+uploadLoading:Upload e analisi del contratto in corso...
+downloadContract:SCARICA
+downloadContractButton:Scarica
+homepageWelcome:Ciao
+browseButton:Carica
+documentName:Nome Documento
+labelAllegati:Allegati
+textDimensionSmall:Piccola
+textDimensionMedium:Media
+textDimensionHigh:Grande
+languageItalian:Italiano
+languageEnglish:Inglese
+uploadContractWarningAnalyze:Hai già caricato un contratto con questo nome. Cliccando sul bottone Analizza verranno sovrascritti gli attuali dati relativi al contratto.
+uploadContractWarningCompare:Il contratto selezionato è già  presente nel sistema. Cliccando sul bottone Confronta verranno sovrascritti gli attuali dati relativi al contratto.
+uploadContractMessageOK:Contratto caricato correttamente
+uploadContractMessageErrorBecauseOfWatson:Watson ha riscontrato dei problemi durante l'analisi del contratto
+uploadContractMessageError:Errore durante il caricamento del contratto
+uploadContractModalFinished:AI 4 CONTRACT MANAGEMENT
+uploadContractModalGoToAnalyze:Visualizza
+uploadContractModalGoToCompare:Visualizza
+uploadContractModalGoToAnalyzeNewTab:Visualizza in una nuova scheda
+uploadContractModalGoToCompareNewTab:Visualizza in una nuova scheda
+uploadContractModalOkAnalyze:Analisi del contratto conclusa.
+uploadContractModalOkCompare:Confronto dei contratti concluso.
+uploadContractProcessingNotification:Contratto in analisi. Riceverai una notifica appena il processo sarà terminato
+noElementsFoundNotification:Nessun elemento trovato
+searchTableDeadline:Scadenza
+suggestChanges:Suggerisci modifiche
+suggestChangesCapitol:SUGGERISCI MODIFICHE
+suggestChangesDefinitions:Suggerisci la label da associare ad ogni elemento, o segnalaci se ci sono associazioni non corrette.
+suggestChangesLabelFilter:Scegli tra le label dell' elenco
+suggestChangesCurrentFilter:FILTRI CORRENTI
+suggestChangeToAddFilter:FILTRI DA AGGIUNGERE
+suggestChangesComment:COMMENTO
+suggestChangesSend:Invia
+overviewContracts:Overview
+critical:Scaduti
+working:In corso
+expiring:In scadenza
+criticalContract:Scaduti
+workingContract:In Corso
+expiringContract:In Scadenza
+seeAll:Vedi tutti
+contractValue:Entrata in vigore
+contractDeadline:Scadenza
+documentSelected:Documenti
+contractNameAlreadyExist:Esiste già un contratto con il nome
+contractWithIdNotExist:Non esiste un contratto con id
+contractUpdateNameError:Errore durante l'aggiornamento del nome del contratto
+contracUpdateNameOK:Nome del contratto aggiornato con successo
+workbookNavbarHeaderAnalyze:Analizza Documento
+workbookNavbarHeaderCompare:Confronta Documenti
+labelDaysAgo:giorni fa
+labelMinutesAgo:minuti fa
+labelHoursAgo:ore fa
+labelLogout:Clicca sul bottone "Logout" se vuoi terminare la sessione corrente
+labelLogoutHeader:Sicuro di voler uscire?
+labelNotification:Notifiche
+labelProfile:Profilo
+labelDetails:Dettagli
+labelContractDetails:Dettagli contratto
+labelEndDate:Data di scadenza
+labelContractState:Stato contratto
+labelNow:Adesso
+labelDetailsAnalyzeCompare:DETTAGLI
+labelfiltersAnalyzeCompare:FILTRI
+labelSearchForAnalyze:Cerca...
+labelDashboard:Dashboard
+labelTemplates:Standard
+preferredContract:Contratti Preferiti
+preferredContractDashboard:I miei preferiti
+labelActionsHeader:Azioni
+labelAdvise:Advise
+labelContractStandard:Standard Snam
+labelLastProviderContract:Contratto/i con stesso fornitore
+labelChangeContract:Cambia contratto
+labelStartAdvise:Confronta con i suggeriti
+labelNoSameSupplierContractFound:Nessun contratto sottoscritto dallo stesso fornitore trovato
+labelNoStandardContractFound:Nessun contratto standard trovato
+labelWarning:ADVISE
+labelMissingFilters:ELEMENTI MANCANTI NEL CONTRATTO
+labelExcedingFilters:ELEMENTI IN ECCESSO NEL CONTRATTO
+labelNumberOfMissingFilters:elementi mancanti
+labelOneMissingFilters:elemento mancante
+labelSupplierContract:Con fornitore
+labelNoMissingFilters:Nessun filtro mancante
+labelNoExcedingFilters:Nessun filtro in eccesso
+labelCurrentContract:Contratto corrente
+labelComparisonContract:Contratto di confronto
+labelNumberOfElementsFound:Elementi trovati
+labelHeaderPreviewAdvise:Anteprima filtro
+labelSupplier:Fornitore
+labelNumberOfExcessFilters:elementi in eccesso
+labelOneExcessFilters:elemento in eccesso
+labelModalAccuracy:Accuratezza
+labelModalVersion:Versione
+labelModelDate:Data aggiornamento
+labelObject:Oggetto
+labelNoNotifications:Nessuna notifica
+labelInformationOfAdviseProcess:Ti proponiamo uno standard che ti potrebbe interessare
+labelInformationOfAdviseProcessSupplier:Ti proproniamo dei contratti che ti potrebbero interessare
+labelFilterPreview:Filtro
+labelModelDateUpdateIta:Data aggiornamento modello italiano
+labelModelDateUpdateEng:Data aggiornamento modello inglese
+labelModelsInformation:Informazioni sui modelli
+labelItalianSettings:Italiano
+labelEnglishSettings:Inglese
+labelPublicContracts:Area condivisa
+labelPrivateContracts:La mia scrivania
+labelCloseFilters:Chiudi filtri
+labelOpenFilters:Apri filtri
+noPermissionError:Non hai i permessi per eseguire questa operazione
+labelForPublicationContract:Cliccare su "Procedi" per spostare il contratto in "Area condivisa"
+labelHeaderPublicationContract:Sposta in "Area condivisa"
+labelPubblicationButton:Procedi
+labelSucessfullyOperation:Operazione completata con successo
+labelErrorOperation:Errore durante l'esecuzione dell'operazione
+labelModalExitFromAdviseExit:Esci
+labelModalExitFromAdviseText:Cliccare su "Esci" per uscire dalla modalità advise
+labelModalExitFromAdviseButton:Esci
+labelModalDeleteContractHeader:Eliminazione Contratto
+labelModalDeleteContractText:Cliccare su "Elimina" per eliminare il contratto
+labelModalDeleteContractButton:Elimina
+labelDeleteAll:Elimina tutto
+labelPersonalContract:Contratti Personali
+labelPersonalContract:I miei contratti
+labelModalPrivatizationContractHeader:Sposta in "La mia scrivania"
+labelModalPrivatizationContractText:Clicca su "Procedi" per spostare il contratto in "La mia scrivania"
+labelModalPrivatizationContractButton:Procedi
+labelForContractInLoading:Esiste un altro contratto in analisi. Per favore aspetta che finisca il processo prima di analizzare un altro contratto
+labelInsertHereYourComment:Inserisci qui il tuo commento...
+labelHeaderAdviseScope:Di seguito alcuni standard che potrebbero esserti utili
+searchTemplateLabel:Cerca standard
+youWillFindYourContractInMYContract:Troverai il contratto caricato nella sezione "I miei contratti"
+labelPutInPreferred:Contratto inserito nei preferiti
+labelRemovedFromPreferred:Contratto rimosso dai preferiti
+labelNewContractSearchView:Carica nuovo
+tooltipDeleteContract:Elimina il contratto
+tooltipPublishContract:Sposta il contratto in "Area condivisa"
+tooltipAddToPreferred:Aggiungi ai preferiti
+tooltipRemoveFromPreferred:Rimuovi dai preferiti
+tooltipModifyName:Modifica il nome
+tooltipPrivatizeContract:Sposta il contratto in "La mia scrivania"
+tooltipSaveOnlyHtml:Salva
+tooltipSaveAndAnalyze:Salva e analizza il contratto
+tooltipDownloadContract:Scarica
+tooltipCreateComment:Crea nuovo commento
+labelCompareWithStandard:Standard
+labelCompareWithContract:Contratto
+tooltipCompareTemplateContract:Confronta con standard
+tooltipCompareContractTemplate:Confronta con contratto
+labelModalExitFromEditModeHeader:Esci
+labelModalExitFromAEditModeText:Sicuro di voler uscire? Tutte le modifiche non salvate andranno perse
+labelModalExitFromEditModeButtonExit:Esci senza analizzare
+labelModalExitFromEditModeSaveAndAnlyze:Salva, analizza ed esci
+labelFoundExactMatchAdvise:Contratto con stesso fornitore e stesso oggetto
+labelHeaderModalSessionExpired:Sessione scaduta
+labelBodyModalSessionExpired:La sessione corrente è scaduta. Per favore effettua di nuovo il login per ristabilire una sessione sicura
+labelButtonModalSessionExpired:Vai al Login
+labelMainInvolvedPartySearchView:Fornitore
+labelDocument:Documento
+labelDate:Date
+labelEconomics:Valori
+labelApplyFilter:Applica Filtri
+labelBudgetSearchViewFilter:Montante
+labelPriceFrom:Da
+labelPriceTo:A
+labelYes:Si
+labelNo:No
+labelOk:Ok
+labelCritical:Critici
+labelIsExpiringOptions:Opzioni in scadenza
+labelEconomicStatus:Stato economico
+labelNotificationExpiringContracts:Contratti in scadenza
+labelNotificationExpiringOptions:Opzioni in scadenza
+labelNotificationReviewEconomics:Evidenze economiche
+labelContrats:Contratto/i
+labelResumePlannedActivities:ecco le tue attività
+labelSeeAllContract:Vedi tutti i contratti
+labelExpiringContract:Contratto in scadenza
+labelReviewEconomics:Evidenze economiche
+labelAttachmentVerify:Allegati da verificare
+labelExpiringOptions:Opzioni in scadenza
+labelIncomingDeadlines:Prossime scadenze
+labelOverviewContractStatus:Lo status dei tuoi contratti
+labelTotalBudget:Montante eroso
+labelState:Tempo trascorso
+labelContractAmount:Valore contratto
+labelFavouritesContracts:I tuoi contratti preferiti
+labelImpactedContract:Contratti impattati
+labelExpireIn:Scade tra
+labelDays:giorni
+labelMonths:mesi
+labelContractNumber:Numero contratto

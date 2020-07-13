@@ -1,0 +1,287 @@
+closeButton:Close
+continueButton:Analyze
+compareButton:Compare
+analyzeButton:Analyze
+goButton:GO
+headerAnalyze:Analyze
+headerCompare:Compare
+headerSearch:Search
+idContract:ID Contract
+homepageDescriptionFirstRow:Accelerate decision making by cutting time spent on document analysis.
+homepageDescriptionSecondRow:Improve the core model and get more value out of documents by proving labelling
+homepageDescriptionThirdRow:suggestions that incorporate your domain knowledge.
+homepageSearchContractButton:Search
+homepageSearchContract: Search Contract
+homepageAnalyzeContract:Analyze Contract
+homepageAnalyzeContractButton:Analyze
+homepageCompareContract:Compare Contracts
+homepageCompareContractButton:Compare
+modalAnalyzeContractTitle:Analyze Document
+modalAnalyzeContractUpload:Drag your document here
+modalAnalyzeContractSupportedFileType:Supported file types are PDF, Word, Images.
+modalAnalyzeContractSearchButton:Search for Document
+modalAnalyzeContractSelectLanguage:Language of the contract to be loaded:
+modalSearchWriteId:Insert the id of the contract to analyze:
+modalCompareContractTitle:Compare documents
+modalCompareContractBaseDocument:Base Document
+modalCompareContractUpload:Drag your document here
+modalCompareContractComparisonDocument:Comparison Document
+modalCompareContractSnamTemplate:SNAM Standard
+analyzeLoading:Loading contract...
+analyzeShowFilters:Show Filters
+analyzeResetFilters:Reset Filters
+analyzeElementScrollbar:Element
+analyzeDocumentButton:Document
+analyzeSelectionButton:Synthesis
+analyzeLoadButton:Load
+analyzeShow:Show
+analyzeHide:Hide
+analyzeFilters:FILTERS
+analyzeLeftNavbarCategories:CATEGORIES
+analyzeLeftNavbarNatures:NATURES
+analyzeLeftNavbarParties:PARTIES
+analyzeLeftNavbarAttributes:ATTRIBUTES
+analyzeLeftNavbarNoCategoriesFound:No categories found
+analyzeLeftNavbarNoNaturesFound:No natures found
+analyzeLeftNavbarNoPartiesFound:No parties found
+analyzeLeftNavbarNoAttributesFound:No attributes found
+analyzeRightNavbarElementDetails:ELEMENT DETAILS
+analyzeRightNavbarEntitiesFound:Filters found in element:
+analyzeRightNavbarNoEntities:No filters found in element
+analyzeRightNavbarDefinitions:DEFINITIONS
+analyzeRightNavbarContacts:CONTACTS
+analyzeRightNavbarDates:DATES/DURATIONS
+analyzeRightNavbarType:Type:
+analyzeRightNavbarNoCategories:No categories found in element
+analyzeRightNavbarNoDefinitions:No definitions found in contract
+analyzeRightNavbarNoContacts:No contacts found in contract
+analyzeRightNavbarNoDates:No dates found in contract
+analyzeRightNavbarInvolvedParties: INVOLVED PARTIES
+searchForContract:Search Contract
+searchForContractButton:Search Document
+searchLoading:Searching for contracts...
+searchTitleMine:Search btw Mine
+searchTitleAll:Search
+searchParties:Party:
+searchContractType:Contract Type:
+searchGoverningLaw:Governing Law:
+searchContractInForce:Language:
+searchTableDocName:Document Name
+searchTableParties:Parties
+searchTableCreationDate:Upload At
+searchTableCreationUser:Upload By
+searchTableContractType:Type
+searchTableGoverningLaw:Governing Law
+searchTableEffectiveDate:Effective date
+searchTableContractInForce:In force
+searchTableGo:VIEW
+searchTableActionContract:Edit
+settingsTitle:Settings
+settingsMenuLang:Language
+settingsMenuApp:Appearance
+settingsLanguagePersonalization:Language personalization
+settingsGlobalLanguage:Application language
+settingsLanguage:Language:
+settingsDocumentsLanguage:Upload document language
+settingsTextVisualization:Text Visualization
+settingsFont:Text font
+settingsChangeButton:Apply changes
+settingsDimension:Text dimension
+settingsDocumentSelection:Document selection
+settingsColorPalette:Color Palette
+uploadLoading:Uploading and analyzing contract...
+downloadContract:DOWNLOAD
+downloadContractButton:Download
+homepageWelcome:Hello
+browseButton:Upload
+documentName:Document Name
+textDimensionSmall:Small
+textDimensionMedium:Medium
+textDimensionHigh:High
+languageItalian:Italian
+languageEnglish:English
+uploadContractWarningAnalyze:You have already uploaded a contract with the same name. By clicking the Analyze button the current contract's data will be overwritten.
+uploadContractWarningCompare:The selected contract is already present in the system. By clicking the Compare button the current contract's data will be overwritten.
+uploadContractMessageOK:Contract successfully uploaded
+uploadContractMessageErrorBecauseOfWatson:Watson service encountered problem while analyzing contract
+uploadContractMessageError:Error while uploading contract
+uploadContractModalFinished:AI 4 CONTRACT MANAGEMENT
+uploadContractModalGoToAnalyze:View
+uploadContractModalGoToCompare:View
+uploadContractModalGoToAnalyzeNewTab:View in new tab
+uploadContractModalGoToCompareNewTab:View in new tab
+uploadContractModalOkAnalyze:Contract analysis completed.
+uploadContractModalOkCompare:Contract comparison completed.
+uploadContractProcessingNotification:Analyzing contract. You will receive a notification when the process will be ended.
+noElementsFoundNotification:No elements found
+searchTableDeadline:Deadline
+suggestChanges:Suggest changes
+suggestChangesCapitol:SUGGEST CHANGES
+suggestChangesLabelFilter:Choose from the labels in the list
+suggestChangesDefinitions:Suggest the label to be associated with each element, or report incorrect associations
+suggestChangesCurrentFilter:CURRENT FILTERS
+suggestChangeToAddFilter:FILTERS TO ADD
+suggestChangesComment:COMMENT
+suggestChangesSend:Send
+overviewContracts:Overview
+critical:Expired
+working:In Progress
+expiring:Expiring
+criticalContract:Expired
+workingContract:In Progress
+expiringContract:Expiring
+seeAll:See all
+contractValue:Effective date
+contractDeadline:Deadline
+documentSelected:Documents
+contractNameAlreadyExist:Exists already a contract with name
+contractWithIdNotExist:There is no contract with id
+contractUpdateNameError:Error while updating the contract name
+contracUpdateNameOK:Contract name update successfully
+workbookNavbarHeaderAnalyze:Analyze Document
+workbookNavbarHeaderCompare:Compare Documents
+labelDaysAgo:days ago
+labelMinutesAgo:minutes ago
+contractDetailModalInvolvedParties:Involved parties
+labelHoursAgo:hours ago
+labelLogout:Select "Logout" below if you are ready to end your current session.
+labelLogoutHeader:Ready to leave?
+labelNotification:Notifications
+labelProfile:Profile
+labelDetails:Details
+labelContractDetails:Contract details
+labelEndDate:End date
+labelContractState:Contract state
+labelNow:Now
+labelDetailsAnalyzeCompare:DETAILS
+labelfiltersAnalyzeCompare:FILTERS
+labelSearchForAnalyze:Search...
+labelDashboard:Dashboard
+labelTemplates:Standard
+preferredContract:Preferred Contracts
+preferredContractDashboard:My preferred
+labelActionsHeader:Actions
+labelAdvise:Advise
+labelContractStandard:Standard Snam for
+labelLastProviderContract:Contract(s) with same supplier
+labelOtherContractObject:Other contract of same object
+labelChangeContract:Change contract
+labelStartAdvise:Compare with the proposed
+labelNoContractFound:No contract found
+labelNoContractPresent:No contract present
+labelNoSameSupplierContractFound:No contract signed with the same supplier was found
+labelNoStandardContractFound:No standard contract was found
+labelWarning:ADVISE
+labelMissingFilters:MISSING ELEMENTS IN THE CONTRACT
+labelExcedingFilters:EXCESS ELEMENTS IN THE CONTRACT
+labelNumberOfMissingFilters:missing elements
+labelOneMissingFilters:missing element
+labelNumberOfExcessFilters:excess elements
+labelOneExcessFilters:excess element
+labelSupplierContract:With supplier
+labelNoMissingFilters:No missing filters
+labelNoExcedingFilters:No excess filters
+labelCurrentContract:Current contract
+labelComparisonContract:Comparison contract
+labelNumberOfElementsFound:Elements found
+labelHeaderPreviewAdvise:Preview filter
+labelSupplier:Supplier
+labelModalAccuracy:Accuracy
+labelModalVersion:Version
+labelModelDate:Update date
+labelObject:Object
+labelNoNotifications:No notification
+labelInformationOfAdviseProcess:We propose a standard that could be interesting for you
+labelInformationOfAdviseProcessSupplier:We propose some contract that could be interesting for you
+labelFilterPreview:Filter
+labelModelDateUpdateIta:Update italian model date
+labelModelDateUpdateEng:Update english model date
+labelModelsInformation:Models informations
+labelItalianSettings:Italian
+labelEnglishSettings:English
+labelPublicContracts:Shared Area
+labelPrivateContracts:My Desk
+labelCloseFilters:Close filters
+labelOpenFilters:Open filters
+noPermissionError:You don't have the permission for this operation
+labelForPublicationContract:Click "Procede" to move the contract in "Shared area"
+labelHeaderPublicationContract:Move in "Shared area"
+labelPubblicationButton:Procede
+labelSucessfullyOperation:Operation completed successfully
+labelErrorOperation:Error occured executing the operation
+labelModalExitFromAdviseExit:Exit
+labelModalExitFromAdviseText:Click "Exit" to exit from advise mode
+labelModalExitFromAdviseButton:Exit
+labelDeleteAll:Delete all
+labelPersonalContract:My contracts
+labelModalDeleteContractHeader:Delete Contract
+labelModalDeleteContractText:Click "Delete" to delete the contract
+labelModalDeleteContractButton:Delete
+labelModalPrivatizationContractHeader:Move in "My desk"
+labelModalPrivatizationContractText:Click "Procede" to move the contract in "My desk"
+labelModalPrivatizationContractButton:Procede
+labelForContractInLoading:There is another contract in analysis. Please wait the end of the process before to analyze another contract
+labelInsertHereYourComment:Insert your comment here...
+labelHeaderAdviseScope:Some standard that could be util for you
+searchTemplateLabel:Search standard
+youWillFindYourContractInMYContract:You will find the uploaded contract in "My contracts" section
+labelPutInPreferred:Contract added to preferred
+labelRemovedFromPreferred:Contract removed from preferred
+labelNewContractSearchView:Upload new
+tooltipDeleteContract:Delete the contract
+tooltipPublishContract:Move the contract to "Shared area"
+tooltipAddToPreferred:Add to preferred
+tooltipRemoveFromPreferred:Remove from preferred
+tooltipModifyName:Modify name
+tooltipPrivatizeContract:Move the contract to "My desk"
+tooltipSaveOnlyHtml:Save
+tooltipSaveAndAnalyze:Save and analye the contract
+tooltipDownloadContract:Download
+tooltipCreateComment:Create new comment
+labelCompareWithStandard:Standard
+labelCompareWithContract:Contract
+tooltipCompareTemplateContract:Compare with standard
+tooltipCompareContractTemplate:Compare with contract
+labelModalExitFromAEditModeText:Are you sure you want to exit? All changes will be lost
+labelModalExitFromEditModeButtonExit:Exit without analyze
+labelModalExitFromEditModeSaveAndAnlyze:Save, analyze and exit
+labelFoundExactMatchAdvise:Contract with same supplier and same object
+labelHeaderModalSessionExpired:Expired session
+labelBodyModalSessionExpired:The current session has expired. Please Login again to re-establish your secure session
+labelButtonModalSessionExpired:Go to Login
+labelAllegati:Attachments
+labelMainInvolvedPartySearchView:Supplier
+labelDocument:Document
+labelDate:Date
+labelEconomics:Economic
+labelApplyFilter:Apply Filters
+labelBudgetSearchViewFilter:Budget
+labelPriceFrom:From
+labelPriceTo:To
+labelYes:Yes
+labelNo:No
+labelIsExpiringOptions:Expiring options
+labelEconomicStatus:Economic status
+labelNotificationExpiringContracts:Expiring Contracts
+labelNotificationExpiringOptions:Expiring Options
+labelNotificationReviewEconomics:Economic highlights
+labelContrats:Contrat(s)
+labelResumePlannedActivities:these are your activities
+labelSeeAllContract:See all contract
+labelExpiringContract:Expiring contract
+labelReviewEconomics:Economic highlights
+labelAttachmentVerify:Attachment to verify
+labelExpiringOptions:Expiring options
+labelIncomingDeadlines:Incoming deadlines
+labelOverviewContractStatus:Contract status overview
+labelTotalBudget:Budget erored
+labelState:Time elapsed
+labelContractAmount:Contract value
+labelFavouritesContracts:Your favourite contracts
+labelOk:Ok
+labelCritical:Critical
+labelImpactedContract:Impacted contracts
+labelExpireIn:Expire in
+labelDays:days
+labelMonths:months
+labelContractNumber:Contract number
