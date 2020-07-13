@@ -20,4 +20,13 @@ public class ViewController {
 		return modelAndView;
 	}
 
+	@GetMapping("/garaOverview")
+	public ModelAndView garaOverview() {
+		logger.info("getting garaOverview");
+		ModelAndView modelAndView = null;
+		modelAndView = new ModelAndView("garaOverview");
+		logger.info("returning garaOverview");
+		return modelAndView;
+	}
+
 }
