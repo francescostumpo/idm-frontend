@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SNAM - ICM</title>
+    <title>SNAM - IDM</title>
 
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
