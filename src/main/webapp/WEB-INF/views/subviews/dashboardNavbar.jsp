@@ -19,7 +19,11 @@
 	</div>
 
 	<ul class="navbar-nav ml-auto">
-		<li class="nav-item dropdown no-arrow mx-1">
+		<button style="width: 70%" type="button" class="my-auto btn button-primary-buyer" >
+			<i class="fas fa-plus"></i>
+			<span>Nuova gara</span>
+		</button>
+		<li class="nav-item dropdown ml-4 no-arrow mx-1">
 			<a class="nav-link dropdown-toggle"  id="alertsDropdown"
 			role="button" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false"> <i style="color:white;cursor:pointer;" class="fas fa-bell fa-1point5 "></i> <!--  Counter - Alerts -->
@@ -40,24 +44,7 @@
 			</div>
 		</li>
 	<li class="nav-item dropdown no-arrow mx-1">
-	<a	class="nav-link dropdown-toggle"  id="messagesDropdown"
-		role="button" data-toggle="dropdown" aria-haspopup="true"
-		aria-expanded="false">
-		<i style="color:white; cursor:pointer" class="fa fa-plus-circle fa-1point5"></i>
-	</a>
-	<div style="color:black; cursor:pointer;" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"	aria-labelledby="messagesDropdown">
-			<!--<h6 class="dropdown-header">Operations</h6>-->
-		<a class="dropdown-item d-flex align-items-center"  data-toggle="modal" data-target="#uploadModal">
-			<div>
-				<div class="text-truncate"> <snamApp:out value="${currentDictionary.headerAnalyze }"></snamApp:out> </div>
-			</div>
-		</a>
-		<a class="dropdown-item d-flex align-items-center"  data-toggle="modal" data-target="#uploadModalComplex">
-			<div>
-				<div class="text-truncate"><snamApp:out value="${currentDictionary.headerCompare }"></snamApp:out></div>
-			</div>
-		</a>
-	</div>
+
 </li>
 
 	<div class="topbar-divider d-none d-sm-block"></div>
@@ -78,10 +65,10 @@
 				class="nav-link dropdown-toggle"  id="userDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">
-			<span class="mr-2 d-none d-lg-inline"	style="color: white" id="userName">
-				Mario
-			</span>
 			<i style="cursor:pointer; color: white" class="far fa-user-circle fa-1point5 fa-sm fa-fw mr-2" style="color:white;"></i>
+			<span class="mr-2 d-none d-lg-inline"	style="color: white" id="userName">
+				Luca Santamaria
+			</span>
 		</a>
 	</li>
 </ul>
