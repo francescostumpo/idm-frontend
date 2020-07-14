@@ -81,20 +81,20 @@
                         <p class="nav-link" id="pills-challenge-tab" data-toggle="pill"  role="tab" aria-controls="pills-challenge" aria-selected="false" ng-click="makeVisibleTab('pills-challenge', 'pills-supplier')">Documentazione di gara</p>
                     </li>
                 </ul>
-                <div class="row mt-2">
-                    <div class="col-lg-10 col-md-10 col-sm-12">
-                        <p>6 FORNITORI CARICATI</p>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-12">
-                        <button class="btn button-neutral-compare-advise">
-                            <i class="fa fa-plus"></i>
-                            <span class="ml-2">AGGIUNGI FORNITORE</span>
-                        </button>
-                    </div>
-                </div>
+
                 <div class="tab-content mt-2" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-supplier" role="tabpanel" aria-labelledby="pills-supplier-tab">
-
+                        <div class="row mt-2">
+                            <div class="col-lg-10 col-md-10 col-sm-12">
+                                <p class="label-item">{{suppliers.length}} FORNITORI CARICATI</p>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                <button class="btn button-block button-neutral-compare-advise">
+                                    <i class="fa fa-plus"></i>
+                                    <span class="ml-2">AGGIUNGI FORNITORE</span>
+                                </button>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-12 mt-3" ng-repeat="supplier in suppliers">
                                 <div class="card shadow">
@@ -107,7 +107,16 @@
                                                 <p class="font-bold">{{supplier.name}}</p>
                                             </div>
                                             <div class="col-lg-1 col-md-1 col-sm-1">
-                                                <i class="fa fa-ellipsis-v"></i>
+                                                <i class="fa fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"></i>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <p class="dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                        <i class="fa fa-pencil-alt"></i><span class="ml-2">Modifica</span>
+                                                    </p>
+                                                    <div class="dropdown-divider"></div>
+                                                    <p class="dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                        <i class="fa fa-trash"></i><span class="ml-2">Elimina</span>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +134,43 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-challenge" role="tabpanel" aria-labelledby="pills-challenge-tab">Documenti</div>
+                    <div class="tab-pane fade" id="pills-challenge" role="tabpanel" aria-labelledby="pills-challenge-tab">
+                        <div class="row mt-2">
+                            <div class="col-lg-5 col-md-5 col-sm-12">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn button-neutral-compare-advise">
+                                        <i class="fa fa-plus"></i>
+                                        <span class="ml-2">AGGIUNGI DOCUMENTO</span>
+                                    </button>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-header d-flex justify-content-center">
+                                        DOCUMENTO
+                                    </div>
+                                </div>
+                                <div class="card" ng-repeat="documentSupp in documentsSuppliers">
+                                    <div class="card-body" >
+                                        <div class="row">
+                                            <div class="col-lg-2 col-md-2 col-sm-2"><input type="checkbox" class="pointer"><i class="ml-2 fa fa-check-circle pointer" style="color: green;"></i><i class="ml-2 fa fa-file-alt"></i> </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9"><p class="no-margin-bottom">{{documentSupp.name}}</p></div>
+                                            <div class="col-lg-1 col-md-1 col-sm-1"><i class="fa fa-ellipsis-h pointer"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Seleziona un documento per visualizzare l'anteprima
+                                    </div>
+                                    <div class="card-body">
+                                        PLACEHOLDER
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

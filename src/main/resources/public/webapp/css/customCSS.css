@@ -1586,3 +1586,11 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
     border-bottom: 2px solid #004B9C;
     font-weight: bold;
 }
+
+.no-margin-bottom{
+    margin-bottom: 0rem;
+}
+
+.pointer{
+    cursor: pointer;
+}
