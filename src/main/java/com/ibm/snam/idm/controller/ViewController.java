@@ -20,4 +20,13 @@ public class ViewController {
 		return modelAndView;
 	}
 
+	@GetMapping("/overviewFornitore")
+	public ModelAndView overviewFornitore() {
+		logger.info("getting overviewFornitore");
+		ModelAndView modelAndView = null;
+		modelAndView = new ModelAndView("overviewFornitore");
+		logger.info("returning overviewFornitore");
+		return modelAndView;
+	}
+
 }
