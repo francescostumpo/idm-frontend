@@ -129,6 +129,32 @@
   background-color: white
 }
 
+.no-border {
+    border: none;
+}
+
+.text-size-14 {
+    font-size: 14px;
+}
+
+.text-size-12 {
+    font-size: 12px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.crop {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.flex-long-text {
+    flex-wrap: nowrap;
+}
+
 .nav-item-active{
   color: #00B042;
   letter-spacing: 0.2px;
@@ -1215,6 +1241,10 @@ a.article:hover {
 
 .table{
 	margin-bottom: 0px !important;
+}
+
+.no-border-t {
+    border-top: none;
 }
 
 /*.tbody-scrollable{
