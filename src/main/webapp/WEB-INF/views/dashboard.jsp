@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SNAM - ICM</title>
+    <title>SNAM - IDM</title>
 
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
@@ -88,6 +88,5 @@
 
 </body>
  	<jsp:include page="subviews/scripts.jsp"></jsp:include>
-<script type="text/javascript" src="./webapp/AngularJS/controllers/dashboardController.js"></script>
 
 </html>
