@@ -336,80 +336,12 @@ mainController = {
 				return null;
 			};
 		}
-	},
-
-	saveContract: function(data) {
-		stompClientWithoutOCR.send("/app/uploadContractWithoutOCR", {}, data);
-		return
-	},
-
-	sendMessageCompare: function(file,fileNumber) {
-		var fileBase64 = null;
-		var reader = new FileReader();
-		//reader.readAsDataURL(file);
-		reader.readAsBinaryString(file);
-		reader.onload = function() {
-			fileBase64 = reader.result;
-			var base64String = window.btoa(fileBase64);
-			if (base64String !== null){
-				var json = {
-					"fileBase64": base64String,
-					"fileName": file.name,
-					"fileNumber": fileNumber,
-					"currentUser": sessionStorage.getItem('currentUser'),
-					"bearerToken" : mainController.getCookie("bearerToken"),
-					"language": mainController.getLanguage()
-				};
-				sessionStorage.setItem("contractInLoading", "true")
-				//stompClientCompare.send("/app/pushNotificationCompare", {}, JSON.stringify(json));
-				return;
-			};
-			reader.onerror = function (error){
-				console.log('Error: ', error);
-				return null;
-			};
-		}
-	},
-
-	searchAndHighlight: function(searchTerm, selector) {
-		//$('#' +selector).find(searchTerm);
-		if (searchTerm) {
-			var selector = selector || "documentContent"; //use body as selector if none provided
-			var searchTermRegEx = new RegExp(searchTerm, "ig");
-			var matches = $('#' + selector).text().match(searchTermRegEx);
-			if (matches != null && matches.length > 0) {
-				$('.highlighted').removeClass('highlighted'); //Remove old search highlights
-
-				//Remove the previous matches
-				$span = $('.match');
-				$span.replaceWith($span.html());
-
-				if (searchTerm === "&") {
-					searchTerm = "&amp;";
-					searchTermRegEx = new RegExp(searchTerm, "ig");
-				}
-				//var htmlToInject = "<span class='match'>" + searchTerm + "</span>";
-				//var stringToInject = "<span ng-bind-html-unsafe="+ htmlToInject + "></span>";
-
-				$('#' + selector).html($('#' + selector).html().replace(searchTermRegEx, "<span class='match'>" + searchTerm + "</span>"));
-
-				$('.match:first').addClass('highlighted');
-
-				var i = 0;
-
-				if ($('.highlighted:first').length) { //if match found, scroll to where the first one appears
-					//location.href = '#match';
-					$(window).scrollTop($('.highlighted:first').position().top);
-				}
-				return true;
-			}
-		}
-		return false;
 	}
+
 }
 
 snamApp.config(['$httpProvider', function ($httpProvider) {
-	console.log('token : ' + mainController.getCookie('bearerToken'))
+	//console.log('token : ' + mainController.getCookie('bearerToken'))
 	//$httpProvider.interceptors.push('authInterceptor')
 	$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
 	//$httpProvider.defaults.headers.common['Content-Type'] = "text/plain"
