@@ -59,6 +59,10 @@
             </div>
             <!-- End Header Section -->
             <!-- Main Section -->
+            <div class="progress" style="height:.5rem;">
+              <div class="pg-presence progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="pg-check progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <div class="row mt-2">
@@ -97,7 +101,9 @@
                                     <div class="col-lg-1 col-md-1 col-sm-1">
                                         <div class="row">
                                             <input ng-checked="checkDocument(document)" ng-click="selectDocument(document)" type="checkbox" class="pointer">
-                                            <i class="ml-4 fa fa-check-circle fa-lg pointer" style="color: green;"></i>
+                                            <div ng-if="document.presence === -1"><i class="ml-4 fas fa-exclamation-triangle pointer" style="color: red;"></i></div>
+                                            <div ng-if="document.presence === 0"><i class="ml-4 fa fa-check-circle pointer" style="color: green;"></i></div>
+                                            <div ng-if="document.presence === 1"><i class="ml-4 fas fa-exclamation pointer" style="color: orange"></i></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5">
@@ -115,11 +121,16 @@
                                         <div ng-if="document.conformity === 2" class="col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange"><i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2">
-                                        <div class="row icon-group">
+                                        <div class="row icon-group" ng-if="document.presence >= 0">
                                             <div class="m-1"><i class="far fa-edit fa-fw fa-lg pointer"></i></div>
                                             <div class="m-1"><i class="fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i></div>
                                             <div class="m-1"><i class="far fa-trash-alt fa-fw fa-lg pointer"></i></div>
                                         </div>
+                                        <div class="row icon-group fa-stack" ng-if="document.presence === -1">
+                                            <div class="m-1"><i class="fas fa-plus fa-fw fa-stack-1x pointer"></i></div>
+                                            <div class="m-1"><i class="far fa-circle fa-fw fa-stack-2x pointer"></i></div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +172,9 @@
                                         <div class="col-lg-2 col-md-2 col-sm-2">
                                             <div class="row">
                                                 <input ng-checked="checkDocument(document)" ng-click="selectDocument(document)" type="checkbox" class="col-lg-7 col-md-7 col-sm-12 pointer">
-                                                <i class="ml-2 fa fa-check-circle pointer" style="color: green;"></i>
+                                                <div ng-if="document.presence === -1"><i class="ml-2 fas fa-exclamation-triangle pointer" style="color: red;"></i></div>
+                                                <div ng-if="document.presence === 0"><i class="ml-2 fa fa-check-circle pointer" style="color: green;"></i></div>
+                                                <div ng-if="document.presence === 1"><i class="ml-2 fas fa-exclamation pointer" style="color: orange"></i></div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 mr-5">
@@ -224,7 +237,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <object class="document-container" data="" type="application/pdf" width="100%" height="600px">
+                                        <object class="document-container" data="" type="application/pdf" width="100%" style="height: 150vh">
                                             <embed class="document-container" src="" type="application/pdf"></embed>
                                         </object>
                                     </div>
