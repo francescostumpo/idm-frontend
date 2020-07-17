@@ -18,6 +18,15 @@ public class ViewController {
 		modelAndView = new ModelAndView("dashboard");
 		logger.info("returning dashboard");
 		return modelAndView;
+	} 
+	
+	@GetMapping("/search") 
+	public ModelAndView search() {
+		logger.info("getting search view"); 
+		ModelAndView modelAndView = null; 
+		modelAndView = new ModelAndView("searchView"); 
+		logger.info("returning search view"); 
+		return modelAndView; 
 	}
 
 }
