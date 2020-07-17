@@ -44,16 +44,15 @@
 
 </head>
 
-<body style="position: fixed; width: 100%;" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp"
-    ng-controller="searchViewController">
+<body  ng-controller="commonController" style="position: fixed; width: 100%;" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp"
+    >
 
-
-    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed"
-        class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow">
+    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed" class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow" >
         <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
     </nav>
+    <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
-    <div class="bodyContainer" style="background: #E6ECF2; height: 100%;">
+    <div ng-controller="searchViewController" class="bodyContainer" style="background: #E6ECF2; height: 100%;">
         <h1 id="searchViewTitle" style="padding-left: 2%; padding-top: 2%; padding-bottom: 2%; font-family: Ubuntu;">
             Bandi di Gara </h1>
 
@@ -205,8 +204,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <!-- Modals -->
 
