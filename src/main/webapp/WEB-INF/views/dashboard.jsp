@@ -27,6 +27,9 @@
 
     <div ng-controller="dashboardController" id="wrapper">
         <div style="margin: 1.5rem" id="content-wrapper" class="d-flex flex-column" >
+          <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                    <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
+          </div>
             <div class="d-sm-flex align-items-center justify-content-between mb-3">
                 <div style="font-size: 28px" class="mb-0">Ciao Luca, ecco le tua gare recenti</div>
                 <a style="cursor:pointer;font-weight: bold; text-decoration: underline" class="text-primary d-sm-inline-block">Vedi tutte</a>

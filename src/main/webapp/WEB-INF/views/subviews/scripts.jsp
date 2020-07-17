@@ -31,6 +31,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.1/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="./webapp/AngularJS/controllers/mainController.js"></script>
+<script type="text/javascript" src="./webapp/AngularJS/controllers/breadcrumbController.js"></script>
 <script type="text/javascript" src="./webapp/AngularJS/controllers/commonController.js"></script>
 <script type="text/javascript" src="./webapp/AngularJS/controllers/navbarController.js"></script>
 <script type="text/javascript" src="./webapp/AngularJS/controllers/sidebarController.js"></script>
