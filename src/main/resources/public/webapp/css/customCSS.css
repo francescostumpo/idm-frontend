@@ -1594,3 +1594,14 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
 .pointer{
     cursor: pointer;
 }
+
+.currentPage{
+    font-weight: bold;
+    color: #004B9C !important;
+}
+
+.pointer-hover:hover{
+    cursor: pointer;
+    font-weight: bold;
+    color: #004B9C !important;
+}

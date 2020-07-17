@@ -20,25 +20,25 @@
 
 <body id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
 
-    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow" >
-        <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
-    </nav>
+<nav id="dashboardNavbar" ng-if="!sidebarIsClosed" class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow" >
+    <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
+</nav>
 
-    <div id="wrapper">
-        <div id="content-wrapper" class="d-flex flex-column" >
-            <div class="container-fluid">
-                <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                    <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
-                </div>
+<div id="wrapper">
+    <div id="content-wrapper" class="d-flex flex-column" >
+        <div class="container-fluid">
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
             </div>
         </div>
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
     </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+</div>
 
 </body>
- 	<jsp:include page="subviews/scripts.jsp"></jsp:include>
-    <script src="./webapp/AngularJS/controllers/"></script>
+<jsp:include page="subviews/scripts.jsp"></jsp:include>
+<script src="./webapp/AngularJS/controllers/"></script>
 
 </html>
