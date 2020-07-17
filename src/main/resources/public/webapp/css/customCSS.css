@@ -217,6 +217,20 @@
     color: white;
 }
 
+.document-viewer-br {
+    border-right: 0.25px solid #dddfeb;
+}
+
+.expand-document-button {
+    text-align: right;
+    padding: .5rem;
+    color: white;
+}
+
+.expand-document-button a {
+    color: white;
+}
+
 .nav-item-active{
   color: #00B042;
   letter-spacing: 0.2px;

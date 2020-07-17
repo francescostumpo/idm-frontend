@@ -47,10 +47,88 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         },
         {
             id: "0008",
-            name: "MAM019",
+            name: "MAM019-23C_Modello 10",
             uploadedAt: new Date('2020-06-23T15:18'),
             conformity: 0,
-        }
+        },
+        {
+            id: "0009",
+            name: "MAM019-23C_DUVRI_Cronoprogramma",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0010",
+            name: "MAM019-23C_DUVRI_Misure Coordinamento",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0011",
+            name: "MAM019-23C_Dichiarazione nominativi_RSPP",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0012",
+            name: "MAM019-23C_DUVRI_Modulo Dati Committente-Fornitore",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0013",
+            name: "MAM019-23C_DUVRI_Rischi Fornitore",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0014",
+            name: "MAM019-23C_DUVRI_Rischi Specifici",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0015",
+            name: "12.17 Dichiarazione modello 14",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0016",
+            name: "12.19 Dichiarazione documenti art. 23.1",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+              id: "0017",
+              name: "12.6 Modello 5",
+              uploadedAt: new Date('2020-06-23T15:18'),
+              conformity: 0,
+        },
+        {
+            id: "0018",
+            name: "13.5 Allegato 1",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0019",
+            name: "MAM019-023_Dichiarazione HSE",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: 0,
+        },
+        {
+            id: "0020",
+            name: "12.4 Modello 20/2",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: -1,
+        },
+        {
+            id: "0020",
+            name: "20.3 Modello 22",
+            uploadedAt: new Date('2020-06-23T15:18'),
+            conformity: -1,
+        },
     ]
 
     $scope.sort = {
@@ -71,6 +149,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         const urlDocument = mainController.getHost() + '/document.pdf'
         $("object.document-container").attr("data", urlDocument);
         $("embed.document-container").attr("src", urlDocument);
+        $("a.document-fullview").attr("href", urlDocument);
     }
 
     $scope.checkDocument = function (document) {

@@ -185,25 +185,25 @@
                                     <div class="card-header card-header-document-viewer">
                                         <div class="row text-size-14">
                                             <div class="col-lg-2 col-md-2 col-sm-12">
-                                                <div class="form-group">
+                                                <div class="form-group document-viewer-br">
                                                     <label class="label-item">DATA</label>
                                                     <p>Presente</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-sm-12">
-                                                <div class="form-group">
+                                                <div class="form-group document-viewer-br">
                                                     <label class="label-item">FIRMA</label>
                                                     <p>Presente</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-sm-12">
-                                                <div class="form-group">
+                                                <div class="form-group document-viewer-br">
                                                     <label class="label-item">TIMBRO</label>
                                                     <p>Presente</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-sm-12">
-                                                <div class="form-group">
+                                                <div class="form-group document-viewer-br">
                                                     <label class="label-item">CIG</label>
                                                     <p>Presente</p>
                                                 </div>
@@ -212,6 +212,13 @@
                                                 <div class="form-group">
                                                     <label class="label-item">NUMERO GARA</label>
                                                     <p>Presente</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="form-group expand-document-button">
+                                                    <a class="document-fullview" target="_blank" href="">
+                                                        <i class="fas fa-expand-arrows-alt fa-2x"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
