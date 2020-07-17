@@ -13,10 +13,8 @@ public class ViewController {
 
 	@GetMapping("/dashboard")
 	public ModelAndView dashboard() {
-		logger.info("getting dashboard");
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("dashboard");
-		logger.info("returning dashboard");
 		return modelAndView;
 	}
 
