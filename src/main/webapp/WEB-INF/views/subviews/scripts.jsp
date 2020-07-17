@@ -32,10 +32,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.1/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="./webapp/AngularJS/controllers/mainController.js"></script>
 <script type="text/javascript" src="./webapp/AngularJS/controllers/breadcrumbController.js"></script>
+<script type="text/javascript" src="./webapp/AngularJS/controllers/commonController.js"></script>
+<script type="text/javascript" src="./webapp/AngularJS/controllers/navbarController.js"></script>
+<script type="text/javascript" src="./webapp/AngularJS/controllers/sidebarController.js"></script>
 <script type="text/javascript" src='./webapp/vendor/fullcalendar/js/fullcalendar-core.js'></script>
 <script type="text/javascript" src='./webapp/vendor/fullcalendar/js/fullcalendar-daygrid.js'></script>
 <script type="text/javascript" src='./webapp/vendor/fullcalendar/js/fullcalendar-interaction.js'></script>
 <script type="text/javascript" src='./webapp/vendor/fullcalendar/js/fullcalendar-timegrid.js'></script>
 <script type="text/javascript" src='./webapp/vendor/fullcalendar/js/fullcalendar-bootstrap.js'></script>
 <script type="text/javascript" src='./webapp/vendor/fullcalendar/js/fullcalendar-locales-all.js'></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.it-it.js" type="text/javascript"></script>
+
+
 
