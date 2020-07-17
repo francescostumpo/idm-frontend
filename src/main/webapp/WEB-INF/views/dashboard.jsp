@@ -95,7 +95,7 @@
 </body>
 
 <jsp:include page="subviews/scripts.jsp"></jsp:include>
-
 <script type="text/javascript" src="./webapp/AngularJS/controllers/dashboardController.js"></script>
+
 
 </html>

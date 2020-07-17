@@ -53,4 +53,22 @@ public class ViewController {
 		return modelAndView;
 	}
 
+	@GetMapping("/overviewFornitore")
+	public ModelAndView overviewFornitore() {
+		logger.info("getting overviewFornitore");
+		ModelAndView modelAndView = null;
+		modelAndView = new ModelAndView("overviewFornitore");
+		logger.info("returning overviewFornitore");
+		return modelAndView;
+	}
+
+	@GetMapping("/garaOverview")
+	public ModelAndView garaOverview() {
+		logger.info("getting garaOverview");
+		ModelAndView modelAndView = null;
+		modelAndView = new ModelAndView("garaOverview");
+		logger.info("returning garaOverview");
+		return modelAndView;
+	}
+
 }
