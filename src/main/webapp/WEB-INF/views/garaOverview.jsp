@@ -30,13 +30,8 @@
         <div class="header-section">
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Bandi di Gara</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Servizio di manutenzione e riparazione di compressori aria...</li>
-                        </ol>
-                    </nav>
+
+                    <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
                     <h3 class="font-bold">Mega titolo gigante</h3>
                     <div class="col-lg-6 col-md-6 col-sm-6 mb-2" style="padding-left: 0rem !important;">
                         <div class="row mt-4">

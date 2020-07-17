@@ -267,6 +267,23 @@
     padding-left: 0px;
 }
 
+.text-medium-size-custom{
+    color: black;
+    font-size: 16px;
+}
+
+.button-secondary-buyer{
+    background-color: #004B9C;
+    color: white;
+    border-color: #004B9C;
+}
+
+.button-secondary-buyer:hover{
+    background-color: #004B9C;
+    color: white;
+    border-color: #004B9C;
+}
+
 .button-primary-buyer{
     background-color: white;
     color: #004B9C;
@@ -1712,3 +1729,16 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
 .pointer{
     cursor: pointer;
 }
+
+
+.currentPage{
+    font-weight: bold;
+    color: #004B9C !important;
+}
+
+.pointer-hover:hover{
+    cursor: pointer;
+    font-weight: bold;
+    color: #004B9C !important;
+}
+
