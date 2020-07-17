@@ -66,20 +66,28 @@
                     <div ng-hide="showDocument" class="col-lg-12 col-md-12 col-sm-12">
                         <div class="d-flex justify-content-end">
                             <button class="btn button-neutral-compare-advise m-1">
-                                <i class="fa fa-refresh"></i>
-                                <span class="ml-1">SOSTITUISCI</span>
-                            </button>
-                            <button class="btn button-neutral-compare-advise m-1">
-                                <i class="fa fa-trash"></i>
-                                <span class="ml-1">ELIMINA</span>
+                                <i class="fas fa-plus"></i>
+                                <span class="ml-1 text-size-14">AGGIUNGI DOCUMENTI</span>
                             </button>
                         </div>
                         <div class="card mt-2 no-border">
                             <div class="card-header d-flex justify-content-center">
                                 <div class="col-lg-1 col-md-1 col-sm-1"></div>
-                                <div class="col-lg-5 col-md-5 col-sm-5 text-size-14">DOCUMENTO</div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 text-size-14">CARICATO IL</div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 text-size-14">CONFORMITA</div>
+                                <div ng-click="sortCardsByColumnName('name')" class="col-lg-5 col-md-5 col-sm-5 text-size-14 no-select">
+                                    DOCUMENTO
+                                    <i ng-if="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                    <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                </div>
+                                <div ng-click="sortCardsByColumnName('uploadedAt')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
+                                    CARICATO IL
+                                    <i ng-if="sort.uploadedAt === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                    <i ng-if="sort.uploadedAt === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                </div>
+                                <div ng-click="sortCardsByColumnName('conformity')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
+                                    CONFORMITA
+                                    <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                    <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2"></div>
                             </div>
                         </div>
@@ -94,16 +102,20 @@
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5">
                                         <div class="row flex-long-text">
-                                            <i class="ml-2 mr-2 fas fa-file-pdf fa-lg" style="color: red;"></i>
-                                            <p class="no-margin-bottom text-size-14 text-bold crop">{{document.name}}</p>
+                                            <i class="ml-2 mr-2 fas fa-file-pdf fa-2x" style="color: red;"></i>
+                                            <p class="no-margin-bottom text-size-16 text-bold crop">{{document.name}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 text-size-14">
-                                        <p class="no-margin-bottom">{{document.uploadedAt | date: 'dd/MM/yyyy - HH:mm'}} </p>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 text-size-14">Conforme</div>
                                     <div class="col-lg-2 col-md-2 col-sm-2">
-                                        <div class="row">
+                                        <p class="no-margin-bottom text-size-16 text-bold">{{document.uploadedAt | date: 'dd/MM/yyyy - HH:mm'}} </p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 text-size-14">
+                                        <div ng-if="document.conformity === 0" class="col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green"><i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                        <div ng-if="document.conformity === 1" class="col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red"><i class="mr-2 fas fa-times"></i>NON CONFORME</div>
+                                        <div ng-if="document.conformity === 2" class="col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange"><i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                        <div class="row icon-group">
                                             <div class="m-1"><i class="far fa-edit fa-fw fa-lg pointer"></i></div>
                                             <div class="m-1"><i class="fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i></div>
                                             <div class="m-1"><i class="far fa-trash-alt fa-fw fa-lg pointer"></i></div>
@@ -117,11 +129,29 @@
                     <div class="col-lg-12 col-md-12 col-sm-12" ng-show="showDocument">
                         <div class="row">
                             <div class="col-lg-5 col-md-5 col-sm-5">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn button-neutral-compare-advise m-1">
+                                    <i class="fas fa-sync fa-flip-horizontal"></i>
+                                    <span class="ml-1 text-size-12">SOSTITUISCI</span>
+                                </button>
+                                <button class="btn button-neutral-compare-advise m-1">
+                                    <i class="fa fa-trash"></i>
+                                    <span class="ml-1 text-size-12">ELIMINA</span>
+                                </button>
+                            </div>
                             <div class="card mt-2 no-border">
                                 <div class="card-header d-flex">
                                     <div class="col-lg-2 col-md-2 col-sm-2"></div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 mr-5 text-size-12">DOCUMENTO</div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 text-size-12">CONFORMITA</div>
+                                    <div ng-click="sortCardsByColumnName('name')" class="col-lg-4 col-md-4 col-sm-4 mr-5 text-size-12 no-select">
+                                        DOCUMENTO
+                                        <i ng-if="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                        <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                    </div>
+                                    <div ng-click="sortCardsByColumnName('conformity')"  class="col-lg-3 col-md-3 col-sm-3 text-size-12">
+                                        CONFORMITA
+                                        <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                        <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                    </div>
                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                 </div>
                             </div>
@@ -140,16 +170,51 @@
                                                 <p class="no-margin-bottom text-size-14 text-bold crop">{{document.name}}</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3 text-size-14">Conforme</div>
-                                        <div class="col-lg-1 col-md-1 col-sm-1"><i class="fa fa-ellipsis-h pointer"></i></div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div ng-if="document.conformity === 0" class="col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-8"><i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                            <div ng-if="document.conformity === 1" class="col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-8"><i class="mr-2 fas fa-times"></i>NON CONFORME</div>
+                                            <div ng-if="document.conformity === 2" class="col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-8"><i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-1 icon-group"><i class="fa fa-ellipsis-h pointer"></i></div>
                                     </div>
                                 </div>
                             </div>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7">
                                 <div class="card">
-                                    <div class="card-header">
-                                        Seleziona un documento per visualizzare l'anteprima
+                                    <div class="card-header card-header-document-viewer">
+                                        <div class="row text-size-14">
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="label-item">DATA</label>
+                                                    <p>Presente</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="label-item">FIRMA</label>
+                                                    <p>Presente</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="label-item">TIMBRO</label>
+                                                    <p>Presente</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="label-item">CIG</label>
+                                                    <p>Presente</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="label-item">NUMERO GARA</label>
+                                                    <p>Presente</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <object class="document-container" data="" type="application/pdf" width="100%" height="600px">

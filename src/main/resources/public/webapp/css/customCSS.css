@@ -133,12 +133,24 @@
     border: none;
 }
 
+.text-size-16 {
+    font-size: 16px;
+}
+
 .text-size-14 {
     font-size: 14px;
 }
 
 .text-size-12 {
     font-size: 12px;
+}
+
+.text-size-10 {
+    font-size: 10px;
+}
+
+.text-size-8 {
+    font-size: 8px;
 }
 
 .text-bold {
@@ -153,6 +165,56 @@
 
 .flex-long-text {
     flex-wrap: nowrap;
+}
+
+.icon-group {
+    color: #004B9C;
+    float: right;
+}
+
+.sort-chev {
+    margin-left: 1%;
+    margin-top: 0.5%;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.conformity-box {
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 1rem;
+    padding: 0.25rem;
+}
+
+.conformity-box-green {
+    border: 1px solid green;
+    color: green;
+    background-color: #e6fbe6;
+}
+
+.conformity-box-red {
+    border: 1px solid red;
+    color: red;
+    background-color: #ffd6da;
+}
+
+.conformity-box-orange {
+    border: 1px solid orange;
+    color: orange;
+    background-color: #fff5d8;
+}
+
+.card-header-document-viewer {
+    background-color: #004B9C;
+    color: white;
 }
 
 .nav-item-active{
