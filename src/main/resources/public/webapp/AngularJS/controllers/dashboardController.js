@@ -27,21 +27,21 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
 
     $scope.events = [
         {
-            title  : 'event 4',
+            title  : 'FORNITURA E INSTALL...',
             start  : '2020-07-15',
             color : '#36A8DF'
         },
         {
-            title  : 'event 3',
+            title  : 'FORNITURA DI TUBI SEN...',
             start  : '2020-07-24',
             color : '#36A8DF'
         },{
-            title  : 'event 2',
+            title  : 'ACCORDO QUADRO FOR...',
             start  : '2020-07-30',
             color : '#36A8DF'
         },
         {
-            title  : 'event 1',
+            title  : 'SERVIZIO DI MANUTENZ...',
             start  : '2020-07-28',
             color : '#FF6C00'
         }

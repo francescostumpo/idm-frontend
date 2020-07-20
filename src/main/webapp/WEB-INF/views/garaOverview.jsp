@@ -107,11 +107,11 @@
                                                 <i class="fa fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"></i>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                     <p class="dropdown-item no-margin-bottom" style="cursor: pointer;">
-                                                        <i class="fa fa-pencil-alt"></i><span class="ml-2">Modifica</span>
+                                                        <i class="far fa-edit fa-fw fa-lg pointer"></i><span class="ml-2">Modifica</span>
                                                     </p>
                                                     <div class="dropdown-divider"></div>
                                                     <p class="dropdown-item no-margin-bottom" style="cursor: pointer;">
-                                                        <i class="fa fa-trash"></i><span class="ml-2">Elimina</span>
+                                                        <i class="far fa-trash-alt fa-fw fa-lg pointer"></i><span class="ml-2">Elimina</span>
                                                     </p>
                                                 </div>
                                             </div>

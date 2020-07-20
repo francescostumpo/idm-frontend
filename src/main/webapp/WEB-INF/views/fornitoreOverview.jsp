@@ -60,7 +60,7 @@
                 <div class="pg-check progress-bar bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="container-fluid">
-                <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-5 mt-3">
                     <div class="row mt-2">
                         <!-- Show list -->
                         <div ng-hide="showDocument" class="col-lg-12 col-md-12 col-sm-12">
@@ -96,44 +96,43 @@
                                     <div class="row">
                                         <div class="col-lg-1 col-md-1 col-sm-1">
                                             <div class="row">
-                                                <input ng-checked="checkDocument(document)" ng-click="selectDocument(document)" type="checkbox" class="pointer">
-                                                <div ng-if="document.presence === -1"><i class="ml-4 fas fa-exclamation-triangle pointer" style="color: red;"></i></div>
-                                                <div ng-if="document.presence === 0"><i class="ml-4 fa fa-check-circle pointer" style="color: green;"></i></div>
-                                                <div ng-if="document.presence === 1"><i class="ml-4 fas fa-exclamation pointer" style="color: orange"></i></div>
+                                                <input ng-checked="checkDocument(document)" ng-click="selectDocument(document)" type="checkbox" class="my-auto pointer">
+                                                <div ng-if="document.presence === -1"><i class="my-auto ml-4 fas fa-exclamation-triangle pointer" style="color: red;"></i></div>
+                                                <div ng-if="document.presence === 0"><i class="my-auto ml-4 fa fa-check-circle pointer" style="color: green;"></i></div>
+                                                <div ng-if="document.presence === 1"><i class="my-auto ml-4 fas fa-exclamation pointer" style="color: orange"></i></div>
                                             </div>
                                         </div>
                                         <div class="col-lg-5 col-md-5 col-sm-5">
                                             <div class="row flex-long-text">
-                                                <i class="ml-2 mr-2 fas fa-file-pdf fa-2x" style="color: red;"></i>
-                                                <p class="no-margin-bottom text-size-16 text-bold crop">{{document.name}}</p>
+                                                <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x" style="color: red;"></i>
+                                                <p class="my-auto  no-margin-bottom text-size-16 text-bold crop">{{document.name}}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-2">
-                                            <p class="no-margin-bottom text-size-16 text-bold">{{document.uploadedAt | date: 'dd/MM/yyyy - HH:mm'}} </p>
+                                            <p class="my-auto  no-margin-bottom text-size-16 text-bold">{{document.uploadedAt | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-2 text-size-14">
-                                            <div ng-if="document.conformity === 0" class="col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green"><i class="mr-2 fas fa-check"></i>CONFORME</div>
-                                            <div ng-if="document.conformity === 1" class="col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red"><i class="mr-2 fas fa-times"></i>NON CONFORME</div>
-                                            <div ng-if="document.conformity === 2" class="col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange"><i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
+                                            <div ng-if="document.conformity === 0" class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green"><i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                            <div ng-if="document.conformity === 1" class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red"><i class="mr-2 fas fa-times"></i>NON CONFORME</div>
+                                            <div ng-if="document.conformity === 2" class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange"><i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-2">
                                             <div class="row icon-group" ng-if="document.presence >= 0">
-                                                <div class="m-1"><i class="far fa-edit fa-fw fa-lg pointer"></i></div>
-                                                <div class="m-1"><i class="fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i></div>
-                                                <div class="m-1"><i class="far fa-trash-alt fa-fw fa-lg pointer"></i></div>
+                                                <div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>
+                                                <div class="m-1"><i class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i></div>
+                                                <div class="m-1"><i class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i></div>
                                             </div>
                                             <div class="row icon-group fa-stack" ng-if="document.presence === -1">
-                                                <div class="m-1"><i class="fas fa-plus fa-fw fa-stack-1x pointer"></i></div>
-                                                <div class="m-1"><i class="far fa-circle fa-fw fa-stack-2x pointer"></i></div>
+                                                <div class="m-1"><i class="my-auto  fas fa-plus fa-fw fa-stack-1x pointer"></i></div>
+                                                <div class="m-1"><i class="my-auto  far fa-circle fa-fw fa-stack-2x pointer"></i></div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Show Document -->
-                        <div class="col-lg-12 col-md-12 col-sm-12" ng-show="showDocument">
+                        <div class="col-lg-12 col-md-12 col-sm-12 mb-5" ng-show="showDocument">
                             <div class="row">
                                 <div class="col-lg-5 col-md-5 col-sm-5">
                                     <div class="d-flex justify-content-end">
@@ -142,19 +141,19 @@
                                             <span class="ml-1 text-size-12">SOSTITUISCI</span>
                                         </button>
                                         <button class="btn button-neutral-compare-advise m-1">
-                                            <i class="fa fa-trash"></i>
+                                            <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                             <span class="ml-1 text-size-12">ELIMINA</span>
                                         </button>
                                     </div>
                                     <div class="card mt-2 no-border">
                                         <div class="card-header d-flex">
                                             <div class="col-lg-2 col-md-2 col-sm-2"></div>
-                                            <div ng-click="sortCardsByColumnName('name')" class="col-lg-4 col-md-4 col-sm-4 mr-5 text-size-12 no-select">
+                                            <div ng-click="sortCardsByColumnName('name')" class="col-lg-6 col-md-6 col-sm-6 text-size-12 no-select">
                                                 DOCUMENTO
                                                 <i ng-if="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                                 <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                                             </div>
-                                            <div ng-click="sortCardsByColumnName('conformity')"  class="col-lg-3 col-md-3 col-sm-3 text-size-12">
+                                            <div ng-click="sortCardsByColumnName('conformity')"  class="col-lg-4 col-md-4 col-sm-4 text-size-12">
                                                 CONFORMITA
                                                 <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                                 <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
@@ -167,24 +166,24 @@
                                             <div class="row">
                                                 <div class="col-lg-2 col-md-2 col-sm-2">
                                                     <div class="row">
-                                                        <input ng-checked="checkDocument(document)" ng-click="selectDocument(document)" type="checkbox" class="col-lg-7 col-md-7 col-sm-12 pointer">
-                                                        <div ng-if="document.presence === -1"><i class="ml-2 fas fa-exclamation-triangle pointer" style="color: red;"></i></div>
-                                                        <div ng-if="document.presence === 0"><i class="ml-2 fa fa-check-circle pointer" style="color: green;"></i></div>
-                                                        <div ng-if="document.presence === 1"><i class="ml-2 fas fa-exclamation pointer" style="color: orange"></i></div>
+                                                        <input ng-checked="checkDocument(document)" ng-click="selectDocument(document)" type="checkbox" class="my-auto  col-lg-7 col-md-7 col-sm-12 pointer">
+                                                        <div ng-if="document.presence === -1"><i class="my-auto  ml-2 fas fa-exclamation-triangle pointer" style="color: red;"></i></div>
+                                                        <div ng-if="document.presence === 0"><i class="my-auto  ml-2 fa fa-check-circle pointer" style="color: green;"></i></div>
+                                                        <div ng-if="document.presence === 1"><i class="my-auto  ml-2 fas fa-exclamation pointer" style="color: orange"></i></div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 mr-5">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="row flex-long-text">
-                                                        <i class="ml-2 mr-2 fas fa-file-pdf fa-lg" style="color: red;"></i>
-                                                        <p class="no-margin-bottom text-size-14 text-bold crop">{{document.name}}</p>
+                                                        <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg" style="color: red;"></i>
+                                                        <p class="my-auto no-margin-bottom text-size-14 text-bold crop">{{document.name}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3">
-                                                    <div ng-if="document.conformity === 0" class="col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-8"><i class="mr-2 fas fa-check"></i>CONFORME</div>
-                                                    <div ng-if="document.conformity === 1" class="col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-8"><i class="mr-2 fas fa-times"></i>NON CONFORME</div>
-                                                    <div ng-if="document.conformity === 2" class="col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-8"><i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
+                                                    <div ng-if="document.conformity === 0" class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-8"><i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                                    <div ng-if="document.conformity === 1" class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-8"><i class="mr-2 fas fa-times"></i>NON CONFORME</div>
+                                                    <div ng-if="document.conformity === 2" class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-8"><i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
                                                 </div>
-                                                <div class="col-lg-1 col-md-1 col-sm-1 icon-group"><i class="fa fa-ellipsis-h pointer"></i></div>
+                                                <div class="col-lg-1 col-md-1 col-sm-1 icon-group"><i class="my-auto fa fa-ellipsis-h pointer"></i></div>
                                             </div>
                                         </div>
                                     </div>

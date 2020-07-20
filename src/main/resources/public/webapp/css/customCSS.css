@@ -133,6 +133,15 @@
     border: none;
 }
 
+.text-size-28{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.text-size-18{
+    font-size: 18px;
+}
+
 .text-size-16 {
     font-size: 16px;
 }
@@ -276,24 +285,28 @@
     background-color: #004B9C;
     color: white;
     border-color: #004B9C;
+    font-size: 14px;
 }
 
 .button-secondary-buyer:hover{
     background-color: #004B9C;
     color: white;
     border-color: #004B9C;
+    font-size: 14px;
 }
 
 .button-primary-buyer{
     background-color: white;
     color: #004B9C;
     border-color: #004B9C;
+    font-size: 14px;
 }
 
 .button-primary-buyer:hover{
     background-color: white;
     color: #004B9C;
     border-color: #004B9C;
+    font-size: 14px;
 }
 
 .col-md-2point4{

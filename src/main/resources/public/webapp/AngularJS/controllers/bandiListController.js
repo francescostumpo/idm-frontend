@@ -100,6 +100,50 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
         }
     ]
 
+    $scope.bandiSelected = [];
+
+    $scope.openModalEditTender = function (bando) {
+        $('#datepickerModify').datepicker({
+            locale: 'it-it',
+            uiLibrary: 'bootstrap4',
+            format: 'dd/mm/yyyy'
+        });
+        $scope.bandoSelected = bando
+
+        $('#editTenderModal').modal()
+    }
+
+    $scope.modifyBando = function(){
+        console.log('Bando ' , $scope.bandoSelected, ' modified')
+        mainController.showNotification('bottom', 'right', 'Modifica effetuata con successo', '', 'far fa-check-square', 'info')
+    }
+
+    $scope.selectBando = function(bando){
+        if(!$scope.bandiSelected.includes(bando)){
+            $scope.bandiSelected.push(bando)
+        }
+        else{
+            var tmp = [];
+            var k = 0;
+            for(var i=0;i<$scope.bandiSelected.length;i++){
+                if(bando.cig !== $scope.bandiSelected[i].cig){
+                    tmp[k] = $scope.bandiSelected[i];
+                    k++;
+                }
+            }
+            $scope.bandiSelected = tmp;
+        }
+        console.log($scope.bandiSelected)
+    }
+
+    $scope.highlightCard = function(bando){
+        for(var i = 0; i < $scope.bandiSelected.length ; i++){
+            if(bando.cig === $scope.bandiSelected[i].cig){
+                return {'background-color' : '#DCF4F2'}
+            }
+        }
+    }
+
     $scope.goToView = function (path, bandoGara) {
 
         sessionStorage.setItem('bandoGara', JSON.stringify(bandoGara));
