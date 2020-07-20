@@ -26,11 +26,71 @@
     </nav>
     <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
-    <div id="wrapper">
-        <div id="content-wrapper" class="d-flex flex-column" >
-            <div class="container-fluid">
-                <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                    <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
+<div id="wrapper" ng-controller="bandiListController">
+    <div id="content-wrapper" class="d-flex flex-column" >
+        <!-- Header section -->
+        <div class="container-fluid">
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
+
+            </div>
+        </div>
+        <!-- End of Header section -->
+
+        <!-- Main Section -->
+        <div class="container-fluid">
+            <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                <div class="card mt-2 no-border">
+                    <div class="card-header d-flex justify-content-center">
+                        <div ng-click="sortCardsByColumnName('name')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                            CIG
+                            <i ng-if="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                        </div>
+                        <div ng-click="sortCardsByColumnName('uploadedAt')" class="col-lg-4 col-md-4 col-sm-4 text-size-14 no-select pointer">
+                            OGGETTO
+                            <i ng-if="sort.uploadedAt === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.uploadedAt === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                        </div>
+                        <div ng-click="sortCardsByColumnName('conformity')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                            SOCIETA'
+                            <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                        </div>
+                        <div ng-click="sortCardsByColumnName('conformity')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                            FINE LAVORAZIONE
+                            <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                        </div>
+                        <div ng-click="sortCardsByColumnName('conformity')" class="col-lg-1 col-md-1 col-sm-1 text-size-14 no-select pointer">
+                            FORNITORI
+                            <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 text-size-14"></div>
+                    </div>
+                </div>
+                <div class="card" ng-repeat="bandoGara in bandiGaraList">
+                    <div class="card-body">
+                        <div class="row" ng-click="goToView('/garaOverview', bandoGara)">
+                            <div class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                                {{bandoGara.cig}}
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 text-size-14 no-select pointer">
+                                {{bandoGara.oggetto}}
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                                {{bandoGara.societa}}
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                                {{bandoGara.lavorazione}}
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 text-size-14 no-select pointer">
+                                {{bandoGara.fornitori}}
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 text-size-14"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,8 +98,9 @@
             <i class="fas fa-angle-up"></i>
         </a>
     </div>
+</div>
 </body>
 <jsp:include page="subviews/scripts.jsp"></jsp:include>
-<script src="./webapp/AngularJS/controllers/"></script>
+<script src="./webapp/AngularJS/controllers/bandiListController.js"></script>
 
 </html>
