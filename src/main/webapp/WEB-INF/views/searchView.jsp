@@ -58,13 +58,11 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
                     <div id="modify-and-delete-button-div" style="display: none;" ng-show="checkIfSelectedBandoGara()" >
-                        <button class="modify-button" ng-show="checkLengthSelectedBandoGara()" ng-click="toggleModalModifyGara()"
-                                style="margin-right: 1%; height: 35px; width: 111px;"> <i class="fas fa-pen"
-                                                                                          style="padding-top: 3%; padding-right: 7%; padding-bottom: 3%;"></i>Modifica
+                        <button class="modify-button" ng-show="checkLengthSelectedBandoGara()" ng-click="toggleModalModifyGara()">
+                            <i class="fas fa-pen"></i><span class="ml-2">Modifica</span>
                         </button>
-                        <button class="delete-button" style="margin-right: 1%; height: 35px; width: 111px;"
-                                ng-click="toggleModalDeleteGara('none', false)"> <i class="fas fa-trash"
-                                                                                    style="padding-top: 3%; padding-right: 7%; padding-bottom: 3%;"></i> Elimina
+                        <button class="delete-button" ng-click="toggleModalDeleteGara('none', false)">
+                            <i class="fas fa-trash"></i> <span class="ml-2">Elimina</span>
                         </button>
                     </div>
 

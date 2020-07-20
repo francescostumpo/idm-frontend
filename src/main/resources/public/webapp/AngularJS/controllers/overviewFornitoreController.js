@@ -163,7 +163,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         conformity: '',
     }
     $scope.showDocument = false;
-    $scope.selectedDocuments = []
+    $scope.selectedDocuments = [];
 
     $scope.dtOptionsSearchView = DTOptionsBuilder.newOptions()
         .withDOM('t')
@@ -189,29 +189,37 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.selectDocument = function (document) {
-        let found = false;
-        for(i = 0;i < $scope.selectedDocuments.length; i++){
+        var found = false;
+        for(var i = 0; i < $scope.selectedDocuments.length; i++){
             var id = document.id;
             if(id === $scope.selectedDocuments[i].id){
                 found = true;
                 $scope.selectedDocuments.splice(i, 1)
             }
         }
-        if (!found) {
+        if (!found && $scope.selectedDocuments.length == 0) {
             $scope.selectedDocuments.push(document)
+            $scope.show(document, 'show');
+        }else if(!found && !$scope.selectedDocuments.length == 0){
+            $scope.selectedDocuments = [];
+            $scope.selectedDocuments.push(document);
+            $scope.show(document, 'show');
+        }else if(found && $scope.selectedDocuments.length == 0){
+            $scope.show(document, 'hide');
         }
     }
 
-    $scope.show = function(document) {
-        $scope.showDocument = true;
-
-
-
-        $http.get(urlDocument).then(function(res) {
-            setTimeout(function(){
-                $scope.setDocument(res);
-            }, 500)
-        });
+    $scope.show = function(document, action) {
+        if(action === 'hide'){
+            $scope.showDocument = false;
+        }else{
+            $scope.showDocument = true;
+            $http.get(urlDocument).then(function(res) {
+                setTimeout(function(){
+                    $scope.setDocument(res);
+                }, 500)
+            });
+        }
     }
 
     $scope.sortCardsByColumnName = function(column){

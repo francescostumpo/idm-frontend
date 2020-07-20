@@ -124,8 +124,9 @@
                                         </div>
 
                                     </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress" style="height:.5rem;">
+                                        <div class="progress-bar bg-info" style="width: 70%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-danger" style="width: 20%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
@@ -133,35 +134,129 @@
                     </div>
                     <div class="tab-pane fade" id="pills-challenge" role="tabpanel" aria-labelledby="pills-challenge-tab">
                         <div class="row mt-2">
-                            <div class="col-lg-5 col-md-5 col-sm-12">
+                            <!-- Show Lost -->
+                            <div ng-hide="showDocument" class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="d-flex justify-content-end">
                                     <button class="btn button-neutral-compare-advise">
                                         <i class="fa fa-plus"></i>
                                         <span class="ml-2">AGGIUNGI DOCUMENTO</span>
                                     </button>
                                 </div>
-                                <div class="card mt-2">
+                                <div class="card mt-2 no-border">
                                     <div class="card-header d-flex justify-content-center">
-                                        DOCUMENTO
+                                        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                                        <div ng-click="sortCardsByColumnName('name')" class="col-lg-7 col-md-7 col-sm-7 text-size-14 no-select">
+                                            DOCUMENTO
+                                            <i ng-if="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                            <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                        </div>
+                                        <div ng-click="sortCardsByColumnName('uploadedAt')" class="col-lg-3 col-md-3 col-sm-3 text-size-14 no-select">
+                                            CARICATO IL
+                                            <i ng-if="sort.uploadedAt === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                            <i ng-if="sort.uploadedAt === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                     </div>
                                 </div>
                                 <div class="card" ng-repeat="documentSupp in documentsSuppliers">
-                                    <div class="card-body" >
+                                    <div class="card-body">
                                         <div class="row">
-                                            <div class="col-lg-2 col-md-2 col-sm-2"><input type="checkbox" class="pointer"><i class="ml-2 fa fa-check-circle pointer" style="color: green;"></i><i class="ml-2 fa fa-file-alt"></i> </div>
-                                            <div class="col-lg-9 col-md-9 col-sm-9"><p class="no-margin-bottom">{{documentSupp.name}}</p></div>
-                                            <div class="col-lg-1 col-md-1 col-sm-1"><i class="fa fa-ellipsis-h pointer"></i></div>
+                                            <div class="col-lg-1 col-md-1 col-sm-1">
+                                                <input ng-checked="checkDocument(documentSupp)" ng-click="selectDocument(documentSupp); show(documentSupp)" type="checkbox" class="my-auto pointer">
+                                                <i class="ml-2 fa fa-check-circle" style="color: limegreen"></i>
+                                            </div>
+                                            <div class="col-lg-7 col-md-7 col-sm-7">
+                                                <div class="row flex-long-text">
+                                                    <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x" style="color: red;"></i>
+                                                    <p class="my-auto  no-margin-bottom text-size-16 text-bold crop">{{documentSupp.name}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                                <p class="my-auto no-margin-bottom text-size-16 text-bold">{{documentSupp.uploadedAt | date: 'dd/MM/yyyy - HH:mm'}} </p>
+                                            </div>
+                                            <div class="col-lg-1 col-md-1 col-sm-1 d-flex justify-content-center"><i class="my-auto fa fa-ellipsis-h pointer"></i></div>
                                         </div>
                                     </div>
                                 </div>
+
+
                             </div>
-                            <div class="col-lg-7 col-md-7 col-sm-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        Seleziona un documento per visualizzare l'anteprima
+
+                            <!-- Show Document -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5" ng-show="showDocument">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn button-neutral-compare-advise m-1">
+                                                <i class="fas fa-sync fa-flip-horizontal"></i>
+                                                <span class="ml-1 text-size-12">SOSTITUISCI</span>
+                                            </button>
+                                            <button class="btn button-neutral-compare-advise m-1">
+                                                <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                <span class="ml-1 text-size-12">ELIMINA</span>
+                                            </button>
+                                        </div>
+                                        <div class="card mt-2 no-border">
+                                            <div class="card-header d-flex">
+                                                <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                                                <div ng-click="sortCardsByColumnName('name')" class="col-lg-9 col-md-9 col-sm-9 text-size-12 no-select">
+                                                    DOCUMENTO
+                                                    <i ng-if="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                                    <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                                </div>
+                                                <div class="col-lg-1 col-md-1 col-sm-1 d-flex justify-content-center"></div>
+                                            </div>
+                                        </div>
+                                        <div class="card" ng-repeat="documentSupp in documentsSuppliers">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                                        <div class="row">
+                                                            <input ng-checked="checkDocument(documentSupp)" ng-click="selectDocument(documentSupp)" type="checkbox" class="my-auto  col-lg-7 col-md-7 col-sm-12 pointer">
+                                                            <i class="ml-2 fa fa-check-circle" style="color: limegreen"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-9">
+                                                        <div class="row flex-long-text">
+                                                            <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg" style="color: red;"></i>
+                                                            <p class="my-auto no-margin-bottom text-size-14 text-bold crop">{{documentSupp.name}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-1 col-md-1 col-sm-1 icon-group d-flex justify-content-center"><i class="my-auto fa fa-ellipsis-h pointer"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        PLACEHOLDER
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <div class="card">
+                                            <div class="card-header card-header-document-viewer">
+                                                <div class="row text-size-14">
+                                                    <div class="col-lg-2 col-md-2 col-sm-12">
+                                                        <div class="form-group document-viewer-br">
+                                                            <label class="label-item">CIG</label>
+                                                            <p>{{bandoGara.cig}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                        <div class="form-group document-viewer-br">
+                                                            <label class="label-item">DATA CARICAMENTO</label>
+                                                            <p>{{selectedDocuments[0].uploadedAt | date: 'dd/MM/yyyy' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="label-item">NOME FILE</label>
+                                                            <p>{{selectedDocuments[0].name}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <object class="document-container" data="" type="application/pdf" width="100%" style="height: 150vh">
+                                                    <embed class="document-container" src="" type="application/pdf"></embed>
+                                                </object>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
