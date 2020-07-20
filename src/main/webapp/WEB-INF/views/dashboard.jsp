@@ -35,7 +35,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-3">
                         <div style="font-size: 28px" class="mb-0">Ciao Luca, ecco le tua gare recenti</div>
-                        <a style="cursor:pointer;font-weight: bold; text-decoration: underline" class="text-primary d-sm-inline-block">Vedi tutte</a>
+                        <a ng-click="goToViewNavigation('/search')" style="cursor:pointer;font-weight: bold; text-decoration: underline" class="text-primary d-sm-inline-block">Vedi tutte</a>
                     </div>
                     <div class="row">
                        <div class="col-md-4" ng-repeat="tender in recentTenders">
