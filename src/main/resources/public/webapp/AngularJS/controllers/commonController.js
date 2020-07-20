@@ -3,6 +3,46 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.sideBarIsClosed = true
 
+    $scope.sort = {
+        name: '',
+        uploadedAt: '',
+        conformity: '',
+        cig: '',
+        oggetto: '',
+        societa: '',
+        lavorazione: '',
+        fornitori: ''
+    }
+
+    $scope.sortCardsByColumnName = function(cards, column){
+        for (key in $scope.sort) {
+            if (key != column){
+                $scope.sort[key] = ''
+            }
+        }
+        $scope.sort[column] = $scope.revertSortingOrder($scope.sort[column]);
+        cards.sort((a, b) => $scope.customSort(a, b, column, $scope.sort[column]));
+    }
+
+    $scope.customSort = function(a, b, column, order) {
+        if (a[column] > b[column]) {
+            return order === 'asc'? 1: -1;
+        } else if (a[column] < b[column]) {
+            return order === 'asc'? -1: 1;
+        } else {
+            return 0;
+        }
+    }
+
+    $scope.revertSortingOrder = function(sortOrder){
+        if (sortOrder === 'asc') {
+            return 'desc'
+        } else {
+            return 'asc'
+        }
+    }
+
+
     /*
     var url = mainController.getHost() + '/fruits/list'
 

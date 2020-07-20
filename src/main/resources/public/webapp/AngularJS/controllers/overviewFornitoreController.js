@@ -157,11 +157,11 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     ]
 
 
-    $scope.sort = {
+   /* $scope.sort = {
         name: '',
         uploadedAt: '',
         conformity: '',
-    }
+    }*/
     $scope.showDocument = false;
     $scope.selectedDocuments = []
 
@@ -213,7 +213,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             }, 500)
         });
     }
-
+/*
     $scope.sortCardsByColumnName = function(column){
         for (key in $scope.sort) {
             if (key != column){
@@ -240,7 +240,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         } else {
             return 'asc'
         }
-    }
+    }*/
 
     $scope.initProgressBar = function(documents){
         var required = documents.length - (documents.filter(d => d.conformity == 2).length);

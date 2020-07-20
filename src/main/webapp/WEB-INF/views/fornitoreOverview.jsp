@@ -18,7 +18,7 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
+<body id="page-top" ng-controller="commonController" class="background-snam text-lato-snam" ng-app="snamApp">
 
     <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed" class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow" >
         <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
@@ -73,20 +73,20 @@
                             <div class="card mt-2 no-border">
                                 <div class="card-header d-flex justify-content-center">
                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
-                                    <div ng-click="sortCardsByColumnName('name')" class="col-lg-5 col-md-5 col-sm-5 text-size-14 no-select">
+                                    <div ng-click="sortCardsByColumnName(documents, 'name')" class="col-lg-5 col-md-5 col-sm-5 text-size-14 no-select">
                                         DOCUMENTO
-                                        <i ng-if="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
-                                        <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                        <i ng-show="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                        <i ng-show="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                                     </div>
-                                    <div ng-click="sortCardsByColumnName('uploadedAt')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
+                                    <div ng-click="sortCardsByColumnName(documents, 'uploadedAt')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
                                         CARICATO IL
-                                        <i ng-if="sort.uploadedAt === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
-                                        <i ng-if="sort.uploadedAt === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                        <i ng-show="sort.uploadedAt === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                        <i ng-show="sort.uploadedAt === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                                     </div>
-                                    <div ng-click="sortCardsByColumnName('conformity')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
+                                    <div ng-click="sortCardsByColumnName(documents, 'conformity')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
                                         CONFORMITA
-                                        <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
-                                        <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                                        <i ng-show="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                                        <i ng-show="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2"></div>
                                 </div>
