@@ -53,20 +53,28 @@ public class ViewController {
 		return modelAndView;
 	}
 
-	@GetMapping("/overviewFornitore")
-	public ModelAndView overviewFornitore() {
-		logger.info("getting overviewFornitore");
+	@GetMapping("/fornitoreOverview")
+	public ModelAndView fornitoreOverview(HttpServletResponse response) {
+		logger.info("getting fornitoreOverview");
 		ModelAndView modelAndView = null;
-		modelAndView = new ModelAndView("overviewFornitore");
-		logger.info("returning overviewFornitore");
+		modelAndView = new ModelAndView("fornitoreOverview");
+		Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList/garaOverview/fornitoreOverview");
+
+		response.addCookie(cookieContextPath);
+		response.addHeader("Cache-Control", "no-store");
+		logger.info("returning fornitoreOverview");
 		return modelAndView;
 	} 
 	
-	@GetMapping("/search") 
-	public ModelAndView search() {
+	@GetMapping("/searchView")
+	public ModelAndView searchView(HttpServletResponse response) {
 		logger.info("getting search view"); 
 		ModelAndView modelAndView = null; 
-		modelAndView = new ModelAndView("searchView"); 
+		modelAndView = new ModelAndView("searchView");
+		Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList");
+
+		response.addCookie(cookieContextPath);
+		response.addHeader("Cache-Control", "no-store");
 		logger.info("returning search view"); 
 		return modelAndView; 
 	}

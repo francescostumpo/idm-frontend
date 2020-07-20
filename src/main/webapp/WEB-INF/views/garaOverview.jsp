@@ -32,31 +32,31 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
 
                     <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
-                    <h3 class="font-bold">Mega titolo gigante</h3>
+                    <h3 class="font-bold">{{bandoGara.oggetto}}</h3>
                     <div class="col-lg-6 col-md-6 col-sm-6 mb-2" style="padding-left: 0rem !important;">
                         <div class="row mt-4">
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">SOCIETA'</label>
-                                    <p class="font-bold">Stogit</p>
+                                    <p class="font-bold">{{bandoGara.societa}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">CIG</label>
-                                    <p class="font-bold">789456123</p>
+                                    <p class="font-bold">{{bandoGara.cig}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">CHIUSURA GARA</label>
-                                    <p class="font-bold">06/07/2020</p>
+                                    <p class="font-bold">{{bandoGara.chiusuraGara}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">FINE LAVORAZIONE</label>
-                                    <p class="font-bold">31/07/2020</p>
+                                    <p class="font-bold">{{bandoGara.lavorazione}}</p>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                                                 AZ
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-9">
-                                                <p class="font-bold">{{supplier.name}}</p>
+                                                <p class="font-bold pointer" ng-click="goToView('fornitoreOverview', supplier)">{{supplier.name}}</p>
                                             </div>
                                             <div class="col-lg-1 col-md-1 col-sm-1">
                                                 <i class="fa fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"></i>

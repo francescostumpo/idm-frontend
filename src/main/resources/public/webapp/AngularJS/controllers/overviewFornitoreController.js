@@ -1,8 +1,12 @@
 snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location', '$rootScope', 'DTOptionsBuilder', function($scope, $http, $location,$rootScope, DTOptionsBuilder) {
     console.log("[INFO] Hello World from overviewFornitoreController");
 
-    $scope.cig = 7600013696
-    $scope.subject = "Fornitura ed installazione in opera di attuatori elettrici per il terminale di Palmi"
+
+    $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
+    $scope.fornitoreOverview = JSON.parse(sessionStorage.getItem("fornitoreOverview"));
+
+    var urlDocument = mainController.getHost() + '/document.pdf';
+
     $scope.documents = [{
             id: "0001",
             name: "12.1 Documentazione di gara",
@@ -168,7 +172,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         // When receiving a byte array
         //var file = new File([data], 'my_document.pdf', { type: 'application/pdf' });
         //var urlDocument = window.URL.createObjectURL(file);
-        const urlDocument = mainController.getHost() + '/document.pdf'
+
         $("object.document-container").attr("data", urlDocument);
         $("embed.document-container").attr("src", urlDocument);
         $("a.document-fullview").attr("href", urlDocument);
@@ -201,7 +205,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.show = function(document) {
         $scope.showDocument = true;
 
-        const urlDocument = mainController.getHost() + '/document.pdf'
+
 
         $http.get(urlDocument).then(function(res) {
             setTimeout(function(){
@@ -239,15 +243,16 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.initProgressBar = function(documents){
-        var required = documents.length - documents.filter(d => d.conformity == 2).length;
-        var percPresence =  Math.floor(documents.filter(d => d.conformity == 0).length / required* 100)
-        var percCheck =  Math.floor(documents.filter(d => d.conformity == 2).length / required * 100)
+        var required = documents.length - (documents.filter(d => d.conformity == 2).length);
+        var percPresence =  Math.floor(documents.filter(d => d.conformity == 0).length / required* 100);
+        var percCheck =  Math.floor(documents.filter(d => d.conformity == 2).length / required * 100);
         console.debug('percPresence', percPresence)
         console.debug('percCheck', percCheck)
         $(".pg-presence").css('width', percPresence + '%').attr('aria-valuenow', percPresence);
         $(".pg-check").css('width', percCheck + '%').attr('aria-valuenow', percCheck);
     }
 
-    $scope.initProgressBar($scope.documents)
+    $scope.initProgressBar($scope.documents);
+
 
 }]);

@@ -29,27 +29,21 @@
             <div class="header-section">
                 <div class="container-fluid">
                     <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Bandi di Gara</a></li>
-                                <li class="breadcrumb-item"><a href="#">Fornitura ed installazione in opera di attuatori...</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Valvitalia S.p.A.</li>
-                            </ol>
-                        </nav>
-                        <h3 class="font-bold">Overview fornitore</h3>
+                        <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
+                        <h3 class="font-bold">{{fornitoreOverview.name}}</h3>
+
                         <div class="col-lg-12 col-md-12 col-sm-12 mb-2" style="padding-left: 0rem !important;">
                             <div class="row mt-4">
                                 <div class="col-lg-2 col-md-2 col-sm-12">
                                     <div class="form-group">
                                         <label class="label-item">CIG</label>
-                                        <p class="font-bold">{{cig}}</p>
+                                        <p class="font-bold">{{bandoGara.cig}}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                     <div class="form-group">
                                         <label class="label-item">OGGETTO</label>
-                                        <p class="font-bold">{{subject}}</p>
+                                        <p class="font-bold">{{bandoGara.oggetto}}</p>
                                     </div>
                                 </div>
                             </div>

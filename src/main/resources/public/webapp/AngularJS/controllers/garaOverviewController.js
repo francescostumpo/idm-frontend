@@ -1,6 +1,9 @@
 snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$anchorScroll', '$rootScope', function($scope, $http, $location,$rootScope) {
     console.log("[INFO] Hello World from garaOverviewController");
 
+
+    $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
+
     $scope.suppliers = [
         {name : 'IBM'},
         {name : 'Oracle'},
@@ -22,5 +25,11 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         $('#'+itemToHide).removeClass('show');
         $('#'+itemToDisplay).fadeIn(100);
         $('#'+itemToDisplay).addClass('show')
+    }
+
+    $scope.goToView = function (path, fornitoreOverview) {
+        sessionStorage.setItem('fornitoreOverview', JSON.stringify(fornitoreOverview));
+        sessionStorage.setItem('fornitoreOverviewName', fornitoreOverview.name);
+        location.href = path;
     }
 }]);
