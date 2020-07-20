@@ -129,6 +129,108 @@
   background-color: white
 }
 
+.no-border {
+    border: none;
+}
+
+.text-size-16 {
+    font-size: 16px;
+}
+
+.text-size-14 {
+    font-size: 14px;
+}
+
+.text-size-12 {
+    font-size: 12px;
+}
+
+.text-size-10 {
+    font-size: 10px;
+}
+
+.text-size-8 {
+    font-size: 8px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.crop {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.flex-long-text {
+    flex-wrap: nowrap;
+}
+
+.icon-group {
+    color: #004B9C;
+    float: right;
+}
+
+.sort-chev {
+    margin-left: 1%;
+    margin-top: 0.5%;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.conformity-box {
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 1rem;
+    padding: 0.25rem;
+}
+
+.conformity-box-green {
+    border: 1px solid green;
+    color: green;
+    background-color: #e6fbe6;
+}
+
+.conformity-box-red {
+    border: 1px solid red;
+    color: red;
+    background-color: #ffd6da;
+}
+
+.conformity-box-orange {
+    border: 1px solid orange;
+    color: orange;
+    background-color: #fff5d8;
+}
+
+.card-header-document-viewer {
+    background-color: #004B9C;
+    color: white;
+}
+
+.document-viewer-br {
+    border-right: 0.25px solid #dddfeb;
+}
+
+.expand-document-button {
+    text-align: right;
+    padding: .5rem;
+    color: white;
+}
+
+.expand-document-button a {
+    color: white;
+}
+
 .nav-item-active{
   color: #00B042;
   letter-spacing: 0.2px;
@@ -1234,6 +1336,10 @@ a.article:hover {
 	margin-bottom: 0px !important;
 }
 
+.no-border-t {
+    border-top: none;
+}
+
 /*.tbody-scrollable{
 	overflow-y: scroll;
 	max-height: 55vh !important;
@@ -1624,6 +1730,7 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
     cursor: pointer;
 }
 
+
 .currentPage{
     font-weight: bold;
     color: #004B9C !important;
@@ -1634,3 +1741,4 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
     font-weight: bold;
     color: #004B9C !important;
 }
+

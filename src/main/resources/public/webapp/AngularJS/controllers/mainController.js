@@ -252,7 +252,7 @@ mainController = {
 		var location = window.location.hostname;
 		var host = ""
 		if(location.includes("localhost")){
-			host = "http://localhost:3000"
+			host = "http://localhost:8080"
 		}
 		else if(location.includes("dev")){
 			host = "https://snam-ai4cm-backend-dev.eu-de.mybluemix.net";

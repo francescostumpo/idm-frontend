@@ -53,4 +53,22 @@ public class ViewController {
 		return modelAndView;
 	}
 
+	@GetMapping("/overviewFornitore")
+	public ModelAndView overviewFornitore() {
+		logger.info("getting overviewFornitore");
+		ModelAndView modelAndView = null;
+		modelAndView = new ModelAndView("overviewFornitore");
+		logger.info("returning overviewFornitore");
+		return modelAndView;
+	} 
+	
+	@GetMapping("/search") 
+	public ModelAndView search() {
+		logger.info("getting search view"); 
+		ModelAndView modelAndView = null; 
+		modelAndView = new ModelAndView("searchView"); 
+		logger.info("returning search view"); 
+		return modelAndView; 
+	}
+
 }
