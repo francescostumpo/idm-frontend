@@ -5,7 +5,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
     $scope.fornitoreOverview = JSON.parse(sessionStorage.getItem("fornitoreOverview"));
 
-    var urlDocument = mainController.getHost() + '/document.pdf';
+    var urlDocument = mainController.getFrontendHost() + '/document.pdf';
 
     $scope.documents = [{
             id: "0001",

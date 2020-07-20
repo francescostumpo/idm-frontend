@@ -3,6 +3,16 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.sideBarIsClosed = true
 
+    var url = mainController.getHost() + '/fruits/list'
+
+    $http.get(url).then(function (response) {
+        console.log('response : ' , response)
+    })
+
+    $scope.goToViewNavigation = function(destination){
+        location.href = destination;
+    }
+
     $("#content-wrapper").click(function () {
         console.log('click on content-wrapper')
         if(!$scope.sideBarIsClosed){

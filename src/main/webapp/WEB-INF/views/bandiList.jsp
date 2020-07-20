@@ -18,11 +18,13 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
+<body id="page-top" ng-controller="commonController" class="background-snam text-lato-snam" ng-app="snamApp">
 
-<nav id="dashboardNavbar" ng-if="!sidebarIsClosed" class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow" >
-    <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
-</nav>
+
+    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed" class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow" >
+        <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
+    </nav>
+    <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
 <div id="wrapper" ng-controller="bandiListController">
     <div id="content-wrapper" class="d-flex flex-column" >
@@ -92,12 +94,11 @@
                 </div>
             </div>
         </div>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
     </div>
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 </div>
-
 </body>
 <jsp:include page="subviews/scripts.jsp"></jsp:include>
 <script src="./webapp/AngularJS/controllers/bandiListController.js"></script>

@@ -44,14 +44,13 @@
 
 </head>
 
-<body style="position: fixed; width: 100%;" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp"
-    ng-controller="searchViewController">
+<body  ng-controller="commonController" style="position: fixed; width: 100%;" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp"
+    >
 
-
-    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed"
-        class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow">
+    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed" class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow" >
         <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
     </nav>
+    <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
     <div id="wrapper">
         <div id="content-wrapper" class="d-flex flex-column" >

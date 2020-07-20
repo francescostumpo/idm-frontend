@@ -25,16 +25,17 @@
     </nav>
     <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
+
     <div ng-controller="dashboardController" id="wrapper">
         <div id="content-wrapper" class="d-flex flex-column" >
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 mt-3 mb-3">
+                <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-3">
                         <div style="font-size: 28px" class="mb-0">Ciao Luca, ecco le tua gare recenti</div>
-                        <a style="cursor:pointer;font-weight: bold; text-decoration: underline" class="text-primary d-sm-inline-block">Vedi tutte</a>
+                        <a ng-click="goToViewNavigation('/bandiList')" style="cursor:pointer;font-weight: bold; text-decoration: underline" class="text-primary d-sm-inline-block">Vedi tutte</a>
                     </div>
                     <div class="row">
                        <div class="col-md-4" ng-repeat="tender in recentTenders">
