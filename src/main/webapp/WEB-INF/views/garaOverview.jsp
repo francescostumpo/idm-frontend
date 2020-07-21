@@ -52,13 +52,13 @@
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">CHIUSURA GARA</label>
-                                    <p class="font-bold">{{bandoGara.chiusuraGara}}</p>
+                                    <p class="font-bold">{{bandoGara.chiusuraGara | date: 'dd/MM/yyyy'}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">FINE LAVORAZIONE</label>
-                                    <p class="font-bold">{{bandoGara.lavorazione}}</p>
+                                    <p class="font-bold">{{bandoGara.lavorazione | date: 'dd/MM/yyyy'}}</p>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                                 <p class="label-item">{{suppliers.length}} FORNITORI CARICATI</p>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-12">
-                                <button class="btn button-block button-neutral-compare-advise">
+                                <button class="btn button-block button-primary-buyer">
                                     <i class="fa fa-plus"></i>
                                     <span class="ml-2">AGGIUNGI FORNITORE</span>
                                 </button>
@@ -135,7 +135,7 @@
                         <div class="row mt-2">
                             <div class="col-lg-5 col-md-5 col-sm-12">
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn button-neutral-compare-advise">
+                                    <button class="btn button-primary-buyer">
                                         <i class="fa fa-plus"></i>
                                         <span class="ml-2">AGGIUNGI DOCUMENTO</span>
                                     </button>
