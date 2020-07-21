@@ -32,7 +32,32 @@
         <div class="container-fluid">
             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                 <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
+                <h3 class="font-bold">Bandi di Gara</h3>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                        <div class="d-sm-flex align-items-center justify-content-between mt-4 mb-4">
+                            <div>
 
+                            </div>
+                            <div>
+                                <div class="row text-center">
+                                    <div class="row justify-content-end my-auto">
+                                        <div class="mr-4">
+                                            <button ng-click="openModalEditTender(bandiSelected[0])" class="btn button-primary-buyer" ng-disabled="bandiSelected.length !== 1" ng-click="goToPage('compare')">
+                                                <i class="far fa-edit fa-fw fa-lg pointer"></i><span class="ml-2">MODIFICA</span>
+                                            </button>
+                                        </div>
+                                        <div class="mr-4">
+                                            <button class="btn button-primary-buyer" ng-disabled="bandiSelected.length === 0" ng-click="goToPage('compare')">
+                                                <i class="far fa-trash-alt fa-fw fa-lg pointer"></i><span class="ml-2">ELIMINA</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- End of Header section -->
@@ -40,30 +65,7 @@
         <!-- Main Section -->
         <div class="container-fluid">
             <div class="col-lg-12 col-md-12 col-sm-12 mb-5 mt-3">
-                <div class="d-sm-flex align-items-center justify-content-between mb-3">
-                    <div  class="text-size-28 mb-0">Bandi di Gara</div>
-                </div>
-                <div class="d-sm-flex align-items-center justify-content-between mt-4 mb-4">
-                    <div>
 
-                    </div>
-                    <div>
-                        <div class="row text-center">
-                            <div class="row justify-content-end my-auto">
-                                <div class="mr-4">
-                                    <button ng-click="openModalEditTender(bandiSelected[0])" class="btn button-primary-buyer" ng-disabled="bandiSelected.length !== 1" ng-click="goToPage('compare')">
-                                        <i class="far fa-edit fa-fw fa-lg pointer"></i><span class="ml-2">MODIFICA</span>
-                                    </button>
-                                </div>
-                                <div class="mr-4">
-                                    <button class="btn button-primary-buyer" ng-disabled="bandiSelected.length === 0" ng-click="goToPage('compare')">
-                                        <i class="far fa-trash-alt fa-fw fa-lg pointer"></i><span class="ml-2">ELIMINA</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card mt-2 no-border">
                     <div class="card-header d-flex justify-content-center">
                         <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">

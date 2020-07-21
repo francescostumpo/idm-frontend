@@ -1,6 +1,7 @@
 snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location,$rootScope) {
     console.log("[INFO] Hello World from bandiListController");
 
+
     $scope.bandiGaraList = [
         {
             "cig": "5100001260",

@@ -92,13 +92,13 @@
                                 </div>
                             </div>
                             <div class="card" ng-repeat="document in documents">
-                                <div class="card-body" ng-click="show(document)">
+                                <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-1 col-sm-1">
                                             <div class="row">
                                                 <input ng-checked="checkDocument(document)" ng-click="selectDocument(document)" type="checkbox" class="my-auto pointer">
                                                 <div ng-if="document.presence === -1"><i class="my-auto ml-4 fas fa-exclamation-triangle pointer" style="color: red;"></i></div>
-                                                <div ng-if="document.presence === 0"><i class="my-auto ml-4 fa fa-check-circle pointer" style="color: green;"></i></div>
+                                                <div ng-if="document.presence === 0"><i class="my-auto ml-4 fa fa-check-circle pointer" style="color: limegreen;"></i></div>
                                                 <div ng-if="document.presence === 1"><i class="my-auto ml-4 fas fa-exclamation pointer" style="color: orange"></i></div>
                                             </div>
                                         </div>
@@ -162,13 +162,13 @@
                                         </div>
                                     </div>
                                     <div class="card" ng-repeat="document in documents">
-                                        <div class="card-body" ng-click="show(document)">
+                                        <div class="card-body">
                                             <div class="row">
                                                 <div class="col-lg-2 col-md-2 col-sm-2">
                                                     <div class="row">
                                                         <input ng-checked="checkDocument(document)" ng-click="selectDocument(document)" type="checkbox" class="my-auto  col-lg-7 col-md-7 col-sm-12 pointer">
                                                         <div ng-if="document.presence === -1"><i class="my-auto  ml-2 fas fa-exclamation-triangle pointer" style="color: red;"></i></div>
-                                                        <div ng-if="document.presence === 0"><i class="my-auto  ml-2 fa fa-check-circle pointer" style="color: green;"></i></div>
+                                                        <div ng-if="document.presence === 0"><i class="my-auto  ml-2 fa fa-check-circle pointer" style="color: limegreen;"></i></div>
                                                         <div ng-if="document.presence === 1"><i class="my-auto  ml-2 fas fa-exclamation pointer" style="color: orange"></i></div>
                                                     </div>
                                                 </div>
