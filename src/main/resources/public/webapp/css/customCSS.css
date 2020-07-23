@@ -133,6 +133,15 @@
     border: none;
 }
 
+.text-size-28{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.text-size-18{
+    font-size: 18px;
+}
+
 .text-size-16 {
     font-size: 16px;
 }
@@ -276,24 +285,28 @@
     background-color: #004B9C;
     color: white;
     border-color: #004B9C;
+    font-size: 14px;
 }
 
 .button-secondary-buyer:hover{
     background-color: #004B9C;
     color: white;
     border-color: #004B9C;
+    font-size: 14px;
 }
 
 .button-primary-buyer{
     background-color: white;
     color: #004B9C;
     border-color: #004B9C;
+    font-size: 14px;
 }
 
 .button-primary-buyer:hover{
     background-color: white;
     color: #004B9C;
     border-color: #004B9C;
+    font-size: 14px;
 }
 
 .col-md-2point4{
@@ -814,6 +827,15 @@ button:hover:enabled.button-searchView-action{
     width: 100%;
 }
 
+.danger-color{
+   color: #e74a3b;
+}
+
+.custom-link-underline{
+    text-decoration: underline;
+    color: #004B9C;
+}
+
 .fa-1point5{
     font-size: 1.5em;
 }
@@ -1315,6 +1337,28 @@ a.article:hover {
 	box-shadow: inset 0 3px 4px #888;
 }
 
+#filedrag4
+{
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    padding: 1em 0;
+    margin: 1em 0;
+    color: #555;
+    border: 2px dashed #555;
+    border-radius: 7px;
+    cursor: default;
+}
+
+
+#filedrag4.hover
+{
+    color: #152935;
+    border-color: #152935;
+    border-style: solid;
+    box-shadow: inset 0 3px 4px #888;
+}
+
 .nav-item-active-snam{
   /*color: white;
   letter-spacing: 0.2px;
@@ -1607,8 +1651,8 @@ th.dateUpload, td.dateUpload {
 }
 
 .sidebarOverlay {
-    min-width: 180px;
-    max-width: 180px;
+    min-width: 280px;
+    max-width: 280px;
     height: 100vh;
     position: fixed;
     top: 0;

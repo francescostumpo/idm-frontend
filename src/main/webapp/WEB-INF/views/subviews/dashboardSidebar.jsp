@@ -16,10 +16,11 @@
     </div>
     <!-- Divider -->
     <!-- Nav Item - Dashboard -->
-    <div id="sidebarDocuments" ng-class="verifyPageForSidebarLeftBorder('searchView')" class="mt-3 mb-3">
-        <div style="cursor: pointer" class="ml-4 " ng-click="goToPageFromSidebar('/searchView')">
-            <i ng-style="verifyPageForSidebar('searchView')" class="fas fa-file-alt"></i>
-            <span ng-style="verifyPageForSidebar('searchView')" class="ml-2" >BANDI DI GARA</span>
+    
+    <div id="sidebarDocuments" ng-class="verifyPageForSidebarLeftBorder('bandiList')" class="mt-3 mb-3">
+        <div style="cursor: pointer" class="ml-4 " ng-click="goToPageFromSidebar('/bandiList')">
+            <i ng-style="verifyPageForSidebar('bandiList')" class="fas fa-file-alt"></i>
+            <span ng-style="verifyPageForSidebar('bandiList')" class="ml-2" >BANDI DI GARA</span>
         </div>
     </div>
     <!-- Divider -->

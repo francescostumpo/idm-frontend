@@ -7,14 +7,27 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
         $scope.contractSelectedName = ""
     }
 
+    $scope.createTender = function(){
+        console.log('createTender -- INIT -- tender : ', $scope.tender)
+        var url = mainController.getHost() + '/tender/createTender'
+        $http.post(url, $scope.tender).then(function (response) {
+            console.log('response ', response)
+            $scope.tender = {}
+            if(response.data.status === 200){
+                mainController.showNotification('bottom', 'right', response.data.message, '',  'info')
+            }
+            else if(response.data.status === 500){
 
+            }
+        })
+    }
 
     $scope.openModalCreateTender = function () {
-        $('#datepicker1').datepicker({
+        /*$('#datepicker1').datepicker({
             locale: 'it-it',
             uiLibrary: 'bootstrap4',
             format: 'dd/mm/yyyy'
-        });
+        });*/
 
         $('#datepicker2').datepicker({
             locale: 'it-it',
@@ -31,15 +44,12 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
     $scope.contractIsSelected = false;
     $scope.contractSelectedName = "";
 
-
-
     (function() {
         // getElementById
         function $id(id) {
             return document.getElementById(id);
         }
 
-        // file drag hover
         function FileDragHover(e) {
             e.stopPropagation();
             e.preventDefault();
@@ -80,11 +90,8 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             var fileselect = $id("fileselect"),
                 filedrag = $id("filedrag")
 
-            // file select
             fileselect.addEventListener("change", FileSelectHandler, false);
-            // is XHR2 available?
 
-            // file drop
             filedrag.addEventListener("dragover", FileDragHover, false);
             filedrag.addEventListener("dragleave", FileDragHover, false);
             filedrag.addEventListener("drop", FileSelectHandler, false);

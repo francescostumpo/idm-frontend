@@ -28,9 +28,7 @@ snamApp.controller("breadcrumbController", ['$scope', '$http', '$location', '$ro
         }
     }
 
-    //For testing purposes - It must be done from bandiList page
-    sessionStorage.setItem('garaDetail', 'Servizio di manutenzione e riparazione di compressori aria...')
-
-    if(sessionStorage.getItem("garaDetail") != null){$scope.garaDetail = sessionStorage.getItem("garaDetail");}
+    if(sessionStorage.getItem("bandoGaraOggetto") != null){$scope.bandoGaraOggetto = sessionStorage.getItem("bandoGaraOggetto");}
+    if(sessionStorage.getItem("fornitoreOverviewName") != null){$scope.fornitoreOverviewName = sessionStorage.getItem("fornitoreOverviewName");}
 
 }]);

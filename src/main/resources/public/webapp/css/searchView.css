@@ -78,32 +78,8 @@ ul#menu ul#sub-menu {
     margin-right: 5%;
 }
 
-.modify-button {
-    border: 1px solid #004B9C;
-    border-radius: 17px; 
-    color: #004B9C; 
-    font-family: Ubuntu;
-    height: 5%; 
-    width: 8%; 
-    text-align:center right;
-    border-radius: 4px;
-    border-radius: 4px;
-    float: right; 
-    margin-right: 5%;
-} 
 
-.delete-button {
-    border: 1px solid #004B9C;
-    border-radius: 17px; 
-    color: #004B9C; 
-    font-family: Ubuntu;
-    height: 5%; 
-    width: 8%; 
-    text-align:center right;
-    border-radius: 4px;
-    border-radius: 4px;
-    float: right; 
-}
+
 
 #dropdown-button{
     background: #FFFFFF;
@@ -112,13 +88,6 @@ ul#menu ul#sub-menu {
     border-radius: 17px; 
 }
 
-#searchViewTitle { 
-    font-family: Ubuntu-Medium;
-    font-size: 28px; 
-    font-weight: bold; 
-    color: #1D2A30;
-    letter-spacing: 0.75px;
-}
 
 #cigHeaderCheckBox {
     background: #FFFFFF;

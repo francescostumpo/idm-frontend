@@ -26,45 +26,45 @@
     <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
 
-    <div ng-controller="dashboardController" id="wrapper">
-        <div style="margin: 1.5rem" id="content-wrapper" class="d-flex flex-column" >
+    <div ng-controller="dashboardController" class="mb-5" id="wrapper">
+        <div id="content-wrapper" class="mt-3 d-flex flex-column" >
             <div class="container-fluid">
-                <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                <!--<div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
-                </div>
+                </div>-->
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-3">
-                        <div style="font-size: 28px" class="mb-0">Ciao Luca, ecco le tua gare recenti</div>
-                        <a style="cursor:pointer;font-weight: bold; text-decoration: underline" class="text-primary d-sm-inline-block">Vedi tutte</a>
+                        <div class="text-size-28 mb-0">Ciao Claudia, ecco le tua gare recenti</div>
+                        <a ng-click="goToViewNavigation('/bandiList')" style="cursor:pointer;font-weight: bold; text-decoration: underline" class="text-primary d-sm-inline-block">Vedi tutte</a>
                     </div>
                     <div class="row">
                        <div class="col-md-4" ng-repeat="tender in recentTenders">
-                           <div class="card">
+                           <div class="card shadow">
                                <div class="card-body">
                                    <div style="font-size: 12px" class="font-weight-bold text-primary">
-                                       CIG {{tender.cig}}
+                                       {{tender.MAM}}
                                    </div>
                                    <div style="font-size: 16px" class="font-weight-bold mt-2 text-secondary">
                                        {{tender.supplier}}
                                    </div>
-                                   <div class="font-weight-bold mt-2" style="color: black; height: 150px; font-size: 16px">
-                                       {{tender.description}}
+                                   <div class="font-weight-bold mt-2" style="color: black; min-height: 80px; font-size: 16px">
+                                       {{processName(tender.description,120, 120)}}
                                    </div>
                                    <div class="break"></div>
                                    <div class="mt-2 text-secondary row no-gutters align-items-center">
                                        <div class="col mr-2">
-                                           <div style="font-size: 14px" class="text-xs mb-1">Chiusura gara</div>
-                                           <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.endDate}}</div>
+                                           <div style="font-size: 14px" class="text-xs mb-1">CIG</div>
+                                           <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.cig}}</div>
                                        </div>
                                        <div class="col-auto">
-                                           <div style="font-size: 14px" class="text-xs mb-1">Fine lavorazione</div>
+                                           <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
                                            <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.endWorkingDate}}</div>
                                        </div>
                                    </div>
                                </div>
                            </div>
                        </div>
-                    </div>
+                   </div>
 
                     <!-- Calendar -->
                     <div class="d-sm-flex align-items-center justify-content-between mt-5 mb-3">
@@ -76,13 +76,9 @@
                         <div class="card-body">
                             <div id="calendar" class="calendar"></div>
                             <div class="mt-3 ml-3 row">
-                                <div class="row">
-                                    <i style="color: #36A8DF" class="mr-1 ml-2 fas fa-circle fa-2x"></i>
-                                    <div style="font-size: 16px" class="font-weight-bold my-auto">Chiusura gara</div>
-                                </div>
                                 <div class="row ml-4">
-                                    <i style="color: #FF6C00" class="mr-1 ml-2 fas fa-circle fa-2x"></i>
-                                    <div style="font-size: 16px" class="font-weight-bold my-auto">Fine lavorazione</div>
+                                    <i style="color: #FF6C00" class="my-auto mr-2 fas fa-circle text-size-16"></i>
+                                    <div style="font-size: 16px" class="font-weight-bold my-auto">Scadenza</div>
                                 </div>
                             </div>
                         </div>
