@@ -14,7 +14,7 @@
 	<div class="d-none d-md-block">
 		<img class="navbar-brand" src="webapp/img/snam-logo.png"
 			width="5%" style="cursor: pointer;" ng-click="goToViewNavigation('/dashboard')"></img>
-		<a class=""	style="cursor: pointer; color: white; letter-spacing: 0.2px; font-weight: bold; font-size: 18px"	>
+		<a ng-click="goToViewNavigation('/dashboard')" class=""	style="cursor: pointer; color: white; letter-spacing: 0.2px; font-weight: bold; font-size: 18px"	>
 			INTELLIGENT DOCUMENT MANAGEMENT
 		</a>
 	</div>
@@ -68,7 +68,7 @@
 				aria-expanded="false">
 			<i style="cursor:pointer; color: white" class="far fa-user-circle fa-1point5 fa-sm fa-fw mr-2" style="color:white;"></i>
 			<span class="mr-2 d-none d-lg-inline"	style="color: white" id="userName">
-				Luca Santamaria
+				Claudia Boselli
 			</span>
 		</a>
 	</li>

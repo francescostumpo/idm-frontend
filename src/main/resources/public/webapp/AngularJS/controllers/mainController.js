@@ -12,7 +12,17 @@ mainController = {
 		return dateInMillis
 	},
 
-	showNotification: function(from, align, message, color, icon, type) {
+	showNotification: function(from, align, message, color, type) {
+		var icon = ''
+		if(type === 'info'){
+			icon = 'far fa-check-square'
+		}
+		else if(type === 'success'){
+			icon = 'far fa-check-square'
+		}
+		else if(type === 'danger'){
+			icon = "fas fa-exclamation-triangle"
+		}
 		$.notify({
 			icon: icon,
 			message: message

@@ -7,39 +7,28 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
             "supplier" : "Stogit",
             "description" : "Servizio di manutenzione e riparazione di compressori aria, sistemi di produzione azoto, gruppi elettrogeni emotopompe antincendio per i siti Stogit in ITALIA",
             "endDate" : "15/07/2020",
-            "endWorkingDate" : "28/07/2020"
+            "endWorkingDate" : "28/07/2020",
+            "MAM" : "MAM019-023C"
          },
         {
             "cig" : "7924253471",
             "supplier" : "Stogit",
             "description" : "Fornitura di tubi senza saldatura",
             "endDate" : "24/07/2020",
-            "endWorkingDate" : "04/07/2020"
+            "endWorkingDate" : "04/07/2020",
+            "MAM" : "MAM023-198A"
         },
         {
             "cig" : "8207265156",
             "supplier" : "Stogit",
             "description" : "Accordo quadro per la fornitura di automezzi ad uso aziendale",
             "endDate" : "30/07/2020",
-            "endWorkingDate" : "24/08/2020"
+            "endWorkingDate" : "24/08/2020",
+            "MAM" : "MAM107-101F"
         }
     ]
 
     $scope.events = [
-        {
-            title  : 'FORNITURA E INSTALL...',
-            start  : '2020-07-15',
-            color : '#36A8DF'
-        },
-        {
-            title  : 'FORNITURA DI TUBI SEN...',
-            start  : '2020-07-24',
-            color : '#36A8DF'
-        },{
-            title  : 'ACCORDO QUADRO FOR...',
-            start  : '2020-07-30',
-            color : '#36A8DF'
-        },
         {
             title  : 'SERVIZIO DI MANUTENZ...',
             start  : '2020-07-28',

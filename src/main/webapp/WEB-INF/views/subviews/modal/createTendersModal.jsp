@@ -17,7 +17,7 @@
                             <span class="text-medium-size-custom">Oggetto gara*</span>
                         </div>
                         <div class="text-primary mt-3">
-                            <input type="text" class="text-primary form-control" placeholder="Scrivi l'oggetto della gara">
+                            <input type="text" class="text-primary form-control" ng-model="tender.object" placeholder="Scrivi l'oggetto della gara">
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
@@ -25,36 +25,26 @@
                             <span class="text-medium-size-custom">CIG*</span>
                         </div>
                         <div class="text-primary mt-3">
-                            <input type="text" class="text-primary form-control" placeholder="000000000">
+                            <input type="text" class="text-primary form-control" ng-model="tender.cig" placeholder="000000000">
                         </div>
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-md-6 col-sm-6">
                         <div>
                             <span class="text-medium-size-custom">Società*</span>
                         </div>
                         <div class="text-primary mt-3">
-                            <input type="text" class="text-primary form-control" placeholder="Nome società">
+                            <input type="text" class="text-primary form-control" ng-model="tender.supplier" placeholder="Nome società">
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-md-6 col-sm-6">
                         <div>
-                            <span class="text-medium-size-custom">Data chiusura gara*</span>
+                            <span class="text-medium-size-custom">Scadenza*</span>
                         </div>
                         <div class="text-primary mt-3">
                             <div class="input-group">
-                                <input id="datepicker1" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4">
-                        <div>
-                            <span class="text-medium-size-custom">Data fine lavorazione*</span>
-                        </div>
-                        <div class="text-primary mt-3">
-                            <div class="input-group">
-                                <input id="datepicker2" class="form-control" />
+                                <input id="datepicker2" ng-model="tender.endDate" class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -106,7 +96,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
+                        <button ng-click="createTender()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
                             PROCEDI
                         </button>
                     </div>

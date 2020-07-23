@@ -1,103 +1,120 @@
 snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location,$rootScope) {
     console.log("[INFO] Hello World from bandiListController");
 
+    var url = mainController.getHost() + '/tender/getAllTenders'
+    $http.get(url).then(function (response) {
+        console.log('response from ', url, ' : ', response)
+    })
+
 
     $scope.bandiGaraList = [
         {
             "cig": "5100001260",
-            "societa": "Acme Inc.",
-            "oggetto": "Fornitura di componenti hardware",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di componenti hardware",
             "lavorazione": new Date("2020-06-23T15:18"),
-            "chiusuraGara": new Date("2020-06-23T15:18"),
-            "fornitori": 12
+            "endDate": new Date("2020-06-23T15:18"),
+            "fornitori": 12,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001259",
-            "societa": "Stogit",
-            "oggetto": "Fornitura di tubi senza saldatura",
+            "supplier": "Stogit",
+            "object": "Fornitura di tubi senza saldatura",
             "lavorazione": new Date("2020-08-15T15:18"),
-            "chiusuraGara": new Date("2020-08-15T15:18"),
-            "fornitori": 15
+            "endDate": new Date("2020-08-15T15:18"),
+            "fornitori": 15,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001263",
-            "societa": "G. House Medicals",
-            "oggetto": "Fornitura di materiali di primo soccorso",
+            "supplier": "Stogit",
+            "object": "Fornitura di materiali di primo soccorso",
             "lavorazione": new Date("2020-06-23T15:18"),
-            "chiusuraGara": new Date("2020-06-23T15:18"),
-            "fornitori": 8
+            "endDate": new Date("2020-06-23T15:18"),
+            "fornitori": 8,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001262",
-            "societa": "Frostfire Electronics",
-            "oggetto": "Fornitura di componenti elettronici",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di componenti elettronici",
             "lavorazione": new Date("2020-06-14T15:18"),
-            "chiusuraGara": new Date("2020-06-14T15:18"),
-            "fornitori": 18
+            "endDate": new Date("2020-06-14T15:18"),
+            "fornitori": 18,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001265",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di materiali di sicurezza",
             "lavorazione": new Date("2021-06-25T15:18"),
-            "chiusuraGara": new Date("2021-06-25T15:18"),
-            "fornitori": 11
+            "endDate": new Date("2021-06-25T15:18"),
+            "fornitori": 11,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001261",
-            "societa": "Wiza and Sons",
-            "oggetto": "Fornitura di telecamere di sicurezza",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di telecamere di sicurezza",
             "lavorazione": new Date("2020-06-23T15:18"),
-            "chiusuraGara": new Date("2020-06-23T15:18"),
-            "fornitori": 15
+            "endDate": new Date("2020-06-23T15:18"),
+            "fornitori": 15,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001266",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di materiali di sicurezza",
             "lavorazione": new Date("2020-11-10T15:18"),
-            "chiusuraGara": new Date("2020-11-10T15:18"),
-            "fornitori": 11
+            "endDate": new Date("2020-11-10T15:18"),
+            "fornitori": 11,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001267",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di materiali di sicurezza",
             "lavorazione": new Date("2020-10-11T15:18"),
-            "chiusuraGara": new Date("2020-10-11T15:18"),
-            "fornitori": 11
+            "endDate": new Date("2020-10-11T15:18"),
+            "fornitori": 11,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001268",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di materiali di sicurezza",
             "lavorazione": new Date("2020-06-22T15:18"),
-            "chiusuraGara": new Date("2020-06-22T15:18"),
-            "fornitori": 11
+            "endDate": new Date("2020-06-22T15:18"),
+            "fornitori": 11,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001269",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di materiali di sicurezza",
             "lavorazione": new Date("2020-07-17T15:18"),
-            "chiusuraGara": new Date("2020-07-17T15:18"),
-            "fornitori": 11
+            "endDate": new Date("2020-07-17T15:18"),
+            "fornitori": 11,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001270",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di materiali di sicurezza",
             "lavorazione": new Date("2020-05-23T15:18"),
-            "chiusuraGara": new Date("2020-05-23T15:18"),
-            "fornitori": 11
+            "endDate": new Date("2020-05-23T15:18"),
+            "fornitori": 11,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
             "cig": "5100001271",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
+            "supplier": "Snam Rete e Gas",
+            "object": "Fornitura di materiali di sicurezza",
             "lavorazione": new Date("2020-06-24T15:18"),
-            "chiusuraGara": new Date("2020-06-24T15:18"),
-            "fornitori": 11
+            "endDate": new Date("2020-06-24T15:18"),
+            "fornitori": 11,
+            "id" : "5f180b8cf1e23e6344b70aa8"
         }
     ]
 
@@ -109,14 +126,30 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             uiLibrary: 'bootstrap4',
             format: 'dd/mm/yyyy'
         });
+        $scope.tenderModified = {}
         $scope.bandoSelected = bando
-
         $('#editTenderModal').modal()
     }
 
     $scope.modifyBando = function(){
         console.log('Bando ' , $scope.bandoSelected, ' modified')
-        mainController.showNotification('bottom', 'right', 'Modifica effetuata con successo', '', 'far fa-check-square', 'info')
+        var url = mainController.getHost() + '/tender/updateTenderFields'
+        var input = {
+            "object" : $scope.tenderModified.object,
+            "description" : $scope.tenderModified.description,
+            "endDate" : $scope.tenderModified.endDate,
+            "cig": $scope.tenderModified.cig,
+            "id" : $scope.bandoSelected.id
+        }
+        $http.post(url, input).then(function (response) {
+            console.log('response from ', url, ' : ', response)
+            if(response.data.status === 200){
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'info')
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
     }
 
     $scope.selectBando = function(bando){
@@ -148,7 +181,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     $scope.goToView = function (path, bandoGara) {
 
         sessionStorage.setItem('bandoGara', JSON.stringify(bandoGara));
-        sessionStorage.setItem('bandoGaraOggetto', bandoGara.oggetto)
+        sessionStorage.setItem('bandoGaraOggetto', bandoGara.object)
         location.href = path;
     }
 

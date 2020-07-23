@@ -1,4 +1,4 @@
-snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location', '$rootScope', 'DTOptionsBuilder', function($scope, $http, $location,$rootScope, DTOptionsBuilder) {
+snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location', '$rootScope', 'DTOptionsBuilder', '$timeout', function($scope, $http, $location,$rootScope, DTOptionsBuilder, $timeout) {
     console.log("[INFO] Hello World from overviewFornitoreController");
 
 
@@ -156,12 +156,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         },
     ]
 
-
-   /* $scope.sort = {
-        name: '',
-        uploadedAt: '',
-        conformity: '',
-    }*/
     $scope.showDocument = false;
     $scope.selectedDocuments = [];
 
@@ -221,34 +215,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             });
         }
     }
-/*
-    $scope.sortCardsByColumnName = function(column){
-        for (key in $scope.sort) {
-            if (key != column){
-                $scope.sort[key] = ''
-            }
-        }
-        $scope.sort[column] = $scope.revertSortingOrder($scope.sort[column]);
-        $scope.documents.sort((a, b) => $scope.customSort(a, b, column, $scope.sort[column]));
-    }
-
-    $scope.customSort = function(a, b, column, order) {
-        if (a[column] > b[column]) {
-            return order === 'asc'? 1: -1;
-        } else if (a[column] < b[column]) {
-            return order === 'asc'? -1: 1;
-        } else {
-            return 0;
-        }
-    }
-
-    $scope.revertSortingOrder = function(sortOrder){
-        if (sortOrder === 'asc') {
-            return 'desc'
-        } else {
-            return 'asc'
-        }
-    }*/
 
     $scope.initProgressBar = function(documents){
         var required = documents.length - (documents.filter(d => d.conformity == 2).length);
@@ -261,6 +227,5 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.initProgressBar($scope.documents);
-
 
 }]);

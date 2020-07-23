@@ -5,7 +5,7 @@
 
 <nav aria-label="breadcrumb" ng-controller="breadcrumbController">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item pointer-hover" ng-if="verifyContextPath('/dashboard')" ng-class="verifyActivePage('/dashboard')"  ng-click="goToView('/dashboard')">Dashboard</li>
+        <li class="breadcrumb-item pointer-hover" ng-if="verifyContextPath('/dashboard')" ng-class="verifyActivePage('/dashboard')"  ng-click="goToView('/dashboard')">Home</li>
         <li class="breadcrumb-item pointer-hover" ng-if="verifyContextPath('/dashboard/bandiList')" ng-class="verifyActivePage('/dashboard/bandiList')" ng-click="goToView('/bandiList')">Bandi di Gara</li>
         <li class="breadcrumb-item pointer-hover" ng-if="verifyContextPath('/dashboard/bandiList/garaOverview')" ng-class="verifyActivePage('/dashboard/bandiList/garaOverview')" ng-click="goToView('/garaOverview')">{{bandoGaraOggetto}}</li>
         <li class="breadcrumb-item pointer-hover" ng-if="verifyContextPath('/dashboard/bandiList/garaOverview/fornitoreOverview')" ng-class="verifyActivePage('/dashboard/bandiList/garaOverview/fornitoreOverview')" ng-click="goToView('/fornitoreOverview')">{{fornitoreOverviewName}}</li>
