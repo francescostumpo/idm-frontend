@@ -4,119 +4,19 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     var url = mainController.getHost() + '/tender/getAllTenders'
     $http.get(url).then(function (response) {
         console.log('response from ', url, ' : ', response)
+        if(response.data.status === 200){
+            $scope.bandiGaraList = response.data.tenderList
+            $scope.bandiGaraList.forEach(tender => {
+                tender.endDate = mainController.convertLocalDateToDate(tender.endDate)
+                tender.fornitori = tender.suppliers.length
+            })
+            console.log('tender list : ', $scope.bandiGaraList)
+        }
+        else{
+            mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+        }
     })
 
-
-    $scope.bandiGaraList = [
-        {
-            "cig": "5100001260",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di componenti hardware",
-            "lavorazione": new Date("2020-06-23T15:18"),
-            "endDate": new Date("2020-06-23T15:18"),
-            "fornitori": 12,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001259",
-            "supplier": "Stogit",
-            "object": "Fornitura di tubi senza saldatura",
-            "lavorazione": new Date("2020-08-15T15:18"),
-            "endDate": new Date("2020-08-15T15:18"),
-            "fornitori": 15,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001263",
-            "supplier": "Stogit",
-            "object": "Fornitura di materiali di primo soccorso",
-            "lavorazione": new Date("2020-06-23T15:18"),
-            "endDate": new Date("2020-06-23T15:18"),
-            "fornitori": 8,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001262",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di componenti elettronici",
-            "lavorazione": new Date("2020-06-14T15:18"),
-            "endDate": new Date("2020-06-14T15:18"),
-            "fornitori": 18,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001265",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2021-06-25T15:18"),
-            "endDate": new Date("2021-06-25T15:18"),
-            "fornitori": 11,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001261",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di telecamere di sicurezza",
-            "lavorazione": new Date("2020-06-23T15:18"),
-            "endDate": new Date("2020-06-23T15:18"),
-            "fornitori": 15,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001266",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-11-10T15:18"),
-            "endDate": new Date("2020-11-10T15:18"),
-            "fornitori": 11,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001267",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-10-11T15:18"),
-            "endDate": new Date("2020-10-11T15:18"),
-            "fornitori": 11,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001268",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-06-22T15:18"),
-            "endDate": new Date("2020-06-22T15:18"),
-            "fornitori": 11,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001269",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-07-17T15:18"),
-            "endDate": new Date("2020-07-17T15:18"),
-            "fornitori": 11,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001270",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-05-23T15:18"),
-            "endDate": new Date("2020-05-23T15:18"),
-            "fornitori": 11,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001271",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-06-24T15:18"),
-            "endDate": new Date("2020-06-24T15:18"),
-            "fornitori": 11,
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        }
-    ]
 
     $scope.bandiSelected = [];
 
@@ -139,6 +39,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "description" : $scope.tenderModified.description,
             "endDate" : $scope.tenderModified.endDate,
             "cig": $scope.tenderModified.cig,
+            "company" : $scope.tenderModified.company,
             "id" : $scope.bandoSelected.id
         }
         $http.post(url, input).then(function (response) {

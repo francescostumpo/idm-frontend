@@ -35,7 +35,7 @@
                             <span class="text-medium-size-custom">Società*</span>
                         </div>
                         <div class="text-primary mt-3">
-                            <input  ng-model="tenderModified.supplier" ng-value="bandoSelected.supplier" type="text" class="text-primary form-control" placeholder="Nome società">
+                            <input  ng-model="tenderModified.company" ng-value="bandoSelected.company" type="text" class="text-primary form-control" placeholder="Nome società">
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
