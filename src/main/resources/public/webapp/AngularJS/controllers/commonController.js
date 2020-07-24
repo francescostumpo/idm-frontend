@@ -3,6 +3,33 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.sideBarIsClosed = true
 
+    stompClient.connect({}, function(frame){
+        stompClient.subscribe("/topic/pushNotification", function(message){
+            console.log("Received message:" + message.body);
+        });
+
+        stompClient.subscribe("/user/queue/errors", function(message) {
+
+        });
+
+        stompClient.subscribe("/user/queue/reply", function(message) {
+            console.log('message ', message)
+            var response = JSON.parse(message.body)
+            if(response.status === 200){
+                mainController.showNotification('bottom', 'right', response.message, '', 'info')
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.message, '', 'danger')
+            }
+        });
+
+        stompClient.subscribe("/user/queue/success", function(message) {
+            console.log("Message " + message.body + ' ' + new Date());
+        });
+    }, function(error){
+        console.log("STOMP protocol error: ", error);
+    });
+
     $scope.processName = function(name, length, subString){
         if(name.length > length){
             var nameProcessed = name.substring(0, subString) + '...';
@@ -17,7 +44,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         conformity: '',
         cig: '',
         object: '',
-        supplier: '',
+        company: '',
         endDate: '',
         fornitori: ''
     }
@@ -49,13 +76,6 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             return 'asc'
         }
     }
-
-    /*
-    var url = mainController.getHost() + '/fruits/list'
-
-    $http.get(url).then(function (response) {
-        console.log('response : ' , response)
-    })*/
 
     $scope.goToViewNavigation = function(destination){
         location.href = destination;
@@ -90,13 +110,11 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             function $id(id) {
                 return document.getElementById(id);
             }
-
             function FileDragHover(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 e.target.className = (e.type == "dragover" ? "hover" : "");
             }
-
             // file selection
             function FileSelectHandler(e) {
                 // cancel event and hover styling

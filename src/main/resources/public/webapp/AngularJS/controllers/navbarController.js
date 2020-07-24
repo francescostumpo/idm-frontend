@@ -9,26 +9,22 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.createTender = function(){
         console.log('createTender -- INIT -- tender : ', $scope.tender)
-        var url = mainController.getHost() + '/tender/createTender'
-        $http.post(url, $scope.tender).then(function (response) {
-            console.log('response ', response)
-            $scope.tender = {}
-            if(response.data.status === 200){
-                mainController.showNotification('bottom', 'right', response.data.message, '',  'info')
+        var fileBase64 = null;
+        var reader = new FileReader();
+        reader.readAsBinaryString($scope.file);
+        reader.onload = function() {
+            fileBase64 = reader.result;
+            var base64String = window.btoa(fileBase64);
+            if (base64String !== null) {
+                $scope.tender.file = base64String
+                $scope.tender.fileName = $scope.contractSelectedName
             }
-            else if(response.data.status === 500){
-
-            }
-        })
+            stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
+            mainController.showNotification("bottom", "right", "Creazione gara in corso. Riceverai una notifica quando il processo sarà terminato", '', 'info')
+        }
     }
 
     $scope.openModalCreateTender = function () {
-        /*$('#datepicker1').datepicker({
-            locale: 'it-it',
-            uiLibrary: 'bootstrap4',
-            format: 'dd/mm/yyyy'
-        });*/
-
         $('#datepicker2').datepicker({
             locale: 'it-it',
             uiLibrary: 'bootstrap4',
