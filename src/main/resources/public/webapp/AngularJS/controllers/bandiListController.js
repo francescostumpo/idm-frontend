@@ -15,6 +15,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-06-23T15:18"),
             "endDate": new Date("2020-06-23T15:18"),
             "fornitori": 12,
+            "codiceGara": "MAM019-023C",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -24,6 +25,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-08-15T15:18"),
             "endDate": new Date("2020-08-15T15:18"),
             "fornitori": 15,
+            "codiceGara": "MAM019-023D",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -32,7 +34,8 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "object": "Fornitura di materiali di primo soccorso",
             "lavorazione": new Date("2020-06-23T15:18"),
             "endDate": new Date("2020-06-23T15:18"),
-            "fornitori": 8,
+            "fornitori": 8, 
+            "codiceGara": "MAM019-023F",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -42,6 +45,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-06-14T15:18"),
             "endDate": new Date("2020-06-14T15:18"),
             "fornitori": 18,
+            "codiceGara": "MAM019-023G",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -51,6 +55,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2021-06-25T15:18"),
             "endDate": new Date("2021-06-25T15:18"),
             "fornitori": 11,
+            "codiceGara": "MAM019-023H",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -60,6 +65,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-06-23T15:18"),
             "endDate": new Date("2020-06-23T15:18"),
             "fornitori": 15,
+            "codiceGara": "MAM019-024B",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -69,6 +75,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-11-10T15:18"),
             "endDate": new Date("2020-11-10T15:18"),
             "fornitori": 11,
+            "codiceGara": "MAM019-024C",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -78,6 +85,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-10-11T15:18"),
             "endDate": new Date("2020-10-11T15:18"),
             "fornitori": 11,
+            "codiceGara": "MAM019-024D",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -87,6 +95,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-06-22T15:18"),
             "endDate": new Date("2020-06-22T15:18"),
             "fornitori": 11,
+            "codiceGara": "MAM019-024F",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -96,6 +105,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-07-17T15:18"),
             "endDate": new Date("2020-07-17T15:18"),
             "fornitori": 11,
+            "codiceGara": "MAM019-024G",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -105,6 +115,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-05-23T15:18"),
             "endDate": new Date("2020-05-23T15:18"),
             "fornitori": 11,
+            "codiceGara": "MAM019-025G",
             "id" : "5f180b8cf1e23e6344b70aa8"
         },
         {
@@ -114,6 +125,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "lavorazione": new Date("2020-06-24T15:18"),
             "endDate": new Date("2020-06-24T15:18"),
             "fornitori": 11,
+            "codiceGara": "MAM019-026G",
             "id" : "5f180b8cf1e23e6344b70aa8"
         }
     ]

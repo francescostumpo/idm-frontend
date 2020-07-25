@@ -20,14 +20,15 @@
 
 <body id="page-top" ng-controller="commonController" class="background-snam text-lato-snam" ng-app="snamApp">
 
-    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed" class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow" >
+    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed"
+        class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow">
         <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
     </nav>
     <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
 
-    <div ng-controller="dashboardController" class="mb-5" id="wrapper">
-        <div id="content-wrapper" class="mt-3 d-flex flex-column" >
+    <div ng-controller="dashboardController" class="mb-5" id="wrapper" style="background-color: #E6ECF2;">
+        <div id="content-wrapper" class="mt-3 d-flex flex-column" style="background-color: #E6ECF2;">
             <div class="container-fluid">
                 <!--<div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
@@ -35,44 +36,55 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-3">
                         <div class="text-size-28 mb-0">Ciao Claudia, ecco le tua gare recenti</div>
-                        <a ng-click="goToViewNavigation('/bandiList')" style="cursor:pointer;font-weight: bold; text-decoration: underline" class="text-primary d-sm-inline-block">Vedi tutte</a>
+                        <a ng-click="goToViewNavigation('/bandiList')"
+                            style="cursor:pointer;font-weight: bold; text-decoration: underline"
+                            class="text-primary d-sm-inline-block">Vedi tutte</a>
                     </div>
                     <div class="row">
-                       <div class="col-md-4" ng-repeat="tender in recentTenders">
-                           <div class="card shadow">
-                               <div class="card-body">
-                                   <div style="font-size: 12px" class="font-weight-bold text-primary">
-                                       {{tender.MAM}}
-                                   </div>
-                                   <div style="font-size: 16px" class="font-weight-bold mt-2 text-secondary">
-                                       {{tender.supplier}}
-                                   </div>
-                                   <div class="font-weight-bold mt-2" style="color: black; min-height: 80px; font-size: 16px">
-                                       {{processName(tender.description,120, 120)}}
-                                   </div>
-                                   <div class="break"></div>
-                                   <div class="mt-2 text-secondary row no-gutters align-items-center">
-                                       <div class="col mr-2">
-                                           <div style="font-size: 14px" class="text-xs mb-1">CIG</div>
-                                           <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.cig}}</div>
-                                       </div>
-                                       <div class="col-auto">
-                                           <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
-                                           <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.endWorkingDate}}</div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
+                        <div class="col-md-4" ng-repeat="tender in recentTenders">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <div style="font-size: 18px" class="font-weight-bold text-primary">
+                                        {{tender.MAM}}
+                                    </div>
+                                    <div style="font-size: 16px" class="font-weight-bold mt-2 text-secondary">
+                                        {{tender.supplier}}
+                                    </div>
+                                    <div class="font-weight-bold mt-2"
+                                        style="color: black; min-height: 80px; font-size: 16px">
+                                        <span style="font-weight: 400;">
+                                            {{processName(tender.description,120, 120)}}
+                                        </span>
+                                    </div>
+                                    <div class="break"></div>
+                                    <div class="mt-2 text-secondary row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div style="font-size: 14px" class="text-xs mb-1">CIG</div>
+                                            <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.cig}}
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
+                                            <div style="font-size: 16px" class=" mb-0 font-weight-bold">
+                                                {{tender.endWorkingDate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Calendar -->
                     <div class="d-sm-flex align-items-center justify-content-between mt-5 mb-3">
                         <div style="font-size: 28px" class="mb-0">Prossime scadenze</div>
-                        <a ng-show="showCalendarCard" ng-click="toggleCalendarCard()" style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">Comprimi calendario</a>
-                        <a ng-show="!showCalendarCard" ng-click="toggleCalendarCard()" style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">Espandi calendario</a>
+                        <a ng-show="showCalendarCard" ng-click="toggleCalendarCard()"
+                            style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">Comprimi
+                            calendario</a>
+                        <a ng-show="!showCalendarCard" ng-click="toggleCalendarCard()"
+                            style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">Espandi
+                            calendario</a>
                     </div>
-                    <div  ng-show="showCalendarCard" class="card">
+                    <div ng-show="showCalendarCard" class="card">
                         <div class="card-body">
                             <div id="calendar" class="calendar"></div>
                             <div class="mt-3 ml-3 row">

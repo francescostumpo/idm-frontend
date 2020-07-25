@@ -19,7 +19,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         object: '',
         supplier: '',
         endDate: '',
-        fornitori: ''
+        fornitori: '',
+        codiceGara: ''
     }
 
     $scope.sortCardsByColumnName = function(cards, column){

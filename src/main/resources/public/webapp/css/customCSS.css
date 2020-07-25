@@ -1786,3 +1786,17 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
     color: #004B9C !important;
 }
 
+.span-progress-bar-header {
+    font-family: Ubuntu;
+    font-size: 14px;
+    color: #30003A;
+    letter-spacing: 0;
+    line-height: 28px;
+}
+
+.doc-detail-title {
+    font-family: Ubuntu;
+    font-size: 24px;
+    color: #1D2A30;
+    letter-spacing: 0.64px;
+}

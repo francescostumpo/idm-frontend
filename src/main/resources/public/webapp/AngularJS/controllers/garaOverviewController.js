@@ -4,6 +4,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
     var urlDocument = mainController.getFrontendHost() + '/document.pdf';
+    var urlDocumentPage = mainController.getFrontendHost() + '/documentDetail';
+
     $scope.showDocument = false;
     $scope.selectedDocuments = [];
 
@@ -37,7 +39,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
         $("object.document-container").attr("data", urlDocument);
         $("embed.document-container").attr("src", urlDocument);
-        $("a.document-fullview").attr("href", urlDocument);
+        $("a.document-fullview").attr("href", urlDocumentPage);
     }
 
     $scope.checkDocument = function (document) {
