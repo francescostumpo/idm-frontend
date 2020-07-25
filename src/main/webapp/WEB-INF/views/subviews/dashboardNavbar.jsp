@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="snamApp"%>
 <!-- Sidebar Toggle (Topbar) -->
+
 <button id="sidebarToggleTop" ng-click="toggleSideBar()" class="btn btn-link rounded-circle mr-3">
 	<i class="fa fa-bars"></i>
 </button>
@@ -13,13 +14,13 @@
 	<div class="d-none d-md-block">
 		<img class="navbar-brand" src="webapp/img/snam-logo.png"
 			width="5%" style="cursor: pointer;" ng-click="goToViewNavigation('/dashboard')"></img>
-		<a class=""	style="cursor: pointer; color: white; letter-spacing: 0.2px; font-weight: bold; font-size: 18px"	>
+		<a ng-click="goToViewNavigation('/dashboard')" class=""	style="cursor: pointer; color: white; letter-spacing: 0.2px; font-weight: bold; font-size: 18px"	>
 			INTELLIGENT DOCUMENT MANAGEMENT
 		</a>
 	</div>
 
 	<ul class="navbar-nav ml-auto">
-		<button style="width: 70%" type="button" class="my-auto btn button-primary-buyer" >
+		<button ng-click="openModalCreateTender()" style="width: 70%; cursor: pointer" type="button" class="my-auto btn button-primary-buyer" >
 			<i class="fas fa-plus"></i>
 			<span>Nuova gara</span>
 		</button>
@@ -67,8 +68,10 @@
 				aria-expanded="false">
 			<i style="cursor:pointer; color: white" class="far fa-user-circle fa-1point5 fa-sm fa-fw mr-2" style="color:white;"></i>
 			<span class="mr-2 d-none d-lg-inline"	style="color: white" id="userName">
-				Luca Santamaria
+				Claudia Boselli
 			</span>
 		</a>
 	</li>
 </ul>
+
+<jsp:include page="modal/createTendersModal.jsp"></jsp:include>

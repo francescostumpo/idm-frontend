@@ -2,79 +2,8 @@ var snamApp = angular.module("snamApp", ["angularjs-gauge", "checklist-model", "
 
 type = ['primary', 'info', 'success', 'warning', 'danger'];
 
-var colorPalette = [
-			'#9deeb2',
-    	    '#fdd186',
-    	    '#e6d6ff',
-    	    '#ffd0d3',
-    	    '#ff9b7c',
-    	    '#bbad9d',
-    	    
-    	    '#dbf8e3',
-    	    '#fef2de',
-    	    '#f8f3ff',
-    	    '#fff2f3',
-    	    '#ffe3db',
-    	    '#f7abbd',
-    	    
-    	    '#8fd9a2',
-    	    '#fdd591',
-    	    '#e8d9ff',
-    	    '#ffd4d7',
-    	    '#ffa487',
-    	    '#aa9e8f',
-    	    
-    	    '#fb4b53',
-    	    '#ee538b',
-    	    '#a66efa',
-    	    '#408bfc',
-    	    '#1191e6',
-    	    '#009c98',
-    	    '#24a148',
-    	    '#ff767c',
-    	    '#fa75a6',
-    	    '#bb8eff',
-    	    '#6ea6ff',
-    	    '#30b0ff',
-    	    '#00bab6',
-    	    '#3dbb61',
-    	    '#ffa4a9',
-    	    '#ffa0c2',
-    	    '#d0b0ff',
-    	    '#97c1ff',
-    	    '#6ccaff',
-    	    '#20d5d2',
-    	    '#56d679',
-    	    '#fff0f1',
-    	    '#fff0f6',
-    	    '#f7f1ff',
-    	    '#edf4ff',
-    	    '#e3f6ff',
-    	    '#dbfbfb',
-    	    '#dafbe4',
-    	    '#f8f3ff',
-    	    '#20d5d2',
-    	    '#fff2f3',
-    	    '#9deeb2',
-    	    '#ffe3db',
-    	    '#dbf8e3'
-]
-
-sessionStorage.setItem("palette", JSON.stringify(colorPalette)); 
 
 mainController = {
-
-	checkBudgetContractForGestore: function(spentBudget, budget, startDate,endDate){
-		var budgetErased = ((spentBudget / budget) * 100).toFixed(1)
-		var today = new Date().getTime();
-		var status = ( (( today - startDate) / (endDate - startDate)) * 100).toFixed(1)
-		if(budgetErased < status){
-			return "rgba(0, 62, 123, 1)"
-		}
-		else{
-			return "#FF6C00"
-		}
-	},
 
 	convertStringToDate: function(stringDate) {
 		var from = stringDate.split("-")
@@ -83,18 +12,59 @@ mainController = {
 		return dateInMillis
 	},
 
-	checkStatusContractForGestore: function(spentBudget, budget, startDate,endDate) {
-		var budgetErased = ((spentBudget / budget) * 100).toFixed(1)
-		var today = new Date();
-		var status = ( (( today - startDate) / (endDate - startDate)) * 100).toFixed(1)
-		if(budgetErased < status){
-			return  "rgba(24, 153, 208, 1)"
-		}
-		else{
-			return 	"#FF9547"
-		}
+	convertLocalDateToDate : function(localDate){
+		var day = localDate.dayOfMonth;
+		var month = localDate.monthValue - 1; // Month is 0-indexed
+		var year = localDate.year;
+		var date = new Date(Date.UTC(year, month, day));
+		return date
 	},
 
+	showNotification: function(from, align, message, color, type) {
+		var icon = ''
+		if(type === 'info'){
+			icon = 'far fa-check-square'
+		}
+		else if(type === 'success'){
+			icon = 'far fa-check-square'
+		}
+		else if(type === 'danger'){
+			icon = "fas fa-exclamation-triangle"
+		}
+		$.notify({
+			icon: icon,
+			message: message
+		}, {
+			element:'body',
+			position: null,
+			allow_dismiss: true,
+			type: type,
+			timer: 25000,
+			url_target: '_blank',
+			placement: {
+				from: from,
+				align: align
+			},
+			animate: {
+				enter: "animated fadeInUp",
+				exit: "animated fadeOut"
+			},
+			icon_type: 'class',
+			template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+				'<button type="button" aria-hidden="true" class="close" data-notify="dismiss"><i style="font-size: 18px" class="text-primary fas fa-times"></i></button>' +
+				'<span data-notify="icon"></span> ' +
+				'<span class="ml-2" style="font-size: 18px" data-notify="title">{1}</span> ' +
+				'<span style="font-size: 18px" data-notify="message">{2}</span>' +
+				'<div class="progress" data-notify="progressbar">' +
+				'<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+				'</div>' +
+				'<a href="{3}" target="{4}" data-notify="url"></a>' +
+				'</div>'
+		});
+	},
+
+
+	/*
 	showNotification : function(from, align, message, color, icon) {
         $.notify({
             icon: icon,
@@ -107,7 +77,7 @@ mainController = {
                 align: align
             }
         });
-    },
+    },*/
        
     startProgressIndicator: function (id){
     	$(id).show();
@@ -117,39 +87,7 @@ mainController = {
         setTimeout(function(){$(id).hide()}, 150);
     },
 
-    sendTest: function(scope){
-        console.log(scope.availableTemplates);
-    },
-    
-    uploadFile: function($http, url, formData,config){
-    	mainController.showNotification('bottom', 'right', sessionStorage.getItem('processNotification'), 0, "fa fa-exclamation-circle");
-    	mainController.startProgressIndicator('#loading_1')
-    	sessionStorage.setItem('uploadContractForWichComponent','analyze')
-    	$http.post(url, formData, config).then(function(response){
-    		console.log('response is ', response.data);
-    		sessionStorage.setItem('contractId', JSON.parse(response.data).contractId);
-    		//mainController.stopProgressIndicator('#loading_1');
-    		//location.href = '/analyze';
-    	});
-    	
-    	mainController.stopProgressIndicator('#loading_1')
-    },
-
-    sendDownloadRequest : function($http, url, data, config){
-        //window.location.href = url;
-        $http.post(url, data, config).then(function(response){
-            console.log(response);
-            debugger;
-            var file = new Blob([response.data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
-            //return response.data;
-            mainController.downloadFile(file);
-        }).catch(function(Exception){
-            console.log(Exception)
-        })
-    },
-
     downloadFile: function(file){
-        
         var url = window.URL || window.webkitURL;
         var element = document.createElement('a');
         element.setAttribute('href', url.createObjectURL(file));
@@ -160,79 +98,8 @@ mainController = {
         document.body.removeChild(element);
     },
 
-    verifyResidualValue: function(value){
-            
-        if (value < 25){ return 'negligible';}
-            else if (value >= 25 && value < 45){ return 'low';}
-            else if (value >= 45 && value < 60){ return 'medium';}
-            else if (value >= 60 && value < 70){ return 'high';}
-            else{return 'very-high';}
-    },
-
     test : function(){
         console.log("Test function");
-    },
-
-    getColorHighlight : function(entity){
-        var palette = JSON.parse(sessionStorage.getItem('palette'));
-        for(i=0; i < palette.palette.length; i++){
-            if(entity === palette.palette[i].entity){
-                return palette.palette[i].color;
-            }
-        }
-    },
-    uploadFileCompare: function($http, url, firstContractForm, secondContractForm, config){
-        var firstContractId = -1;
-        var secondContractId = -1;
-        sessionStorage.setItem('firstContractId',-1)
-        sessionStorage.setItem('secondContractId',-1)
-        //mainController.startProgressIndicator('#loading'); 
-        console.log('in uploadFileCompare, firstContractForm is: ', firstContractForm); 
-        console.log('in uploadFileCompare, secondContractForm is: ', secondContractForm);
-		mainController.showNotification('bottom', 'right', sessionStorage.getItem('processNotification'), 0, "fa fa-exclamation-circle");
-        $http.post(url, firstContractForm, config).then(function(response) {
-            if(response.status === 200){
-                console.log('in uploadFileCompare, response from first upload is: ', response); 
-                firstContractId = JSON.parse(response.data).contractId; 
-                //mainController.goToCompare(firstContractId,secondContractId,JSON.parse(response.data).message);
-            } 
-            else {
-                //mainController.goToCompare(-2,-2, JSON.parse(response.data).message);
-            }
-        }).catch(function(Exception){
-            mainController.goToCompare(-2,-2, JSON.parse(response.data).message);
-        });
-        console.log('first call started...')
-        sessionStorage.setItem('uploadContractForWichComponent','compare')
-        $http.post(url, secondContractForm, config).then(function(res) {
-            if(res.status === 200){
-                console.log('in uploadFileCompare, response from second upload is: ', res); 
-                secondContractId = JSON.parse(res.data).contractId; 
-                //mainController.goToCompare(firstContractId,secondContractId,JSON.parse(res.data).message);
-            } 
-        }).catch(function(Exception){
-            //mainController.goToCompare(-2,-2, JSON.parse(res.data).message);
-        });
-        console.log('second call started...')   
-     	mainController.stopProgressIndicator('#loading_1'); 
-    },
-    
-    goToCompare: function(firstContractId, secondContractId, message){
-    	console.log('mainController.goToCompare...')
-        console.log('firstContractId in session: ', firstContractId); 
-        console.log('secondContractId in session: ', secondContractId); 
-	    if(firstContractId !== -1 && secondContractId !== -1){
-	    	mainController.showNotification('bottom', 'right', message, 2, "icon-check-2");
-	     	mainController.stopProgressIndicator('#loading_1'); 
-	     	sessionStorage.setItem('firstContractId', firstContractId); 
-	     	sessionStorage.setItem('secondContractId', secondContractId); 
-	    	location.href = '/compare';
-    	}
-	    else if(firstContractId === -2 && secondContractId === -2){
-	    	console.log('exception during loading contract')
-	    	mainController.showNotification('bottom', 'right', message, 4, "fas fa-times");
-	     	mainController.stopProgressIndicator('#loading_1'); 
-	    }
     },
 
 	getEmailUser: function(){
@@ -252,7 +119,7 @@ mainController = {
 		var location = window.location.hostname;
 		var host = ""
 		if(location.includes("localhost")){
-			host = "http://localhost:3000"
+			host = "http://localhost:8080"
 		}
 		else if(location.includes("dev")){
 			host = "https://snam-ai4cm-backend-dev.eu-de.mybluemix.net";
@@ -336,84 +203,21 @@ mainController = {
 				return null;
 			};
 		}
-	},
-
-	saveContract: function(data) {
-		stompClientWithoutOCR.send("/app/uploadContractWithoutOCR", {}, data);
-		return
-	},
-
-	sendMessageCompare: function(file,fileNumber) {
-		var fileBase64 = null;
-		var reader = new FileReader();
-		//reader.readAsDataURL(file);
-		reader.readAsBinaryString(file);
-		reader.onload = function() {
-			fileBase64 = reader.result;
-			var base64String = window.btoa(fileBase64);
-			if (base64String !== null){
-				var json = {
-					"fileBase64": base64String,
-					"fileName": file.name,
-					"fileNumber": fileNumber,
-					"currentUser": sessionStorage.getItem('currentUser'),
-					"bearerToken" : mainController.getCookie("bearerToken"),
-					"language": mainController.getLanguage()
-				};
-				sessionStorage.setItem("contractInLoading", "true")
-				//stompClientCompare.send("/app/pushNotificationCompare", {}, JSON.stringify(json));
-				return;
-			};
-			reader.onerror = function (error){
-				console.log('Error: ', error);
-				return null;
-			};
-		}
-	},
-
-	searchAndHighlight: function(searchTerm, selector) {
-		//$('#' +selector).find(searchTerm);
-		if (searchTerm) {
-			var selector = selector || "documentContent"; //use body as selector if none provided
-			var searchTermRegEx = new RegExp(searchTerm, "ig");
-			var matches = $('#' + selector).text().match(searchTermRegEx);
-			if (matches != null && matches.length > 0) {
-				$('.highlighted').removeClass('highlighted'); //Remove old search highlights
-
-				//Remove the previous matches
-				$span = $('.match');
-				$span.replaceWith($span.html());
-
-				if (searchTerm === "&") {
-					searchTerm = "&amp;";
-					searchTermRegEx = new RegExp(searchTerm, "ig");
-				}
-				//var htmlToInject = "<span class='match'>" + searchTerm + "</span>";
-				//var stringToInject = "<span ng-bind-html-unsafe="+ htmlToInject + "></span>";
-
-				$('#' + selector).html($('#' + selector).html().replace(searchTermRegEx, "<span class='match'>" + searchTerm + "</span>"));
-
-				$('.match:first').addClass('highlighted');
-
-				var i = 0;
-
-				if ($('.highlighted:first').length) { //if match found, scroll to where the first one appears
-					//location.href = '#match';
-					$(window).scrollTop($('.highlighted:first').position().top);
-				}
-				return true;
-			}
-		}
-		return false;
 	}
+
 }
 
 snamApp.config(['$httpProvider', function ($httpProvider) {
-	console.log('token : ' + mainController.getCookie('bearerToken'))
+	//console.log('token : ' + mainController.getCookie('bearerToken'))
 	//$httpProvider.interceptors.push('authInterceptor')
 	$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
 	//$httpProvider.defaults.headers.common['Content-Type'] = "text/plain"
 }]);
+
+host = mainController.getFrontendHost()
+
+ws = new SockJS(host + "/createTender");
+stompClient = Stomp.over(ws);
 
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "customtime-pre": function ( a ) {
