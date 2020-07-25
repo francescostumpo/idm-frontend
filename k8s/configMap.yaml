@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-config
+data:
+  KEYCLOAK_SERVER_URL: http://158.177.78.141:8080/auth
+  KEYCLOAK_REALM: idm-realm
+  KEYCLOAK_RESOURCE: idm-frontend
