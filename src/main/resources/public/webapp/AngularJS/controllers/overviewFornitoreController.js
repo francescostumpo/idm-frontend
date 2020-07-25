@@ -1,14 +1,16 @@
-snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location', '$rootScope', 'DTOptionsBuilder', '$timeout', function($scope, $http, $location,$rootScope, DTOptionsBuilder, $timeout) {
+snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location', '$rootScope', '$timeout', function($scope, $http, $location,$rootScope, $timeout) {
     console.log("[INFO] Hello World from overviewFornitoreController");
 
 
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
     $scope.fornitoreOverview = JSON.parse(sessionStorage.getItem("fornitoreOverview"));
 
-    var urlDocument = mainController.getFrontendHost() + '/document.pdf';
+    $scope.tempDocumentUrl = null;
+
+    var urlDocumentContent = mainController.getFrontendHost() + '/api/documentContent';
 
     $scope.documents = [{
-            id: "0001",
+            id: "5f1af6d8b8742101e4e78c7a",
             name: "12.1 Documentazione di gara",
             uploadedAt: new Date('2020-06-23T15:18'),
             conformity: 0,
@@ -159,17 +161,15 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.showDocument = false;
     $scope.selectedDocuments = [];
 
-    $scope.dtOptionsSearchView = DTOptionsBuilder.newOptions()
-        .withDOM('t')
-
     $scope.setDocument = function(data) {
-        // When receiving a byte array
-        //var file = new File([data], 'my_document.pdf', { type: 'application/pdf' });
-        //var urlDocument = window.URL.createObjectURL(file);
-
-        $("object.document-container").attr("data", urlDocument);
-        $("embed.document-container").attr("src", urlDocument);
-        $("a.document-fullview").attr("href", urlDocument);
+        var file = new File([data], 'document.pdf', { type: 'application/pdf' });
+        if ($scope.tempDocumentUrl) {
+            window.URL.revokeObjectURL($scope.tempDocumentUrl)
+        }
+        $scope.tempDocumentUrl = window.URL.createObjectURL(file);
+        $("object.document-container").attr("data", $scope.tempDocumentUrl);
+        $("embed.document-container").attr("src", $scope.tempDocumentUrl);
+        $("a.document-fullview").attr("href", $scope.tempDocumentUrl);
     }
 
     $scope.checkDocument = function (document) {
@@ -208,10 +208,8 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
-            $http.get(urlDocument).then(function(res) {
-                setTimeout(function(){
-                    $scope.setDocument(res);
-                }, 500)
+            $http.get(urlDocumentContent + "/" + document.id, {responseType: 'blob'}).then(function(res) {
+                $scope.setDocument(res.data);
             });
         }
     }
@@ -220,8 +218,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         var required = documents.length - (documents.filter(d => d.conformity == 2).length);
         var percPresence =  Math.floor(documents.filter(d => d.conformity == 0).length / required* 100);
         var percCheck =  Math.floor(documents.filter(d => d.conformity == 2).length / required * 100);
-        console.debug('percPresence', percPresence)
-        console.debug('percCheck', percCheck)
         $(".pg-presence").css('width', percPresence + '%').attr('aria-valuenow', percPresence);
         $(".pg-check").css('width', percCheck + '%').attr('aria-valuenow', percCheck);
     }
