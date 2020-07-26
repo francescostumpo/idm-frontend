@@ -64,19 +64,6 @@ public class ViewController {
 		response.addHeader("Cache-Control", "no-store");
 		logger.info("returning fornitoreOverview");
 		return modelAndView;
-	} 
-	
-	@GetMapping("/searchView")
-	public ModelAndView searchView(HttpServletResponse response) {
-		logger.info("getting search view"); 
-		ModelAndView modelAndView = null; 
-		modelAndView = new ModelAndView("searchView");
-		Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList");
-
-		response.addCookie(cookieContextPath);
-		response.addHeader("Cache-Control", "no-store");
-		logger.info("returning search view"); 
-		return modelAndView; 
 	}
 
 }

@@ -2,20 +2,29 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
     console.log("[INFO] Hello World from navbarController");
 
     $scope.deselectFile = function() {
-        $scope.file = null
-        $scope.contractIsSelected = false
-        $scope.contractSelectedName = ""
-    }
+        $scope.file = null;
+        $scope.contractIsSelected = false;
+        $scope.contractSelectedName = "";
+    };
 
-
+    $scope.createTender = function(){
+        console.log('createTender -- INIT -- tender : ', $scope.tender);
+        var fileBase64 = null;
+        var reader = new FileReader();
+        reader.readAsBinaryString($scope.file);
+        reader.onload = function() {
+            fileBase64 = reader.result;
+            var base64String = window.btoa(fileBase64);
+            if (base64String !== null) {
+                $scope.tender.file = base64String;
+                $scope.tender.fileName = $scope.contractSelectedName;
+            }
+            stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
+            mainController.showNotification("bottom", "right", "Creazione gara in corso. Riceverai una notifica quando il processo sarà terminato", '', 'info')
+        }
+    };
 
     $scope.openModalCreateTender = function () {
-        $('#datepicker1').datepicker({
-            locale: 'it-it',
-            uiLibrary: 'bootstrap4',
-            format: 'dd/mm/yyyy'
-        });
-
         $('#datepicker2').datepicker({
             locale: 'it-it',
             uiLibrary: 'bootstrap4',
@@ -31,15 +40,12 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
     $scope.contractIsSelected = false;
     $scope.contractSelectedName = "";
 
-
-
     (function() {
         // getElementById
         function $id(id) {
             return document.getElementById(id);
         }
 
-        // file drag hover
         function FileDragHover(e) {
             e.stopPropagation();
             e.preventDefault();
@@ -80,11 +86,8 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             var fileselect = $id("fileselect"),
                 filedrag = $id("filedrag")
 
-            // file select
             fileselect.addEventListener("change", FileSelectHandler, false);
-            // is XHR2 available?
 
-            // file drop
             filedrag.addEventListener("dragover", FileDragHover, false);
             filedrag.addEventListener("dragleave", FileDragHover, false);
             filedrag.addEventListener("drop", FileSelectHandler, false);
