@@ -71,30 +71,30 @@
                         <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
 
                         </div>
-                        <div ng-click="sortCardsByColumnName('name')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                        <div ng-click="sortCardsByColumnName(bandiGaraList, 'cig')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
                             CIG
-                            <i ng-if="sort.name === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
-                            <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                            <i ng-if="sort.cig === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.cig === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                         </div>
-                        <div ng-click="sortCardsByColumnName('uploadedAt')" class="col-lg-3 col-md-3 col-sm-3 text-size-14 no-select pointer">
+                        <div ng-click="sortCardsByColumnName(bandiGaraList, 'object')" class="col-lg-3 col-md-3 col-sm-3 text-size-14 no-select pointer">
                             OGGETTO
-                            <i ng-if="sort.uploadedAt === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
-                            <i ng-if="sort.uploadedAt === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                            <i ng-if="sort.object === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.object === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                         </div>
-                        <div ng-click="sortCardsByColumnName('conformity')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                        <div ng-click="sortCardsByColumnName(bandiGaraList, 'company')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
                             SOCIETA'
-                            <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
-                            <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                            <i ng-if="sort.company === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.company === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                         </div>
-                        <div ng-click="sortCardsByColumnName('conformity')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
-                            FINE LAVORAZIONE
-                            <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
-                            <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                        <div ng-click="sortCardsByColumnName(bandiGaraList, 'endDate')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                            SCADENZA
+                            <i ng-if="sort.endDate === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.endDate === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                         </div>
-                        <div ng-click="sortCardsByColumnName('conformity')" class="col-lg-1 col-md-1 col-sm-1 text-size-14 no-select pointer">
+                        <div ng-click="sortCardsByColumnName(bandiGaraList, 'fornitori')" class="col-lg-1 col-md-1 col-sm-1 text-size-14 no-select pointer">
                             FORNITORI
-                            <i ng-if="sort.conformity === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
-                            <i ng-if="sort.conformity === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
+                            <i ng-if="sort.fornitori === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
+                            <i ng-if="sort.fornitori === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
 
@@ -107,23 +107,23 @@
                             <div class="text-center col-lg-1 col-md-1 col-sm-1 text-size-14">
                                 <input ng-click="selectBando(bandoGara)" style="cursor: pointer" type="checkbox"/>
                             </div>
-                            <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
-                                {{bandoGara.cig}}
+                            <div ng-click="goToView('/garaOverview', bandoGara)" class="custom-link-underline col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
+                                {{bandoGara.cig[0]}}
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 text-size-14 no-select">
-                                {{bandoGara.oggetto}}
+                                {{bandoGara.object}}
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select ">
-                                {{bandoGara.societa}}
+                                {{bandoGara.company}}
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select ">
-                                {{bandoGara.lavorazione}}
+                                {{bandoGara.endDate | date: 'dd/MM/yyyy'}}
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-1 text-size-14 no-select ">
                                 {{bandoGara.fornitori}}
                             </div>
                             <div class="text-center col-lg-1 col-md-1 col-sm-1 text-size-14 pointer">
-                                <i class="fas fa-ellipsis-h" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"></i>
+                                <i class="text-primary fas fa-ellipsis-h" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"></i>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <p ng-click="openModalEditTender(bandoGara)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                         <i class="far fa-edit fa-fw fa-lg pointer"></i><span class="ml-2">Modifica</span>

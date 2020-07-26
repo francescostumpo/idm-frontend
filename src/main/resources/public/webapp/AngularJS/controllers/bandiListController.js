@@ -1,105 +1,22 @@
 snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location,$rootScope) {
-    console.log("[INFO] Hello World from searchViewController");
+    console.log("[INFO] Hello World from bandiListController");
 
-
-    $scope.bandiGaraList = [
-        {
-            "cig": "5100001260",
-            "societa": "Acme Inc.",
-            "oggetto": "Fornitura di componenti hardware",
-            "lavorazione": "03/07/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "12"
-        },
-        {
-            "cig": "5100001259",
-            "societa": "Stogit",
-            "oggetto": "Fornitura di tubi senza saldatura",
-            "lavorazione": "03/06/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "15"
-        },
-        {
-            "cig": "5100001263",
-            "societa": "G. House Medicals",
-            "oggetto": "Fornitura di materiali di primo soccorso",
-            "lavorazione": "03/06/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "8"
-        },
-        {
-            "cig": "5100001262",
-            "societa": "Frostfire Electronics",
-            "oggetto": "Fornitura di componenti elettronici",
-            "lavorazione": "03/06/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "18"
-        },
-        {
-            "cig": "5100001265",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
-            "lavorazione": "18/10/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "11"
-        },
-        {
-            "cig": "5100001261",
-            "societa": "Wiza and Sons",
-            "oggetto": "Fornitura di telecamere di sicurezza",
-            "lavorazione": "25/12/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "15"
-        },
-        {
-            "cig": "5100001266",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
-            "lavorazione": "18/10/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "11"
-        },
-        {
-            "cig": "5100001267",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
-            "lavorazione": "18/10/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "11"
-        },
-        {
-            "cig": "5100001268",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
-            "lavorazione": "18/10/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "11"
-        },
-        {
-            "cig": "5100001269",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
-            "lavorazione": "18/10/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "11"
-        },
-        {
-            "cig": "5100001270",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
-            "lavorazione": "18/10/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "11"
-        },
-        {
-            "cig": "5100001271",
-            "societa": "Stark Inc.",
-            "oggetto": "Fornitura di materiali di sicurezza",
-            "lavorazione": "18/10/2020",
-            "chiusuraGara": "06/07/2020",
-            "fornitori": "11"
+    var url = mainController.getHost() + '/tender/getAllTenders'
+    $http.get(url).then(function (response) {
+        console.log('response from ', url, ' : ', response)
+        if(response.data.status === 200){
+            $scope.bandiGaraList = response.data.tenderList
+            $scope.bandiGaraList.forEach(tender => {
+                tender.endDate = mainController.convertLocalDateToDate(tender.endDate)
+                tender.fornitori = tender.suppliers.length
+            })
+            console.log('tender list : ', $scope.bandiGaraList)
         }
-    ]
+        else{
+            mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+        }
+    })
+
 
     $scope.bandiSelected = [];
 
@@ -109,14 +26,31 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             uiLibrary: 'bootstrap4',
             format: 'dd/mm/yyyy'
         });
+        $scope.tenderModified = {}
         $scope.bandoSelected = bando
-
         $('#editTenderModal').modal()
     }
 
     $scope.modifyBando = function(){
         console.log('Bando ' , $scope.bandoSelected, ' modified')
-        mainController.showNotification('bottom', 'right', 'Modifica effetuata con successo', '', 'far fa-check-square', 'info')
+        var url = mainController.getHost() + '/tender/updateTenderFields'
+        var input = {
+            "object" : $scope.tenderModified.object,
+            "description" : $scope.tenderModified.description,
+            "endDate" : $scope.tenderModified.endDate,
+            "cig": $scope.tenderModified.cig,
+            "company" : $scope.tenderModified.company,
+            "id" : $scope.bandoSelected.id
+        }
+        $http.post(url, input).then(function (response) {
+            console.log('response from ', url, ' : ', response)
+            if(response.data.status === 200){
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'info')
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
     }
 
     $scope.selectBando = function(bando){
@@ -148,7 +82,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     $scope.goToView = function (path, bandoGara) {
 
         sessionStorage.setItem('bandoGara', JSON.stringify(bandoGara));
-        sessionStorage.setItem('bandoGaraOggetto', bandoGara.oggetto)
+        sessionStorage.setItem('bandoGaraOggetto', bandoGara.object)
         location.href = path;
     }
 

@@ -12,7 +12,25 @@ mainController = {
 		return dateInMillis
 	},
 
-	showNotification: function(from, align, message, color, icon, type) {
+	convertLocalDateToDate : function(localDate){
+		var day = localDate.dayOfMonth;
+		var month = localDate.monthValue - 1; // Month is 0-indexed
+		var year = localDate.year;
+		var date = new Date(Date.UTC(year, month, day));
+		return date
+	},
+
+	showNotification: function(from, align, message, color, type) {
+		var icon = ''
+		if(type === 'info'){
+			icon = 'far fa-check-square'
+		}
+		else if(type === 'success'){
+			icon = 'far fa-check-square'
+		}
+		else if(type === 'danger'){
+			icon = "fas fa-exclamation-triangle"
+		}
 		$.notify({
 			icon: icon,
 			message: message
@@ -195,6 +213,11 @@ snamApp.config(['$httpProvider', function ($httpProvider) {
 	$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
 	//$httpProvider.defaults.headers.common['Content-Type'] = "text/plain"
 }]);
+
+host = mainController.getFrontendHost()
+
+ws = new SockJS(host + "/createTender");
+stompClient = Stomp.over(ws);
 
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "customtime-pre": function ( a ) {

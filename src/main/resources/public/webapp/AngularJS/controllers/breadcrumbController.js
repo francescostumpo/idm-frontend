@@ -28,8 +28,6 @@ snamApp.controller("breadcrumbController", ['$scope', '$http', '$location', '$ro
         }
     }
 
-
-
     if(sessionStorage.getItem("bandoGaraOggetto") != null){$scope.bandoGaraOggetto = sessionStorage.getItem("bandoGaraOggetto");}
     if(sessionStorage.getItem("fornitoreOverviewName") != null){$scope.fornitoreOverviewName = sessionStorage.getItem("fornitoreOverviewName");}
 

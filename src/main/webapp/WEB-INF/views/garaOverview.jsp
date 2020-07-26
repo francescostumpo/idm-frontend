@@ -32,33 +32,42 @@
         <div class="header-section">
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-
                     <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
-                    <h3 class="font-bold">{{bandoGara.oggetto}}</h3>
+                    <div class="col-md-12 col-sm-12 col-lg-12 row">
+                        <h3 class="font-bold">{{bandoGara.object}}</h3>
+                        <div class="ml-2 my-auto col-lg-1 col-md-1 col-sm-1">
+                            <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"></i>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                    <i class="far fa-edit fa-fw fa-lg pointer"></i>
+                                    <span class="ml-2">Modifica</span>
+                                </p>
+                                <div class="dropdown-divider"></div>
+                                <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                    <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                    <span class="ml-2">Elimina</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 mb-2" style="padding-left: 0rem !important;">
                         <div class="row mt-4">
-                            <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">SOCIETA'</label>
-                                    <p class="font-bold">{{bandoGara.societa}}</p>
+                                    <p class="font-bold">{{bandoGara.supplier}}</p>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">CIG</label>
                                     <p class="font-bold">{{bandoGara.cig}}</p>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label class="label-item">CHIUSURA GARA</label>
-                                    <p class="font-bold">{{bandoGara.chiusuraGara}}</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                <div class="form-group">
-                                    <label class="label-item">FINE LAVORAZIONE</label>
-                                    <p class="font-bold">{{bandoGara.lavorazione}}</p>
+                                    <label class="label-item">SCADENZA</label>
+                                    <p class="font-bold">{{bandoGara.endDate | date: 'dd/MM/yyyy'}}</p>
                                 </div>
                             </div>
                         </div>
@@ -82,13 +91,13 @@
                 <div class="tab-content mt-2" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-supplier" role="tabpanel" aria-labelledby="pills-supplier-tab">
                         <div class="row mt-2">
-                            <div class="col-lg-10 col-md-10 col-sm-12">
-                                <p class="label-item">{{suppliers.length}} FORNITORI CARICATI</p>
+                            <div class="my-auto  col-lg-10 col-md-10 col-sm-12">
+                                <p class="my-auto text-size-16 text-secondary ">{{suppliers.length}} FORNITORI CARICATI</p>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-12">
-                                <button class="btn button-block button-neutral-compare-advise">
+                                <button ng-click="openModalUploadDocument('uploadDocumentModalNewFornitore','fileselect4','filedrag4','imageUpload4')" class="btn button-block button-primary-buyer">
                                     <i class="fa fa-plus"></i>
-                                    <span class="ml-2">AGGIUNGI FORNITORE</span>
+                                    <span  class="ml-2">AGGIUNGI FORNITORE</span>
                                 </button>
                             </div>
                         </div>
@@ -97,36 +106,36 @@
                                 <div class="card shadow">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                                AZ
-                                            </div>
-                                            <div class="col-lg-9 col-md-9 col-sm-9">
+                                            <div class="col-lg-11 col-md-11 col-sm-11">
                                                 <p class="font-bold pointer" ng-click="goToView('fornitoreOverview', supplier)">{{supplier.name}}</p>
                                             </div>
                                             <div class="col-lg-1 col-md-1 col-sm-1">
                                                 <i class="fa fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"></i>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <p class="dropdown-item no-margin-bottom" style="cursor: pointer;">
-                                                        <i class="far fa-edit fa-fw fa-lg pointer"></i><span class="ml-2">Modifica</span>
+                                                    <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                        <i class="far fa-edit fa-fw fa-lg pointer"></i>
+                                                        <span class="ml-2">Modifica</span>
                                                     </p>
                                                     <div class="dropdown-divider"></div>
-                                                    <p class="dropdown-item no-margin-bottom" style="cursor: pointer;">
-                                                        <i class="far fa-trash-alt fa-fw fa-lg pointer"></i><span class="ml-2">Elimina</span>
+                                                    <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                        <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                        <span class="ml-2">Elimina</span>
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer" style="background-color: white; padding-bottom: 0">
+                                        <div class="break mt-3 mb-3"></div>
                                         <div class="row mb-3">
                                             <div class="col-lg-10 col-md-10 col-sm-10">6/8 documenti</div>
-                                            <div class="col-lg-2 col-md-2 col-sm-2">Alert</div>
+                                            <div class="danger-color text-center col-lg-2 col-md-2 col-sm-2">
+                                                <span>3 </span>
+                                                <i class="mr-1 fas fa-exclamation-triangle"></i>
+                                            </div>
                                         </div>
-
-                                    </div>
-                                    <div class="progress" style="height:.5rem;">
-                                        <div class="progress-bar bg-info" style="width: 70%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                        <div class="progress-bar bg-danger" style="width: 20%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress" style="height:.5rem;">
+                                            <div class="progress-bar bg-info" style="width: 70%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-danger" style="width: 20%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -137,9 +146,9 @@
                             <!-- Show Lost -->
                             <div ng-hide="showDocument" class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn button-neutral-compare-advise">
+                                    <button ng-click="openModalUploadDocument('uploadDocumentModalOverviewGara','fileselect3','filedrag3','imageUpload3')" class="btn button-primary-buyer">
                                         <i class="fa fa-plus"></i>
-                                        <span class="ml-2">AGGIUNGI DOCUMENTO</span>
+                                        <span  class="ml-2">AGGIUNGI DOCUMENTO</span>
                                     </button>
                                 </div>
                                 <div class="card mt-2 no-border">
@@ -162,7 +171,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-1 col-md-1 col-sm-1">
-                                                <input ng-checked="checkDocument(documentSupp)" ng-click="selectDocument(documentSupp); show(documentSupp)" type="checkbox" class="my-auto pointer">
+                                                <input ng-checked="checkDocument(documentSupp)" ng-click="selectDocument(documentSupp)" type="checkbox" class="my-auto pointer">
                                                 <i class="ml-2 fa fa-check-circle" style="color: limegreen"></i>
                                             </div>
                                             <div class="col-lg-7 col-md-7 col-sm-7">
@@ -178,8 +187,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
 
                             <!-- Show Document -->
@@ -271,6 +278,8 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    <jsp:include page="subviews/modal/uploadDocumentModalNewFornitore.jsp"></jsp:include>
+    <jsp:include page="subviews/modal/uploadDocumentModalOverviewGara.jsp"></jsp:include>
 </div>
 
 </body>
