@@ -1,24 +1,34 @@
 snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location,$rootScope) {
     console.log("[INFO] Hello World from bandiListController");
 
-    var url = mainController.getHost() + '/tender/getAllTenders'
-    $http.get(url).then(function (response) {
-        console.log('response from ', url, ' : ', response)
-        if(response.data.status === 200){
-            $scope.bandiGaraList = response.data.tenderList
-            $scope.bandiGaraList.forEach(tender => {
-                tender.endDate = mainController.convertLocalDateToDate(tender.endDate)
-                tender.fornitori = tender.suppliers.length
-            })
-            console.log('tender list : ', $scope.bandiGaraList)
-        }
-        else{
-            mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
-        }
-    })
+    var url = mainController.getHost() + '/tender/getAllTenders';
+
+    $scope.getAllTendersByDefault.getFromParent = function(){
+        $scope.getAllTenders();
+    };
+
+    $scope.getAllTenders = function(){
+        $http.get(url).then(function (response) {
+            console.log('response from ', url, ' : ', response)
+            if(response.data.status === 200){
+                $scope.bandiGaraList = response.data.tenderList;
+                $scope.bandiGaraList.forEach(tender => {
+                    tender.endDate = mainController.convertLocalDateToDate(tender.endDate)
+                    tender.fornitori = tender.suppliers.length
+                })
+                console.log('tender list : ', $scope.bandiGaraList)
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
+    };
+
+    $scope.getAllTenders();
 
 
-    $scope.bandiGaraList = [
+
+    /*$scope.bandiGaraList = [
         {
             "cig": "5100001260",
             "supplier": "Snam Rete e Gas",
@@ -139,7 +149,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "codiceGara": "MAM019-026G",
             "id" : "5f180b8cf1e23e6344b70aa8"
         }
-    ]
+    ]*/
 
     $scope.bandiSelected = [];
 
