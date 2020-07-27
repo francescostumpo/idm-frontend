@@ -177,12 +177,12 @@
                                                 <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x"
                                                     style="color: red;"></i>
                                                 <p class="my-auto  no-margin-bottom text-size-16 text-bold crop">
-                                                    {{document.name}}</p>
+                                                    {{document.fileName}}</p>
                                             </div>
                                         </div>
                                         <div class="my-auto col-lg-2 col-md-2 col-sm-2">
                                             <p class="my-auto  no-margin-bottom text-size-16 text-bold">
-                                                {{document.uploadedAt | date: 'dd/MM/yyyy - HH:mm'}} </p>
+                                                {{document.uploadedOn | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                         </div>
                                         <div class="my-auto col-lg-2 col-md-2 col-sm-2 text-size-14">
                                             <div ng-if="document.conformity === 0"
@@ -275,7 +275,7 @@
                                                         <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
                                                             style="color: red;"></i>
                                                         <p class="my-auto no-margin-bottom text-size-16 text-bold crop">
-                                                            {{document.name}}</p>
+                                                            {{document.fileName}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3">
@@ -311,10 +311,10 @@
                                                         style="height: 75%; margin-top: 5%;">
                                                         <label class="label-item"
                                                             style="padding-top: 7%; float: left;">DATA</label>
-                                                        <div> <i *ngIf="document.name"
+                                                        <div> <i *ngIf="document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i>
-                                                            <!-- <i *ngIf="!document.name"
+                                                            <!-- <i *ngIf="!document.fileName"
                                                                 class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i> --> 
                                                         </div>
@@ -326,10 +326,10 @@
                                                         style="height: 75%; margin-top: 5%;">
                                                         <label class="label-item"
                                                             style="padding-top: 7%; float: left;">FIRMA</label>
-                                                        <div> <i *ngIf="document.name"
+                                                        <div> <i *ngIf="document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i>
-                                                           <!-- <i *ngIf="!document.name"
+                                                           <!-- <i *ngIf="!document.fileName"
                                                                 class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i> --> 
                                                         </div>
@@ -341,10 +341,10 @@
                                                         style="height: 75%; margin-top: 5%;">
                                                         <label class="label-item"
                                                             style="padding-top: 7%; float: left;">TIMBRO</label>
-                                                        <div> <i *ngIf="document.name"
+                                                        <div> <i *ngIf="document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i>
-                                                          <!--   <i *ngIf="!document.name"
+                                                          <!--   <i *ngIf="!document.fileName"
                                                                 class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i> --> 
                                                         </div>
@@ -356,10 +356,10 @@
                                                         style="height: 75%; margin-top: 5%;">
                                                         <label class="label-item" style="padding-top: 7%; float: left;">
                                                             CIG </label>
-                                                        <div> <i *ngIf="document.name"
+                                                        <div> <i *ngIf="document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i>
-                                                         <!--   <i *ngIf="!document.name"
+                                                         <!--   <i *ngIf="!document.fileName"
                                                                 class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i> --> 
                                                         </div>
@@ -369,10 +369,10 @@
                                                 <div class="col-lg-2 col-md-2 col-sm-12">
                                                     <label class="label-item" style="padding-top: 12%; float: left;">
                                                         NUMERO GARA </label>
-                                                    <div> <!-- <i *ngIf="!document.name"
+                                                    <div> <!-- <i *ngIf="!document.fileName"
                                                             class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                             style="padding-top: 13%;"> </i> --> 
-                                                        <i *ngIf="document.name"
+                                                        <i *ngIf="document.fileName"
                                                             class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                             style="padding-top: 13%;"> </i>
                                                     </div>
@@ -473,12 +473,12 @@
                                                     <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x"
                                                         style="color: red;"></i>
                                                     <p class="my-auto  no-margin-bottom text-size-16 text-bold crop">
-                                                        {{document.name}}</p>
+                                                        {{document.fileName}}</p>
                                                 </div>
                                             </div>
                                             <div class="my-auto col-lg-2 col-md-2 col-sm-2">
                                                 <p class="my-auto  no-margin-bottom text-size-16 text-bold">
-                                                    {{document.uploadedAt | date: 'dd/MM/yyyy - HH:mm'}} </p>
+                                                    {{document.uploadedOn | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                             </div>
                                             <div class="my-auto col-lg-2 col-md-2 col-sm-2 text-size-14">
                                                 <div ng-if="document.conformity === 0"
@@ -571,7 +571,7 @@
                                                             <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
                                                                 style="color: red;"></i>
                                                             <p class="my-auto no-margin-bottom text-size-16 text-bold crop">
-                                                                {{document.name}}</p>
+                                                                {{document.fileName}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-3">
@@ -609,10 +609,10 @@
                                                             style="height: 75%; margin-top: 5%;">
                                                             <label class="label-item"
                                                                 style="padding-top: 7%; float: left;">DATA</label>
-                                                            <div> <i *ngIf="document.name"
+                                                            <div> <i *ngIf="document.fileName"
                                                                     class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                     style="padding-top: 8%;"> </i>
-                                                                <!-- <i *ngIf="!document.name"
+                                                                <!-- <i *ngIf="!document.fileName"
                                                                     class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                     style="padding-top: 8%;"> </i> --> 
                                                             </div>
@@ -624,10 +624,10 @@
                                                             style="height: 75%; margin-top: 5%;">
                                                             <label class="label-item"
                                                                 style="padding-top: 7%; float: left;">FIRMA</label>
-                                                            <div> <i *ngIf="document.name"
+                                                            <div> <i *ngIf="document.fileName"
                                                                     class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                     style="padding-top: 8%;"> </i>
-                                                               <!-- <i *ngIf="!document.name"
+                                                               <!-- <i *ngIf="!document.fileName"
                                                                     class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                     style="padding-top: 8%;"> </i> --> 
                                                             </div>
@@ -639,10 +639,10 @@
                                                             style="height: 75%; margin-top: 5%;">
                                                             <label class="label-item"
                                                                 style="padding-top: 7%; float: left;">TIMBRO</label>
-                                                            <div> <i *ngIf="document.name"
+                                                            <div> <i *ngIf="document.fileName"
                                                                     class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                     style="padding-top: 8%;"> </i>
-                                                              <!--   <i *ngIf="!document.name"
+                                                              <!--   <i *ngIf="!document.fileName"
                                                                     class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                     style="padding-top: 8%;"> </i> --> 
                                                             </div>
@@ -654,10 +654,10 @@
                                                             style="height: 75%; margin-top: 5%;">
                                                             <label class="label-item" style="padding-top: 7%; float: left;">
                                                                 CIG </label>
-                                                            <div> <i *ngIf="document.name"
+                                                            <div> <i *ngIf="document.fileName"
                                                                     class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                     style="padding-top: 8%;"> </i>
-                                                             <!--   <i *ngIf="!document.name"
+                                                             <!--   <i *ngIf="!document.fileName"
                                                                     class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                     style="padding-top: 8%;"> </i> --> 
                                                             </div>
@@ -667,10 +667,10 @@
                                                     <div class="col-lg-2 col-md-2 col-sm-12">
                                                         <label class="label-item" style="padding-top: 12%; float: left;">
                                                             NUMERO GARA </label>
-                                                        <div> <!-- <i *ngIf="!document.name"
+                                                        <div> <!-- <i *ngIf="!document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 13%;"> </i> --> 
-                                                            <i *ngIf="document.name"
+                                                            <i *ngIf="document.fileName"
                                                                 class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                                 style="padding-top: 13%;"> </i>
                                                         </div>

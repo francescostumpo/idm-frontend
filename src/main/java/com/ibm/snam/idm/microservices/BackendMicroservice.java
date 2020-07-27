@@ -54,4 +54,21 @@ public class BackendMicroservice {
         logger.info("getDocumentContent -- END --");
         return response;
     }
+
+    public ResponseEntity<JSONObject> getSuppliersByTenderId(String tenderId) {
+        logger.info("getSuppliersByTenderId -- INIT --");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String serverBackend = config.getBackendUrl();
+        String endpoint = "/tender/"+ tenderId + "/suppliers";
+        String url = serverBackend + endpoint;
+        RestTemplate httpRestTemplate = new RestTemplate();
+        httpRestTemplate.getMessageConverters()
+                .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        HttpEntity<String> request = new HttpEntity<String>(headers);
+        logger.info("calling url : " + url);
+        ResponseEntity<JSONObject> response = httpRestTemplate.exchange(url, HttpMethod.GET, request, JSONObject.class);
+        logger.info("getSuppliersByTenderId -- END --");
+        return response;
+    }
 }

@@ -8,21 +8,15 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
     $scope.showDocument = false;
     $scope.selectedDocuments = [];
+    $scope.tempDocumentUrl = null;
+    $scope.suppliers = []
 
-    $scope.suppliers = [
-        {name : 'IBM'},
-        {name : 'Oracle'},
-        {name : 'Accenture'},
-        {name : 'NTT Data'},
-        {name : 'HPE'},
-        {name : 'Deloitte'}
-    ]
+    var urlGetSuppliersByTenderId = mainController.getFrontendHost() + "/api/tender" + $scope.bandoGara.id + "/suppliers";
+    $http.get(urlGetSuppliersByTenderId).then(function (res) {
+        $scope.suppliers = res;
+    })
 
-    $scope.documentsSuppliers = [
-        {id: "0001", name: "Lettera_invito_MAM19023C.pdf", uploadedAt: new Date('2020-06-23T15:18')},
-        {id: "0002", name: "Condizioni Specifiche", uploadedAt: new Date('2020-06-23T15:20')},
-        {id: "0003", name: "Condizioni Generali", uploadedAt: new Date('2020-06-23T15:21')}
-    ];
+    $scope.tenderAttachments = $scope.bandoGara.tenderAttachments
 
     $scope.createSupplier = function(){
         var fileBase64 = null;
@@ -54,19 +48,19 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     }
 
     $scope.setDocument = function(data) {
-        // When receiving a byte array
-        //var file = new File([data], 'my_document.pdf', { type: 'application/pdf' });
-        //var urlDocument = window.URL.createObjectURL(file);
-
-        $("object.document-container").attr("data", urlDocument);
-        $("embed.document-container").attr("src", urlDocument);
-        $("a.document-fullview").attr("href", urlDocumentPage);
+        var file = new File([data], 'document.pdf', { type: 'application/pdf' });
+        if ($scope.tempDocumentUrl) {
+            window.URL.revokeObjectURL($scope.tempDocumentUrl)
+        }
+        $scope.tempDocumentUrl = window.URL.createObjectURL(file);
+        $("object.document-container").attr("data", $scope.tempDocumentUrl);
+        $("embed.document-container").attr("src", $scope.tempDocumentUrl);
     }
 
     $scope.checkDocument = function (document) {
         for(i = 0;i < $scope.selectedDocuments.length; i++){
-            var id = document.id;
-            if(id === $scope.selectedDocuments[i].id){
+            var id = document._idAttachments;
+            if(id === $scope.selectedDocuments[i]._idAttachments){
                 return true;
             }
         }
@@ -76,8 +70,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.selectDocument = function (document) {
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document.id;
-            if(id === $scope.selectedDocuments[i].id){
+            var id = document._idAttachments;
+            if(id === $scope.selectedDocuments[i]._idAttachments){
                 found = true;
                 $scope.selectedDocuments.splice(i, 1)
             }

@@ -10,200 +10,202 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     var urlDocumentContent = mainController.getFrontendHost() + '/api/documentContent';
     var urlDocument = mainController.getFrontendHost() + '/document.pdf';
     var urlDocumentPage = mainController.getFrontendHost() + '/documentDetail';
+    $scope.documents = fornitoreOverview.attachments;
 
-    $scope.documents = [{
-            id: "5f1af6d8b8742101e4e78c7a",
-            name: "12.1 Documentazione di gara",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0002",
-            name: "12.2 Patto etico di integrita'",
-            uploadedAt: new Date('2020-06-23T15:16'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0003",
-            name: "12.3 Modello 2",
-            uploadedAt: new Date('2020-06-23T15:17'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0004",
-            name: "12.5 Modello 3",
-            uploadedAt: new Date('2020-06-23T15:19'),
-            conformity: 1,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0005",
-            name: "12.6 Modello 5",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 1,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0006",
-            name: "12.9 White-List",
-            uploadedAt: new Date('2020-06-23T15:19'),
-            conformity: 2,
-            presence: 1,
-            notPlanned: false
-        },
-        {
-            id: "0007",
-            name: "12.8 Situazioni di controllo",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0008",
-            name: "MAM019-23C_Modello 10",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0009",
-            name: "MAM019-23C_DUVRI_Cronoprogramma",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0010",
-            name: "MAM019-23C_DUVRI_Misure Coordinamento",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0011",
-            name: "MAM019-23C_Dichiarazione nominativi_RSPP",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0012",
-            name: "MAM019-23C_DUVRI_Modulo Dati Committente-Fornitore",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0013",
-            name: "MAM019-23C_DUVRI_Rischi Fornitore",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0014",
-            name: "MAM019-23C_DUVRI_Rischi Specifici",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0015",
-            name: "12.17 Dichiarazione modello 14",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0016",
-            name: "12.19 Dichiarazione documenti art. 23.1",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-          id: "0017",
-          name: "12.6 Modello 5",
-          uploadedAt: new Date('2020-06-23T15:18'),
-          conformity: 0,
-          presence: 0,
-          notPlanned: false
-        },
-        {
-            id: "0018",
-            name: "13.5 Allegato 1",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0019",
-            name: "MAM019-023_Dichiarazione HSE",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: false
-        },
-        {
-            id: "0020",
-            name: "12.4 Modello 20/2",
-            uploadedAt: null,
-            conformity: -1,
-            presence: -1,
-            notPlanned: false
-        },
-        {
-            id: "0021",
-            name: "20.3 Modello 22",
-            uploadedAt: null,
-            conformity: -1,
-            presence: -1,
-            notPlanned: false
-        },
-        {
-            id: "00022",
-            name: "Verbale di sopralluogo",
-            uploadedAt: new Date('2020-06-23T15:18'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: true
-        },
-        {
-            id: "00023",
-            name: "12.4 Patto etico di integrita'",
-            uploadedAt: new Date('2020-06-23T15:16'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: true
-        },
-        {
-            id: "00024",
-            name: "12.4 Modello 2",
-            uploadedAt: new Date('2020-06-23T15:17'),
-            conformity: 0,
-            presence: 0,
-            notPlanned: true
-        },
-    ]
+
+//    $scope.documents = [{
+//            id: "5f1af6d8b8742101e4e78c7a",
+//            name: "12.1 Documentazione di gara",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0002",
+//            name: "12.2 Patto etico di integrita'",
+//            uploadedAt: new Date('2020-06-23T15:16'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0003",
+//            name: "12.3 Modello 2",
+//            uploadedAt: new Date('2020-06-23T15:17'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0004",
+//            name: "12.5 Modello 3",
+//            uploadedAt: new Date('2020-06-23T15:19'),
+//            conformity: 1,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0005",
+//            name: "12.6 Modello 5",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 1,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0006",
+//            name: "12.9 White-List",
+//            uploadedAt: new Date('2020-06-23T15:19'),
+//            conformity: 2,
+//            presence: 1,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0007",
+//            name: "12.8 Situazioni di controllo",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0008",
+//            name: "MAM019-23C_Modello 10",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0009",
+//            name: "MAM019-23C_DUVRI_Cronoprogramma",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0010",
+//            name: "MAM019-23C_DUVRI_Misure Coordinamento",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0011",
+//            name: "MAM019-23C_Dichiarazione nominativi_RSPP",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0012",
+//            name: "MAM019-23C_DUVRI_Modulo Dati Committente-Fornitore",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0013",
+//            name: "MAM019-23C_DUVRI_Rischi Fornitore",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0014",
+//            name: "MAM019-23C_DUVRI_Rischi Specifici",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0015",
+//            name: "12.17 Dichiarazione modello 14",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0016",
+//            name: "12.19 Dichiarazione documenti art. 23.1",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//          id: "0017",
+//          name: "12.6 Modello 5",
+//          uploadedAt: new Date('2020-06-23T15:18'),
+//          conformity: 0,
+//          presence: 0,
+//          notPlanned: false
+//        },
+//        {
+//            id: "0018",
+//            name: "13.5 Allegato 1",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0019",
+//            name: "MAM019-023_Dichiarazione HSE",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0020",
+//            name: "12.4 Modello 20/2",
+//            uploadedAt: null,
+//            conformity: -1,
+//            presence: -1,
+//            notPlanned: false
+//        },
+//        {
+//            id: "0021",
+//            name: "20.3 Modello 22",
+//            uploadedAt: null,
+//            conformity: -1,
+//            presence: -1,
+//            notPlanned: false
+//        },
+//        {
+//            id: "00022",
+//            name: "Verbale di sopralluogo",
+//            uploadedAt: new Date('2020-06-23T15:18'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: true
+//        },
+//        {
+//            id: "00023",
+//            name: "12.4 Patto etico di integrita'",
+//            uploadedAt: new Date('2020-06-23T15:16'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: true
+//        },
+//        {
+//            id: "00024",
+//            name: "12.4 Modello 2",
+//            uploadedAt: new Date('2020-06-23T15:17'),
+//            conformity: 0,
+//            presence: 0,
+//            notPlanned: true
+//        },
+//    ]
 
 
     console.log("$sscope.documents: ", $scope.documents);
@@ -230,7 +232,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.checkDocument = function (document) {
         for(i = 0;i < $scope.selectedDocuments.length; i++){
             var id = document.id;
-            if(id === $scope.selectedDocuments[i].id){
+            if(id === $scope.selectedDocuments[i]._idAttachments){
                 return true;
             }
         }
@@ -242,7 +244,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
             var id = document.id;
-            if(id === $scope.selectedDocuments[i].id){
+            if(id === $scope.selectedDocuments[i]._idAttachments){
                 found = true;
                 $scope.selectedDocuments.splice(i, 1)
             }
@@ -266,7 +268,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
-            $http.get(urlDocumentContent + "/" + document.id, {responseType: 'blob'}).then(function(res) {
+            $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
                 $scope.setDocument(res.data);
             });
         }
