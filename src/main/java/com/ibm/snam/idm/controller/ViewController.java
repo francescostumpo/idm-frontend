@@ -65,6 +65,19 @@ public class ViewController {
 		logger.info("returning fornitoreOverview");
 		return modelAndView;
 	} 
+
+	@GetMapping("/documentDetail")
+	public ModelAndView documentDetail(HttpServletResponse response) {
+		logger.info("getting documentDetail");
+		ModelAndView modelAndView = null;
+		modelAndView = new ModelAndView("documentDetail");
+		Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList/garaOverview/fornitoreOverview/documentDetail");
+
+		response.addCookie(cookieContextPath);
+		response.addHeader("Cache-Control", "no-store");
+		logger.info("returning documentDetail");
+		return modelAndView;
+	} 
 	
 	@GetMapping("/searchView")
 	public ModelAndView searchView(HttpServletResponse response) {
