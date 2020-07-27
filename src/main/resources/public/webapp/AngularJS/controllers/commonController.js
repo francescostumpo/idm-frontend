@@ -5,7 +5,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.userNotifications = []
 
-    var url = mainController.getFrontendHost() + '/getUserNotification?userId=RIDP86Z'
+
+    var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
     $http.get(url).then(function (response) {
         console.log('response from url ', url ,' : ', response)
         if(response.data.status === 200){
@@ -15,6 +16,27 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             })*/
         }
     })
+
+    stompClientSupplier.connect({}, function(frame){
+        stompClientSupplier.subscribe("/topic/pushNotification", function(message){
+            console.log("Received message:" + message.body);
+        });
+        stompClientSupplier.subscribe("/user/queue/errors", function(message) {
+
+        });
+        stompClientSupplier.subscribe("/user/queue/reply/supplier", function(message) {
+            console.log('message ', message)
+            var response = JSON.parse(message.body)
+            if(response.status === 200) {
+                mainController.showNotification('bottom', 'right', response.message, '', 'info')
+            }
+        });
+        stompClientSupplier.subscribe("/user/queue/success", function(message) {
+            console.log("Message " + message.body + ' ' + new Date());
+        });
+    }, function(error){
+        console.log("STOMP protocol error: ", error);
+    });
 
     stompClient.connect({}, function(frame){
         stompClient.subscribe("/topic/pushNotification", function(message){
@@ -73,7 +95,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         object: '',
         company: '',
         endDate: '',
-        fornitori: ''
+        fornitori: '',
+        codiceGara: ''
     }
 
     $scope.sortCardsByColumnName = function(cards, column){

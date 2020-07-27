@@ -15,25 +15,19 @@ public class DatasourceConfiguration {
 	
 	Logger logger = LoggerFactory.getLogger(DatasourceConfiguration.class);
 
-	@Value("${datasource_url}")
+	@Value("${DATASOURCE_URL}")
 	private String datasourceUrl;
 
-	@Value("${datasource_name}")
+	@Value("${DATASOURCE_NAME}")
 	private String datasourceUserName;
 
-	@Value("${datasource_password}")
+	@Value("${DATASOURCE_PASSWORD}")
 	private String datasourcePassword;
 	
 	@Bean
 	public DataSource getDataSource() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		logger.info("Connecting to Datasource....");
 		DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-		if(datasourceUrl == null) {
-            logger.info("init datasource - Env variables not found, trying default..");
-            datasourceUrl = "jdbc:db2://dashdb-txn-flex-yp-fra02-550.services.eu-de.bluemix.net:50000/BLUDB";
-            datasourceUserName = "bluadmin";
-            datasourcePassword = "Passwordai4cm-dev";
-        }
         dataSourceBuilder.url(datasourceUrl);
         dataSourceBuilder.username(datasourceUserName);
         dataSourceBuilder.password(datasourcePassword);
