@@ -24,6 +24,10 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         {id: "0003", name: "Condizioni Generali", uploadedAt: new Date('2020-06-23T15:21')}
     ];
 
+    $scope.uploadDocument = function(){
+        stompClientTestSocket.send('testSocket')
+    }
+
     $scope.createSupplier = function(){
         var fileBase64 = null;
         var reader = new FileReader();
@@ -39,6 +43,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
                 files.push(file)
             }
             $scope.supplier.files = files
+            $scope.supplier.idTender = $scope.bandoGara.id
             $scope.supplier.sapNumber = $scope.bandoGara.sapNumber
             stompClientSupplier.send("/app/createSupplier", {}, JSON.stringify($scope.supplier));
             mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info')

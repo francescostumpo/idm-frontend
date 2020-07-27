@@ -16,7 +16,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             })*/
         }
     })
-
+    /*
     stompClientSupplier.connect({}, function(frame){
         stompClientSupplier.subscribe("/topic/pushNotification", function(message){
             console.log("Received message:" + message.body);
@@ -30,13 +30,16 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             if(response.status === 200) {
                 mainController.showNotification('bottom', 'right', response.message, '', 'info')
             }
+            else{
+                mainController.showNotification('bottom', 'right', response.message, '', 'danger')
+            }
         });
         stompClientSupplier.subscribe("/user/queue/success", function(message) {
             console.log("Message " + message.body + ' ' + new Date());
         });
     }, function(error){
         console.log("STOMP protocol error: ", error);
-    });
+    });*/
 
     stompClient.connect({}, function(frame){
         stompClient.subscribe("/topic/pushNotification", function(message){
@@ -70,9 +73,26 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         console.log("STOMP protocol error: ", error);
     });
 
+    stompClientTestSocket.connect({}, function(frame){
+        stompClientTestSocket.subscribe("/topic/pushNotification", function(message){
+            console.log("Received message:" + message.body);
+        });
+        stompClientTestSocket.subscribe("/user/queue/errors", function(message) {
+
+        });
+        stompClientTestSocket.subscribe("/user/queue/reply/testSocket", function(message) {
+            console.log('message ', message)
+        });
+        stompClientTestSocket.subscribe("/user/queue/success", function(message) {
+            console.log("Message " + message.body + ' ' + new Date());
+        });
+    }, function(error){
+        console.log("STOMP protocol error: ", error);
+    });
+
     $scope.createNotificationFromTender = function(tender, notificationType){
         var notification = {}
-        notification.userId = 'RIDP86Z'
+        notification.userId = mainController.getUserId()
         notification.cig = tender.cig[0]
         notification.idTender = tender.id
         notification.notificationType = notificationType

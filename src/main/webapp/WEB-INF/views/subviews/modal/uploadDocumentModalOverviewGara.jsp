@@ -60,7 +60,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button type="button" class="btn button-secondary-buyer" data-dismiss="modal">
+                        <button ng-click="uploadDocument()" type="button" class="btn button-secondary-buyer" data-dismiss="modal">
                             CARICA
                         </button>
                     </div>
