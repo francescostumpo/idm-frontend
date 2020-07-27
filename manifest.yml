@@ -2,9 +2,9 @@
 applications:
 - instances: 1
   timeout: 180
-  name: Snam-IDM-Frontend-dev
+  name: Snam-IDM-Frontend-dev-keycloak
   buildpack: java_buildpack
   path: ./target/idm-frontend-0.0.1.war
   memory: 2048M
   domain: eu-de.mybluemix.net
-  host: snam-idm-dev
+  host: snam-idm-dev-keycloak
