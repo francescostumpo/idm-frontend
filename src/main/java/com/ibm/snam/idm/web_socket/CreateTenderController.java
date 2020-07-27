@@ -35,7 +35,6 @@ public class CreateTenderController {
     @SendToUser("/queue/reply")
     public String createTender(@Payload JSONObject request){
         try{
-            logger.info("Waiting... ");
             String base64File = request.getString("file");
             String fileName = request.getString("fileName");
             byte [] data = Base64.getDecoder().decode(base64File);
@@ -50,7 +49,7 @@ public class CreateTenderController {
             }
             request.remove("file");
             request.put("responseFromAnalyzer", responseFromAnalyzer);
-            JSONObject responseFromBackend = backendMicroservice.saveTenderOnDb(request);
+            JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(request, "/tender/createTender");
             if(responseFromBackend.getInt("status") != HttpStatus.OK.value()){
                 logger.error("Error calling backend microservice");
                 JSONObject response = new JSONObject();
@@ -63,7 +62,10 @@ public class CreateTenderController {
             return responseFromBackend.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return "No ok";
+            JSONObject response = new JSONObject();
+            response.put("status", Constants.HTTP_STATUS_ERROR);
+            response.put("message", Constants.ERROR_CREATING_TENDER);
+            return response.toString();
         }
     }
 

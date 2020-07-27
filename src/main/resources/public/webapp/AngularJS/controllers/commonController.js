@@ -3,32 +3,81 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.sideBarIsClosed = true
 
+    $scope.userNotifications = []
+
+
+    var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
+    $http.get(url).then(function (response) {
+        console.log('response from url ', url ,' : ', response)
+        if(response.data.status === 200){
+            $scope.userNotifications = response.data.userNotifications
+            /*$scope.userNotifications.forEach(notification => {
+                notification.creationDate = mainController.convertLocalDateToDate(notification.creationDate)
+            })*/
+        }
+    })
+
+    stompClientSupplier.connect({}, function(frame){
+        stompClientSupplier.subscribe("/topic/pushNotification", function(message){
+            console.log("Received message:" + message.body);
+        });
+        stompClientSupplier.subscribe("/user/queue/errors", function(message) {
+
+        });
+        stompClientSupplier.subscribe("/user/queue/reply/supplier", function(message) {
+            console.log('message ', message)
+            var response = JSON.parse(message.body)
+            if(response.status === 200) {
+                mainController.showNotification('bottom', 'right', response.message, '', 'info')
+            }
+        });
+        stompClientSupplier.subscribe("/user/queue/success", function(message) {
+            console.log("Message " + message.body + ' ' + new Date());
+        });
+    }, function(error){
+        console.log("STOMP protocol error: ", error);
+    });
+
     stompClient.connect({}, function(frame){
         stompClient.subscribe("/topic/pushNotification", function(message){
             console.log("Received message:" + message.body);
         });
-
         stompClient.subscribe("/user/queue/errors", function(message) {
 
         });
-
         stompClient.subscribe("/user/queue/reply", function(message) {
             console.log('message ', message)
             var response = JSON.parse(message.body)
             if(response.status === 200){
                 mainController.showNotification('bottom', 'right', response.message, '', 'info')
+                var url = mainController.getFrontendHost() + '/createNotification'
+                var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation')
+                $http.post(url, tenderNotification).then(function (response) {
+                    console.log(' responde from ', url, ' : ', response)
+                    if(response.data.status === 200){
+                        $scope.userNotifications.push(response.data.userNotification)
+                    }
+                })
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
             }
         });
-
         stompClient.subscribe("/user/queue/success", function(message) {
             console.log("Message " + message.body + ' ' + new Date());
         });
     }, function(error){
         console.log("STOMP protocol error: ", error);
     });
+
+    $scope.createNotificationFromTender = function(tender, notificationType){
+        var notification = {}
+        notification.userId = 'RIDP86Z'
+        notification.cig = tender.cig[0]
+        notification.idTender = tender.id
+        notification.notificationType = notificationType
+        return notification
+    }
 
     $scope.processName = function(name, length, subString){
         if(name.length > length){

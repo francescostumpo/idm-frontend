@@ -2,13 +2,13 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
     console.log("[INFO] Hello World from navbarController");
 
     $scope.deselectFile = function() {
-        $scope.file = null
-        $scope.contractIsSelected = false
-        $scope.contractSelectedName = ""
-    }
+        $scope.file = null;
+        $scope.contractIsSelected = false;
+        $scope.contractSelectedName = "";
+    };
 
     $scope.createTender = function(){
-        console.log('createTender -- INIT -- tender : ', $scope.tender)
+        console.log('createTender -- INIT -- tender : ', $scope.tender);
         var fileBase64 = null;
         var reader = new FileReader();
         reader.readAsBinaryString($scope.file);
@@ -16,13 +16,13 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             fileBase64 = reader.result;
             var base64String = window.btoa(fileBase64);
             if (base64String !== null) {
-                $scope.tender.file = base64String
-                $scope.tender.fileName = $scope.contractSelectedName
+                $scope.tender.file = base64String;
+                $scope.tender.fileName = $scope.contractSelectedName;
             }
             stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
-            mainController.showNotification("bottom", "right", "Creazione gara in corso. Riceverai una notifica quando il processo sarà terminato", '', 'info')
+            mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
         }
-    }
+    };
 
     $scope.openModalCreateTender = function () {
         $('#datepicker2').datepicker({
