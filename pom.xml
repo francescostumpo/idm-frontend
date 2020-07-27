@@ -110,12 +110,14 @@
 		</dependency>
 	</dependencies>
 
+
 	<repositories>
 		<repository>
 			<id>repo</id>
 			<url>file://${project.basedir}/lib</url>
 		</repository>
 	</repositories>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
