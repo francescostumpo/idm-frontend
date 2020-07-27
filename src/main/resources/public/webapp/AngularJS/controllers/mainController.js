@@ -122,10 +122,10 @@ mainController = {
 			host = "http://localhost:8080"
 		}
 		else if(location.includes("dev")){
-			host = "https://snam-ai4cm-backend-dev.eu-de.mybluemix.net";
+			host = "http://158.177.78.140:8080";
 		}
 		else{
-			host = "https://snam-ai4cm-backend.eu-de.mybluemix.net";
+			host = "http://158.177.78.140:8080";
 		}
 		return host
 	},
