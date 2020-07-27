@@ -20,9 +20,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Controller
-public class CreateSupplierController {
+public class UpdateTenderFilesController {
 
-    Logger logger = LoggerFactory.getLogger(CreateSupplierController.class);
+    Logger logger = LoggerFactory.getLogger(UpdateTenderFilesController.class);
 
     @Autowired
     AnalyzerMicroservice analyzerMicroservice;
@@ -30,13 +30,13 @@ public class CreateSupplierController {
     @Autowired
     BackendMicroservice backendMicroservice;
 
-    @MessageMapping("/createSupplier")
-    @SendToUser("/queue/reply/supplier")
-    public String crateSupplier(@Payload  JSONObject supplier){
+    @MessageMapping("/updateTenderFiles")
+    @SendToUser("/queue/reply/updateTenderFiles")
+    public String updateFiles(@Payload  JSONObject updateFiles){
         JSONObject response = new JSONObject();
-        logger.info("supplier : " + supplier);
+        logger.info("tenderFiles : " + updateFiles);
         try{
-            JSONArray files = supplier.getJSONArray("files");
+            JSONArray files = updateFiles.getJSONArray("files");
             List<JSONObject> attachmentsId = new LinkedList<>();
             for(int i = 0 ; i < files.size() ; i++){
                 JSONObject file = files.getJSONObject(i);
@@ -50,17 +50,16 @@ public class CreateSupplierController {
                 attachmentId.put("fileName", fileName);
                 attachmentsId.add(attachmentId);
             }
-            supplier.remove("files");
-            supplier.put("attachmentsId", attachmentsId);
-            JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(supplier, "/supplier/createSupplier");
+            updateFiles.remove("files");
+            updateFiles.put("attachmentsId", attachmentsId);
+            JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachments");
             logger.info("Response from backend : " + responseFromBackend);
             return responseFromBackend.toString();
         }catch (Exception e){
             e.printStackTrace();
             response.put("status", Constants.HTTP_STATUS_ERROR);
-            response.put("message", Constants.ERROR_CREATING_SUPPLIER);
+            response.put("message", Constants.ERROR_CALLING_BACKEND);
             return response.toString();
         }
     }
-
 }

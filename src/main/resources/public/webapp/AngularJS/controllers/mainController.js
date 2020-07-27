@@ -211,24 +211,48 @@ mainController = {
 		var userId = tokenBody.preferred_username.toUpperCase();
 		console.log("LoggedIn as: " + userId);
 		return userId;
+	},
+
+	getUserName: function(){
+		var bearerToken = this.getCookie('bearerToken');
+		var tokenBody = JSON.parse(atob(bearerToken.split('.')[1]));
+		var userId = tokenBody.name;
+		return userId;
 	}
 
 }
 
+snamApp.factory('AuthInterceptor', function () {
+	return {
+		request: function (config) {
+			config.headers = config.headers || {};
+			var token = mainController.getCookie('bearerToken')
+			config.headers.Authorization = 'Bearer ' + token;
+			return config
+		}
+	};
+});
+
 snamApp.config(['$httpProvider', function ($httpProvider) {
 	//console.log('token : ' + mainController.getCookie('bearerToken'))
-	//$httpProvider.interceptors.push('authInterceptor')
-	$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
+	$httpProvider.interceptors.push('AuthInterceptor')
+	//$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
 	//$httpProvider.defaults.headers.common['Content-Type'] = "text/plain"
 }]);
 
-host = mainController.getFrontendHost()
+host = mainController.getFrontendHost();
+
+ws = new SockJS(host + "/testSocket");
+stompClientTestSocket = Stomp.over(ws);
 
 ws = new SockJS(host + "/createTender");
 stompClient = Stomp.over(ws);
 
 ws = new SockJS(host + "/createSupplier");
 stompClientSupplier = Stomp.over(ws);
+
+ws = new SockJS(host + "/updateTenderFiles");
+stompClientTenderFiles = Stomp.over(ws);
 
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "customtime-pre": function ( a ) {

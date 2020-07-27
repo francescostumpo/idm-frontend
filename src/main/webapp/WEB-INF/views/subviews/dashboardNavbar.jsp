@@ -111,7 +111,7 @@
 				aria-expanded="false">
 			<i style="cursor:pointer; color: white" class="far fa-user-circle fa-1point5 fa-sm fa-fw mr-2" style="color:white;"></i>
 			<span class="mr-2 d-none d-lg-inline"	style="color: white" id="userName">
-				Claudia Boselli
+				{{userId}}
 			</span>
 		</a>
 	</li>

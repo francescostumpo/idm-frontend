@@ -27,7 +27,7 @@
                     </div>
                     <div class="text-center mt-3">
                         <input type="file" id="fileselect3" style="display: none;"></input>
-                        <button type="button" class="btn button-primary-buyer" onclick="document.getElementById('fileselect2').click();">
+                        <button type="button" class="btn button-primary-buyer" onclick="document.getElementById('fileselect3').click();">
                             <i class="fas fa-upload"></i>
                             <span style="margin-left: 0.5em;"> Carica documento </span>
                         </button>
@@ -60,7 +60,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button type="button" class="btn button-secondary-buyer" data-dismiss="modal">
+                        <button type="button" ng-click="uploadTenderFile()" class="btn button-secondary-buyer" data-dismiss="modal">
                             CARICA
                         </button>
                     </div>

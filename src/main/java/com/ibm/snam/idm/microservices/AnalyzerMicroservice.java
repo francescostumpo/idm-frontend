@@ -1,8 +1,10 @@
 package com.ibm.snam.idm.microservices;
 
+import com.ibm.snam.idm.common.Config;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -13,6 +15,9 @@ import java.net.URI;
 
 @Service
 public class AnalyzerMicroservice {
+
+    @Autowired
+    Config config;
 
     Logger logger = LoggerFactory.getLogger(AnalyzerMicroservice.class);
 
@@ -32,7 +37,7 @@ public class AnalyzerMicroservice {
             };
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("document", contentsAsResource);
-            String serverAnalyzer = "http://localhost:8085";
+            String serverAnalyzer = config.getAnalyzerUrl();
             String serviceAnalyzeDocument = "/analyzerDocument/analyze/document";
             String url = serverAnalyzer + serviceAnalyzeDocument;
             logger.info("Calling URL : " + url);
