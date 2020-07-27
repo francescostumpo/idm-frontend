@@ -222,10 +222,21 @@ mainController = {
 
 }
 
+snamApp.factory('AuthInterceptor', function () {
+	return {
+		request: function (config) {
+			config.headers = config.headers || {};
+			var token = mainController.getCookie('bearerToken')
+			config.headers.Authorization = 'Bearer ' + token;
+			return config
+		}
+	};
+});
+
 snamApp.config(['$httpProvider', function ($httpProvider) {
 	//console.log('token : ' + mainController.getCookie('bearerToken'))
-	//$httpProvider.interceptors.push('authInterceptor')
-	$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
+	$httpProvider.interceptors.push('AuthInterceptor')
+	//$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
 	//$httpProvider.defaults.headers.common['Content-Type'] = "text/plain"
 }]);
 
@@ -236,9 +247,9 @@ stompClientTestSocket = Stomp.over(ws);
 
 ws = new SockJS(host + "/createTender");
 stompClient = Stomp.over(ws);
-/*
+
 ws = new SockJS(host + "/createSupplier");
-stompClientSupplier = Stomp.over(ws);*/
+stompClientSupplier = Stomp.over(ws);
 
 ws = new SockJS(host + "/updateTenderFiles");
 stompClientTenderFiles = Stomp.over(ws);
