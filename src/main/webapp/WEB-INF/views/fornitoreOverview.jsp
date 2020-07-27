@@ -130,7 +130,7 @@
                                     style="background-color: #E6ECF2;">
                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                     <div ng-click="sortCardsByColumnName('name')"
-                                        class="col-lg-5 col-md-5 col-sm-5 text-size-14 no-select">
+                                        class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
                                         DOCUMENTO
                                         <i ng-if="sort.name === 'desc'"
                                             class="fas fa-sort-down hoverable sort-chev"></i>
@@ -152,7 +152,7 @@
                                         <i ng-if="sort.conformity === 'asc'"
                                             class="fas fa-sort-up hoverable sort-chev"></i>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                 </div>
                             </div>
                             <div class="card" ng-repeat="document in documents">
@@ -174,7 +174,7 @@
                                                 <i class="my-auto ml-2 fa fa-check-circle pointer"
                                                     style="color: limegreen;"></i>
                                         </div>
-                                        <div class="my-auto  col-lg-5 col-md-5 col-sm-5">
+                                        <div class="my-auto  col-lg-6 col-md-6 col-sm-6">
                                             <div class="row flex-long-text">
                                                 <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x"
                                                     style="color: red;"></i>
@@ -201,16 +201,18 @@
                                                 <div class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green">
                                                 <i class="mr-2 fas fa-check"></i>CONFORME</div>
                                         </div>
-                                        <div class="my-auto col-lg-2 col-md-2 col-sm-2">
+                                        <div class="row my-auto col-lg-1 col-md-1 col-sm-1">
                                             <!--<div class="row icon-group" ng-if="document.presence >= 0">
                                                 <div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>-->
                                                 <div class="m-1"><i
                                                         class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
                                                 </div>
                                                 <div class="m-1"><i
-                                                        class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i></div>
-                                            </div>
-                                            <div class="row icon-group fa-stack" ng-if="document.presence === -1">
+                                                        class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                </div>
+                                        </div>
+                                        <!--
+                                        <div class="row icon-group fa-stack" ng-if="document.presence === -1">
                                                 <div class="m-1"><i
                                                         class="my-auto  fas fa-plus fa-fw fa-stack-1x pointer"></i>
                                                 </div>
@@ -226,7 +228,7 @@
                                                         class="my-auto  far fa-circle fa-fw fa-stack-2x pointer"></i>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>

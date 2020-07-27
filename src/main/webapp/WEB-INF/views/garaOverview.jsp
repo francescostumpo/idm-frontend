@@ -231,7 +231,7 @@
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                                     <p class="my-auto no-margin-bottom text-size-16 text-bold">
-                                                        {{ document.uploadOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
+                                                        {{ document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-sm-1 d-flex justify-content-center"><i
                                                         class="my-auto fa fa-ellipsis-h pointer"></i></div>
