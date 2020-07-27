@@ -108,7 +108,25 @@ public class ViewController {
 			response.sendRedirect("/dashboard");
 		}
 		return modelAndView;
-	}
+	} 
+
+	@GetMapping("/documentDetail")
+	public ModelAndView documentDetail(HttpServletResponse response) {
+		logger.info("getting documentDetail");
+	  ModelAndView modelAndView = null;
+		boolean loggedIn = verifyBearerToken(request);
+		response.addHeader("Cache-Control", "no-store");
+		if(loggedIn == true){
+      modelAndView = new ModelAndView("documentDetail");
+      Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList/garaOverview/fornitoreOverview/documentDetail");
+      response.addCookie(cookieContextPath);
+      logger.info("returning documentDetail");
+    }
+    else{
+			response.sendRedirect("/dashboard");
+		}
+		return modelAndView;
+	} 
 
 	private boolean verifyBearerToken(HttpServletRequest request) {
 		boolean loggedIn = false;
