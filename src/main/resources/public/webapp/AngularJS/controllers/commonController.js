@@ -5,7 +5,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.userNotifications = []
 
-    var url = mainController.getFrontendHost() + '/getUserNotification?userId=RIDP86Z'
+
+    var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
     $http.get(url).then(function (response) {
         console.log('response from url ', url ,' : ', response)
         if(response.data.status === 200){

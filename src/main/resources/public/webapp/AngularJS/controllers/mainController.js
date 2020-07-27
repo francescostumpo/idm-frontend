@@ -203,6 +203,14 @@ mainController = {
 				return null;
 			};
 		}
+	},
+
+	getUserId: function(){
+    	var bearerToken = this.getCookie('bearerToken');
+		var tokenBody = JSON.parse(atob(bearerToken.split('.')[1]));
+		var userId = tokenBody.preferred_username.toUpperCase();
+		console.log("LoggedIn as: " + userId);
+		return userId;
 	}
 
 }
