@@ -22,6 +22,27 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         {id: "0003", name: "Condizioni Generali", uploadedAt: new Date('2020-06-23T15:21')}
     ];
 
+    $scope.createSupplier = function(){
+        var fileBase64 = null;
+        var reader = new FileReader();
+        reader.readAsBinaryString($scope.listOfFiles[0]);
+        reader.onload = function() {
+            fileBase64 = reader.result;
+            var base64String = window.btoa(fileBase64);
+            var file = {}
+            var files = []
+            if (base64String !== null) {
+                file.file = base64String
+                file.fileName = $scope.listOfFiles[0].name
+                files.push(file)
+            }
+            $scope.supplier.files = files
+            $scope.supplier.sapNumber = $scope.bandoGara.sapNumber
+            stompClientSupplier.send("/app/createSupplier", {}, JSON.stringify($scope.supplier));
+            mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info')
+        }
+    }
+
     $scope.makeVisibleTab = function (itemToDisplay, itemToHide) {
         console.log('[INFO] makeVisibleTab intercepted')
         $('#'+itemToHide).hide();

@@ -16,7 +16,7 @@
                         <span class="text-medium-size-custom">Fornitore*</span>
                     </div>
                     <div class="text-primary mt-3">
-                        <input type="text" class="text-primary form-control" placeholder="Nome fornitore">
+                        <input type="text" ng-model="supplier.name" class="text-primary form-control" placeholder="Nome fornitore">
                     </div>
                 </div>
                 <div class="mt-3">
@@ -66,7 +66,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
+                        <button ng-click="createSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
                             AGGIUNGI
                         </button>
                     </div>

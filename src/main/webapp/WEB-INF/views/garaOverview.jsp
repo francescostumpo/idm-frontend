@@ -55,13 +55,13 @@
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">SOCIETA'</label>
-                                    <p class="font-bold">{{bandoGara.supplier}}</p>
+                                    <p class="font-bold">{{bandoGara.company}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label class="label-item">CIG</label>
-                                    <p class="font-bold">{{bandoGara.cig}}</p>
+                                    <p class="font-bold">{{bandoGara.cig[0]}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">

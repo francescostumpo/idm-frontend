@@ -16,6 +16,27 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         }
     })
 
+    stompClientSupplier.connect({}, function(frame){
+        stompClientSupplier.subscribe("/topic/pushNotification", function(message){
+            console.log("Received message:" + message.body);
+        });
+        stompClientSupplier.subscribe("/user/queue/errors", function(message) {
+
+        });
+        stompClientSupplier.subscribe("/user/queue/reply/supplier", function(message) {
+            console.log('message ', message)
+            var response = JSON.parse(message.body)
+            if(response.status === 200) {
+                mainController.showNotification('bottom', 'right', response.message, '', 'info')
+            }
+        });
+        stompClientSupplier.subscribe("/user/queue/success", function(message) {
+            console.log("Message " + message.body + ' ' + new Date());
+        });
+    }, function(error){
+        console.log("STOMP protocol error: ", error);
+    });
+
     stompClient.connect({}, function(frame){
         stompClient.subscribe("/topic/pushNotification", function(message){
             console.log("Received message:" + message.body);
