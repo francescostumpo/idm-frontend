@@ -227,6 +227,9 @@ host = mainController.getFrontendHost()
 ws = new SockJS(host + "/createTender");
 stompClient = Stomp.over(ws);
 
+ws = new SockJS(host + "/createSupplier");
+stompClientSupplier = Stomp.over(ws);
+
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "customtime-pre": function ( a ) {
         return mainController.convertStringToDate(a)
