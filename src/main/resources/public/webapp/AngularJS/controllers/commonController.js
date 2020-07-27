@@ -17,6 +17,27 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         }
     })
 
+    stompClientTenderFiles.connect({}, function(frame){
+        stompClientTenderFiles.subscribe("/topic/pushNotification", function(message){
+            console.log("Received message:" + message.body);
+        });
+        stompClientTenderFiles.subscribe("/user/queue/errors", function(message) {
+
+        });
+        stompClientTenderFiles.subscribe("/user/queue/reply/updateTenderFiles", function(message) {
+            console.log('message ', message)
+            var response = JSON.parse(message.body)
+            if(response.status === 200) {
+                mainController.showNotification('bottom', 'right', response.message, '', 'info')
+            }
+        });
+        stompClientTenderFiles.subscribe("/user/queue/success", function(message) {
+            console.log("Message " + message.body + ' ' + new Date());
+        });
+    }, function(error){
+        console.log("STOMP protocol error: ", error);
+    });
+
     stompClientSupplier.connect({}, function(frame){
         stompClientSupplier.subscribe("/topic/pushNotification", function(message){
             console.log("Received message:" + message.body);
@@ -155,6 +176,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     }
 
     $scope.openModalUploadDocument = function(idModal, idFileSelect, idFileDrag, idImageUpload){
+        $scope.listOfFiles = [];
         (function() {
             // getElementById
             function $id(id) {
