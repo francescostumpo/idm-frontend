@@ -21,11 +21,11 @@ public class BackendMicroservice {
     Config config;
 
 
-    public JSONObject  saveObjectOnDb(JSONObject object, String service){
+    public JSONObject saveObjectOnDb(JSONObject object, String service){
         logger.info("saveTenderOnDb -- INIT --");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String serverBackend = "http://localhost:8080";
+        String serverBackend = config.getBackendUrl();
         String url = serverBackend + service;
         RestTemplate httpRestTemplate = new RestTemplate();
         httpRestTemplate.getMessageConverters()

@@ -1,0 +1,10 @@
+2020-07-27 16:39:24,440 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-40] analyzeFile -- INIT --
+2020-07-27 16:39:24,450 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-40] bytes : [B@5a03190d
+2020-07-27 16:39:24,450 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-40] name : 20200724_T100_ICM.docx
+2020-07-27 16:39:24,453 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-40] Calling URL : http://localhost:8085/analyzerDocument/analyze/document
+2020-07-27 16:39:27,533 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-40] analyzeFile --END--
+2020-07-27 16:39:27,541 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-40] saveTenderOnDb -- INIT --
+2020-07-27 16:39:27,545 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-40] calling url : http://localhost:8080/attachment/uploadAttachments
+2020-07-27 16:39:27,545 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-40] JSON: {"idTender":"5f1acf1cbf951a0891a44b2c","attachmentsId":[{"idAttachment":"5f1ee71c475c8757d9a647a7","fileName":"20200724_T100_ICM.docx"}]}
+2020-07-27 16:39:28,777 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-40] saveTenderOnDb -- END --
+2020-07-27 16:39:28,777 INFO com.ibm.snam.idm.web_socket.UpdateTenderFilesController [clientInboundChannel-40] Response from backend : {"status":200,"message":"Gara modificata con successo"}

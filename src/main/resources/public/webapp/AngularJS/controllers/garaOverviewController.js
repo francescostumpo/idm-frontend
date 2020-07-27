@@ -24,9 +24,29 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         {id: "0003", name: "Condizioni Generali", uploadedAt: new Date('2020-06-23T15:21')}
     ];
 
-    $scope.uploadDocument = function(){
-        stompClientTestSocket.send('testSocket')
-    }
+    $scope.uploadTenderFile = function(){
+        var fileBase64 = null;
+        var reader = new FileReader();
+        reader.readAsBinaryString($scope.listOfFiles[0]);
+        reader.onload = function() {
+            fileBase64 = reader.result;
+            var base64String = window.btoa(fileBase64);
+            var file = {}
+            var files = []
+            if (base64String !== null) {
+                file.file = base64String;
+                file.fileName = $scope.listOfFiles[0].name
+                files.push(file)
+            }
+            var fileToBeUploaded = {};
+            fileToBeUploaded.files = files;
+            fileToBeUploaded.idTender = $scope.bandoGara.id;
+
+            stompClientTenderFiles.send("/app/updateTenderFiles", {}, JSON.stringify(fileToBeUploaded));
+            mainController.showNotification("bottom", "right", "Upload files in corso", '', 'info');
+        }
+    };
+    
 
     $scope.createSupplier = function(){
         var fileBase64 = null;
@@ -46,7 +66,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.supplier.idTender = $scope.bandoGara.id
             $scope.supplier.sapNumber = $scope.bandoGara.sapNumber
             stompClientSupplier.send("/app/createSupplier", {}, JSON.stringify($scope.supplier));
-            mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info')
+            mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info');
         }
     }
 
