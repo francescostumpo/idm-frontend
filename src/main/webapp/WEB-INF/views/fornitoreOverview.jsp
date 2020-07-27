@@ -380,7 +380,7 @@
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-12">
                                                     <div class="form-group expand-document-button">
-                                                        <a class="document-fullview" target="_blank" href="http://127.0.0.1:3030/documentDetail">
+                                                        <a class="document-fullview" target="_blank" href="/documentDetail">
                                                             <i class="fas fa-expand-arrows-alt fa-2x"></i>
                                                         </a>
                                                     </div>

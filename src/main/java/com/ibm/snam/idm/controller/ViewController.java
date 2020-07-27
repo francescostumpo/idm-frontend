@@ -111,18 +111,18 @@ public class ViewController {
 	} 
 
 	@GetMapping("/documentDetail")
-	public ModelAndView documentDetail(HttpServletResponse response) {
+	public ModelAndView documentDetail(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		logger.info("getting documentDetail");
-	  ModelAndView modelAndView = null;
+	    ModelAndView modelAndView = null;
 		boolean loggedIn = verifyBearerToken(request);
 		response.addHeader("Cache-Control", "no-store");
 		if(loggedIn == true){
-      modelAndView = new ModelAndView("documentDetail");
-      Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList/garaOverview/fornitoreOverview/documentDetail");
-      response.addCookie(cookieContextPath);
-      logger.info("returning documentDetail");
-    }
-    else{
+			modelAndView = new ModelAndView("documentDetail");
+			Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList/garaOverview/fornitoreOverview/documentDetail");
+			response.addCookie(cookieContextPath);
+			logger.info("returning documentDetail");
+		}
+		else{
 			response.sendRedirect("/dashboard");
 		}
 		return modelAndView;
