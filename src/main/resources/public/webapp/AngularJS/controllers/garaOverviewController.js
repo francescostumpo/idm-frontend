@@ -3,7 +3,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
 
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
-    var urlDocument = mainController.getFrontendHost() + '/document.pdf';
+    var urlDocumentContent = mainController.getFrontendHost() + '/api/documentContent';
     var urlDocumentPage = mainController.getFrontendHost() + '/documentDetail';
 
     $scope.showDocument = false;
@@ -11,9 +11,10 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.tempDocumentUrl = null;
     $scope.suppliers = []
 
-    var urlGetSuppliersByTenderId = mainController.getFrontendHost() + "/api/tender" + $scope.bandoGara.id + "/suppliers";
+    var urlGetSuppliersByTenderId = mainController.getFrontendHost() + "/api/tender/" + $scope.bandoGara.id + "/suppliers";
     $http.get(urlGetSuppliersByTenderId).then(function (res) {
-        $scope.suppliers = res;
+        $scope.suppliers = res.data;
+        console.debug($scope.suppliers)
     })
 
     $scope.tenderAttachments = $scope.bandoGara.tenderAttachments
@@ -93,9 +94,9 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
-            $http.get(urlDocument).then(function(res) {
+            $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
-                    $scope.setDocument(res);
+                    $scope.setDocument(res.data);
                 }, 500)
             });
         }

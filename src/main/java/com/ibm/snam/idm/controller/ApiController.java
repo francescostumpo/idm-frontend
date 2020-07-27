@@ -2,7 +2,7 @@ package com.ibm.snam.idm.controller;
 
 import com.ibm.snam.idm.microservices.BackendMicroservice;
 import com.ibm.snam.idm.web_socket.CreateTenderController;
-import net.sf.json.JSONObject;
+import net.sf.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class ApiController {
     }
 
     @GetMapping("/api/tender/{tenderId}/suppliers")
-    public ResponseEntity<JSONObject> getSuppliersByTenderId(@PathVariable("tenderId") String tenderId) {
+    public ResponseEntity<JSONArray> getSuppliersByTenderId(@PathVariable("tenderId") String tenderId) {
         return backendMicroservice.getSuppliersByTenderId(tenderId);
     }
 }

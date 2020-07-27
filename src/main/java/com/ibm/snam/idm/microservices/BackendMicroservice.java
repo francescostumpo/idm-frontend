@@ -1,6 +1,7 @@
 package com.ibm.snam.idm.microservices;
 
 import com.ibm.snam.idm.common.Config;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,7 @@ public class BackendMicroservice {
         return response;
     }
 
-    public ResponseEntity<JSONObject> getSuppliersByTenderId(String tenderId) {
+    public ResponseEntity<JSONArray> getSuppliersByTenderId(String tenderId) {
         logger.info("getSuppliersByTenderId -- INIT --");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -67,7 +68,7 @@ public class BackendMicroservice {
                 .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         HttpEntity<String> request = new HttpEntity<String>(headers);
         logger.info("calling url : " + url);
-        ResponseEntity<JSONObject> response = httpRestTemplate.exchange(url, HttpMethod.GET, request, JSONObject.class);
+        ResponseEntity<JSONArray> response = httpRestTemplate.exchange(url, HttpMethod.GET, request, JSONArray.class);
         logger.info("getSuppliersByTenderId -- END --");
         return response;
     }

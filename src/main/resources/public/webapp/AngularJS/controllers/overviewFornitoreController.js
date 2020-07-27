@@ -10,7 +10,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     var urlDocumentContent = mainController.getFrontendHost() + '/api/documentContent';
     var urlDocument = mainController.getFrontendHost() + '/document.pdf';
     var urlDocumentPage = mainController.getFrontendHost() + '/documentDetail';
-    $scope.documents = fornitoreOverview.attachments;
+    $scope.documents = $scope.fornitoreOverview.attachments;
 
 
 //    $scope.documents = [{
@@ -208,7 +208,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
 //    ]
 
 
-    console.log("$sscope.documents: ", $scope.documents);
+    console.log("$scope.documents: ", $scope.documents);
 
 
     $scope.showDocument = false;
@@ -240,10 +240,10 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.selectDocument = function (document) {
-        console.log('document.isPlanned: ', document.notPlanned);
+
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document.id;
+            var id = document._idAttachments;
             if(id === $scope.selectedDocuments[i]._idAttachments){
                 found = true;
                 $scope.selectedDocuments.splice(i, 1)
@@ -251,15 +251,14 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
         if (!found && $scope.selectedDocuments.length == 0) {
             $scope.selectedDocuments.push(document)
-            document.notPlanned == false ? $scope.show(document, 'show') : $scope.showOptionalDocumentFunction(document, 'show');
+            $scope.show(document, 'show');
         }else if(!found && !$scope.selectedDocuments.length == 0){
             $scope.selectedDocuments = [];
             $scope.selectedDocuments.push(document);
-            document.notPlanned == false ? $scope.show(document, 'show') : $scope.showOptionalDocumentFunction(document, 'show') // $scope.show(document, 'show');
+            $scope.show(document, 'show');
         }else if(found && $scope.selectedDocuments.length == 0){
-            document.notPlanned == false ? $scope.show(document, 'hide'): $scope.showOptionalDocumentFunction(document, 'hide');
+            $scope.show(document, 'hide');
         }
-        console.log('after, $scope.showOptionalDocument is: ', $scope.showOptionalDocument);
     }
 
     $scope.show = function(document, action) {
@@ -280,7 +279,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             $scope.showOptionalDocument = false;
         }else{
             $scope.showOptionalDocument = true;
-            $http.get(urlDocument).then(function(res) {
+            $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
                     $scope.setDocument(res);
                 }, 500)

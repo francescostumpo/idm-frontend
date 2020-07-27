@@ -231,7 +231,7 @@
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                                     <p class="my-auto no-margin-bottom text-size-16 text-bold">
-                                                        {{document.uploadOn | date: 'dd/MM/yyyy - HH:mm'}} </p>
+                                                        {{ document.uploadOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-sm-1 d-flex justify-content-center"><i
                                                         class="my-auto fa fa-ellipsis-h pointer"></i></div>
@@ -306,20 +306,20 @@
                                                         <div class="col-lg-2 col-md-2 col-sm-12">
                                                             <div class="form-group document-viewer-br">
                                                                 <label class="label-item">CIG</label>
-                                                                <p>{{bandoGara.cig}}</p>
+                                                                <p>{{bandoGara.cig[0]}}</p>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3 col-md-3 col-sm-12">
                                                             <div class="form-group document-viewer-br">
                                                                 <label class="label-item">DATA CARICAMENTO</label>
-                                                                <p>{{selectedDocuments[0].uploadedAt | date: 'dd/MM/yyyy' }}
+                                                                <p>{{selectedDocuments[0].uploadOn.time | date: 'dd/MM/yyyy' }}
                                                                 </p>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="label-item">NOME FILE</label>
-                                                                <p>{{selectedDocuments[0].name}}</p>
+                                                                <p>{{selectedDocuments[0].fileName}}</p>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-1 col-md-1 col-sm-12">
