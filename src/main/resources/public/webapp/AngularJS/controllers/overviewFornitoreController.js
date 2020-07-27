@@ -225,7 +225,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         $scope.tempDocumentUrl = window.URL.createObjectURL(file);
         $("object.document-container").attr("data", $scope.tempDocumentUrl);
         $("embed.document-container").attr("src", $scope.tempDocumentUrl);
-        $("a.document-fullview").attr("href", $scope.tempDocumentUrl);
     }
 
     $scope.checkDocument = function (document) {

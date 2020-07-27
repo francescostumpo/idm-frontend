@@ -57,19 +57,19 @@
                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label class="label-item">SOCIETA'</label>
-                                        <p class="font-bold">{{bandoGara.supplier}}</p>
+                                        <p class="font-bold">{{bandoGara.company}}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <label class="label-item">NUMERO GARA'</label>
-                                        <p class="font-bold">{{bandoGara.codiceGara}}</p>
+                                        <label class="label-item">NUMERO GARA</label>
+                                        <p class="font-bold">{{bandoGara.sapNumber}}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                     <div class="form-group">
                                         <label class="label-item">CIG</label>
-                                        <p class="font-bold">{{bandoGara.cig}}</p>
+                                        <p class="font-bold">{{bandoGara.cig[0]}}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-12">
