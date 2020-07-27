@@ -58,7 +58,7 @@ public class CreateSupplierController {
         }catch (Exception e){
             e.printStackTrace();
             response.put("status", Constants.HTTP_STATUS_ERROR);
-            response.put("message", Constants.ERROR_CALLING_BACKEND);
+            response.put("message", Constants.ERROR_CREATING_SUPPLIER);
             return response.toString();
         }
     }

@@ -46,6 +46,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             mainController.showNotification("bottom", "right", "Upload files in corso", '', 'info');
         }
     };
+    
 
     $scope.createSupplier = function(){
         var fileBase64 = null;
@@ -61,8 +62,9 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
                 file.fileName = $scope.listOfFiles[0].name
                 files.push(file)
             }
-            $scope.supplier.files = files;
-            $scope.supplier.sapNumber = $scope.bandoGara.sapNumber;
+            $scope.supplier.files = files
+            $scope.supplier.idTender = $scope.bandoGara.id
+            $scope.supplier.sapNumber = $scope.bandoGara.sapNumber
             stompClientSupplier.send("/app/createSupplier", {}, JSON.stringify($scope.supplier));
             mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info');
         }
