@@ -20,7 +20,7 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
                 $scope.tender.fileName = $scope.contractSelectedName;
             }
             stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
-            mainController.showNotification("bottom", "right", "Creazione gara in corso. Riceverai una notifica quando il processo sarà terminato", '', 'info')
+            mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
         }
     };
 

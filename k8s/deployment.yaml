@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idm-frontend-deployment
+  labels:
+    app: idm-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: idm-frontend-selector
+  template:
+    metadata:
+      labels:
+        app: idm-frontend-selector
+    spec:
+      containers:
+        - name: idm-frontend
+          image: de.icr.io/idm-registry/idm-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: KEYCLOAK_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-config
+                  key: KEYCLOAK_SERVER_URL
+            - name: KEYCLOAK_REALM
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-config
+                  key: KEYCLOAK_REALM
+            - name: KEYCLOAK_RESOURCE
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-config
+                  key: KEYCLOAK_RESOURCE
+      imagePullSecrets:
+        - name: default-de-icr-io

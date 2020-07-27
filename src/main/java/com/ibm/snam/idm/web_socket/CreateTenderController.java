@@ -63,7 +63,10 @@ public class CreateTenderController {
             return responseFromBackend.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return "No ok";
+            JSONObject response = new JSONObject();
+            response.put("status", Constants.HTTP_STATUS_ERROR);
+            response.put("message", Constants.ERROR_CREATING_TENDER);
+            return response.toString();
         }
     }
 
