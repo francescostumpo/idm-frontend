@@ -34,7 +34,6 @@ public class CreateSupplierController {
     @SendToUser("/queue/reply/supplier")
     public String crateSupplier(@Payload  JSONObject supplier){
         JSONObject response = new JSONObject();
-        logger.info("supplier : " + supplier);
         try{
             JSONArray files = supplier.getJSONArray("files");
             List<JSONObject> attachmentsId = new LinkedList<>();

@@ -2,6 +2,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     console.log("[INFO] Hello World from bandiListController");
 
     var url = mainController.getHost() + '/tender/getAllTenders'
+    mainController.startProgressIndicator('#loading')
     $http.get(url).then(function (response) {
         console.log('response from ', url, ' : ', response)
         if(response.data.status === 200){
@@ -15,9 +16,11 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
         else{
             mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
         }
+        mainController.stopProgressIndicator('#loading')
     })
 
 
+    /*
     $scope.bandiGaraList = [
         {
             "cig": "5100001260",
@@ -139,7 +142,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "codiceGara": "MAM019-026G",
             "id" : "5f180b8cf1e23e6344b70aa8"
         }
-    ]
+    ]*/
 
     $scope.bandiSelected = [];
 

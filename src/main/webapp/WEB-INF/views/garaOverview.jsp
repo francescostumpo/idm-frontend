@@ -19,7 +19,9 @@
 </head>
 
 <body ng-controller="commonController" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
-
+    <div id="loading" style="background-color: white">
+        <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
+    </div>
     <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed"
         class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow">
         <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
@@ -214,11 +216,11 @@
                                     <div class="card" ng-repeat="document in tenderAttachments">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-lg-1 col-md-1 col-sm-1">
+                                                <div class="my-auto col-lg-1 col-md-1 col-sm-1">
                                                     <input ng-checked="checkDocument(document)"
                                                         ng-click="selectDocument(document)" type="checkbox"
-                                                        class="my-auto pointer">
-                                                    <i class="ml-2 fa fa-check-circle" style="color: limegreen"></i>
+                                                        class="ml-3 my-auto pointer">
+                                                    <i class="ml-4 fa fa-check-circle" style="color: limegreen"></i>
                                                 </div>
                                                 <div class="col-lg-7 col-md-7 col-sm-7">
                                                     <div class="row flex-long-text">

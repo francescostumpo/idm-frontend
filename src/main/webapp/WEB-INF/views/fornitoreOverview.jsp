@@ -19,7 +19,9 @@
 </head>
 
 <body ng-controller="commonController" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
-
+    <div id="loading" style="background-color: white">
+        <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
+    </div>
     <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed"
         class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow">
         <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
@@ -155,80 +157,51 @@
                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                 </div>
                             </div>
-                            <div class="card" ng-repeat="document in documents">
+                            <div class="card" ng-repeat="document in requiredAttachments">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="my-auto col-lg-1 col-md-1 col-sm-1">
-                                            <input ng-checked="checkDocument(document)"
+                                            <input ng-if="document.isPresent" ng-checked="checkDocument(document)"
                                                 ng-click="selectDocument(document)" type="checkbox"
                                                 class="my-auto col-lg-7 col-md-7 col-sm-12 pointer">
-                                            <!-- <i ng-if="document.presence === -1"
-                                                class="my-auto ml-2 fas fa-exclamation-triangle pointer"
-                                                style="color: red;"></i>
-                                            <i ng-if="document.presence === 0"
-                                                class="my-auto ml-2 fa fa-check-circle pointer"
-                                                style="color: limegreen;"></i>
-                                            <i ng-if="document.presence === 1"
-                                                class="my-auto ml-2 fas fa-exclamation pointer"
-                                                style="color: orange"></i> -->
-                                                <i class="my-auto ml-2 fa fa-check-circle pointer"
+                                                <i ng-if="document.isPresent" class="my-auto ml-2 fa fa-check-circle pointer"
                                                     style="color: limegreen;"></i>
+                                                <i  ng-if="!document.isPresent" class="danger-color my-auto fas fa-exclamation-triangle ml-2"></i>
+
                                         </div>
                                         <div class="my-auto  col-lg-6 col-md-6 col-sm-6">
                                             <div class="row flex-long-text">
-                                                <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x"
+                                                <i ng-if="document.isPresent" class="my-auto ml-2 mr-4 fas fa-file-pdf fa-2x"
                                                     style="color: red;"></i>
-                                                <p class="my-auto  no-margin-bottom text-size-16 text-bold crop">
-                                                    {{document.fileName}}</p>
+                                                <i ng-if="!document.isPresent" style="color: #CFD6DB" class="my-auto ml-2 mr-4 fa-2x fas fa-file"></i>
+                                                <p ng-style="checkIfTagIsPresent(document)" class="my-auto  no-margin-bottom text-size-16 text-bold crop">
+                                                    {{document.tag}}</p>
                                             </div>
                                         </div>
                                         <div class="my-auto col-lg-2 col-md-2 col-sm-2">
-                                            <p class="my-auto  no-margin-bottom text-size-16 text-bold">
+                                            <p ng-if="document.isPresent" class="my-auto  no-margin-bottom text-size-16 text-bold">
                                                 {{document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
+                                            <p style="font-style: italic; color: #727888" ng-if="!document.isPresent" class="my-auto  no-margin-bottom text-size-16 text-bold">
+                                                N/A </p>
                                         </div>
                                         <div class="my-auto col-lg-2 col-md-2 col-sm-2 text-size-14">
-                                            <!--
-                                            <div ng-if="document.conformity === 0"
-                                                class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green">
-                                                <i class="mr-2 fas fa-check"></i>CONFORME</div>
-                                            <div ng-if="document.conformity === 1"
-                                                class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red">
-                                                <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
-                                            <div ng-if="document.conformity === 2"
-                                                class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange">
-                                                <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
-                                                -->
+                                            <div ng-if="document.isPresent">
                                                 <div class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green">
                                                 <i class="mr-2 fas fa-check"></i>CONFORME</div>
-                                        </div>
-                                        <div class="row my-auto col-lg-1 col-md-1 col-sm-1">
-                                            <!--<div class="row icon-group" ng-if="document.presence >= 0">
-                                                <div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>-->
-                                                <div class="m-1"><i
-                                                        class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
-                                                </div>
-                                                <div class="m-1"><i
-                                                        class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
-                                                </div>
-                                        </div>
-                                        <!--
-                                        <div class="row icon-group fa-stack" ng-if="document.presence === -1">
-                                                <div class="m-1"><i
-                                                        class="my-auto  fas fa-plus fa-fw fa-stack-1x pointer"></i>
-                                                </div>
-                                                <div class="m-1"><i
-                                                        class="my-auto  far fa-circle fa-fw fa-stack-2x pointer"></i>
-                                                </div>
                                             </div>
-                                            <div class="row icon-group fa-stack">
-                                                <div class="m-1"><i
-                                                        class="my-auto  fas fa-plus fa-fw fa-stack-1x pointer"></i>
-                                                </div>
-                                                <div class="m-1"><i
-                                                        class="my-auto  far fa-circle fa-fw fa-stack-2x pointer"></i>
-                                                </div>
+                                            <div ng-if="!document.isPresent">
+                                                <p style="font-style: italic; color: #727888" class="my-auto  no-margin-bottom text-size-16 text-bold">
+                                                    N/A </p>
                                             </div>
-                                        </div>-->
+                                        </div>
+                                        <div class="text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
+                                                 <div class="m-1">
+                                                    <i ng-if="document.isPresent" class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
+                                                </div>
+                                                <div class="m-1">
+                                                    <i ng-if="document.isPresent" class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -345,11 +318,7 @@
                                                         <div> <i *ngIf="document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i>
-                                                           <!-- <i *ngIf="!document.fileName"
-                                                                class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
-                                                                style="padding-top: 8%;"> </i> --> 
                                                         </div>
-                                                        <!-- <p>Presente</p> -->
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-12">
@@ -360,11 +329,7 @@
                                                         <div> <i *ngIf="document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i>
-                                                          <!--   <i *ngIf="!document.fileName"
-                                                                class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
-                                                                style="padding-top: 8%;"> </i> --> 
                                                         </div>
-                                                        <!-- <p>Presente</p> -->
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-12">
@@ -375,24 +340,17 @@
                                                         <div> <i *ngIf="document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i>
-                                                         <!--   <i *ngIf="!document.fileName"
-                                                                class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
-                                                                style="padding-top: 8%;"> </i> --> 
                                                         </div>
-                                                        <!-- <p>Presente</p> -->
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-12">
                                                     <label class="label-item" style="padding-top: 12%; float: left;">
                                                         NUMERO GARA </label>
-                                                    <div> <!-- <i *ngIf="!document.fileName"
-                                                            class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
-                                                            style="padding-top: 13%;"> </i> --> 
+                                                    <div>
                                                         <i *ngIf="document.fileName"
                                                             class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                             style="padding-top: 13%;"> </i>
                                                     </div>
-                                                    <!-- <p>Presente</p> -->
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-12">
                                                     <div class="form-group expand-document-button">
@@ -415,17 +373,10 @@
                         </div>
                     </div>
                 </div> 
-            </div> 
+            </div>
+            <!-- Sezione Altri Documenti -->
 
-
-
-
-
-
-
-                <!-- Sezione Altri Documenti -->
-
-                <!-- End of Main Section -->
+            <!-- End of Main Section -->
         </div>
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>

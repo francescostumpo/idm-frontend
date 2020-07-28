@@ -15,6 +15,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $http.get(urlGetSuppliersByTenderId).then(function (res) {
         $scope.suppliers = res.data;
         console.debug($scope.suppliers)
+        mainController.stopProgressIndicator('#loading')
     })
 
     $scope.tenderAttachments = $scope.bandoGara.tenderAttachments
@@ -119,9 +120,11 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
+            mainController.startProgressIndicator('#loading')
             $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
                     $scope.setDocument(res.data);
+                    mainController.stopProgressIndicator('#loading')
                 }, 500)
             });
         }

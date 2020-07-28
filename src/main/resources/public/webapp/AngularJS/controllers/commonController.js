@@ -95,23 +95,6 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         console.log("STOMP protocol error: ", error);
     });
 
-    stompClientTestSocket.connect({}, function(frame){
-        stompClientTestSocket.subscribe("/topic/pushNotification", function(message){
-            console.log("Received message:" + message.body);
-        });
-        stompClientTestSocket.subscribe("/user/queue/errors", function(message) {
-
-        });
-        stompClientTestSocket.subscribe("/user/queue/reply/testSocket", function(message) {
-            console.log('message ', message)
-        });
-        stompClientTestSocket.subscribe("/user/queue/success", function(message) {
-            console.log("Message " + message.body + ' ' + new Date());
-        });
-    }, function(error){
-        console.log("STOMP protocol error: ", error);
-    });
-
     $scope.createNotificationFromTender = function(tender, notificationType){
         var notification = {}
         notification.userId = mainController.getUserId()
