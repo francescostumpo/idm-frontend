@@ -239,8 +239,8 @@ stompClient = Stomp.over(ws);
 ws = new SockJS(host + "/createSupplier");
 stompClientSupplier = Stomp.over(ws);
 
-ws = new SockJS(host + "/updateTenderFiles");
-stompClientTenderFiles = Stomp.over(ws);
+ws = new SockJS(host + "/updateFiles");
+stompClientFiles = Stomp.over(ws);
 
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "customtime-pre": function ( a ) {

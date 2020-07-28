@@ -60,11 +60,11 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
                 files.push(file)
             }
             var fileToBeUploaded = {};
+            fileToBeUploaded.cig = $scope.bandoGara.cig[0]
             fileToBeUploaded.files = files;
             fileToBeUploaded.idTender = $scope.bandoGara.id;
-
-            stompClientTenderFiles.send("/app/updateTenderFiles", {}, JSON.stringify(fileToBeUploaded));
-            mainController.showNotification("bottom", "right", "Upload files in corso", '', 'info');
+            stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
+            mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         }
     };
     
@@ -111,8 +111,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
     $scope.checkDocument = function (document) {
         for(i = 0;i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachments;
-            if(id === $scope.selectedDocuments[i]._idAttachments){
+            var id = document._idAttachment;
+            if(id === $scope.selectedDocuments[i]._idAttachment){
                 return true;
             }
         }
@@ -122,8 +122,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.selectDocument = function (document) {
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachments;
-            if(id === $scope.selectedDocuments[i]._idAttachments){
+            var id = document._idAttachment;
+            if(id === $scope.selectedDocuments[i]._idAttachment){
                 found = true;
                 $scope.selectedDocuments.splice(i, 1)
             }
@@ -145,7 +145,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
-            $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
+            $http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
                     $scope.setDocument(res.data);
                 }, 500)

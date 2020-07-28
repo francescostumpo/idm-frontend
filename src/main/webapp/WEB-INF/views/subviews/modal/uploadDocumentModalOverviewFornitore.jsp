@@ -60,7 +60,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button type="button" class="btn button-secondary-buyer" data-dismiss="modal" style="width: 50%; height: 50px;">
+                        <button ng-click="updateAttachmentsForSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" style="width: 50%; height: 50px;">
                             CARICA
                         </button>
                     </div>

@@ -79,19 +79,23 @@
                 </div>
 
                 <div style="padding-top: 2%;">
-                    <div class="col-lg-2 col-md-2 col-sm-12"
-                        style="float: left; padding-top: 1%; padding-left: 3%; padding-bottom: 1%;"> <span
-                            class="span-progress-bar-header" style="color: grey;"> <span style="font-size:28px;"> 8
-                            </span> RICHIESTI </span> </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12" style="float: left; padding-top: 1%; padding-left: 3%; padding-bottom: 1%;">
+                        <span class="span-progress-bar-header" style="color: grey;">
+                            <span style="font-size:28px;">
+                                {{requiredAttachments.length}}
+                            </span>
+                            RICHIESTI
+                        </span>
+                    </div>
                     <div class="col-lg-2 col-md-2 col-sm-12"
                         style="float: left; padding-top: 1%; padding-left: 3%; padding-bottom: 1%;"> <span
                             class="span-progress-bar-header" style="color: grey;"> <span
-                                style="font-size:28px; color: #36A8DF !important;"> 7 </span> / 8 CARICATI </span>
+                                style="font-size:28px; color: #36A8DF !important;"> {{countRequiredAttachmentsUploaded()}} </span> / {{requiredAttachments.length}} CARICATI </span>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-12"
                         style="float: left; padding-top: 1%; padding-left: 3%; padding-bottom: 1%;"> <span
                             class="span-progress-bar-header" style="float: right; padding-right: 4%; color: grey;">
-                            <span style="font-size:28px; color: #e74a3b !important;"> 1 </span> NON CONFORMI </span>
+                            <span style="font-size:28px; color: #e74a3b !important;"> 0 </span> NON CONFORMI </span>
                     </div>
                     <div class="progress" style="height:0.5rem; width: 100%;">
                         <div class="pg-presence progress-bar bg-info" role="progressbar" aria-valuenow="0"
@@ -199,7 +203,7 @@
                                                     <i ng-if="document.isPresent" class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
                                                 </div>
                                                 <div class="m-1">
-                                                    <i ng-if="document.isPresent" class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                    <i ng-click="deleteDocument(document)" ng-if="document.isPresent" class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                 </div>
                                         </div>
                                     </div>
