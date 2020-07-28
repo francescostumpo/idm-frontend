@@ -1,9 +1,14 @@
 snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootScope', '$timeout', function($scope, $http, $location,$rootScope, $timeout) {
     console.log("[INFO] Hello World from commontController");
 
-    $scope.sideBarIsClosed = true
+    $scope.sideBarIsClosed = true;
 
-    $scope.userNotifications = []
+    $scope.userNotifications = [];
+
+    $scope.getAllTendersByDefault = {};
+    $scope.getSuppliersByTenderId = {};
+    $scope.getTenderAttachmentsByTenderId = {};
+
 
 
     var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
@@ -29,6 +34,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             var response = JSON.parse(message.body)
             if(response.status === 200) {
                 mainController.showNotification('bottom', 'right', response.message, '', 'info')
+                $scope.getTenderAttachmentsByTenderId.getFromParent();
             }
         });
         stompClientTenderFiles.subscribe("/user/queue/success", function(message) {
@@ -51,6 +57,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             var response = JSON.parse(message.body)
             if(response.status === 200) {
                 mainController.showNotification('bottom', 'right', response.message, '', 'info')
+                console.log("called from parent component");
+                $scope.getSuppliersByTenderId.getFromParent();
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
@@ -80,7 +88,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 $http.post(url, tenderNotification).then(function (response) {
                     console.log(' responde from ', url, ' : ', response)
                     if(response.data.status === 200){
-                        $scope.userNotifications.push(response.data.userNotification)
+                        $scope.userNotifications.push(response.data.userNotification);
+                        $scope.getAllTendersByDefault.getFromParent();
                     }
                 })
             }
@@ -94,6 +103,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     }, function(error){
         console.log("STOMP protocol error: ", error);
     });
+
 
     $scope.createNotificationFromTender = function(tender, notificationType){
         var notification = {}

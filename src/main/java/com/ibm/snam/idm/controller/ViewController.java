@@ -1,6 +1,7 @@
 package com.ibm.snam.idm.controller;
 
 import net.sf.json.JSONObject;
+import org.keycloak.Config;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.account.SimpleKeycloakAccount;
@@ -9,6 +10,7 @@ import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.keycloak.representations.AccessToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ import java.security.Principal;
 public class ViewController {
 
 	Logger logger = LoggerFactory.getLogger(ViewController.class);
+
 
 	@GetMapping("/dashboard")
 	public ModelAndView dashboard(Principal principal, HttpServletResponse response) {
@@ -49,9 +52,11 @@ public class ViewController {
 		logger.info("returning dashboard");
 		Cookie cookieContextPath = new Cookie("contextPath", "/dashboard");
 		Cookie cookieBearerToken = new Cookie("bearerToken", bearerToken);
+		Cookie cookieBackendUrl = new Cookie("backendUrl", System.getenv("BACKEND_URL"));
 
 		response.addCookie(cookieContextPath);
 		response.addCookie(cookieBearerToken);
+		response.addCookie(cookieBackendUrl);
 
 		response.addHeader("Cache-Control", "no-store");
 		return modelAndView;

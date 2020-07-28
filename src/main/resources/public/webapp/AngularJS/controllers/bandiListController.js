@@ -1,23 +1,33 @@
 snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location,$rootScope) {
     console.log("[INFO] Hello World from bandiListController");
 
-    var url = mainController.getHost() + '/tender/getAllTenders'
+    var url = mainController.getHost() + '/tender/getAllTenders';
     mainController.startProgressIndicator('#loading')
-    $http.get(url).then(function (response) {
-        console.log('response from ', url, ' : ', response)
-        if(response.data.status === 200){
-            $scope.bandiGaraList = response.data.tenderList
-            $scope.bandiGaraList.forEach(tender => {
-                tender.endDate = mainController.convertLocalDateToDate(tender.endDate)
-                tender.fornitori = tender.suppliers.length
-            })
-            console.log('tender list : ', $scope.bandiGaraList)
-        }
-        else{
-            mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
-        }
-        mainController.stopProgressIndicator('#loading')
-    })
+
+    $scope.getAllTendersByDefault.getFromParent = function(){
+        $scope.getAllTenders();
+    };
+
+    $scope.getAllTenders = function(){
+        $http.get(url).then(function (response) {
+            console.log('response from ', url, ' : ', response)
+            if(response.data.status === 200){
+                $scope.bandiGaraList = response.data.tenderList;
+                $scope.bandiGaraList.forEach(tender => {
+                    tender.endDate = mainController.convertLocalDateToDate(tender.endDate)
+                    tender.fornitori = tender.suppliers.length
+                })
+                console.log('tender list : ', $scope.bandiGaraList)
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+            mainController.stopProgressIndicator('#loading')
+        })
+    };
+
+    $scope.getAllTenders();
+
 
 
     /*

@@ -9,7 +9,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.showDocument = false;
     $scope.selectedDocuments = [];
     $scope.tempDocumentUrl = null;
-    $scope.suppliers = []
+    $scope.suppliers = [];
 
     var urlGetSuppliersByTenderId = mainController.getFrontendHost() + "/api/tender/" + $scope.bandoGara.id + "/suppliers";
     $http.get(urlGetSuppliersByTenderId).then(function (res) {
@@ -18,7 +18,32 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         mainController.stopProgressIndicator('#loading')
     })
 
-    $scope.tenderAttachments = $scope.bandoGara.tenderAttachments
+    $scope.getSuppliersByTenderId.getFromParent = function(){
+        $scope.getSuppliers();
+    };
+
+    $scope.getSuppliers = function(){
+        $http.get(urlGetSuppliersByTenderId).then(function (res) {
+            $scope.suppliers = res.data;
+            console.debug($scope.suppliers)
+        })
+    };
+
+    $scope.getSuppliers();
+
+    $scope.getTenderAttachmentsByTenderId.getFromParent = function(){
+        $scope.getTenderAttachments();
+    };
+
+    $scope.getTenderAttachments = function(){
+        var url = mainController.getHost() + "/tender/getTenderById/" + $scope.bandoGara.id;
+        $http.get(url).then(function(res){
+            console.log(res.data);
+            $scope.tenderAttachments = res.data.tenderAttachments;
+        })
+    };
+
+    $scope.getTenderAttachments();
 
     $scope.uploadTenderFile = function(){
         var fileBase64 = null;
@@ -120,11 +145,9 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
-            mainController.startProgressIndicator('#loading')
             $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
                     $scope.setDocument(res.data);
-                    mainController.stopProgressIndicator('#loading')
                 }, 500)
             });
         }

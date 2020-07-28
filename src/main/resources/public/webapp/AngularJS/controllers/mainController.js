@@ -117,16 +117,7 @@ mainController = {
 
 	getHost: function(){
 		var location = window.location.hostname;
-		var host = ""
-		if(location.includes("localhost")){
-			host = "http://localhost:8080"
-		}
-		else if(location.includes("dev")){
-			host = "http://158.177.78.140:8080";
-		}
-		else{
-			host = "http://158.177.78.140:8080";
-		}
+		var host = mainController.getCookie("backendUrl");
 		return host
 	},
     

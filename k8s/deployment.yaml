@@ -21,21 +21,12 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
-          env:
-            - name: KEYCLOAK_SERVER_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: keycloak-config
-                  key: KEYCLOAK_SERVER_URL
-            - name: KEYCLOAK_REALM
-              valueFrom:
-                configMapKeyRef:
-                  name: keycloak-config
-                  key: KEYCLOAK_REALM
-            - name: KEYCLOAK_RESOURCE
-              valueFrom:
-                configMapKeyRef:
-                  name: keycloak-config
-                  key: KEYCLOAK_RESOURCE
+          envFrom:
+            - configMapRef:
+                name: keycloak-config
+            - configMapRef:
+                name: database-config
+            - configMapRef:
+                name: frontend-config
       imagePullSecrets:
         - name: default-de-icr-io
