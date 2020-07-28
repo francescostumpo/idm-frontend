@@ -2,6 +2,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     console.log("[INFO] Hello World from bandiListController");
 
     var url = mainController.getHost() + '/tender/getAllTenders';
+    mainController.startProgressIndicator('#loading')
 
     $scope.getAllTendersByDefault.getFromParent = function(){
         $scope.getAllTenders();
@@ -21,6 +22,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             else{
                 mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
             }
+            mainController.stopProgressIndicator('#loading')
         })
     };
 
@@ -28,7 +30,8 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
 
 
 
-    /*$scope.bandiGaraList = [
+    /*
+    $scope.bandiGaraList = [
         {
             "cig": "5100001260",
             "supplier": "Snam Rete e Gas",

@@ -19,7 +19,9 @@
 </head>
 
 <body id="page-top" ng-controller="commonController" class="background-snam text-lato-snam" ng-app="snamApp">
-
+    <div id="loading" style="background-color: white">
+        <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
+    </div>
     <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed"
         class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow">
         <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>

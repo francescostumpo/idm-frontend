@@ -1,6 +1,10 @@
 snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location,$rootScope) {
     console.log("[INFO] Hello World from dashboardController");
 
+    mainController.startProgressIndicator('#loading')
+
+
+
     $scope.recentTenders = [
         {
             "cig" : "821367BD9",
@@ -66,5 +70,6 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
     }
 
     $scope.initCalendar()
+    mainController.stopProgressIndicator('#loading')
 
 }]);

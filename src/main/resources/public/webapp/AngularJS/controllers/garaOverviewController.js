@@ -12,6 +12,11 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.suppliers = [];
 
     var urlGetSuppliersByTenderId = mainController.getFrontendHost() + "/api/tender/" + $scope.bandoGara.id + "/suppliers";
+    $http.get(urlGetSuppliersByTenderId).then(function (res) {
+        $scope.suppliers = res.data;
+        console.debug($scope.suppliers)
+        mainController.stopProgressIndicator('#loading')
+    })
 
     $scope.getSuppliersByTenderId.getFromParent = function(){
         $scope.getSuppliers();

@@ -233,9 +233,6 @@ snamApp.config(['$httpProvider', function ($httpProvider) {
 
 host = mainController.getFrontendHost();
 
-ws = new SockJS(host + "/testSocket");
-stompClientTestSocket = Stomp.over(ws);
-
 ws = new SockJS(host + "/createTender");
 stompClient = Stomp.over(ws);
 

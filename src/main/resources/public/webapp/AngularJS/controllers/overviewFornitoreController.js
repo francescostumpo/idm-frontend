@@ -1,17 +1,57 @@
 snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location', '$rootScope', '$timeout', function($scope, $http, $location,$rootScope, $timeout) {
     console.log("[INFO] Hello World from overviewFornitoreController");
 
-
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
     $scope.fornitoreOverview = JSON.parse(sessionStorage.getItem("fornitoreOverview"));
+
+    $scope.requiredAttachments = []
+
+    for(var i = 0; i < $scope.bandoGara.requiredAttachments.length; i++){
+        var tagRequired = {}
+        tagRequired.uploadedOn = 'N/A'
+        tagRequired.fileName = 'N/A'
+        tagRequired._idAttachments = 'N/A'
+        tagRequired.isPresent = false
+        tagRequired.tag = $scope.bandoGara.requiredAttachments[i]
+        $scope.requiredAttachments.push(tagRequired)
+    }
+
+    $scope.documents = $scope.fornitoreOverview.attachments;
+
+    $scope.documentCheckList = []
+    $scope.notRequiredDocuments = []
+
+    for(var i = 0; i < $scope.documents.length; i++){
+        var document = $scope.documents[i]
+        var tag = document.tag
+        var found = false
+        for(var j = 0; j < $scope.requiredAttachments.length; j++){
+            var tagRequired = $scope.requiredAttachments[j]
+            if(tag === tagRequired.tag){
+                tagRequired.uploadedOn = document.uploadedOn
+                tagRequired.fileName = document.fileName
+                tagRequired._idAttachments = document._idAttachments
+                tagRequired.isPresent = true
+                found = true
+            }
+        }
+        if(!found){
+            $scope.notRequiredDocuments.push(document)
+        }
+    }
 
     $scope.tempDocumentUrl = null;
 
     var urlDocumentContent = mainController.getFrontendHost() + '/api/documentContent';
-    var urlDocument = mainController.getFrontendHost() + '/document.pdf';
-    var urlDocumentPage = mainController.getFrontendHost() + '/documentDetail';
-    $scope.documents = $scope.fornitoreOverview.attachments;
 
+    $scope.checkIfTagIsPresent = function(document){
+        if(document.isPresent){
+            return {'font-style': 'normal','color': 'black' }
+        }
+        else{
+            return {'font-style': 'italic','color': '#727888' }
+        }
+    }
 
 //    $scope.documents = [{
 //            id: "5f1af6d8b8742101e4e78c7a",
@@ -267,8 +307,10 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
+            mainController.startProgressIndicator('#loading')
             $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
                 $scope.setDocument(res.data);
+                mainController.stopProgressIndicator('#loading')
             });
         }
     }
@@ -279,9 +321,11 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             $scope.showOptionalDocument = false;
         }else{
             $scope.showOptionalDocument = true;
+            mainController.startProgressIndicator('#loading')
             $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
                     $scope.setDocument(res);
+                    mainController.stopProgressIndicator('#loading')
                 }, 500)
             });
         }
@@ -296,5 +340,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.initProgressBar($scope.documents);
+    mainController.stopProgressIndicator('#loading')
 
 }]);
