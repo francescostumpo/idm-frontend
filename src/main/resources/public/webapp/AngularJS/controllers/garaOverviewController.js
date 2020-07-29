@@ -46,26 +46,28 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.getTenderAttachments();
 
     $scope.uploadTenderFile = function(){
-        var fileBase64 = null;
-        var reader = new FileReader();
-        reader.readAsBinaryString($scope.listOfFiles[0]);
-        reader.onload = function() {
-            fileBase64 = reader.result;
-            var base64String = window.btoa(fileBase64);
-            var file = {}
-            var files = []
-            if (base64String !== null) {
-                file.file = base64String;
-                file.fileName = $scope.listOfFiles[0].name
-                files.push(file)
+        for(var i = 0; i < $scope.listOfFiles.length; i++){
+            var fileBase64 = null;
+            var reader = new FileReader();
+            reader.readAsBinaryString($scope.listOfFiles[i]);
+            reader.onload = function() {
+                fileBase64 = reader.result;
+                var base64String = window.btoa(fileBase64);
+                var file = {}
+                var files = []
+                if (base64String !== null) {
+                    file.file = base64String;
+                    file.fileName = $scope.listOfFiles[i].name
+                    files.push(file)
+                }
+                var fileToBeUploaded = {};
+                fileToBeUploaded.cig = $scope.bandoGara.cig[0]
+                fileToBeUploaded.files = files;
+                fileToBeUploaded.idTender = $scope.bandoGara.id;
+                stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             }
-            var fileToBeUploaded = {};
-            fileToBeUploaded.cig = $scope.bandoGara.cig[0]
-            fileToBeUploaded.files = files;
-            fileToBeUploaded.idTender = $scope.bandoGara.id;
-            stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
-            mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         }
+        mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
     };
     
 

@@ -9,6 +9,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     };
 
     $scope.getAllTenders = function(){
+        mainController.startProgressIndicator('#loading')
         $http.get(url).then(function (response) {
             console.log('response from ', url, ' : ', response)
             if(response.data.status === 200){
@@ -27,132 +28,6 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     };
 
     $scope.getAllTenders();
-
-
-
-    /*
-    $scope.bandiGaraList = [
-        {
-            "cig": "5100001260",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di componenti hardware",
-            "lavorazione": new Date("2020-06-23T15:18"),
-            "endDate": new Date("2020-06-23T15:18"),
-            "fornitori": 12,
-            "codiceGara": "MAM019-023C",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001259",
-            "supplier": "Stogit",
-            "object": "Fornitura di tubi senza saldatura",
-            "lavorazione": new Date("2020-08-15T15:18"),
-            "endDate": new Date("2020-08-15T15:18"),
-            "fornitori": 15,
-            "codiceGara": "MAM019-023D",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001263",
-            "supplier": "Stogit",
-            "object": "Fornitura di materiali di primo soccorso",
-            "lavorazione": new Date("2020-06-23T15:18"),
-            "endDate": new Date("2020-06-23T15:18"),
-            "fornitori": 8,
-            "codiceGara": "MAM019-023F",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001262",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di componenti elettronici",
-            "lavorazione": new Date("2020-06-14T15:18"),
-            "endDate": new Date("2020-06-14T15:18"),
-            "fornitori": 18,
-            "codiceGara": "MAM019-023G",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001265",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2021-06-25T15:18"),
-            "endDate": new Date("2021-06-25T15:18"),
-            "fornitori": 11,
-            "codiceGara": "MAM019-023H",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001261",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di telecamere di sicurezza",
-            "lavorazione": new Date("2020-06-23T15:18"),
-            "endDate": new Date("2020-06-23T15:18"),
-            "fornitori": 15,
-            "codiceGara": "MAM019-024B",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001266",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-11-10T15:18"),
-            "endDate": new Date("2020-11-10T15:18"),
-            "fornitori": 11,
-            "codiceGara": "MAM019-024C",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001267",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-10-11T15:18"),
-            "endDate": new Date("2020-10-11T15:18"),
-            "fornitori": 11,
-            "codiceGara": "MAM019-024D",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001268",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-06-22T15:18"),
-            "endDate": new Date("2020-06-22T15:18"),
-            "fornitori": 11,
-            "codiceGara": "MAM019-024F",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001269",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-07-17T15:18"),
-            "endDate": new Date("2020-07-17T15:18"),
-            "fornitori": 11,
-            "codiceGara": "MAM019-024G",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001270",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-05-23T15:18"),
-            "endDate": new Date("2020-05-23T15:18"),
-            "fornitori": 11,
-            "codiceGara": "MAM019-025G",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        },
-        {
-            "cig": "5100001271",
-            "supplier": "Snam Rete e Gas",
-            "object": "Fornitura di materiali di sicurezza",
-            "lavorazione": new Date("2020-06-24T15:18"),
-            "endDate": new Date("2020-06-24T15:18"),
-            "fornitori": 11,
-            "codiceGara": "MAM019-026G",
-            "id" : "5f180b8cf1e23e6344b70aa8"
-        }
-    ]*/
 
     $scope.bandiSelected = [];
 
@@ -176,12 +51,14 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             "endDate" : $scope.tenderModified.endDate,
             "cig": $scope.tenderModified.cig,
             "company" : $scope.tenderModified.company,
-            "id" : $scope.bandoSelected.id
+            "id" : $scope.bandoSelected.id,
+            "sapNumber" : $scope.tenderModified.sapNumber
         }
         $http.post(url, input).then(function (response) {
             console.log('response from ', url, ' : ', response)
             if(response.data.status === 200){
-                mainController.showNotification('bottom', 'right', response.data.message, '', 'info')
+                $scope.getAllTenders()
+                //mainController.showNotification('bottom', 'right', response.data.message, '', 'info')
             }
             else{
                 mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')

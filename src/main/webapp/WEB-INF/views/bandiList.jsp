@@ -18,7 +18,7 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body id="page-top" ng-controller="commonController" class="background-snam text-lato-snam" ng-app="snamApp">
+<body id="page-top" ng-controller="commonController" class="background-color-application text-lato-snam" ng-app="snamApp">
 
     <div id="loading" style="background-color: white">
         <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />

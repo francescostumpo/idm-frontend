@@ -18,7 +18,7 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body ng-controller="commonController" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
+<body ng-controller="commonController" id="page-top" class="background-color-application text-lato-snam" ng-app="snamApp">
     <div id="loading" style="background-color: white">
         <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
     </div>
@@ -87,7 +87,7 @@
             </div>
             <!-- End Header Section -->
             <!-- Main Section -->
-            <div class="container-fluid" style="background: #E6ECF2; height: 180vh;">
+            <div class="background-color-application container-fluid" style="height: 180vh;">
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item">

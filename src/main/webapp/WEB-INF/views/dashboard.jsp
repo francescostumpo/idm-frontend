@@ -18,7 +18,7 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body id="page-top" ng-controller="commonController" class="background-snam text-lato-snam" ng-app="snamApp">
+<body id="page-top" ng-controller="commonController" class="background-color-application text-lato-snam" ng-app="snamApp">
     <div id="loading" style="background-color: white">
         <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
     </div>
@@ -29,7 +29,7 @@
     <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
 
-    <div ng-controller="dashboardController" class="mb-5" id="wrapper" style="background-color: #E6ECF2;">
+    <div ng-controller="dashboardController" class="mb-5" id="wrapper">
         <div id="content-wrapper" class="mt-3 d-flex flex-column" style="background-color: #E6ECF2;">
             <div class="container-fluid">
                 <!--<div class="col-lg-12 col-md-12 col-sm-12 mt-3">
@@ -42,38 +42,93 @@
                             style="cursor:pointer;font-weight: bold; text-decoration: underline"
                             class="text-primary d-sm-inline-block">Vedi tutte</a>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4" ng-repeat="tender in recentTenders">
-                            <div class="card shadow">
-                                <div class="card-body">
-                                    <div style="font-size: 18px" class="font-weight-bold text-primary">
-                                        {{tender.MAM}}
-                                    </div>
-                                    <div style="font-size: 16px" class="font-weight-bold mt-2 text-secondary">
-                                        {{tender.supplier}}
-                                    </div>
-                                    <div class="font-weight-bold mt-2"
-                                        style="color: black; min-height: 80px; font-size: 16px">
-                                        <span style="font-weight: 400;">
-                                            {{processName(tender.description,120, 120)}}
-                                        </span>
-                                    </div>
-                                    <div class="break"></div>
-                                    <div class="mt-2 text-secondary row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div style="font-size: 14px" class="text-xs mb-1">CIG</div>
-                                            <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.cig}}
+                    <div id="carouselExampleIndicators_recent_tenders" class="carousel slide col-xl-12 col-md-12" data-ride="carousel"  data-interval="10000000">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_0">
+                                        <div class="card shadow">
+                                            <div class="card-body">
+                                                <div style="font-size: 18px" class="font-weight-bold text-primary">
+                                                    {{tender.sapNumber}}
+                                                </div>
+                                                <div style="font-size: 16px" class="font-weight-bold mt-2 text-secondary">
+                                                    {{tender.company}}
+                                                </div>
+                                                <div class="font-weight-bold mt-2"
+                                                    style="color: black; min-height: 80px; font-size: 16px">
+                                                    <span style="font-weight: 400;">
+                                                        {{processName(tender.object,120, 120)}}
+                                                    </span>
+                                                </div>
+                                                <div class="break"></div>
+                                                <div class="mt-2 text-secondary row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div style="font-size: 14px" class="text-xs mb-1">CIG</div>
+                                                        <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.cig[0]}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
+                                                        <div style="font-size: 16px" class=" mb-0 font-weight-bold">
+                                                            {{tender.endDate}}</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-auto">
-                                            <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
-                                            <div style="font-size: 16px" class=" mb-0 font-weight-bold">
-                                                {{tender.endWorkingDate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="recentTenders_wip_1.length > 0" class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_1">
+                                        <div class="card shadow">
+                                            <div class="card-body">
+                                                <div style="font-size: 18px" class="font-weight-bold text-primary">
+                                                    {{tender.sapNumber}}
+                                                </div>
+                                                <div style="font-size: 16px" class="font-weight-bold mt-2 text-secondary">
+                                                    {{tender.company}}
+                                                </div>
+                                                <div class="font-weight-bold mt-2"
+                                                     style="color: black; min-height: 80px; font-size: 16px">
+                                                    <span style="font-weight: 400;">
+                                                        {{processName(tender.object,120, 120)}}
+                                                    </span>
+                                                </div>
+                                                <div class="break"></div>
+                                                <div class="mt-2 text-secondary row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div style="font-size: 14px" class="text-xs mb-1">CIG</div>
+                                                        <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.cig[0]}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
+                                                        <div style="font-size: 16px" class=" mb-0 font-weight-bold">
+                                                            {{tender.endDate}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div ng-if="recentTenders.length > 4">
+                            <a class="circular-div carousel-control-prev my-auto" style="color: black" href="#carouselExampleIndicators_recent_tenders" role="button" data-slide="prev">
+                                <span class="fas fa-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="circular-div carousel-control-next my-auto" style="color: black" href="#carouselExampleIndicators_recent_tenders" role="button" data-slide="next">
+                                <span class="fas fa-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators_recent_tenders" data-slide-to="0" class="dot active"></li>
+                            <li ng-show="recentTenders_wip_1.length > 0" data-target="#carouselExampleIndicators_recent_tenders" data-slide-to="1" class="dot"></li>
+                        </ol>
                     </div>
 
                     <!-- Calendar -->

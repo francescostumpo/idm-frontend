@@ -1,11 +1,48 @@
-snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location,$rootScope) {
+snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$rootScope', '$filter', function($scope, $http, $location,$rootScope, $filter) {
     console.log("[INFO] Hello World from dashboardController");
 
     mainController.startProgressIndicator('#loading')
 
+    var url = mainController.getHost() + '/tender/getAllTenders';
+    mainController.startProgressIndicator('#loading')
 
+    $scope.recentTenders = []
+    $scope.recentTenders_wip_0 = []
+    $scope.recentTenders_wip_1 = []
 
-    $scope.recentTenders = [
+    $scope.getRecentTenders = function(){
+        mainController.startProgressIndicator('#loading')
+        $http.get(url).then(function (response) {
+            console.log('response from ', url, ' : ', response)
+            if(response.data.status === 200){
+                $scope.recentTenders = response.data.tenderList;
+                $scope.recentTenders.forEach(tender => {
+                    tender.endDate = $filter('date')(mainController.convertLocalDateToDate(tender.endDate), 'dd/MM/yyyy')
+                    tender.fornitori = tender.suppliers.length
+                })
+                console.log('tender list : ', $scope.recentTenders)
+                $scope.populateTenderListWip()
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+            mainController.stopProgressIndicator('#loading')
+        })
+    };
+
+    $scope.populateTenderListWip = function(){
+        for(var i = 0; i < $scope.recentTenders.length && i < 12; i++){
+            if(i < 4){
+                $scope.recentTenders_wip_0.push($scope.recentTenders[i]);
+            }else if(i < 8 && i >=4){
+                $scope.recentTenders_wip_1.push($scope.recentTenders[i]);
+            }
+        }
+    }
+
+    $scope.getRecentTenders();
+
+    /*$scope.recentTenders = [
         {
             "cig" : "821367BD9",
             "supplier" : "Stogit",
@@ -30,7 +67,7 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
             "endWorkingDate" : "24/08/2020",
             "MAM" : "MAM107-101F"
         }
-    ]
+    ]*/
 
     $scope.events = [
         {

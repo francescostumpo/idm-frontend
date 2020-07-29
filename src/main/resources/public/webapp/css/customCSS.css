@@ -827,6 +827,10 @@ button:hover:enabled.button-searchView-action{
     width: 100%;
 }
 
+.background-color-application{
+    background-color: #E6ECF2;
+}
+
 .danger-color{
    color: #e74a3b;
 }

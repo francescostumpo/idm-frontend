@@ -18,7 +18,7 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body ng-controller="commonController" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
+<body ng-controller="commonController" id="page-top" class="background-color-application text-lato-snam" ng-app="snamApp">
     <div id="loading" style="background-color: white">
         <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
     </div>
@@ -109,7 +109,7 @@
             </div>
             <!-- End Header Section -->
             <!-- Main Section -->
-            <div class="container-fluid" style="background: #E6ECF2;">
+            <div class="container-fluid" >
                 <div class="col-lg-12 col-md-12 col-sm-12 mb-5 mt-3">
                     <div class="row mt-2">
                         <!-- Show list -->
@@ -133,7 +133,7 @@
                             </div>
                             <div class="card mt-2 no-border">
                                 <div class="card-header d-flex justify-content-center"
-                                    style="background-color: #E6ECF2;">
+                                    >
                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                     <div ng-click="sortCardsByColumnName('name')"
                                         class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">

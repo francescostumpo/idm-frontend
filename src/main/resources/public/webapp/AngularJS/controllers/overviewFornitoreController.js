@@ -98,26 +98,29 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.updateAttachmentsForSupplier = function(){
-        var fileBase64 = null;
-        var reader = new FileReader();
-        reader.readAsBinaryString($scope.listOfFiles[0]);
-        reader.onload = function() {
-            fileBase64 = reader.result;
-            var base64String = window.btoa(fileBase64);
-            var file = {}
-            var files = []
-            if (base64String !== null) {
-                file.file = base64String;
-                file.fileName = $scope.listOfFiles[0].name
-                files.push(file)
+        for(var i = 0; i < $scope.listOfFiles.length; i++){
+            var file = $scope.listOfFiles[0]
+            var fileBase64 = null;
+            var reader = new FileReader();
+            reader.readAsBinaryString(file);
+            reader.onload = function() {
+                fileBase64 = reader.result;
+                var base64String = window.btoa(fileBase64);
+                var file = {}
+                var files = []
+                if (base64String !== null) {
+                    file.file = base64String;
+                    file.fileName = $scope.listOfFiles[0].name
+                    files.push(file)
+                }
+                var fileToBeUploaded = {};
+                fileToBeUploaded.cig = $scope.bandoGara.cig[0]
+                fileToBeUploaded.files = files;
+                fileToBeUploaded.idTender = $scope.bandoGara.id
+                fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
+                stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
+                mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
             }
-            var fileToBeUploaded = {};
-            fileToBeUploaded.cig = $scope.bandoGara.cig[0]
-            fileToBeUploaded.files = files;
-            fileToBeUploaded.idTender = $scope.bandoGara.id
-            fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
-            stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
-            mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         }
     }
 
