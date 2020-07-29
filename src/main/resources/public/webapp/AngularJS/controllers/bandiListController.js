@@ -42,6 +42,27 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
         $('#editTenderModal').modal()
     }
 
+    $scope.deleteTenders = function(){
+        console.log('deleting all tenders selected : ', $scope.bandiSelected)
+        for(var i = 0; i < $scope.bandiSelected.length; i++){
+            $scope.deleteTender($scope.bandiSelected[i])
+        }
+    }
+
+    $scope.deleteTender = function(tender){
+        console.log('deleting bando ', tender)
+        var url = mainController.getHost() + '/tender/deleteTender/' + tender.id
+        $http.delete(url).then(function (response) {
+            console.log('response from ', url ,' : ', response)
+            if(response.data.status == 200){
+                $scope.getAllTenders();
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
+    }
+
     $scope.modifyBando = function(){
         console.log('Bando ' , $scope.bandoSelected, ' modified')
         var url = mainController.getHost() + '/tender/updateTenderFields'

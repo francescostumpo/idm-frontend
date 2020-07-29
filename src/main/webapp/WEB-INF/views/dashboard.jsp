@@ -49,14 +49,13 @@
                                     <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_0">
                                         <div class="card shadow">
                                             <div class="card-body">
-                                                <div style="font-size: 18px" class="font-weight-bold text-primary">
+                                                <div class="text-size-18 font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
                                                 </div>
-                                                <div style="font-size: 16px" class="font-weight-bold mt-2 text-secondary">
+                                                <div class="text-size-16 font-weight-bold mt-2 text-secondary">
                                                     {{tender.company}}
                                                 </div>
-                                                <div class="font-weight-bold mt-2"
-                                                    style="color: black; min-height: 80px; font-size: 16px">
+                                                <div class="font-weight-bold mt-2" style="color: black; min-height: 80px; font-size: 16px">
                                                     <span style="font-weight: 400;">
                                                         {{processName(tender.object,120, 120)}}
                                                     </span>
@@ -158,6 +157,7 @@
                 <i class="fas fa-angle-up"></i>
             </a>
         </div>
+        <jsp:include page="subviews/modal/eventModal.jsp"></jsp:include>
     </div>
 
 </body>
