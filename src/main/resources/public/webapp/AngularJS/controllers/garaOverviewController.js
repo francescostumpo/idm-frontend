@@ -26,9 +26,10 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.getSuppliers = function(){
         $http.get(urlGetSuppliersByTenderId).then(function (res) {
             $scope.suppliers = res.data;
-            console.debug($scope.suppliers)
+            console.log($scope.suppliers);
         })
     };
+
 
     $scope.getSuppliers();
 
@@ -43,6 +44,30 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.tenderAttachments = res.data.tenderAttachments;
         })
     };
+
+    $scope.getTenderAttachments();
+
+    $scope.retrieveProgressBarLength = function(supplier){
+        console.log(supplier);
+        var documentCheckList = [];
+        for(var i = 0; i < supplier.attachments.length; i++) {
+            var document = supplier.attachments[i];
+            var tag = document.tag;
+            var found = false
+            for (var j = 0; j < $scope.bandoGara.requiredAttachments.length; j++) {
+                var tagRequired = $scope.bandoGara.requiredAttachments[j];
+                if (tag === tagRequired) {
+                    documentCheckList.push(tagRequired);
+                }
+            }
+        }
+        supplier.compliantAttachments = documentCheckList.length;
+        var progressBarCompliant = Math.floor(documentCheckList.length / $scope.bandoGara.requiredAttachments.length * 100);
+
+        return {'width': progressBarCompliant + '%'};
+    };
+
+
 
     $scope.uploadTenderFile = function(){
         for(var i = 0; i < $scope.listOfFiles.length; i++){
@@ -208,8 +233,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
     $scope.checkDocument = function (document) {
         for(i = 0;i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachment;
-            if(id === $scope.selectedDocuments[i]._idAttachment){
+            var id = document._idAttachments;
+            if(id === $scope.selectedDocuments[i]._idAttachments){
                 return true;
             }
         }
@@ -219,8 +244,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.selectDocument = function (document) {
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachment;
-            if(id === $scope.selectedDocuments[i]._idAttachment){
+            var id = document._idAttachments;
+            if(id === $scope.selectedDocuments[i]._idAttachments){
                 found = true;
                 $scope.selectedDocuments.splice(i, 1)
             }
@@ -242,7 +267,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
-            $http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
+            $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
                     $scope.setDocument(res.data);
                 }, 500)

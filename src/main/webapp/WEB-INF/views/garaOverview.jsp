@@ -160,16 +160,16 @@
                                             </div>
                                             <div class="break mt-3 mb-3"></div>
                                             <div class="row mb-3">
-                                                <div class="col-lg-9 col-md-9 col-sm-9">6/8 documenti</div>
-                                                <div class="danger-color text-center col-lg-3 col-md-3 col-sm-3">
+                                                <div class="col-lg-9 col-md-9 col-sm-9">{{supplier.compliantAttachments}}/{{bandoGara.requiredAttachments.length}} documenti</div>
+                                                <!--<div class="danger-color text-center col-lg-3 col-md-3 col-sm-3">
                                                      <span>3 </span> 
                                                     <i class="mr-1 fas fa-exclamation-triangle" style="margin-left: 0.4em;"></i> 
-                                                </div>
+                                                </div>-->
                                             </div>
                                             <div class="progress" style="height:.5rem;">
-                                                <div class="progress-bar bg-info" style="width: 70%;" role="progressbar"
+                                                <div class="progress-bar bg-info" ng-style="retrieveProgressBarLength(supplier)" role="progressbar"
                                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-danger" style="width: 20%;"
+                                                <div class="progress-bar bg-danger" style="width: 0%;"
                                                     role="progressbar" aria-valuenow="0" aria-valuemin="0"
                                                     aria-valuemax="100"></div>
                                             </div>
@@ -202,12 +202,12 @@
                                                 <i ng-if="sort.name === 'asc'"
                                                     class="fas fa-sort-up hoverable sort-chev"></i>
                                             </div>
-                                            <div ng-click="sortCardsByColumnName('uploadedAt')"
+                                            <div ng-click="sortCardsByColumnName('uploadedOn')"
                                                 class="col-lg-3 col-md-3 col-sm-3 text-size-14 no-select">
                                                 CARICATO IL
-                                                <i ng-if="sort.uploadedAt === 'desc'"
+                                                <i ng-if="sort.uploadedOn === 'desc'"
                                                     class="fas fa-sort-down hoverable sort-chev"></i>
-                                                <i ng-if="sort.uploadedAt === 'asc'"
+                                                <i ng-if="sort.uploadedOn === 'asc'"
                                                     class="fas fa-sort-up hoverable sort-chev"></i>
                                             </div>
                                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
@@ -314,7 +314,7 @@
                                                         <div class="col-lg-3 col-md-3 col-sm-12">
                                                             <div class="form-group document-viewer-br">
                                                                 <label class="label-item">DATA CARICAMENTO</label>
-                                                                <p>{{selectedDocuments[0].uploadOn.time | date: 'dd/MM/yyyy' }}
+                                                                <p>{{selectedDocuments[0].uploadedOn.time | date: 'dd/MM/yyyy' }}
                                                                 </p>
                                                             </div>
                                                         </div>
