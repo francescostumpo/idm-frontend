@@ -38,7 +38,7 @@ public class ViewController {
 			OAuth2AuthenticationDetails oauthsDetails = (OAuth2AuthenticationDetails) detailsToken;
 			bearerToken = oauthsDetails.getTokenValue();
 		}*/
-		String bearerToken = getActiveToken(principal);
+		String bearerToken = getActiveToken();
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("dashboard");
 		logger.info("returning dashboard");
@@ -66,7 +66,7 @@ public class ViewController {
 			modelAndView = new ModelAndView("bandiList");
 			logger.info("returning bandiList");
 			Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList");
-			Cookie cookieBearerToken = new Cookie("bearerToken", getActiveToken(principal));
+			Cookie cookieBearerToken = new Cookie("bearerToken", getActiveToken());
 			response.addCookie(cookieContextPath);
 			response.addCookie(cookieBearerToken);
 
@@ -104,7 +104,7 @@ public class ViewController {
 		if(loggedIn == true){
 			modelAndView = new ModelAndView("fornitoreOverview");
 			Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList/garaOverview/fornitoreOverview");
-			Cookie cookieBearerToken = new Cookie("bearerToken", getActiveToken(principal));
+			Cookie cookieBearerToken = new Cookie("bearerToken", getActiveToken());
 			response.addCookie(cookieContextPath);
 			response.addCookie(cookieBearerToken);
 
@@ -124,7 +124,7 @@ public class ViewController {
 		if(loggedIn == true){
 			modelAndView = new ModelAndView("documentDetail");
 			Cookie cookieContextPath = new Cookie("contextPath", "/dashboard/bandiList/garaOverview/fornitoreOverview/documentDetail");
-			Cookie cookieBearerToken = new Cookie("bearerToken", getActiveToken(principal));
+			Cookie cookieBearerToken = new Cookie("bearerToken", getActiveToken());
 			response.addCookie(cookieContextPath);
 			response.addCookie(cookieBearerToken);
 			logger.info("returning documentDetail");
@@ -151,9 +151,7 @@ public class ViewController {
 		return loggedIn;
 	}
 
-	private String getActiveToken(Principal principal){
-
-		Authentication authentication = (Authentication) principal;
+	private String getActiveToken(){
 		Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
 		Object detailsToken = authenticationToken.getDetails();
 		SimpleKeycloakAccount account = (SimpleKeycloakAccount) detailsToken;

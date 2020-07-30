@@ -6,7 +6,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
 
     $scope.requiredAttachments = [];
     $scope.notCompliants = 0;
-
+    $scope.compliants = 0;
     $scope.requiredAttachmentsCommon.getFromParent = function(){
         var url = mainController.getHost() + '/supplier/getSupplierById/' + $scope.fornitoreOverview.id
         mainController.startProgressIndicator('#loading')
@@ -20,10 +20,11 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             mainController.stopProgressIndicator('#loading')
         })
     }
+    $scope.notRequiredAttachments = [];
 
-    $scope.getRequiredAttachments = function(){
+    $scope.getRequiredAttachments = function() {
         $scope.requiredAttachments = []
-        for(var i = 0; i < $scope.bandoGara.requiredAttachments.length; i++){
+        for (var i = 0; i < $scope.bandoGara.requiredAttachments.length; i++) {
             var tagRequired = {}
             tagRequired.uploadedOn = 'N/A'
             tagRequired.fileName = 'N/A'
@@ -31,45 +32,37 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             tagRequired.isPresent = false
             tagRequired.tag = $scope.bandoGara.requiredAttachments[i]
             $scope.requiredAttachments.push(tagRequired)
+            if(null != tagRequired.compliant && undefined != tagRequired.compliant && tagRequired.compliant === false){
+                $scope.notCompliants++;
+            }
         }
         $scope.documents = $scope.fornitoreOverview.attachments;
-        $scope.notRequiredDocuments = []
-        for(var i = 0; i < $scope.documents.length; i++){
+        for (var i = 0; i < $scope.documents.length; i++) {
             var document = $scope.documents[i]
             var tag = document.tag
             var found = false
-            for(var j = 0; j < $scope.requiredAttachments.length; j++){
+            for (var j = 0; j < $scope.requiredAttachments.length; j++) {
                 var tagRequired = $scope.requiredAttachments[j]
-                if(tag === tagRequired.tag){
+                if (tag === tagRequired.tag) {
                     tagRequired.uploadedOn = document.uploadedOn
                     tagRequired.fileName = document.fileName
                     tagRequired._idAttachment = document._idAttachment
                     tagRequired.isPresent = true
                     found = true
+                    tagRequired.compliant = true
+                    $scope.compliants++
                 }
             }
-            if(!found){
-                $scope.notRequiredDocuments.push(document)
+            if (!found) {
+                $scope.notRequiredAttachments.push(document)
             }
-    for(var i = 0; i < $scope.bandoGara.requiredAttachments.length; i++){
-        var tagRequired = {};
-        tagRequired.uploadedOn = 'N/A'
-        tagRequired.fileName = 'N/A'
-        tagRequired._idAttachment = 'N/A'
-        tagRequired.isPresent = false
-        tagRequired.tag = $scope.bandoGara.requiredAttachments[i];
-        $scope.requiredAttachments.push(tagRequired);
-        if(null != tagRequired.compliant && undefined != tagRequired.compliant && tagRequired.compliant === false){
-            $scope.notCompliants++;
         }
-
     }
 
     $scope.documents = $scope.fornitoreOverview.attachments;
 
     $scope.documentCheckList = [];
-    $scope.notRequiredAttachments = [];
-
+    /*
     for(var i = 0; i < $scope.documents.length; i++){
         var document = $scope.documents[i]
         var tag = document.tag
@@ -89,7 +82,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         if(!found){
             $scope.notRequiredAttachments.push(document);
         }
-    }
+    }*/
 
     console.log('$scope.notRequiredAttachments', $scope.notRequiredAttachments);
     console.log('$scope.requiredAttachments', $scope.requiredAttachments);
@@ -219,7 +212,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.selectDocument = function (document, optional) {
-
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
             var id = document._idAttachment;
@@ -265,11 +257,10 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }else{
             $scope.showDocument = true;
             mainController.startProgressIndicator('#loading')
-            /*$http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
+            $http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
                 $scope.setDocument(res.data);
                 mainController.stopProgressIndicator('#loading')
-            });*/
-            mainController.stopProgressIndicator('#loading')
+            });
         }
     }
 
@@ -280,13 +271,12 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }else{
             $scope.showOptionalDocument = true;
             mainController.startProgressIndicator('#loading')
-            /*$http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
+            $http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
-                    $scope.setDocument(res);
+                    $scope.setDocument(res.data);
                     mainController.stopProgressIndicator('#loading')
                 }, 500)
-            });*/
-            mainController.stopProgressIndicator('#loading')
+            });
         }
     }
 

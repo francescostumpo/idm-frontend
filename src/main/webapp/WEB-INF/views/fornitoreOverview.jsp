@@ -84,7 +84,7 @@
                     <div class="col-lg-2 col-md-2 col-sm-12"
                         style="float: left; padding-top: 1%; padding-left: 3%; padding-bottom: 1%;"> <span
                             class="span-progress-bar-header" style="color: grey;"> <span
-                                style="font-size:28px; color: #36A8DF !important;"> {{documentCheckList.length}} </span> / {{requiredAttachments.length}} CARICATI </span>
+                                style="font-size:28px; color: #36A8DF !important;"> {{compliants}} </span> / {{requiredAttachments.length}} CARICATI </span>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-12"
                         style="float: left; padding-top: 1%; padding-left: 3%; padding-bottom: 1%;"> <span
@@ -361,7 +361,7 @@
                                         </div>
                                         <div class="card-body">
                                             <object class="document-container" data="" type="application/pdf"
-                                                width="100%" style="height: 150vh">
+                                                width="100%" style="height: 100vh">
                                                 <embed class="document-container" src="" type="application/pdf"></embed>
                                             </object>
                                         </div>
@@ -608,7 +608,7 @@
                                 </div>
                                 <div class="card-body">
                                     <object class="document-container" data="" type="application/pdf"
-                                            width="100%" style="height: 150vh">
+                                            width="100%" style="height: 100vh">
                                         <embed class="document-container" src="" type="application/pdf"></embed>
                                     </object>
                                 </div>

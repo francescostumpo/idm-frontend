@@ -97,10 +97,10 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.deleteSupplier = function(supplier){
         var supplierId = supplier.id
         var url = mainController.getHost() + '/supplier/deleteSupplier/' + supplierId
-        mainController.startProgressIndicator('#idloading')
+        mainController.startProgressIndicator('#loading')
         $http.delete(url).then(function (response) {
             console.log('response from url ', url ,' : ', response)
-            mainController.stopProgressIndicator('#idloading')
+            mainController.stopProgressIndicator('#loading')
             if(response.data.status === 200){
                 if(response.data.exitStatus === 0){
                     $scope.getSuppliers()
@@ -233,8 +233,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
     $scope.checkDocument = function (document) {
         for(i = 0;i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachments;
-            if(id === $scope.selectedDocuments[i]._idAttachments){
+            var id = document._idAttachment;
+            if(id === $scope.selectedDocuments[i]._idAttachment){
                 return true;
             }
         }
@@ -244,8 +244,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.selectDocument = function (document) {
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachments;
-            if(id === $scope.selectedDocuments[i]._idAttachments){
+            var id = document._idAttachment;
+            if(id === $scope.selectedDocuments[i]._idAttachment){
                 found = true;
                 $scope.selectedDocuments.splice(i, 1)
             }
@@ -267,9 +267,11 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
-            $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
+            mainController.startProgressIndicator('#loading')
+            $http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
                     $scope.setDocument(res.data);
+                    mainController.stopProgressIndicator('#loading')
                 }, 500)
             });
         }
