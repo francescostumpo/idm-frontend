@@ -30,7 +30,15 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
+                        <div>
+                            <span class="text-medium-size-custom">Numero SAP</span>
+                        </div>
+                        <div class="text-primary mt-3">
+                            <input  ng-model="tenderModified.sapNumber" ng-value="bandoSelected.sapNumber" type="text" class="text-primary form-control" placeholder="Numero SAP">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
                         <div>
                             <span class="text-medium-size-custom">Società*</span>
                         </div>
@@ -38,7 +46,7 @@
                             <input  ng-model="tenderModified.company" ng-value="bandoSelected.company" type="text" class="text-primary form-control" placeholder="Nome società">
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                         <div>
                             <span class="text-medium-size-custom">Scadenza</span>
                         </div>

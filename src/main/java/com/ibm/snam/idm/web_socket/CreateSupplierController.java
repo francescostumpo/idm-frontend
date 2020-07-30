@@ -4,6 +4,7 @@ import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -34,10 +35,10 @@ public class CreateSupplierController {
     @SendToUser("/queue/reply/supplier")
     public String crateSupplier(@Payload  JSONObject supplier){
         JSONObject response = new JSONObject();
-        logger.info("supplier : " + supplier);
         try{
             JSONArray files = supplier.getJSONArray("files");
             List<JSONObject> attachmentsId = new LinkedList<>();
+            JSONObject responseFromAnalyzer = new JSONObject();
             for(int i = 0 ; i < files.size() ; i++){
                 JSONObject file = files.getJSONObject(i);
                 String base64File = file.getString("file");
@@ -45,13 +46,14 @@ public class CreateSupplierController {
                 byte [] data = Base64.getDecoder().decode(base64File);
                 MultipartFile document = new Base64DecodedMultipartFile(data, fileName);
                 JSONObject attachmentId = new JSONObject();
-                JSONObject responseFromAnalyzer = analyzerMicroservice.analyzeFile(document);
+                responseFromAnalyzer = analyzerMicroservice.analyzeFile(document);
                 attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
                 attachmentId.put("fileName", fileName);
                 attachmentsId.add(attachmentId);
             }
             supplier.remove("files");
             supplier.put("attachmentsId", attachmentsId);
+            supplier.put("responseFromAnalyzer", responseFromAnalyzer);
             JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(supplier, "/supplier/createSupplier");
             logger.info("Response from backend : " + responseFromBackend);
             return responseFromBackend.toString();

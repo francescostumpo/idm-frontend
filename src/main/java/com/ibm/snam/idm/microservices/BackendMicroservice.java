@@ -23,7 +23,7 @@ public class BackendMicroservice {
 
 
     public JSONObject saveObjectOnDb(JSONObject object, String service){
-        logger.info("saveTenderOnDb -- INIT --");
+        logger.info("saveObjectOnDb -- INIT --");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         String serverBackend = config.getBackendUrl();
@@ -35,7 +35,7 @@ public class BackendMicroservice {
         logger.info("calling url : " + url);
         logger.info("JSON: " + object);
         JSONObject responseAsJsonObject = httpRestTemplate.postForObject(url, request, JSONObject.class);
-        logger.info("saveTenderOnDb -- END --");
+        logger.info("saveObjectOnDb -- END --");
         return responseAsJsonObject;
     }
 

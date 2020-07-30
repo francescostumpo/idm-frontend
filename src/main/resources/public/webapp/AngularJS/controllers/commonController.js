@@ -1,37 +1,64 @@
 snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootScope', '$timeout', function($scope, $http, $location,$rootScope, $timeout) {
     console.log("[INFO] Hello World from commontController");
 
-    $scope.sideBarIsClosed = true
+    $scope.sideBarIsClosed = true;
 
-    $scope.userNotifications = []
+    $scope.userNotifications = [];
 
+    $scope.getAllTendersByDefault = {};
+    $scope.getSuppliersByTenderId = {};
+    $scope.getTenderAttachmentsByTenderId = {};
+    $scope.requiredAttachmentsCommon = {};
 
     var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
     $http.get(url).then(function (response) {
         console.log('response from url ', url ,' : ', response)
         if(response.data.status === 200){
             $scope.userNotifications = response.data.userNotifications
-            /*$scope.userNotifications.forEach(notification => {
-                notification.creationDate = mainController.convertLocalDateToDate(notification.creationDate)
-            })*/
         }
     })
 
-    stompClientTenderFiles.connect({}, function(frame){
-        stompClientTenderFiles.subscribe("/topic/pushNotification", function(message){
+    stompClientFiles.connect({}, function(frame){
+        stompClientFiles.subscribe("/topic/pushNotification", function(message){
             console.log("Received message:" + message.body);
         });
-        stompClientTenderFiles.subscribe("/user/queue/errors", function(message) {
+        stompClientFiles.subscribe("/user/queue/errors", function(message) {
 
         });
-        stompClientTenderFiles.subscribe("/user/queue/reply/updateTenderFiles", function(message) {
+        stompClientFiles.subscribe("/user/queue/reply/updateFiles", function(message) {
             console.log('message ', message)
             var response = JSON.parse(message.body)
             if(response.status === 200) {
                 mainController.showNotification('bottom', 'right', response.message, '', 'info')
+                var url = mainController.getFrontendHost() + '/createNotification'
+                if(response.updated === 'tender'){
+                    $scope.getTenderAttachmentsByTenderId.getFromParent();
+                    var tenderNotification = $scope.createNotificationForUploadFile(response.idTender, null, response.cig,'uploadFileTender')
+                    $http.post(url, tenderNotification).then(function (response) {
+                        console.log(' responde from ', url, ' : ', response)
+                        if(response.data.status === 200){
+                            $scope.userNotifications.push(response.data.userNotification);
+                            $scope.getAllTendersByDefault.getFromParent();
+                        }
+                    })
+                }
+                else if(response.updated === 'supplier'){
+                    $scope.requiredAttachmentsCommon.getFromParent();
+                    var tenderNotification = $scope.createNotificationForUploadFile(response.idTender, response.idSupplier, response.cig, 'uploadFileSupplier')
+                    $http.post(url, tenderNotification).then(function (response) {
+                        console.log(' responde from ', url, ' : ', response)
+                        if(response.data.status === 200){
+                            $scope.userNotifications.push(response.data.userNotification);
+                            $scope.getAllTendersByDefault.getFromParent();
+                        }
+                    })
+                }
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.message, '', 'danger')
             }
         });
-        stompClientTenderFiles.subscribe("/user/queue/success", function(message) {
+        stompClientFiles.subscribe("/user/queue/success", function(message) {
             console.log("Message " + message.body + ' ' + new Date());
         });
     }, function(error){
@@ -51,6 +78,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             var response = JSON.parse(message.body)
             if(response.status === 200) {
                 mainController.showNotification('bottom', 'right', response.message, '', 'info')
+                console.log("called from parent component");
+                $scope.getSuppliersByTenderId.getFromParent();
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
@@ -78,9 +107,10 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 var url = mainController.getFrontendHost() + '/createNotification'
                 var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation')
                 $http.post(url, tenderNotification).then(function (response) {
-                    console.log(' responde from ', url, ' : ', response)
+                    console.log(' response from ', url, ' : ', response);
                     if(response.data.status === 200){
-                        $scope.userNotifications.push(response.data.userNotification)
+                        $scope.userNotifications.push(response.data.userNotification);
+                        $scope.getAllTendersByDefault.getFromParent();
                     }
                 })
             }
@@ -95,22 +125,15 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         console.log("STOMP protocol error: ", error);
     });
 
-    stompClientTestSocket.connect({}, function(frame){
-        stompClientTestSocket.subscribe("/topic/pushNotification", function(message){
-            console.log("Received message:" + message.body);
-        });
-        stompClientTestSocket.subscribe("/user/queue/errors", function(message) {
-
-        });
-        stompClientTestSocket.subscribe("/user/queue/reply/testSocket", function(message) {
-            console.log('message ', message)
-        });
-        stompClientTestSocket.subscribe("/user/queue/success", function(message) {
-            console.log("Message " + message.body + ' ' + new Date());
-        });
-    }, function(error){
-        console.log("STOMP protocol error: ", error);
-    });
+    $scope.createNotificationForUploadFile = function(idTender, idSupplier, cig, notificationType){
+        var notification = {}
+        notification.userId = mainController.getUserId()
+        notification.idTender = idTender
+        notification.idSupplier = idSupplier
+        notification.cig = cig
+        notification.notificationType = notificationType
+        return notification
+    }
 
     $scope.createNotificationFromTender = function(tender, notificationType){
         var notification = {}
@@ -198,47 +221,6 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.openModalUploadDocument = function(idModal, idFileSelect, idFileDrag, idImageUpload){
         $scope.listOfFiles = [];
-        (function() {
-            // getElementById
-            function $id(id) {
-                return document.getElementById(id);
-            }
-            function FileDragHover(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                e.target.className = (e.type == "dragover" ? "hover" : "");
-            }
-            // file selection
-            function FileSelectHandler(e) {
-                // cancel event and hover styling
-                FileDragHover(e);
-                console.log(e.target.id)
-                // fetch FileList object
-                var files = e.target.files || e.dataTransfer.files;
-                var file = files[0];
-                if(e.target.id === idFileDrag || e.target.id === idImageUpload || e.target.id === idFileSelect){
-                    console.log('file = ', file)
-                    $timeout(function () {
-                        $scope.listOfFiles.push(file)
-                        console.log('set contract selected')
-                    }, 200)
-                }
-            }
-            // initialize
-            function Init() {
-                var fileselect = $id(idFileSelect),
-                    filedrag = $id(idFileDrag)
-                fileselect.addEventListener("change", FileSelectHandler, false);
-                filedrag.addEventListener("dragover", FileDragHover, false);
-                filedrag.addEventListener("dragleave", FileDragHover, false);
-                filedrag.addEventListener("drop", FileSelectHandler, false);
-                filedrag.style.display = "block";
-            }
-            if (window.File && window.FileList && window.FileReader) {
-                Init();
-            }
-        })();
-        $scope.listOfFiles = [];
         $('#' + idModal).modal()
     }
 
@@ -255,5 +237,81 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     }
 
     $scope.listOfFiles = [];
+
+    (function() {
+        // getElementById
+        function $id(id) {
+            return document.getElementById(id);
+        }
+        function FileDragHover(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            e.target.className = (e.type == "dragover" ? "hover" : "");
+        }
+        // file selection
+        function FileSelectHandler(e) {
+            // cancel event and hover styling
+            FileDragHover(e);
+            console.log(e.target.id)
+            // fetch FileList object
+            var files = e.target.files || e.dataTransfer.files;
+            var file = files[0];
+            if(e.target.id === 'fileselect2' || e.target.id === 'filedrag2' || e.target.id === 'fileselect2'
+                || e.target.id === 'fileselect' || e.target.id === 'filedrag' || e.target.id === 'fileselect'
+                || e.target.id === 'fileselect3' || e.target.id === 'filedrag3' || e.target.id === 'fileselect3'
+                || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'){
+                console.log('file = ', file)
+                $timeout(function () {
+                    $scope.listOfFiles.push(file)
+                    console.log('set contract selected')
+                }, 200)
+            }
+        }
+        // initialize
+        function Init() {
+            var fileselect4 = $id('fileselect4'),
+                filedrag4 = $id('filedrag4')
+            if(fileselect4 !== null && filedrag4 !== null) {
+                fileselect4.addEventListener("change", FileSelectHandler, false);
+                filedrag4.addEventListener("dragover", FileDragHover, false);
+                filedrag4.addEventListener("dragleave", FileDragHover, false);
+                filedrag4.addEventListener("drop", FileSelectHandler, false);
+                filedrag4.style.display = "block";
+            }
+
+            var fileselect2 = $id('fileselect2'),
+                filedrag2 = $id('filedrag2')
+            if(fileselect2 !== null && filedrag2 !== null) {
+                fileselect2.addEventListener("change", FileSelectHandler, false);
+                filedrag2.addEventListener("dragover", FileDragHover, false);
+                filedrag2.addEventListener("dragleave", FileDragHover, false);
+                filedrag2.addEventListener("drop", FileSelectHandler, false);
+                filedrag2.style.display = "block";
+            }
+
+            var fileselect3 = $id('fileselect3'),
+                filedrag3 = $id('filedrag3')
+            if(fileselect3 !== null && filedrag3 !== null) {
+                fileselect3.addEventListener("change", FileSelectHandler, false);
+                filedrag3.addEventListener("dragover", FileDragHover, false);
+                filedrag3.addEventListener("dragleave", FileDragHover, false);
+                filedrag3.addEventListener("drop", FileSelectHandler, false);
+                filedrag3.style.display = "block";
+            }
+
+            var fileselect = $id('fileselect'),
+                filedrag = $id('filedrag')
+            if(fileselect !== null && filedrag !== null) {
+                fileselect.addEventListener("change", FileSelectHandler, false);
+                filedrag.addEventListener("dragover", FileDragHover, false);
+                filedrag.addEventListener("dragleave", FileDragHover, false);
+                filedrag.addEventListener("drop", FileSelectHandler, false);
+                filedrag.style.display = "block";
+            }
+        }
+        if (window.File && window.FileList && window.FileReader) {
+            Init();
+        }
+    })();
 
 }]);
