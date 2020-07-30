@@ -86,7 +86,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 var url = mainController.getFrontendHost() + '/createNotification'
                 var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation')
                 $http.post(url, tenderNotification).then(function (response) {
-                    console.log(' responde from ', url, ' : ', response)
+                    console.log(' response from ', url, ' : ', response);
                     if(response.data.status === 200){
                         $scope.userNotifications.push(response.data.userNotification);
                         $scope.getAllTendersByDefault.getFromParent();

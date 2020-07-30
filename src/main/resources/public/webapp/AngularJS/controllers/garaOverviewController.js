@@ -25,9 +25,10 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.getSuppliers = function(){
         $http.get(urlGetSuppliersByTenderId).then(function (res) {
             $scope.suppliers = res.data;
-            console.debug($scope.suppliers)
+            console.log($scope.suppliers);
         })
     };
+
 
     $scope.getSuppliers();
 
@@ -44,6 +45,28 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     };
 
     $scope.getTenderAttachments();
+
+    $scope.retrieveProgressBarLength = function(supplier){
+        console.log(supplier);
+        var documentCheckList = [];
+        for(var i = 0; i < supplier.attachments.length; i++) {
+            var document = supplier.attachments[i];
+            var tag = document.tag;
+            var found = false
+            for (var j = 0; j < $scope.bandoGara.requiredAttachments.length; j++) {
+                var tagRequired = $scope.bandoGara.requiredAttachments[j];
+                if (tag === tagRequired) {
+                    documentCheckList.push(tagRequired);
+                }
+            }
+        }
+        supplier.compliantAttachments = documentCheckList.length;
+        var progressBarCompliant = Math.floor(documentCheckList.length / $scope.bandoGara.requiredAttachments.length * 100);
+
+        return {'width': progressBarCompliant + '%'};
+    };
+
+
 
     $scope.uploadTenderFile = function(){
         var fileBase64 = null;
