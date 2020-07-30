@@ -140,7 +140,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-sm-1">
-                                                    <i class="fa fa-ellipsis-v" data-toggle="dropdown"
+                                                    <i class="text-primary fa fa-ellipsis-v" data-toggle="dropdown"
                                                         aria-haspopup="true" aria-expanded="false"
                                                         style="cursor: pointer;"></i>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -236,7 +236,7 @@
                                                         {{ document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-sm-1 d-flex justify-content-center"><i
-                                                        class="my-auto fa fa-ellipsis-h pointer"></i></div>
+                                                        class="my-auto fa text-primary fa-ellipsis-h pointer"></i></div>
                                             </div>
                                         </div>
                                     </div>

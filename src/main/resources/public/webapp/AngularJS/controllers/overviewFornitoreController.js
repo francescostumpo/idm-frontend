@@ -24,12 +24,15 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
 
     $scope.getRequiredAttachments = function() {
         $scope.requiredAttachments = []
+        $scope.documentCheckList = []
+        $scope.notRequiredAttachments = []
         for (var i = 0; i < $scope.bandoGara.requiredAttachments.length; i++) {
             var tagRequired = {}
             tagRequired.uploadedOn = 'N/A'
             tagRequired.fileName = 'N/A'
             tagRequired._idAttachment = 'N/A'
             tagRequired.isPresent = false
+            tagRequired.compliant = true
             tagRequired.tag = $scope.bandoGara.requiredAttachments[i]
             $scope.requiredAttachments.push(tagRequired)
             if(null != tagRequired.compliant && undefined != tagRequired.compliant && tagRequired.compliant === false){
@@ -61,28 +64,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
 
     $scope.documents = $scope.fornitoreOverview.attachments;
 
-    $scope.documentCheckList = [];
-    /*
-    for(var i = 0; i < $scope.documents.length; i++){
-        var document = $scope.documents[i]
-        var tag = document.tag
-        var found = false
-        for(var j = 0; j < $scope.requiredAttachments.length; j++){
-            var tagRequired = $scope.requiredAttachments[j];
-            if(tag === tagRequired.tag){
-                tagRequired.uploadedOn = document.uploadedOn;
-                tagRequired.fileName = document.fileName;
-                tagRequired._idAttachment = document._idAttachment;
-                tagRequired.isPresent = true;
-                tagRequired.compliant = true; // needed to take from watson
-                found = true
-                $scope.documentCheckList.push(tagRequired);
-            }
-        }
-        if(!found){
-            $scope.notRequiredAttachments.push(document);
-        }
-    }*/
+
 
     console.log('$scope.notRequiredAttachments', $scope.notRequiredAttachments);
     console.log('$scope.requiredAttachments', $scope.requiredAttachments);
@@ -156,6 +138,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.updateAttachmentsForSupplier = function(){
         for(var i = 0; i < $scope.listOfFiles.length; i++){
             var file = $scope.listOfFiles[i]
+            $scope.fileName = $scope.listOfFiles[i].name
             var fileBase64 = null;
             var reader = new FileReader();
             reader.readAsBinaryString(file);
@@ -166,7 +149,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 var files = []
                 if (base64String !== null) {
                     file.file = base64String;
-                    file.fileName = $scope.listOfFiles[i].name
+                    file.fileName = $scope.fileName
                     files.push(file)
                 }
                 var fileToBeUploaded = {};
@@ -284,13 +267,13 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         var required = $scope.requiredAttachments.length;
         //var percPresence =  Math.floor(documents.filter(d => d.compliant == 0).length / required* 100);
         //var percCheck =  Math.floor(documents.filter(d => d.compliant == 2).length / required * 100);
-        var percPresence = Math.floor(documents.filter(d => d.compliant === true).length /required * 100);
+        var percPresence = Math.floor(documents.filter(d => d.isPresent === true).length /required * 100);
         var percCheck =  Math.floor(documents.filter(d => d.compliant === false).length / required * 100);
         $(".pg-presence").css('width', percPresence + '%').attr('aria-valuenow', percPresence);
         $(".pg-check").css('width', percCheck + '%').attr('aria-valuenow', percCheck);
     }
 
-    $scope.initProgressBar($scope.documentCheckList);
+    $scope.initProgressBar($scope.requiredAttachments);
     mainController.stopProgressIndicator('#loading');
 
 }]);

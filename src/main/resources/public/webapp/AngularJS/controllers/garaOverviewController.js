@@ -73,6 +73,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         for(var i = 0; i < $scope.listOfFiles.length; i++){
             var fileBase64 = null;
             var reader = new FileReader();
+            $scope.fileName = $scope.listOfFiles[i].name
             reader.readAsBinaryString($scope.listOfFiles[i]);
             reader.onload = function() {
                 fileBase64 = reader.result;
@@ -81,7 +82,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
                 var files = []
                 if (base64String !== null) {
                     file.file = base64String;
-                    file.fileName = $scope.listOfFiles[i].name
+                    file.fileName = $scope.fileName
                     files.push(file)
                 }
                 var fileToBeUploaded = {};

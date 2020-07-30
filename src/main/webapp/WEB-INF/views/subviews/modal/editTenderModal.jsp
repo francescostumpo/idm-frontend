@@ -32,7 +32,7 @@
                 <div class="row mt-4">
                     <div class="col-md-4 col-sm-4">
                         <div>
-                            <span class="text-medium-size-custom">Società*</span>
+                            <span class="text-medium-size-custom">Numero SAP</span>
                         </div>
                         <div class="text-primary mt-3">
                             <input  ng-model="tenderModified.sapNumber" ng-value="bandoSelected.sapNumber" type="text" class="text-primary form-control" placeholder="Numero SAP">

@@ -221,47 +221,6 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.openModalUploadDocument = function(idModal, idFileSelect, idFileDrag, idImageUpload){
         $scope.listOfFiles = [];
-        (function() {
-            // getElementById
-            function $id(id) {
-                return document.getElementById(id);
-            }
-            function FileDragHover(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                e.target.className = (e.type == "dragover" ? "hover" : "");
-            }
-            // file selection
-            function FileSelectHandler(e) {
-                // cancel event and hover styling
-                FileDragHover(e);
-                console.log(e.target.id)
-                // fetch FileList object
-                var files = e.target.files || e.dataTransfer.files;
-                var file = files[0];
-                if(e.target.id === idFileDrag || e.target.id === idImageUpload || e.target.id === idFileSelect){
-                    console.log('file = ', file)
-                    $timeout(function () {
-                        $scope.listOfFiles.push(file)
-                        console.log('set contract selected')
-                    }, 200)
-                }
-            }
-            // initialize
-            function Init() {
-                var fileselect = $id(idFileSelect),
-                    filedrag = $id(idFileDrag)
-                fileselect.addEventListener("change", FileSelectHandler, false);
-                filedrag.addEventListener("dragover", FileDragHover, false);
-                filedrag.addEventListener("dragleave", FileDragHover, false);
-                filedrag.addEventListener("drop", FileSelectHandler, false);
-                filedrag.style.display = "block";
-            }
-            if (window.File && window.FileList && window.FileReader) {
-                Init();
-            }
-        })();
-        $scope.listOfFiles = [];
         $('#' + idModal).modal()
     }
 
@@ -278,5 +237,81 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     }
 
     $scope.listOfFiles = [];
+
+    (function() {
+        // getElementById
+        function $id(id) {
+            return document.getElementById(id);
+        }
+        function FileDragHover(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            e.target.className = (e.type == "dragover" ? "hover" : "");
+        }
+        // file selection
+        function FileSelectHandler(e) {
+            // cancel event and hover styling
+            FileDragHover(e);
+            console.log(e.target.id)
+            // fetch FileList object
+            var files = e.target.files || e.dataTransfer.files;
+            var file = files[0];
+            if(e.target.id === 'fileselect2' || e.target.id === 'filedrag2' || e.target.id === 'fileselect2'
+                || e.target.id === 'fileselect' || e.target.id === 'filedrag' || e.target.id === 'fileselect'
+                || e.target.id === 'fileselect3' || e.target.id === 'filedrag3' || e.target.id === 'fileselect3'
+                || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'){
+                console.log('file = ', file)
+                $timeout(function () {
+                    $scope.listOfFiles.push(file)
+                    console.log('set contract selected')
+                }, 200)
+            }
+        }
+        // initialize
+        function Init() {
+            var fileselect4 = $id('fileselect4'),
+                filedrag4 = $id('filedrag4')
+            if(fileselect4 !== null && filedrag4 !== null) {
+                fileselect4.addEventListener("change", FileSelectHandler, false);
+                filedrag4.addEventListener("dragover", FileDragHover, false);
+                filedrag4.addEventListener("dragleave", FileDragHover, false);
+                filedrag4.addEventListener("drop", FileSelectHandler, false);
+                filedrag4.style.display = "block";
+            }
+
+            var fileselect2 = $id('fileselect2'),
+                filedrag2 = $id('filedrag2')
+            if(fileselect2 !== null && filedrag2 !== null) {
+                fileselect2.addEventListener("change", FileSelectHandler, false);
+                filedrag2.addEventListener("dragover", FileDragHover, false);
+                filedrag2.addEventListener("dragleave", FileDragHover, false);
+                filedrag2.addEventListener("drop", FileSelectHandler, false);
+                filedrag2.style.display = "block";
+            }
+
+            var fileselect3 = $id('fileselect3'),
+                filedrag3 = $id('filedrag3')
+            if(fileselect3 !== null && filedrag3 !== null) {
+                fileselect3.addEventListener("change", FileSelectHandler, false);
+                filedrag3.addEventListener("dragover", FileDragHover, false);
+                filedrag3.addEventListener("dragleave", FileDragHover, false);
+                filedrag3.addEventListener("drop", FileSelectHandler, false);
+                filedrag3.style.display = "block";
+            }
+
+            var fileselect = $id('fileselect'),
+                filedrag = $id('filedrag')
+            if(fileselect !== null && filedrag !== null) {
+                fileselect.addEventListener("change", FileSelectHandler, false);
+                filedrag.addEventListener("dragover", FileDragHover, false);
+                filedrag.addEventListener("dragleave", FileDragHover, false);
+                filedrag.addEventListener("drop", FileSelectHandler, false);
+                filedrag.style.display = "block";
+            }
+        }
+        if (window.File && window.FileList && window.FileReader) {
+            Init();
+        }
+    })();
 
 }]);
