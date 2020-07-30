@@ -18,7 +18,7 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body ng-controller="commonController" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
+<body ng-controller="commonController" id="page-top" class="background-color-application text-lato-snam" ng-app="snamApp">
     <div id="loading" style="background-color: white">
         <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
     </div>
@@ -43,7 +43,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                         <i class="far fa-edit fa-fw fa-lg pointer"></i>
-                                        <span class="ml-2">Modifica</span>
+                                        <span ng-click="openModalEditSupplier()" class="ml-2">Modifica</span>
                                     </p>
                                     <div class="dropdown-divider"></div>
                                     <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
@@ -84,7 +84,7 @@
                     <div class="col-lg-2 col-md-2 col-sm-12"
                         style="float: left; padding-top: 1%; padding-left: 3%; padding-bottom: 1%;"> <span
                             class="span-progress-bar-header" style="color: grey;"> <span
-                                style="font-size:28px; color: #36A8DF !important;"> {{documentCheckList.length}} </span> / {{requiredAttachments.length}} CARICATI </span>
+                                style="font-size:28px; color: #36A8DF !important;"> {{compliants}} </span> / {{requiredAttachments.length}} CARICATI </span>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-12"
                         style="float: left; padding-top: 1%; padding-left: 3%; padding-bottom: 1%;"> <span
@@ -103,7 +103,7 @@
             </div>
             <!-- End Header Section -->
             <!-- Main Section -->
-            <div class="container-fluid" style="background: #E6ECF2;">
+            <div class="container-fluid" >
                 <div class="col-lg-12 col-md-12 col-sm-12 mb-5 mt-3">
                     <div class="row mt-2">
                         <!-- Show list -->
@@ -127,7 +127,7 @@
                             </div>
                             <div class="card mt-2 no-border">
                                 <div class="card-header d-flex justify-content-center"
-                                    style="background-color: #E6ECF2;">
+                                    >
                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                     <div ng-click="sortCardsByColumnName('name')"
                                         class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
@@ -197,7 +197,7 @@
                                                     <i ng-if="document.isPresent" class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
                                                 </div>
                                                 <div class="m-1">
-                                                    <i ng-if="document.isPresent" class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                    <i ng-click="deleteDocument(document)" ng-if="document.isPresent" class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                 </div>
                                         </div>
                                     </div>
@@ -361,7 +361,7 @@
                                         </div>
                                         <div class="card-body">
                                             <object class="document-container" data="" type="application/pdf"
-                                                width="100%" style="height: 150vh">
+                                                width="100%" style="height: 100vh">
                                                 <embed class="document-container" src="" type="application/pdf"></embed>
                                             </object>
                                         </div>
@@ -608,7 +608,7 @@
                                 </div>
                                 <div class="card-body">
                                     <object class="document-container" data="" type="application/pdf"
-                                            width="100%" style="height: 150vh">
+                                            width="100%" style="height: 100vh">
                                         <embed class="document-container" src="" type="application/pdf"></embed>
                                     </object>
                                 </div>
@@ -624,6 +624,7 @@
             <i class="fas fa-angle-up"></i>
         </a>
         <jsp:include page="subviews/modal/uploadDocumentModalOverviewFornitore.jsp"></jsp:include>
+        <jsp:include page="subviews/modal/editSupplierModal.jsp"></jsp:include>
     </div>
 
 </body>

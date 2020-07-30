@@ -3,6 +3,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
 
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
+    $scope.tenderAttachments = $scope.bandoGara.tenderAttachments
     var urlDocumentContent = mainController.getFrontendHost() + '/api/documentContent';
     var urlDocumentPage = mainController.getFrontendHost() + '/documentDetail';
 
@@ -69,28 +70,112 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
 
     $scope.uploadTenderFile = function(){
-        var fileBase64 = null;
-        var reader = new FileReader();
-        reader.readAsBinaryString($scope.listOfFiles[0]);
-        reader.onload = function() {
-            fileBase64 = reader.result;
-            var base64String = window.btoa(fileBase64);
-            var file = {}
-            var files = []
-            if (base64String !== null) {
-                file.file = base64String;
-                file.fileName = $scope.listOfFiles[0].name
-                files.push(file)
+        for(var i = 0; i < $scope.listOfFiles.length; i++){
+            var fileBase64 = null;
+            var reader = new FileReader();
+            reader.readAsBinaryString($scope.listOfFiles[i]);
+            reader.onload = function() {
+                fileBase64 = reader.result;
+                var base64String = window.btoa(fileBase64);
+                var file = {}
+                var files = []
+                if (base64String !== null) {
+                    file.file = base64String;
+                    file.fileName = $scope.listOfFiles[i].name
+                    files.push(file)
+                }
+                var fileToBeUploaded = {};
+                fileToBeUploaded.cig = $scope.bandoGara.cig[0]
+                fileToBeUploaded.files = files;
+                fileToBeUploaded.idTender = $scope.bandoGara.id;
+                stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             }
-            var fileToBeUploaded = {};
-            fileToBeUploaded.files = files;
-            fileToBeUploaded.idTender = $scope.bandoGara.id;
-
-            stompClientTenderFiles.send("/app/updateTenderFiles", {}, JSON.stringify(fileToBeUploaded));
-            mainController.showNotification("bottom", "right", "Upload files in corso", '', 'info');
         }
+        mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
     };
-    
+
+    $scope.deleteSupplier = function(supplier){
+        var supplierId = supplier.id
+        var url = mainController.getHost() + '/supplier/deleteSupplier/' + supplierId
+        mainController.startProgressIndicator('#loading')
+        $http.delete(url).then(function (response) {
+            console.log('response from url ', url ,' : ', response)
+            mainController.stopProgressIndicator('#loading')
+            if(response.data.status === 200){
+                if(response.data.exitStatus === 0){
+                    $scope.getSuppliers()
+                }
+                else{
+                    mainController.showNotification('bottom', 'right', response.data.message, '', 'warning')
+                }
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
+    }
+
+    $scope.openModalEditSupplier = function (supplier) {
+        $scope.supplierModified = {}
+        $scope.supplierSelected = supplier
+        $('#editSupplierModal').modal()
+    }
+
+
+    $scope.editSupplier = function(){
+        var url = mainController.getHost() + '/supplier/editSupplier'
+        var newSupplier = {
+            "id" : $scope.supplierSelected.id,
+            "name" : $scope.supplierModified.name
+        }
+        $http.post(url, newSupplier).then(function(response){
+            console.log('response from url ', url ,' : ', response )
+            if(response.data.status === 200){
+                $scope.getSuppliers()
+            }
+            else{
+                mainController.showNotification("bottom", "right", response.data.message, '', 'danger');
+            }
+        })
+    }
+
+
+    $scope.openModalEditTender = function () {
+        $('#datepickerModify').datepicker({
+            locale: 'it-it',
+            uiLibrary: 'bootstrap4',
+            format: 'dd/mm/yyyy'
+        });
+        $scope.tenderModified = {}
+        $scope.bandoSelected = $scope.bandoGara
+        $('#editTenderModal').modal()
+    }
+
+    $scope.modifyBando = function(){
+        console.log('Bando ', $scope.bandoGara, ' modified')
+        var url = mainController.getHost() + '/tender/updateTenderFields'
+        var input = {
+            "object" : $scope.tenderModified.object,
+            "description" : $scope.tenderModified.description,
+            "endDate" : $scope.tenderModified.endDate,
+            "cig": $scope.tenderModified.cig,
+            "company" : $scope.tenderModified.company,
+            "id" : $scope.bandoSelected.id,
+            "sapNumber" : $scope.tenderModified.sapNumber
+        }
+        $http.post(url, input).then(function (response) {
+            console.log('response from ', url, ' : ', response)
+            if(response.data.status === 200){
+                $scope.bandoGara = response.data.tender
+                $scope.bandoGara.endDate = mainController.convertLocalDateToDate($scope.bandoGara.endDate)
+                $scope.getSuppliers()
+                //mainController.showNotification('bottom', 'right', response.data.message, '', 'info')
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
+    }
 
     $scope.createSupplier = function(){
         var fileBase64 = null;
@@ -114,6 +199,20 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         }
     }
 
+    $scope.deleteTender = function(){
+        console.log('deleting tender ', $scope.bandoGara)
+        var url = mainController.getHost() + '/tender/deleteTender/' + $scope.bandoGara.id
+        $http.delete(url).then(function (response) {
+            console.log('response from ', url ,' : ', response)
+            if(response.data.status == 200){
+                location.href = '/bandiList'
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
+    }
+
     $scope.makeVisibleTab = function (itemToDisplay, itemToHide) {
         console.log('[INFO] makeVisibleTab intercepted')
         $('#'+itemToHide).hide();
@@ -134,8 +233,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
     $scope.checkDocument = function (document) {
         for(i = 0;i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachments;
-            if(id === $scope.selectedDocuments[i]._idAttachments){
+            var id = document._idAttachment;
+            if(id === $scope.selectedDocuments[i]._idAttachment){
                 return true;
             }
         }
@@ -145,8 +244,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.selectDocument = function (document) {
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachments;
-            if(id === $scope.selectedDocuments[i]._idAttachments){
+            var id = document._idAttachment;
+            if(id === $scope.selectedDocuments[i]._idAttachment){
                 found = true;
                 $scope.selectedDocuments.splice(i, 1)
             }
@@ -168,9 +267,11 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
-            $http.get(urlDocumentContent + "/" + document._idAttachments, {responseType: 'blob'}).then(function(res) {
+            mainController.startProgressIndicator('#loading')
+            $http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
                 setTimeout(function(){
                     $scope.setDocument(res.data);
+                    mainController.stopProgressIndicator('#loading')
                 }, 500)
             });
         }

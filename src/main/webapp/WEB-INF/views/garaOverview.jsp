@@ -18,7 +18,7 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body ng-controller="commonController" id="page-top" class="background-snam text-lato-snam" ng-app="snamApp">
+<body ng-controller="commonController" id="page-top" class="background-color-application text-lato-snam" ng-app="snamApp">
     <div id="loading" style="background-color: white">
         <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
     </div>
@@ -42,12 +42,12 @@
                                 <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" style="cursor: pointer;"></i>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                    <p ng-click="openModalEditTender()" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                         <i class="far fa-edit fa-fw fa-lg pointer"></i>
                                         <span class="ml-2">Modifica</span>
                                     </p>
                                     <div class="dropdown-divider"></div>
-                                    <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                    <p ng-click="deleteTender()" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                         <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                         <span class="ml-2">Elimina</span>
                                     </p>
@@ -87,7 +87,7 @@
             </div>
             <!-- End Header Section -->
             <!-- Main Section -->
-            <div class="container-fluid" style="background: #E6ECF2; height: 180vh;">
+            <div class="background-color-application container-fluid" style="height: 180vh;">
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item">
@@ -144,13 +144,13 @@
                                                         aria-haspopup="true" aria-expanded="false"
                                                         style="cursor: pointer;"></i>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <p class="text-primary dropdown-item no-margin-bottom"
+                                                        <p ng-click="openModalEditSupplier(supplier)" class="text-primary dropdown-item no-margin-bottom"
                                                             style="cursor: pointer;">
                                                             <i class="far fa-edit fa-fw fa-lg pointer"></i>
                                                             <span class="ml-2">Modifica</span>
                                                         </p>
                                                         <div class="dropdown-divider"></div>
-                                                        <p class="text-primary dropdown-item no-margin-bottom"
+                                                        <p ng-click="deleteSupplier(supplier)" class="text-primary dropdown-item no-margin-bottom"
                                                             style="cursor: pointer;">
                                                             <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                             <span class="ml-2">Elimina</span>
@@ -231,7 +231,7 @@
                                                             {{document.fileName}}</p>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                                <div class="my-auto col-lg-3 col-md-3 col-sm-3">
                                                     <p class="my-auto no-margin-bottom text-size-16 text-bold">
                                                         {{ document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                                 </div>
@@ -357,6 +357,8 @@
         </a>
         <jsp:include page="subviews/modal/uploadDocumentModalNewFornitore.jsp"></jsp:include>
         <jsp:include page="subviews/modal/uploadDocumentModalOverviewGara.jsp"></jsp:include>
+        <jsp:include page="subviews/modal/editTenderModal.jsp"></jsp:include>
+        <jsp:include page="subviews/modal/editSupplierModal.jsp"></jsp:include>
     </div>
 
 </body>

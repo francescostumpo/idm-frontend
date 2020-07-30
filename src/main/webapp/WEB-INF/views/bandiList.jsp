@@ -18,7 +18,7 @@
     <jsp:include page="subviews/cssSheets.jsp"></jsp:include>
 </head>
 
-<body id="page-top" ng-controller="commonController" class="background-snam text-lato-snam" ng-app="snamApp">
+<body id="page-top" ng-controller="commonController" class="background-color-application text-lato-snam" ng-app="snamApp">
 
     <div id="loading" style="background-color: white">
         <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
@@ -50,7 +50,7 @@
                                                 </button>
                                             </div>
                                             <div class="mr-4">
-                                                <button class="btn button-primary-buyer" ng-disabled="bandiSelected.length === 0" ng-click="goToPage('compare')">
+                                                <button ng-click="deleteTenders()" class="btn button-primary-buyer" ng-disabled="bandiSelected.length === 0" ng-click="goToPage('compare')">
                                                     <i class="far fa-trash-alt fa-fw fa-lg pointer"></i><span class="ml-2">ELIMINA</span>
                                                 </button>
                                             </div>
@@ -131,7 +131,7 @@
                                             <i class="far fa-edit fa-fw fa-lg pointer"></i><span class="ml-2">Modifica</span>
                                         </p>
                                         <div class="dropdown-divider"></div>
-                                        <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                        <p ng-click="deleteTender(bandoGara)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                             <i class="far fa-trash-alt fa-fw fa-lg pointer"></i><span class="ml-2">Elimina</span>
                                         </p>
                                     </div>

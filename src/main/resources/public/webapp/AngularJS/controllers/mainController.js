@@ -12,6 +12,19 @@ mainController = {
 		return dateInMillis
 	},
 
+	convertDateToStringForEvents : function(date){
+		var day = date.dayOfMonth;
+		if(day < 10){
+			day = '0' + day
+		}
+		var month = date.monthValue; // Month is 0-indexed
+		if(month < 10){
+			month = '0' + month
+		}
+		var year = date.year;
+		return year + '-' + month + '-' + day
+	},
+
 	convertLocalDateToDate : function(localDate){
 		var day = localDate.dayOfMonth;
 		var month = localDate.monthValue - 1; // Month is 0-indexed
@@ -239,8 +252,8 @@ stompClient = Stomp.over(ws);
 ws = new SockJS(host + "/createSupplier");
 stompClientSupplier = Stomp.over(ws);
 
-ws = new SockJS(host + "/updateTenderFiles");
-stompClientTenderFiles = Stomp.over(ws);
+ws = new SockJS(host + "/updateFiles");
+stompClientFiles = Stomp.over(ws);
 
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "customtime-pre": function ( a ) {
