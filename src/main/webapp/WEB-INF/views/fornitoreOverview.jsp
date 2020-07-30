@@ -43,7 +43,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                         <i class="far fa-edit fa-fw fa-lg pointer"></i>
-                                        <span class="ml-2">Modifica</span>
+                                        <span ng-click="openModalEditSupplier()" class="ml-2">Modifica</span>
                                     </p>
                                     <div class="dropdown-divider"></div>
                                     <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
@@ -386,6 +386,7 @@
             <i class="fas fa-angle-up"></i>
         </a>
         <jsp:include page="subviews/modal/uploadDocumentModalOverviewFornitore.jsp"></jsp:include>
+        <jsp:include page="subviews/modal/editSupplierModal.jsp"></jsp:include>
     </div>
 
 </body>

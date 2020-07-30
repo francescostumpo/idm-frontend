@@ -42,12 +42,12 @@
                                 <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" style="cursor: pointer;"></i>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                    <p ng-click="openModalEditTender()" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                         <i class="far fa-edit fa-fw fa-lg pointer"></i>
                                         <span class="ml-2">Modifica</span>
                                     </p>
                                     <div class="dropdown-divider"></div>
-                                    <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                    <p ng-click="deleteTender()" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                         <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                         <span class="ml-2">Elimina</span>
                                     </p>
@@ -144,13 +144,13 @@
                                                         aria-haspopup="true" aria-expanded="false"
                                                         style="cursor: pointer;"></i>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <p class="text-primary dropdown-item no-margin-bottom"
+                                                        <p ng-click="openModalEditSupplier(supplier)" class="text-primary dropdown-item no-margin-bottom"
                                                             style="cursor: pointer;">
                                                             <i class="far fa-edit fa-fw fa-lg pointer"></i>
                                                             <span class="ml-2">Modifica</span>
                                                         </p>
                                                         <div class="dropdown-divider"></div>
-                                                        <p class="text-primary dropdown-item no-margin-bottom"
+                                                        <p ng-click="deleteSupplier(supplier)" class="text-primary dropdown-item no-margin-bottom"
                                                             style="cursor: pointer;">
                                                             <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                             <span class="ml-2">Elimina</span>
@@ -357,6 +357,8 @@
         </a>
         <jsp:include page="subviews/modal/uploadDocumentModalNewFornitore.jsp"></jsp:include>
         <jsp:include page="subviews/modal/uploadDocumentModalOverviewGara.jsp"></jsp:include>
+        <jsp:include page="subviews/modal/editTenderModal.jsp"></jsp:include>
+        <jsp:include page="subviews/modal/editSupplierModal.jsp"></jsp:include>
     </div>
 
 </body>

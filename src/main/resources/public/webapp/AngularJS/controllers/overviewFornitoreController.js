@@ -66,6 +66,29 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
     $scope.tempDocumentUrl = null;
 
+    $scope.openModalEditSupplier = function () {
+        $scope.supplierModified = {}
+        $scope.supplierSelected = $scope.fornitoreOverview
+        $('#editSupplierModal').modal()
+    }
+
+    $scope.editSupplier = function(){
+        var url = mainController.getHost() + '/supplier/editSupplier'
+        var newSupplier = {
+            "id" : $scope.supplierSelected.id,
+            "name" : $scope.supplierModified.name
+        }
+        $http.post(url, newSupplier).then(function(response){
+            console.log('response from url ', url ,' : ', response )
+            if(response.data.status === 200){
+                $scope.fornitoreOverview = response.data.supplier
+            }
+            else{
+                mainController.showNotification("bottom", "right", response.data.message, '', 'danger');
+            }
+        })
+    }
+
     $scope.deleteDocument = function (document) {
         var idSupplier = $scope.fornitoreOverview.id
         console.log('document ', document, ' - id ', idSupplier)
@@ -99,7 +122,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
 
     $scope.updateAttachmentsForSupplier = function(){
         for(var i = 0; i < $scope.listOfFiles.length; i++){
-            var file = $scope.listOfFiles[0]
+            var file = $scope.listOfFiles[i]
             var fileBase64 = null;
             var reader = new FileReader();
             reader.readAsBinaryString(file);
@@ -110,7 +133,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 var files = []
                 if (base64String !== null) {
                     file.file = base64String;
-                    file.fileName = $scope.listOfFiles[0].name
+                    file.fileName = $scope.listOfFiles[i].name
                     files.push(file)
                 }
                 var fileToBeUploaded = {};

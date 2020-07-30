@@ -3,6 +3,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
 
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
+    $scope.tenderAttachments = $scope.bandoGara.tenderAttachments
     var urlDocumentContent = mainController.getFrontendHost() + '/api/documentContent';
     var urlDocumentPage = mainController.getFrontendHost() + '/documentDetail';
 
@@ -43,8 +44,6 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         })
     };
 
-    $scope.getTenderAttachments();
-
     $scope.uploadTenderFile = function(){
         for(var i = 0; i < $scope.listOfFiles.length; i++){
             var fileBase64 = null;
@@ -69,7 +68,89 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         }
         mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
     };
-    
+
+    $scope.deleteSupplier = function(supplier){
+        var supplierId = supplier.id
+        var url = mainController.getHost() + '/supplier/deleteSupplier/' + supplierId
+        mainController.startProgressIndicator('#idloading')
+        $http.delete(url).then(function (response) {
+            console.log('response from url ', url ,' : ', response)
+            mainController.stopProgressIndicator('#idloading')
+            if(response.data.status === 200){
+                if(response.data.exitStatus === 0){
+                    $scope.getSuppliers()
+                }
+                else{
+                    mainController.showNotification('bottom', 'right', response.data.message, '', 'warning')
+                }
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
+    }
+
+    $scope.openModalEditSupplier = function (supplier) {
+        $scope.supplierModified = {}
+        $scope.supplierSelected = supplier
+        $('#editSupplierModal').modal()
+    }
+
+
+    $scope.editSupplier = function(){
+        var url = mainController.getHost() + '/supplier/editSupplier'
+        var newSupplier = {
+            "id" : $scope.supplierSelected.id,
+            "name" : $scope.supplierModified.name
+        }
+        $http.post(url, newSupplier).then(function(response){
+            console.log('response from url ', url ,' : ', response )
+            if(response.data.status === 200){
+                $scope.getSuppliers()
+            }
+            else{
+                mainController.showNotification("bottom", "right", response.data.message, '', 'danger');
+            }
+        })
+    }
+
+
+    $scope.openModalEditTender = function () {
+        $('#datepickerModify').datepicker({
+            locale: 'it-it',
+            uiLibrary: 'bootstrap4',
+            format: 'dd/mm/yyyy'
+        });
+        $scope.tenderModified = {}
+        $scope.bandoSelected = $scope.bandoGara
+        $('#editTenderModal').modal()
+    }
+
+    $scope.modifyBando = function(){
+        console.log('Bando ', $scope.bandoGara, ' modified')
+        var url = mainController.getHost() + '/tender/updateTenderFields'
+        var input = {
+            "object" : $scope.tenderModified.object,
+            "description" : $scope.tenderModified.description,
+            "endDate" : $scope.tenderModified.endDate,
+            "cig": $scope.tenderModified.cig,
+            "company" : $scope.tenderModified.company,
+            "id" : $scope.bandoSelected.id,
+            "sapNumber" : $scope.tenderModified.sapNumber
+        }
+        $http.post(url, input).then(function (response) {
+            console.log('response from ', url, ' : ', response)
+            if(response.data.status === 200){
+                $scope.bandoGara = response.data.tender
+                $scope.bandoGara.endDate = mainController.convertLocalDateToDate($scope.bandoGara.endDate)
+                $scope.getSuppliers()
+                //mainController.showNotification('bottom', 'right', response.data.message, '', 'info')
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
+    }
 
     $scope.createSupplier = function(){
         var fileBase64 = null;
@@ -91,6 +172,20 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             stompClientSupplier.send("/app/createSupplier", {}, JSON.stringify($scope.supplier));
             mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info');
         }
+    }
+
+    $scope.deleteTender = function(){
+        console.log('deleting tender ', $scope.bandoGara)
+        var url = mainController.getHost() + '/tender/deleteTender/' + $scope.bandoGara.id
+        $http.delete(url).then(function (response) {
+            console.log('response from ', url ,' : ', response)
+            if(response.data.status == 200){
+                location.href = '/bandiList'
+            }
+            else{
+                mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
+            }
+        })
     }
 
     $scope.makeVisibleTab = function (itemToDisplay, itemToHide) {

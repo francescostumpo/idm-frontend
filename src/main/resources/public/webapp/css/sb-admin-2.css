@@ -2483,9 +2483,9 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
     background-color:#f8f9fc
 }
 .dropdown-item.active,.dropdown-item:active {
-    color:#fff;
+    color:#004B9C;
     text-decoration:none;
-    background-color:#4e73df
+    background-color:white
 }
 .dropdown-item.disabled,.dropdown-item:disabled {
     color:#858796;
@@ -8073,11 +8073,11 @@ a:focus {
     overflow:hidden
 }
 .topbar .dropdown-list .dropdown-header {
-    background-color:#4e73df;
-    border:1px solid #4e73df;
+    background-color:white;
+    border:1px solid #004B9C;
     padding-top:.75rem;
     padding-bottom:.75rem;
-    color:#fff
+    color:#004B9C
 }
 .topbar .dropdown-list .dropdown-item {
     white-space:normal;
