@@ -174,7 +174,7 @@
                                                     style="color: red;"></i>
                                                 <i ng-if="!document.isPresent" style="color: #CFD6DB" class="my-auto ml-2 mr-4 fa-2x fas fa-file"></i>
                                                 <p ng-style="checkIfTagIsPresent(document)" class="my-auto  no-margin-bottom text-size-16 text-bold crop">
-                                                    {{document.tag}}</p>
+                                                    {{document.label}}</p>
                                             </div>
                                         </div>
                                         <div class="my-auto col-lg-2 col-md-2 col-sm-2">
@@ -263,7 +263,7 @@
                                                         <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
                                                             style="color: red;"></i>
                                                         <p ng-style="checkIfTagIsPresent(document)" class="my-auto no-margin-bottom text-size-16 text-bold crop">
-                                                            {{document.tag}}</p>
+                                                            {{document.label}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3">
