@@ -4,6 +4,44 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
     $scope.fornitoreOverview = JSON.parse(sessionStorage.getItem("fornitoreOverview"));
 
+    $scope.labelsAssociatedToTag = [
+        { tag : "M_01_ETICO", label : "Patto Etico e d'Integrita'"},
+        { tag : "M_02_ESCLUSIONE", label : "Autocertificazione assenza motivi di esclusione"},
+        { tag : "M_03_RESPONSABILITA", label : "Dichiarazione responsabilita' amministrativa e anticorruzione"},
+        { tag : "M_05_CONSENSO", label : "Dichiarazione di consenso privacy"},
+        { tag : "M_06_ISCRIZIONE_CAMERA", label : "Dichiarazione iscrizione camera di commercio"},
+        { tag : "M_07_AUTOCERT_445", label : "Autocertificazione ex DPR n 445/2000"},
+        { tag : "M_09_DICHIARAZIONE_445", label : "Dichiarazione sostitutiva ex DPR n 445/2000 familiari conviventi"},
+        { tag : "M_11_BID_BOND", label : "Testo di garanzia bancaria bid bond"},
+        { tag : "M_12_SOPRALLUOGO", label : "Verbale di sopralluogo"},
+        { tag : "D_12_01_VISIONE", label : "Presa visione documenti gara"},
+        { tag : "D_12_07_COMUNICAZIONI", label : "Luogo comunicazioni"},
+        { tag : "D_12_08_CONTROLLO", label : "Dichiarazione relative alle situazioni di controllo"},
+        { tag : "C_12_10_VERSAMENTO", label : "Versamento anticorruzione/contributo ANAC"},
+        { tag : "C_12_13_DURC", label : "Durc"},
+        { tag : "D_12_09_WHITE_LIST", label : "White list"},
+        { tag : "D_12_14_ASSICURAZIONE", label : "Impegno presentazione assicurazione"},
+        { tag : "D_12_15_CAR", label : "Impegno presentazione polizza CAR"},
+        { tag : "D_12_21_COMMERCIALE", label : "NO segreto tecnico o commerciale"},
+        { tag : "D_12_23_CONFINAMENTO", label : "Rispetto prescrizioni di sicurezza in caso di inquinamento o confinamento"},
+        { tag : "D_12_16_MODELLO_15", label : "Impegno a presentare modello 15/1 o modello 15/2"},
+        { tag : "D_12_17_MODELLO_14", label : "Impegno a presentare modello 14"},
+        { tag : "D_12_19_DOCUMENTI_23_1", label : "Dichiarazione di trasmettere al Committente i documenti indicati all'art. 23.1 della RdO"},
+        { tag : "D_12_11_01_HS", label : "Requisiti HS (salute e sicurezza)"},
+        { tag : "D_12_11_02_SALUTE", label : "Salute e sicurezza"},
+        { tag : "D_12_11_03_RSPP", label : "RSPP-ASPP"},
+        { tag : "D_12_11_04_COSTI", label : "Costi sicurezza"},
+        { tag : "D_12_11_05_OBBLIGHI", label : "Obblighi sicurezza"},
+        { tag : "D_12_11_06_DSSC", label : "DSSC"},
+        { tag : "D_12_11_07_DSS", label : "DSS"},
+        { tag : "D_12_11_08_DPI", label : "DPI"},
+        { tag : "D_12_11_09_MEZZI", label : "Mezzi e attrezzature"},
+        { tag : "D_12_11_10_ADDETTI", label : "Numero di addetti"},
+        { tag : "D_12_18_01_SICILIA", label : "Protocollo di legalita' - Regione Siciliana"},
+        { tag : "D_12_18_02_CALTANISETTA", label : "Protocollo di legalita' - Provincia di Caltanisetta"},
+        { tag : "D_12_18_03_PEDEMONTANA", label : "Protocollo di legalita' - Pedemontana veneta"}
+    ];
+
     $scope.requiredAttachments = [];
     $scope.notCompliants = 0;
     $scope.compliants = 0;
@@ -34,6 +72,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             tagRequired.isPresent = false
             tagRequired.compliant = true
             tagRequired.tag = $scope.bandoGara.requiredAttachments[i]
+            tagRequired.label = $scope.getLabelAssociatedToTag(tagRequired.tag);
             $scope.requiredAttachments.push(tagRequired)
             if(null != tagRequired.compliant && undefined != tagRequired.compliant && tagRequired.compliant === false){
                 $scope.notCompliants++;
@@ -53,6 +92,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                     tagRequired.isPresent = true
                     found = true
                     tagRequired.compliant = true
+                    tagRequired.label = $scope.getLabelAssociatedToTag(tag);
                     $scope.compliants++
                 }
             }
@@ -62,13 +102,22 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
     }
 
+    $scope.getLabelAssociatedToTag = function(tag){
+        for(var i=0; i< $scope.labelsAssociatedToTag.length; i++){
+            if(tag === $scope.labelsAssociatedToTag[i].tag){
+                return $scope.labelsAssociatedToTag[i].label;
+            }
+        }
+    }
+
     $scope.documents = $scope.fornitoreOverview.attachments;
 
 
 
+
+    $scope.getRequiredAttachments()
     console.log('$scope.notRequiredAttachments', $scope.notRequiredAttachments);
     console.log('$scope.requiredAttachments', $scope.requiredAttachments);
-    $scope.getRequiredAttachments()
 
     $scope.countRequiredAttachmentsUploaded = function() {
         var count = 0

@@ -36,8 +36,8 @@
                     <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
                     <h3 class="font-bold">Bandi di Gara</h3>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                            <div class="d-sm-flex align-items-center justify-content-between mt-4 mb-4">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-3">
                                 <div>
 
                                 </div>
@@ -84,7 +84,7 @@
                                 <i ng-if="sort.object === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
                             <div ng-click="sortCardsByColumnName(bandiGaraList, 'company')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
-                                SOCIETA'
+                                SOCIET&Agrave;
                                 <i ng-if="sort.company === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.company === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
