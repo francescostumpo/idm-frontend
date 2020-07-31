@@ -146,7 +146,7 @@
                                     </div>
                                     <div ng-click="sortCardsByColumnName('conformity')"
                                         class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
-                                        CONFORMITA'
+                                        CONFORMIT&Agrave;
                                         <i ng-if="sort.conformity === 'desc'"
                                             class="fas fa-sort-down hoverable sort-chev"></i>
                                         <i ng-if="sort.conformity === 'asc'"
@@ -162,7 +162,7 @@
                                             <i ng-if="document.isPresent" class="my-auto ml-2 fa fa-check-circle pointer"
                                                     style="color: limegreen;"></i>
                                             <i  ng-if="!document.isPresent" class="danger-color my-auto fas fa-exclamation-triangle ml-2"></i>
-                                            <span class="col-lg-7 col-md-7 col-sm-12" >
+                                            <span class="ml-4 col-lg-7 col-md-7 col-sm-12" >
                                                 <input ng-if="document.isPresent" ng-checked="checkDocument(document)"
                                                        ng-click="selectDocument(document, false)" type="checkbox"
                                                        class="my-auto  pointer">
@@ -232,7 +232,7 @@
                                             </div>
                                             <div ng-click="sortCardsByColumnName('conformity')"
                                                 class="col-lg-3 col-md-3 col-sm-3 text-size-14">
-                                                CONFORMITA'
+                                                CONFORMIT&Agrave;
                                                 <i ng-if="sort.conformity === 'desc'"
                                                     class="fas fa-sort-down hoverable sort-chev"></i>
                                                 <i ng-if="sort.conformity === 'asc'"
@@ -401,7 +401,7 @@
                             </div>
                             <div ng-click="sortCardsByColumnName('conformity')"
                                  class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
-                                CONFORMITA'
+                                CONFORMIT&Agrave;
                                 <i ng-if="sort.conformity === 'desc'"
                                    class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.conformity === 'asc'"
@@ -480,7 +480,7 @@
                                     </div>
                                     <div ng-click="sortCardsByColumnName('conformity')"
                                          class="col-lg-3 col-md-3 col-sm-3 text-size-14">
-                                        CONFORMITA'
+                                        CONFORMIT&Agrave;
                                         <i ng-if="sort.conformity === 'desc'"
                                            class="fas fa-sort-down hoverable sort-chev"></i>
                                         <i ng-if="sort.conformity === 'asc'"

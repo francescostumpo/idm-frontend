@@ -84,7 +84,7 @@
                                 <i ng-if="sort.object === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
                             <div ng-click="sortCardsByColumnName(bandiGaraList, 'company')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
-                                SOCIETA'
+                                SOCIET&Agrave;
                                 <i ng-if="sort.company === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.company === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
