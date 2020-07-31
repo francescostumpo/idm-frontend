@@ -449,3 +449,582 @@
 2020-07-31 10:27:11,602 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-2] getUserNotification -- INIT --
 2020-07-31 10:27:11,723 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-2] Found 2 notification(s) for user RIDP86Z
 2020-07-31 10:27:11,724 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-2] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:31:33,219 INFO org.springframework.boot.StartupInfoLogger [main] Starting IdmFrontendApplication on DESKTOP-D7RNNC6 with PID 9648 (C:\progetti\Legal_IDM\workspace\idm-frontend\target\classes started by PietroGerace in C:\progetti\Legal_IDM\workspace\idm-frontend)
+2020-07-31 10:31:33,221 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-31 10:31:33,925 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-07-31 10:31:33,978 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 46ms. Found 1 JPA repository interfaces.
+2020-07-31 10:31:34,407 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3030 (http)
+2020-07-31 10:31:34,412 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:31:34,413 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-31 10:31:34,413 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-07-31 10:31:34,715 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-07-31 10:31:34,719 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-31 10:31:34,719 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1461 ms
+2020-07-31 10:31:34,758 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-31 10:31:34,764 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connecting to Datasource....
+2020-07-31 10:31:34,764 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connected to Datasource - url : jdbc:db2://dashdb-txn-flex-yp-fra02-566.services.eu-de.bluemix.net:50000/BLUDB
+2020-07-31 10:31:34,820 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-07-31 10:31:35,239 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-07-31 10:31:35,356 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-31 10:31:35,394 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-31 10:31:35,499 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-31 10:31:35,586 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.DB2Dialect
+2020-07-31 10:31:36,315 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-31 10:31:36,323 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-31 10:31:36,511 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@703e8050, org.springframework.security.web.context.SecurityContextPersistenceFilter@755b5f30, org.springframework.security.web.header.HeaderWriterFilter@2c06b113, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@4a216eb4, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@45801322, org.springframework.security.web.authentication.logout.LogoutFilter@3cb6e0ee, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@272778ae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@236c098, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@7a04f730, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@3b11620a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@49c1e294, org.springframework.security.web.session.SessionManagementFilter@785ed99c, org.springframework.security.web.access.ExceptionTranslationFilter@39d77de9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1291aab5]
+2020-07-31 10:31:36,559 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientInboundChannelExecutor'
+2020-07-31 10:31:36,563 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
+2020-07-31 10:31:36,568 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
+2020-07-31 10:31:36,592 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'brokerChannelExecutor'
+2020-07-31 10:31:36,704 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [public/index.html]
+2020-07-31 10:31:36,786 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:31:36,810 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3030 (http) with context path ''
+2020-07-31 10:31:36,812 INFO org.springframework.core.log.CompositeLog [main] Starting...
+2020-07-31 10:31:36,813 INFO org.springframework.core.log.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2020-07-31 10:31:36,813 INFO org.springframework.core.log.CompositeLog [main] Started.
+2020-07-31 10:31:36,813 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-07-31 10:31:36,993 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-07-31 10:31:36,998 INFO org.springframework.boot.StartupInfoLogger [main] Started IdmFrontendApplication in 4.116 seconds (JVM running for 5.148)
+2020-07-31 10:31:43,274 INFO org.apache.juli.logging.DirectJDKLog [http-nio-3030-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 10:31:43,275 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-31 10:31:43,279 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Completed initialization in 4 ms
+2020-07-31 10:31:44,119 INFO org.keycloak.adapters.KeycloakDeployment [http-nio-3030-exec-2] Loaded URLs from http://158.177.78.141:8080/auth/realms/idm-realm/.well-known/openid-configuration
+2020-07-31 10:31:44,376 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-07-31 10:31:44,384 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting dashboard
+2020-07-31 10:31:44,385 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] returning dashboard
+2020-07-31 10:31:45,543 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:31:45,548 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] getUserNotification -- INIT --
+2020-07-31 10:31:45,830 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:31:45,872 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:31:49,135 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting bandiList
+2020-07-31 10:31:49,135 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning bandiList
+2020-07-31 10:31:49,402 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:31:49,403 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] getUserNotification -- INIT --
+2020-07-31 10:31:49,536 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:31:49,538 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:31:53,932 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting garaOverview
+2020-07-31 10:31:53,933 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] returning garaOverview
+2020-07-31 10:31:54,319 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-1] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:31:54,319 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-1] getUserNotification -- INIT --
+2020-07-31 10:31:54,321 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- INIT --
+2020-07-31 10:31:54,330 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:31:54,446 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- END --
+2020-07-31 10:31:54,450 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-1] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:31:54,451 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-1] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:31:54,453 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- INIT --
+2020-07-31 10:31:54,455 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:31:54,555 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- END --
+2020-07-31 10:31:55,903 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-6] getting fornitoreOverview
+2020-07-31 10:31:55,904 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-6] returning fornitoreOverview
+2020-07-31 10:31:56,188 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-6] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:31:56,189 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-6] getUserNotification -- INIT --
+2020-07-31 10:31:56,325 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-6] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:31:56,325 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-6] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:32:36,591 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-11] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 12 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(12)-CONNECTED(12)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 207], outboundChannel[pool size = 21, active threads = 0, queued tasks = 0, completed tasks = 21], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 36]
+2020-07-31 10:37:58,313 INFO org.springframework.boot.StartupInfoLogger [main] Starting IdmFrontendApplication on DESKTOP-D7RNNC6 with PID 13984 (C:\progetti\Legal_IDM\workspace\idm-frontend\target\classes started by PietroGerace in C:\progetti\Legal_IDM\workspace\idm-frontend)
+2020-07-31 10:37:58,316 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-31 10:37:59,018 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-07-31 10:37:59,071 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 46ms. Found 1 JPA repository interfaces.
+2020-07-31 10:37:59,492 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3030 (http)
+2020-07-31 10:37:59,498 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:37:59,498 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-31 10:37:59,498 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-07-31 10:37:59,810 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-07-31 10:37:59,813 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-31 10:37:59,814 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1465 ms
+2020-07-31 10:37:59,863 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-31 10:37:59,869 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connecting to Datasource....
+2020-07-31 10:37:59,870 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connected to Datasource - url : jdbc:db2://dashdb-txn-flex-yp-fra02-566.services.eu-de.bluemix.net:50000/BLUDB
+2020-07-31 10:37:59,928 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-07-31 10:38:00,317 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-07-31 10:38:00,422 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-31 10:38:00,462 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-31 10:38:00,568 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-31 10:38:00,661 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.DB2Dialect
+2020-07-31 10:38:01,364 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-31 10:38:01,371 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-31 10:38:01,553 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@129c4d19, org.springframework.security.web.context.SecurityContextPersistenceFilter@52f8a6f4, org.springframework.security.web.header.HeaderWriterFilter@5f8f1712, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@17c0274c, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@39832280, org.springframework.security.web.authentication.logout.LogoutFilter@4652c74d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6486fe7b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@71d55b7e, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@1b52699c, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@dbed7fd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@11810917, org.springframework.security.web.session.SessionManagementFilter@52ecc989, org.springframework.security.web.access.ExceptionTranslationFilter@18ffca6c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5fd43e58]
+2020-07-31 10:38:01,603 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientInboundChannelExecutor'
+2020-07-31 10:38:01,607 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
+2020-07-31 10:38:01,611 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
+2020-07-31 10:38:01,638 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'brokerChannelExecutor'
+2020-07-31 10:38:01,762 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [public/index.html]
+2020-07-31 10:38:01,854 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:38:01,875 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3030 (http) with context path ''
+2020-07-31 10:38:01,878 INFO org.springframework.core.log.CompositeLog [main] Starting...
+2020-07-31 10:38:01,878 INFO org.springframework.core.log.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2020-07-31 10:38:01,878 INFO org.springframework.core.log.CompositeLog [main] Started.
+2020-07-31 10:38:01,879 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-07-31 10:38:02,089 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-07-31 10:38:02,095 INFO org.springframework.boot.StartupInfoLogger [main] Started IdmFrontendApplication in 4.132 seconds (JVM running for 5.113)
+2020-07-31 10:38:09,010 INFO org.apache.juli.logging.DirectJDKLog [http-nio-3030-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 10:38:09,010 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-31 10:38:09,014 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Completed initialization in 3 ms
+2020-07-31 10:38:09,892 INFO org.keycloak.adapters.KeycloakDeployment [http-nio-3030-exec-2] Loaded URLs from http://158.177.78.141:8080/auth/realms/idm-realm/.well-known/openid-configuration
+2020-07-31 10:38:10,152 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-07-31 10:38:10,158 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting dashboard
+2020-07-31 10:38:10,159 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] returning dashboard
+2020-07-31 10:38:11,189 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:38:11,194 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] getUserNotification -- INIT --
+2020-07-31 10:38:11,471 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:38:11,506 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:38:56,344 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-1] getting dashboard
+2020-07-31 10:38:56,344 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-1] returning dashboard
+2020-07-31 10:38:56,574 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-4] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:38:56,575 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-4] getUserNotification -- INIT --
+2020-07-31 10:38:56,684 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-4] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:38:56,686 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-4] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:38:58,528 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-7] getting bandiList
+2020-07-31 10:38:58,529 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-7] returning bandiList
+2020-07-31 10:38:58,794 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:38:58,794 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] getUserNotification -- INIT --
+2020-07-31 10:38:58,910 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:38:58,910 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:39:01,620 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-3] getting garaOverview
+2020-07-31 10:39:01,621 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-3] returning garaOverview
+2020-07-31 10:39:01,636 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-9] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 9 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(9)-CONNECTED(9)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 153], outboundChannel[pool size = 15, active threads = 0, queued tasks = 0, completed tasks = 15], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 36]
+2020-07-31 10:39:02,022 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:39:02,022 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] getUserNotification -- INIT --
+2020-07-31 10:39:02,024 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- INIT --
+2020-07-31 10:39:02,046 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:39:02,132 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:39:02,132 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:39:02,172 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- END --
+2020-07-31 10:39:02,180 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- INIT --
+2020-07-31 10:39:02,184 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:39:02,282 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- END --
+2020-07-31 10:39:04,480 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] getting fornitoreOverview
+2020-07-31 10:39:04,481 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] returning fornitoreOverview
+2020-07-31 10:39:04,770 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:39:04,770 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] getUserNotification -- INIT --
+2020-07-31 10:39:04,880 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:39:04,880 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:39:15,831 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-3] getting garaOverview
+2020-07-31 10:39:15,832 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-3] returning garaOverview
+2020-07-31 10:39:16,071 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:39:16,072 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] getUserNotification -- INIT --
+2020-07-31 10:39:16,072 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] getSuppliersByTenderId -- INIT --
+2020-07-31 10:39:16,075 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:39:16,184 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:39:16,184 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:39:16,452 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] getSuppliersByTenderId -- END --
+2020-07-31 10:39:16,456 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- INIT --
+2020-07-31 10:39:16,460 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:39:16,582 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- END --
+2020-07-31 10:39:20,801 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-07-31 10:39:20,801 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] returning fornitoreOverview
+2020-07-31 10:39:21,005 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:39:21,005 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] getUserNotification -- INIT --
+2020-07-31 10:39:21,116 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] Found 2 notification(s) for user RIDP86Z
+2020-07-31 10:39:21,116 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:39:28,596 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-24] analyzeFile -- INIT --
+2020-07-31 10:39:28,597 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-24] bytes : [B@149c4931
+2020-07-31 10:39:28,597 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-24] name : Documento - Off Topic.docx
+2020-07-31 10:39:28,600 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-24] Calling URL : http://158.177.78.140:8080/analyzerDocument/analyze/document
+2020-07-31 10:39:30,785 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-24] analyzeFile --END--
+2020-07-31 10:39:30,786 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-24] saveObjectOnDb -- INIT --
+2020-07-31 10:39:30,788 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-24] calling url : http://localhost:8080/attachment/uploadAttachmentsForSupplier
+2020-07-31 10:39:30,788 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-24] JSON: {"cig":"7901795F80","idTender":"5f2315c00fb28237c312c122","idSupplier":"5f2317bf0fb28237c312c123","attachmentsId":[{"idAttachment":"5f23d8c1115b3374bb5e91f3","fileName":"Documento - Off Topic.docx"}],"responseFromAnalyzer":{"entities":[],"language":"it","status":200,"idAttachment":"5f23d8c1115b3374bb5e91f3"}}
+2020-07-31 10:39:30,891 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-24] saveObjectOnDb -- END --
+2020-07-31 10:39:30,892 INFO com.ibm.snam.idm.web_socket.UpdateFilesController [clientInboundChannel-24] Response from backend : {"status":200,"message":"Documento caricato con successo","updated":"supplier","idSupplier":"5f2317bf0fb28237c312c123","cig":"7901795F80","idTender":"5f2315c00fb28237c312c122"}
+2020-07-31 10:39:30,913 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] createNotification -- INIT --
+2020-07-31 10:39:30,913 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] createNotification -- INIT -- notification : {"userId":"RIDP86Z","idTender":"5f2315c00fb28237c312c122","idSupplier":"5f2317bf0fb28237c312c123","cig":"7901795F80","notificationType":"uploadFileSupplier"}
+2020-07-31 10:39:30,919 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Create notification for user RIDP86Z at time : 2020-07-31
+2020-07-31 10:39:30,921 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Saving notification : UserNotification{id=null, userId='RIDP86Z', notificationType='uploadFileSupplier', idTender='5f2315c00fb28237c312c122', creationDate=31.07.2020 10:39, idSupplier='5f2315c00fb28237c312c122', readingDate='null'}
+2020-07-31 10:39:31,110 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] createNotification -- END -- 
+2020-07-31 10:40:25,366 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] getDocumentContent -- INIT --
+2020-07-31 10:40:25,371 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] calling url : http://localhost:8080/document/5f23d8c1115b3374bb5e91f3/content
+2020-07-31 10:40:25,850 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] getDocumentContent -- END --
+2020-07-31 10:44:21,547 INFO org.springframework.boot.StartupInfoLogger [main] Starting IdmFrontendApplication on DESKTOP-D7RNNC6 with PID 7112 (C:\progetti\Legal_IDM\workspace\idm-frontend\target\classes started by PietroGerace in C:\progetti\Legal_IDM\workspace\idm-frontend)
+2020-07-31 10:44:21,550 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-31 10:44:22,229 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-07-31 10:44:22,282 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 48ms. Found 1 JPA repository interfaces.
+2020-07-31 10:44:22,717 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3030 (http)
+2020-07-31 10:44:22,722 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:44:22,723 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-31 10:44:22,723 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-07-31 10:44:23,034 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-07-31 10:44:23,038 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-31 10:44:23,038 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1453 ms
+2020-07-31 10:44:23,084 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-31 10:44:23,090 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connecting to Datasource....
+2020-07-31 10:44:23,091 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connected to Datasource - url : jdbc:db2://dashdb-txn-flex-yp-fra02-566.services.eu-de.bluemix.net:50000/BLUDB
+2020-07-31 10:44:23,153 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-07-31 10:44:23,811 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-07-31 10:44:23,847 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-31 10:44:23,884 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-31 10:44:24,002 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-31 10:44:24,097 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.DB2Dialect
+2020-07-31 10:44:25,050 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-31 10:44:25,057 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-31 10:44:25,245 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@46bb0bdf, org.springframework.security.web.context.SecurityContextPersistenceFilter@194012a2, org.springframework.security.web.header.HeaderWriterFilter@77083e41, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@5c4cc644, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@797fcf9, org.springframework.security.web.authentication.logout.LogoutFilter@68dfda77, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@60591e1b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4f2ac7e0, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@62b6c045, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@58f254b1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@561f9d92, org.springframework.security.web.session.SessionManagementFilter@2d130ac4, org.springframework.security.web.access.ExceptionTranslationFilter@7b8ea1db, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@45c80312]
+2020-07-31 10:44:25,299 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientInboundChannelExecutor'
+2020-07-31 10:44:25,303 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
+2020-07-31 10:44:25,307 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
+2020-07-31 10:44:25,336 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'brokerChannelExecutor'
+2020-07-31 10:44:25,465 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [public/index.html]
+2020-07-31 10:44:25,558 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:44:25,578 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3030 (http) with context path ''
+2020-07-31 10:44:25,580 INFO org.springframework.core.log.CompositeLog [main] Starting...
+2020-07-31 10:44:25,581 INFO org.springframework.core.log.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2020-07-31 10:44:25,581 INFO org.springframework.core.log.CompositeLog [main] Started.
+2020-07-31 10:44:25,581 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-07-31 10:44:25,793 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-07-31 10:44:25,800 INFO org.springframework.boot.StartupInfoLogger [main] Started IdmFrontendApplication in 4.598 seconds (JVM running for 5.619)
+2020-07-31 10:44:27,051 INFO org.apache.juli.logging.DirectJDKLog [http-nio-3030-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 10:44:27,051 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-31 10:44:27,057 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Completed initialization in 5 ms
+2020-07-31 10:44:27,924 INFO org.keycloak.adapters.KeycloakDeployment [http-nio-3030-exec-2] Loaded URLs from http://158.177.78.141:8080/auth/realms/idm-realm/.well-known/openid-configuration
+2020-07-31 10:44:28,184 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-07-31 10:44:28,190 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting dashboard
+2020-07-31 10:44:28,191 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] returning dashboard
+2020-07-31 10:44:29,296 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:44:29,302 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] getUserNotification -- INIT --
+2020-07-31 10:44:29,562 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:44:29,602 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:44:31,431 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting bandiList
+2020-07-31 10:44:31,432 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] returning bandiList
+2020-07-31 10:44:31,819 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:44:31,820 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] getUserNotification -- INIT --
+2020-07-31 10:44:31,942 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:44:31,944 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:44:33,309 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-1] getting garaOverview
+2020-07-31 10:44:33,310 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-1] returning garaOverview
+2020-07-31 10:44:33,856 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:44:33,856 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] getUserNotification -- INIT --
+2020-07-31 10:44:33,859 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] getSuppliersByTenderId -- INIT --
+2020-07-31 10:44:33,870 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:44:33,987 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:44:33,988 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:44:50,861 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting garaOverview
+2020-07-31 10:44:50,862 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning garaOverview
+2020-07-31 10:44:51,213 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] getSuppliersByTenderId -- INIT --
+2020-07-31 10:44:51,213 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:44:51,213 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] getUserNotification -- INIT --
+2020-07-31 10:44:51,215 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:44:51,323 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] getSuppliersByTenderId -- END --
+2020-07-31 10:44:51,332 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- INIT --
+2020-07-31 10:44:51,334 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:44:51,337 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:44:51,338 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:44:51,434 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- END --
+2020-07-31 10:44:53,162 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] getSuppliersByTenderId -- END --
+2020-07-31 10:44:59,842 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-2] getting fornitoreOverview
+2020-07-31 10:44:59,842 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-2] returning fornitoreOverview
+2020-07-31 10:45:00,164 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:45:00,164 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] getUserNotification -- INIT --
+2020-07-31 10:45:00,291 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:45:00,292 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:45:25,336 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-11] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 15 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(15)-CONNECTED(15)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 261], outboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 27], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 39]
+2020-07-31 10:46:30,103 INFO org.springframework.boot.StartupInfoLogger [main] Starting IdmFrontendApplication on DESKTOP-D7RNNC6 with PID 10892 (C:\progetti\Legal_IDM\workspace\idm-frontend\target\classes started by PietroGerace in C:\progetti\Legal_IDM\workspace\idm-frontend)
+2020-07-31 10:46:30,106 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-31 10:46:30,797 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-07-31 10:46:30,850 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 46ms. Found 1 JPA repository interfaces.
+2020-07-31 10:46:31,274 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3030 (http)
+2020-07-31 10:46:31,280 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:46:31,280 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-31 10:46:31,280 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-07-31 10:46:31,588 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-07-31 10:46:31,591 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-31 10:46:31,592 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1449 ms
+2020-07-31 10:46:31,634 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-31 10:46:31,641 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connecting to Datasource....
+2020-07-31 10:46:31,641 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connected to Datasource - url : jdbc:db2://dashdb-txn-flex-yp-fra02-566.services.eu-de.bluemix.net:50000/BLUDB
+2020-07-31 10:46:31,699 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-07-31 10:46:32,106 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-07-31 10:46:32,195 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-31 10:46:32,232 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-31 10:46:32,337 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-31 10:46:32,431 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.DB2Dialect
+2020-07-31 10:46:33,150 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-31 10:46:33,157 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-31 10:46:33,343 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5333f08f, org.springframework.security.web.context.SecurityContextPersistenceFilter@4981d95b, org.springframework.security.web.header.HeaderWriterFilter@216c22ce, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@4a50c746, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@65eb3597, org.springframework.security.web.authentication.logout.LogoutFilter@28b523a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b867ee7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@143fefaf, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@6ef2f7ad, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@22d477c2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@27898e13, org.springframework.security.web.session.SessionManagementFilter@21e5f0b6, org.springframework.security.web.access.ExceptionTranslationFilter@3bbf1c0d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6650a6c]
+2020-07-31 10:46:33,392 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientInboundChannelExecutor'
+2020-07-31 10:46:33,396 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
+2020-07-31 10:46:33,401 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
+2020-07-31 10:46:33,428 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'brokerChannelExecutor'
+2020-07-31 10:46:33,549 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [public/index.html]
+2020-07-31 10:46:33,640 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:46:33,661 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3030 (http) with context path ''
+2020-07-31 10:46:33,663 INFO org.springframework.core.log.CompositeLog [main] Starting...
+2020-07-31 10:46:33,663 INFO org.springframework.core.log.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2020-07-31 10:46:33,664 INFO org.springframework.core.log.CompositeLog [main] Started.
+2020-07-31 10:46:33,664 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-07-31 10:46:33,868 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-07-31 10:46:33,874 INFO org.springframework.boot.StartupInfoLogger [main] Started IdmFrontendApplication in 4.133 seconds (JVM running for 5.135)
+2020-07-31 10:46:39,414 INFO org.apache.juli.logging.DirectJDKLog [http-nio-3030-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 10:46:39,415 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-31 10:46:39,419 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Completed initialization in 4 ms
+2020-07-31 10:46:40,295 INFO org.keycloak.adapters.KeycloakDeployment [http-nio-3030-exec-2] Loaded URLs from http://158.177.78.141:8080/auth/realms/idm-realm/.well-known/openid-configuration
+2020-07-31 10:46:40,568 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting fornitoreOverview
+2020-07-31 10:46:40,574 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-3] getting dashboard
+2020-07-31 10:46:40,575 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-3] returning dashboard
+2020-07-31 10:46:41,879 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:46:41,884 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] getUserNotification -- INIT --
+2020-07-31 10:46:42,140 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:46:42,178 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:46:44,653 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting bandiList
+2020-07-31 10:46:44,654 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning bandiList
+2020-07-31 10:46:45,057 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:46:45,057 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] getUserNotification -- INIT --
+2020-07-31 10:46:45,167 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:46:45,170 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:46:48,424 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting garaOverview
+2020-07-31 10:46:48,425 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning garaOverview
+2020-07-31 10:46:48,984 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:46:48,985 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] getUserNotification -- INIT --
+2020-07-31 10:46:48,989 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-3] getSuppliersByTenderId -- INIT --
+2020-07-31 10:46:49,000 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-3] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:46:49,093 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:46:49,094 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:46:49,156 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-3] getSuppliersByTenderId -- END --
+2020-07-31 10:46:49,163 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] getSuppliersByTenderId -- INIT --
+2020-07-31 10:46:49,165 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:46:49,266 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] getSuppliersByTenderId -- END --
+2020-07-31 10:46:50,143 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] getting fornitoreOverview
+2020-07-31 10:46:50,144 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] returning fornitoreOverview
+2020-07-31 10:46:50,586 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:46:50,586 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] getUserNotification -- INIT --
+2020-07-31 10:46:50,699 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:46:50,700 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:47:33,427 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-6] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 12 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(12)-CONNECTED(12)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 207], outboundChannel[pool size = 21, active threads = 0, queued tasks = 0, completed tasks = 21], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 36]
+2020-07-31 10:48:01,216 INFO org.springframework.boot.StartupInfoLogger [main] Starting IdmFrontendApplication on DESKTOP-D7RNNC6 with PID 17220 (C:\progetti\Legal_IDM\workspace\idm-frontend\target\classes started by PietroGerace in C:\progetti\Legal_IDM\workspace\idm-frontend)
+2020-07-31 10:48:01,219 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-31 10:48:01,961 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-07-31 10:48:02,015 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 46ms. Found 1 JPA repository interfaces.
+2020-07-31 10:48:02,449 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3030 (http)
+2020-07-31 10:48:02,455 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:48:02,455 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-31 10:48:02,456 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-07-31 10:48:02,774 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-07-31 10:48:02,780 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-31 10:48:02,780 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1521 ms
+2020-07-31 10:48:02,838 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-31 10:48:02,847 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connecting to Datasource....
+2020-07-31 10:48:02,847 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connected to Datasource - url : jdbc:db2://dashdb-txn-flex-yp-fra02-566.services.eu-de.bluemix.net:50000/BLUDB
+2020-07-31 10:48:02,909 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-07-31 10:48:03,332 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-07-31 10:48:03,412 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-31 10:48:03,449 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-31 10:48:03,554 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-31 10:48:03,647 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.DB2Dialect
+2020-07-31 10:48:04,369 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-31 10:48:04,376 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-31 10:48:04,556 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7ceb6c45, org.springframework.security.web.context.SecurityContextPersistenceFilter@29c53c4f, org.springframework.security.web.header.HeaderWriterFilter@2f0ccb34, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@62b6c045, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@3312f4f4, org.springframework.security.web.authentication.logout.LogoutFilter@79252c83, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2ee4706d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@48e41b5d, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@240f350a, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@706f6d26, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@629075f4, org.springframework.security.web.session.SessionManagementFilter@55296b50, org.springframework.security.web.access.ExceptionTranslationFilter@231df705, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@42a0786f]
+2020-07-31 10:48:04,612 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientInboundChannelExecutor'
+2020-07-31 10:48:04,615 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
+2020-07-31 10:48:04,620 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
+2020-07-31 10:48:04,646 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'brokerChannelExecutor'
+2020-07-31 10:48:04,771 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [public/index.html]
+2020-07-31 10:48:04,863 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:48:04,884 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3030 (http) with context path ''
+2020-07-31 10:48:04,887 INFO org.springframework.core.log.CompositeLog [main] Starting...
+2020-07-31 10:48:04,887 INFO org.springframework.core.log.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2020-07-31 10:48:04,888 INFO org.springframework.core.log.CompositeLog [main] Started.
+2020-07-31 10:48:04,888 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-07-31 10:48:05,109 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-07-31 10:48:05,115 INFO org.springframework.boot.StartupInfoLogger [main] Started IdmFrontendApplication in 4.229 seconds (JVM running for 5.227)
+2020-07-31 10:48:07,548 INFO org.apache.juli.logging.DirectJDKLog [http-nio-3030-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 10:48:07,548 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-31 10:48:07,553 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Completed initialization in 5 ms
+2020-07-31 10:48:08,379 INFO org.keycloak.adapters.KeycloakDeployment [http-nio-3030-exec-2] Loaded URLs from http://158.177.78.141:8080/auth/realms/idm-realm/.well-known/openid-configuration
+2020-07-31 10:48:08,637 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-07-31 10:48:08,643 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting dashboard
+2020-07-31 10:48:08,644 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] returning dashboard
+2020-07-31 10:48:09,797 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:48:09,802 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] getUserNotification -- INIT --
+2020-07-31 10:48:10,092 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:48:10,130 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:48:11,692 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-2] getting bandiList
+2020-07-31 10:48:11,693 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-2] returning bandiList
+2020-07-31 10:48:12,135 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:48:12,136 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] getUserNotification -- INIT --
+2020-07-31 10:48:12,275 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:48:12,277 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:48:14,592 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting garaOverview
+2020-07-31 10:48:14,593 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] returning garaOverview
+2020-07-31 10:48:15,160 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-4] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:48:15,161 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-4] getUserNotification -- INIT --
+2020-07-31 10:48:15,162 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] getSuppliersByTenderId -- INIT --
+2020-07-31 10:48:15,173 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:48:15,298 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] getSuppliersByTenderId -- END --
+2020-07-31 10:48:15,305 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-1] getSuppliersByTenderId -- INIT --
+2020-07-31 10:48:15,306 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-4] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:48:15,307 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-4] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:48:15,309 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-1] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:48:15,401 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-1] getSuppliersByTenderId -- END --
+2020-07-31 10:48:17,190 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] getting fornitoreOverview
+2020-07-31 10:48:17,191 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] returning fornitoreOverview
+2020-07-31 10:48:17,604 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:48:17,604 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] getUserNotification -- INIT --
+2020-07-31 10:48:17,743 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-8] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:48:17,744 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-8] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:49:04,645 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-11] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 12 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(12)-CONNECTED(12)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 207], outboundChannel[pool size = 21, active threads = 0, queued tasks = 0, completed tasks = 21], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 36]
+2020-07-31 10:51:16,460 INFO org.springframework.boot.StartupInfoLogger [main] Starting IdmFrontendApplication on DESKTOP-D7RNNC6 with PID 17056 (C:\progetti\Legal_IDM\workspace\idm-frontend\target\classes started by PietroGerace in C:\progetti\Legal_IDM\workspace\idm-frontend)
+2020-07-31 10:51:16,463 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-31 10:51:17,129 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-07-31 10:51:17,181 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 46ms. Found 1 JPA repository interfaces.
+2020-07-31 10:51:17,598 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3030 (http)
+2020-07-31 10:51:17,604 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:51:17,604 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-31 10:51:17,604 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-07-31 10:51:17,882 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-07-31 10:51:17,885 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-31 10:51:17,886 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1387 ms
+2020-07-31 10:51:17,924 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-31 10:51:17,930 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connecting to Datasource....
+2020-07-31 10:51:17,931 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connected to Datasource - url : jdbc:db2://dashdb-txn-flex-yp-fra02-566.services.eu-de.bluemix.net:50000/BLUDB
+2020-07-31 10:51:17,985 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-07-31 10:51:18,326 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-07-31 10:51:18,435 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-31 10:51:18,468 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-31 10:51:18,565 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-31 10:51:18,651 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.DB2Dialect
+2020-07-31 10:51:19,319 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-31 10:51:19,327 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-31 10:51:19,513 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7bd38fed, org.springframework.security.web.context.SecurityContextPersistenceFilter@7b6141f0, org.springframework.security.web.header.HeaderWriterFilter@69a5c6be, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@16bd7ae1, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@31aab981, org.springframework.security.web.authentication.logout.LogoutFilter@27898e13, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@70b48eb3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@60591e1b, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@b5aa65b, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@76cdafa3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@377dfb8d, org.springframework.security.web.session.SessionManagementFilter@497ed877, org.springframework.security.web.access.ExceptionTranslationFilter@1373e3ee, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3a40bb52]
+2020-07-31 10:51:19,560 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientInboundChannelExecutor'
+2020-07-31 10:51:19,563 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
+2020-07-31 10:51:19,568 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
+2020-07-31 10:51:19,593 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'brokerChannelExecutor'
+2020-07-31 10:51:19,720 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [public/index.html]
+2020-07-31 10:51:19,816 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:51:19,840 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3030 (http) with context path ''
+2020-07-31 10:51:19,843 INFO org.springframework.core.log.CompositeLog [main] Starting...
+2020-07-31 10:51:19,843 INFO org.springframework.core.log.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2020-07-31 10:51:19,843 INFO org.springframework.core.log.CompositeLog [main] Started.
+2020-07-31 10:51:19,844 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-07-31 10:51:20,027 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-07-31 10:51:20,033 INFO org.springframework.boot.StartupInfoLogger [main] Started IdmFrontendApplication in 3.912 seconds (JVM running for 4.902)
+2020-07-31 10:51:22,401 INFO org.apache.juli.logging.DirectJDKLog [http-nio-3030-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 10:51:22,401 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-31 10:51:22,406 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Completed initialization in 5 ms
+2020-07-31 10:51:23,261 INFO org.keycloak.adapters.KeycloakDeployment [http-nio-3030-exec-2] Loaded URLs from http://158.177.78.141:8080/auth/realms/idm-realm/.well-known/openid-configuration
+2020-07-31 10:51:23,521 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-07-31 10:51:23,527 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting dashboard
+2020-07-31 10:51:23,528 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] returning dashboard
+2020-07-31 10:51:24,670 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-4] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:51:24,674 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-4] getUserNotification -- INIT --
+2020-07-31 10:51:24,954 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-4] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:51:24,995 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-4] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:51:26,401 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] getting bandiList
+2020-07-31 10:51:26,402 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] returning bandiList
+2020-07-31 10:51:26,784 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-6] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:51:26,785 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-6] getUserNotification -- INIT --
+2020-07-31 10:51:26,930 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-6] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:51:26,932 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-6] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:51:28,339 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting garaOverview
+2020-07-31 10:51:28,340 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] returning garaOverview
+2020-07-31 10:51:28,882 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:51:28,883 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] getUserNotification -- INIT --
+2020-07-31 10:51:28,885 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-8] getSuppliersByTenderId -- INIT --
+2020-07-31 10:51:28,897 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-8] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:51:29,000 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:51:29,001 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:51:29,023 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-8] getSuppliersByTenderId -- END --
+2020-07-31 10:51:29,028 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] getSuppliersByTenderId -- INIT --
+2020-07-31 10:51:29,031 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:51:29,129 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] getSuppliersByTenderId -- END --
+2020-07-31 10:51:30,588 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-07-31 10:51:30,589 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] returning fornitoreOverview
+2020-07-31 10:51:30,995 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:51:30,995 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] getUserNotification -- INIT --
+2020-07-31 10:51:31,109 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:51:31,110 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:52:19,591 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-11] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 12 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(12)-CONNECTED(12)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 207], outboundChannel[pool size = 21, active threads = 0, queued tasks = 0, completed tasks = 21], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 36]
+2020-07-31 10:52:23,397 INFO org.springframework.boot.StartupInfoLogger [main] Starting IdmFrontendApplication on DESKTOP-D7RNNC6 with PID 17748 (C:\progetti\Legal_IDM\workspace\idm-frontend\target\classes started by PietroGerace in C:\progetti\Legal_IDM\workspace\idm-frontend)
+2020-07-31 10:52:23,400 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-31 10:52:24,102 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-07-31 10:52:24,154 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 45ms. Found 1 JPA repository interfaces.
+2020-07-31 10:52:24,582 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3030 (http)
+2020-07-31 10:52:24,587 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:52:24,588 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-31 10:52:24,588 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-07-31 10:52:24,895 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-07-31 10:52:24,900 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-31 10:52:24,900 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1465 ms
+2020-07-31 10:52:24,944 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-31 10:52:24,952 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connecting to Datasource....
+2020-07-31 10:52:24,953 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connected to Datasource - url : jdbc:db2://dashdb-txn-flex-yp-fra02-566.services.eu-de.bluemix.net:50000/BLUDB
+2020-07-31 10:52:25,014 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-07-31 10:52:25,374 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-07-31 10:52:25,465 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-31 10:52:25,502 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-31 10:52:25,621 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-31 10:52:25,724 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.DB2Dialect
+2020-07-31 10:52:26,461 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-31 10:52:26,469 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-31 10:52:26,653 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7781263c, org.springframework.security.web.context.SecurityContextPersistenceFilter@71d55b7e, org.springframework.security.web.header.HeaderWriterFilter@6f1fa1d0, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@3db65c0d, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@7abeabe9, org.springframework.security.web.authentication.logout.LogoutFilter@272778ae, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@28ee882c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@72a8361b, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@1efac5b9, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@11a3a45f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5fdd97c1, org.springframework.security.web.session.SessionManagementFilter@52ba685a, org.springframework.security.web.access.ExceptionTranslationFilter@3a0b6a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@11810917]
+2020-07-31 10:52:26,703 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientInboundChannelExecutor'
+2020-07-31 10:52:26,707 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
+2020-07-31 10:52:26,712 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
+2020-07-31 10:52:26,737 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'brokerChannelExecutor'
+2020-07-31 10:52:26,855 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [public/index.html]
+2020-07-31 10:52:26,942 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-3030"]
+2020-07-31 10:52:26,963 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3030 (http) with context path ''
+2020-07-31 10:52:26,965 INFO org.springframework.core.log.CompositeLog [main] Starting...
+2020-07-31 10:52:26,966 INFO org.springframework.core.log.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2020-07-31 10:52:26,966 INFO org.springframework.core.log.CompositeLog [main] Started.
+2020-07-31 10:52:26,966 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-07-31 10:52:27,162 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-07-31 10:52:27,167 INFO org.springframework.boot.StartupInfoLogger [main] Started IdmFrontendApplication in 4.192 seconds (JVM running for 5.256)
+2020-07-31 10:52:27,337 INFO org.apache.juli.logging.DirectJDKLog [http-nio-3030-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 10:52:27,337 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-31 10:52:27,343 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Completed initialization in 5 ms
+2020-07-31 10:52:28,368 INFO org.keycloak.adapters.KeycloakDeployment [http-nio-3030-exec-2] Loaded URLs from http://158.177.78.141:8080/auth/realms/idm-realm/.well-known/openid-configuration
+2020-07-31 10:52:28,641 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-07-31 10:52:28,647 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-6] getting dashboard
+2020-07-31 10:52:28,647 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-6] returning dashboard
+2020-07-31 10:52:29,889 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-1] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:52:29,893 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-1] getUserNotification -- INIT --
+2020-07-31 10:52:30,166 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-1] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:52:30,211 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-1] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:52:31,659 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting bandiList
+2020-07-31 10:52:31,659 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] returning bandiList
+2020-07-31 10:52:32,037 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:52:32,037 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] getUserNotification -- INIT --
+2020-07-31 10:52:32,159 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:52:32,161 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:52:33,858 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-7] getting garaOverview
+2020-07-31 10:52:33,858 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-7] returning garaOverview
+2020-07-31 10:52:34,407 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-6] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:52:34,408 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-6] getUserNotification -- INIT --
+2020-07-31 10:52:34,409 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] getSuppliersByTenderId -- INIT --
+2020-07-31 10:52:34,419 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:52:34,529 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-6] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:52:34,530 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-6] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:52:34,544 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] getSuppliersByTenderId -- END --
+2020-07-31 10:52:34,550 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- INIT --
+2020-07-31 10:52:34,554 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:52:34,646 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- END --
+2020-07-31 10:52:35,812 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting fornitoreOverview
+2020-07-31 10:52:35,813 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning fornitoreOverview
+2020-07-31 10:52:36,261 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-6] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:52:36,261 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-6] getUserNotification -- INIT --
+2020-07-31 10:52:36,381 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-6] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:52:36,382 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-6] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:53:26,737 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-3] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 12 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(12)-CONNECTED(12)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 207], outboundChannel[pool size = 21, active threads = 0, queued tasks = 0, completed tasks = 21], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 42]
+2020-07-31 10:54:00,946 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-9] getting fornitoreOverview
+2020-07-31 10:54:00,947 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-9] returning fornitoreOverview
+2020-07-31 10:54:01,235 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-2] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:54:01,236 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-2] getUserNotification -- INIT --
+2020-07-31 10:54:01,357 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-2] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:54:01,357 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-2] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:54:02,491 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting garaOverview
+2020-07-31 10:54:02,492 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning garaOverview
+2020-07-31 10:54:02,684 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] getSuppliersByTenderId -- INIT --
+2020-07-31 10:54:02,684 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:54:02,684 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] getUserNotification -- INIT --
+2020-07-31 10:54:02,687 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:54:02,792 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-2] getSuppliersByTenderId -- END --
+2020-07-31 10:54:02,796 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] getSuppliersByTenderId -- INIT --
+2020-07-31 10:54:02,799 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] calling url : http://localhost:8080/tender/5f2315c00fb28237c312c122/suppliers
+2020-07-31 10:54:02,804 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:54:02,806 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- END -- userId : RIDP86Z
+2020-07-31 10:54:02,894 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] getSuppliersByTenderId -- END --
+2020-07-31 10:54:04,631 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-6] getting fornitoreOverview
+2020-07-31 10:54:04,631 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-6] returning fornitoreOverview
+2020-07-31 10:54:04,882 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- INIT -- userId : RIDP86Z
+2020-07-31 10:54:04,882 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] getUserNotification -- INIT --
+2020-07-31 10:54:05,002 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Found 3 notification(s) for user RIDP86Z
+2020-07-31 10:54:05,003 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- END -- userId : RIDP86Z
