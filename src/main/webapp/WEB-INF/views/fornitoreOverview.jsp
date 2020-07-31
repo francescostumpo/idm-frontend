@@ -126,8 +126,7 @@
                                 </div>
                             </div>
                             <div class="card mt-2 no-border">
-                                <div class="card-header d-flex justify-content-center"
-                                    >
+                                <div class="card-header d-flex justify-content-center">
                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                     <div ng-click="sortCardsByColumnName('name')"
                                         class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
@@ -146,7 +145,7 @@
                                     </div>
                                     <div ng-click="sortCardsByColumnName('conformity')"
                                         class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
-                                        CONFORMITA'
+                                        CONFORMIT&Agrave;
                                         <i ng-if="sort.conformity === 'desc'"
                                             class="fas fa-sort-down hoverable sort-chev"></i>
                                         <i ng-if="sort.conformity === 'asc'"
@@ -159,13 +158,14 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="my-auto col-lg-1 col-md-1 col-sm-1">
-                                            <input ng-if="document.isPresent" ng-checked="checkDocument(document)"
-                                                ng-click="selectDocument(document, false)" type="checkbox"
-                                                class="my-auto col-lg-7 col-md-7 col-sm-12 pointer">
-                                                <i ng-if="document.isPresent" class="my-auto ml-2 fa fa-check-circle pointer"
+                                            <i ng-if="document.isPresent" class="my-auto ml-2 fa fa-check-circle pointer"
                                                     style="color: limegreen;"></i>
-                                                <i  ng-if="!document.isPresent" class="danger-color my-auto fas fa-exclamation-triangle ml-2"></i>
-
+                                            <i  ng-if="!document.isPresent" class="danger-color my-auto fas fa-exclamation-triangle ml-2"></i>
+                                            <!--<span class="ml-4 col-lg-7 col-md-7 col-sm-12" >-->
+                                                <input ng-if="document.isPresent" ng-checked="checkDocument(document)"
+                                                       ng-click="selectDocument(document, false)" type="checkbox"
+                                                       class="ml-4 my-auto  pointer">
+                                            <!--</span>-->
                                         </div>
                                         <div class="my-auto  col-lg-6 col-md-6 col-sm-6">
                                             <div class="row flex-long-text">
@@ -231,7 +231,7 @@
                                             </div>
                                             <div ng-click="sortCardsByColumnName('conformity')"
                                                 class="col-lg-3 col-md-3 col-sm-3 text-size-14">
-                                                CONFORMITA'
+                                                CONFORMIT&Agrave;
                                                 <i ng-if="sort.conformity === 'desc'"
                                                     class="fas fa-sort-down hoverable sort-chev"></i>
                                                 <i ng-if="sort.conformity === 'asc'"
@@ -373,15 +373,15 @@
                 </div> 
             </div>
             <!-- Sezione Altri Documenti -->
-            <div class="container-fluid" style="background: #E6ECF2;">
-                <div ng-hide="showOptionalDocument">
+            <div ng-hide="notRequiredAttachments.length === 0" class="container-fluid">
+                <div class="col-lg-12 col-md-12 col-sm-12" ng-hide="showOptionalDocument">
                     <div class="d-flex justify-content">
                         <div class="col-lg-10 col-md-10 col-sm-10">
                             <span style="font-family: Ubuntu; font-size: 22px; color: #1D2A30; letter-spacing: 0; font-weight: bold;">Altri Documenti</span>
                         </div>
                     </div>
                     <div class="card mt-2 no-border">
-                        <div class="card-header d-flex justify-content-center" style="background-color: #E6ECF2;">
+                        <div class="card-header d-flex justify-content-center">
                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
                             <div ng-click="sortCardsByColumnName('name')"
                                  class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
@@ -400,7 +400,7 @@
                             </div>
                             <div ng-click="sortCardsByColumnName('conformity')"
                                  class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
-                                CONFORMITA'
+                                CONFORMIT&Agrave;
                                 <i ng-if="sort.conformity === 'desc'"
                                    class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.conformity === 'asc'"
@@ -409,16 +409,16 @@
                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                    <div class="mb-5">
                         <div class="card" ng-repeat="document in notRequiredAttachments">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="my-auto col-lg-1 col-md-1 col-sm-1">
+                                        <i class="my-auto ml-2 fa fa-check-circle pointer"
+                                           style="color: limegreen;"></i>
                                         <input ng-checked="checkDocument(document)"
                                                ng-click="selectDocument(document, true)" type="checkbox"
                                                class="my-auto col-lg-7 col-md-7 col-sm-12 pointer">
-                                        <i class="my-auto ml-2 fa fa-check-circle pointer"
-                                           style="color: limegreen;"></i>
                                     </div>
                                     <div class="my-auto  col-lg-6 col-md-6 col-sm-6">
                                         <div class="row flex-long-text">
@@ -478,7 +478,7 @@
                                     </div>
                                     <div ng-click="sortCardsByColumnName('conformity')"
                                          class="col-lg-3 col-md-3 col-sm-3 text-size-14">
-                                        CONFORMITA'
+                                        CONFORMIT&Agrave;
                                         <i ng-if="sort.conformity === 'desc'"
                                            class="fas fa-sort-down hoverable sort-chev"></i>
                                         <i ng-if="sort.conformity === 'asc'"
