@@ -159,13 +159,14 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="my-auto col-lg-1 col-md-1 col-sm-1">
-                                            <input ng-if="document.isPresent" ng-checked="checkDocument(document)"
-                                                ng-click="selectDocument(document, false)" type="checkbox"
-                                                class="my-auto col-lg-7 col-md-7 col-sm-12 pointer">
-                                                <i ng-if="document.isPresent" class="my-auto ml-2 fa fa-check-circle pointer"
+                                            <i ng-if="document.isPresent" class="my-auto ml-2 fa fa-check-circle pointer"
                                                     style="color: limegreen;"></i>
-                                                <i  ng-if="!document.isPresent" class="danger-color my-auto fas fa-exclamation-triangle ml-2"></i>
-
+                                            <i  ng-if="!document.isPresent" class="danger-color my-auto fas fa-exclamation-triangle ml-2"></i>
+                                            <span class="col-lg-7 col-md-7 col-sm-12" >
+                                                <input ng-if="document.isPresent" ng-checked="checkDocument(document)"
+                                                       ng-click="selectDocument(document, false)" type="checkbox"
+                                                       class="my-auto  pointer">
+                                            </span>
                                         </div>
                                         <div class="my-auto  col-lg-6 col-md-6 col-sm-6">
                                             <div class="row flex-long-text">
@@ -413,12 +414,13 @@
                         <div class="card" ng-repeat="document in notRequiredAttachments">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="my-auto col-lg-1 col-md-1 col-sm-1">
+                                    <i class="my-auto ml-2 fa fa-check-circle pointer"
+                                       style="color: limegreen;"></i>
+                                    <div class="ml-4 my-auto col-lg-1 col-md-1 col-sm-1">
                                         <input ng-checked="checkDocument(document)"
                                                ng-click="selectDocument(document, true)" type="checkbox"
                                                class="my-auto col-lg-7 col-md-7 col-sm-12 pointer">
-                                        <i class="my-auto ml-2 fa fa-check-circle pointer"
-                                           style="color: limegreen;"></i>
+
                                     </div>
                                     <div class="my-auto  col-lg-6 col-md-6 col-sm-6">
                                         <div class="row flex-long-text">

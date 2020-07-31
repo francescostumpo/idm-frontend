@@ -36,8 +36,8 @@
                     <jsp:include page="subviews/breadcrumb.jsp"></jsp:include>
                     <h3 class="font-bold">Bandi di Gara</h3>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                            <div class="d-sm-flex align-items-center justify-content-between mt-4 mb-4">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-3">
                                 <div>
 
                                 </div>
