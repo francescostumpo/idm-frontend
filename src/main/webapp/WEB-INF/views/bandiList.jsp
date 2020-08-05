@@ -69,12 +69,12 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 mb-5 mt-3">
 
                     <div class="card mt-2 no-border">
-                        <div class="card-header d-flex justify-content-center">
+                        <div class="row card-body background-color-application justify-content-center">
                             <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
 
                             </div>
                             <div ng-click="sortCardsByColumnName(bandiGaraList, 'cig')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
-                                CIG
+                                N. GARA
                                 <i ng-if="sort.cig === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.cig === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
@@ -94,7 +94,7 @@
                                 <i ng-if="sort.endDate === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
                             <div ng-click="sortCardsByColumnName(bandiGaraList, 'fornitori')" class="col-lg-1 col-md-1 col-sm-1 text-size-14 no-select pointer">
-                                FORNITORI
+                                N. OFFERENTI
                                 <i ng-if="sort.fornitori === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.fornitori === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
@@ -109,19 +109,19 @@
                                 <div class="text-center col-lg-1 col-md-1 col-sm-1 text-size-14">
                                     <input ng-click="selectBando(bandoGara)" style="cursor: pointer" type="checkbox"/>
                                 </div>
-                                <div ng-click="goToView('/garaOverview', bandoGara)" class="custom-link-underline col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
-                                    {{bandoGara.cig[0]}}
+                                <div ng-click="goToView('/garaOverview', bandoGara)"  class="col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
+                                    {{bandoGara.sapNumber}}
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 text-size-14 no-select">
+                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-3 col-md-3 col-sm-3 text-size-14 pointer no-select">
                                     {{bandoGara.object}}
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select ">
+                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
                                     {{bandoGara.company}}
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select ">
+                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
                                     {{bandoGara.endDate | date: 'dd/MM/yyyy'}}
                                 </div>
-                                <div class="col-lg-1 col-md-1 col-sm-1 text-size-14 no-select ">
+                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-1 col-md-1 col-sm-1 text-size-14 pointer no-select ">
                                     {{bandoGara.fornitori}}
                                 </div>
                                 <div class="text-center col-lg-1 col-md-1 col-sm-1 text-size-14 pointer">

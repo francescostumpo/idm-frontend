@@ -100,6 +100,18 @@
     color: #FF9547;
 }
 
+.text-alert-color{
+    color: #FF6C00
+}
+
+.card-events-dashboard-alert{
+    border-left: solid #FF6C00;
+}
+
+.card-events-dashboard-today{
+    border-left: solid #727888;
+}
+
 .circular-div{
     width: 22px;
     height: 22px;
@@ -816,7 +828,7 @@ button:hover:enabled.button-searchView-action{
 
 .break { 
   background: #CFD6DB;
-  height: 1.2px;
+  height: 1px;
   margin: 5px 0 5px 0;
   width: 100%;
 }
@@ -831,7 +843,9 @@ button:hover:enabled.button-searchView-action{
     background-color: #E6ECF2;
 }
 
-
+.breadcrumb-disabled-color {
+    color: #727888;
+}
 
 .danger-color{
    color: #e74a3b;
@@ -1704,23 +1718,77 @@ th.dateUpload, td.dateUpload {
     margin-bottom: 0px !important;
 }
 
+.fc-day-grid-container {
+    margin-top: 2rem;
+}
+
 .calendar {
     background-color: #fff;
-    padding: 2rem;
+    padding: 0.5rem;
+}
+
+.fc-ltr .fc-basic-view .fc-day-top .fc-day-number{
+    float: none;
 }
 
 .fc-sat, .fc-sun {
-    background-color: #f8f9fc;
+    opacity: 0.3;
 }
+
+/*
+.fc-mon{
+    font-weight: bold;
+    /*line-height: 67px;
+}
+
+.fc-tue{
+    font-weight: bold;
+    /*line-height: 67px;
+}
+
+.fc-wed{
+    font-weight: bold;
+    /*line-height: 67px;
+}
+.fc-thu{
+    font-weight: bold;
+    /*line-height: 67px;
+}
+.fc-fri{
+    font-weight: bold;
+    /*line-height: 67px;
+}
+
+.fc-sun{
+    /*line-height: 67px;
+}
+
+.fc-sat{
+    /*line-height: 67px;
+}*/
 
 .fc-toolbar {
     text-transform: capitalize;
 }
 
+.fc-prev-button{
+    background-color: white !important;
+    color: #004B9C !important;
+    border :0px !important;
+}
+
+
+.fc-next-button{
+    background-color: white !important;
+    color: #004B9C !important;
+    border :0px !important;
+}
+
 button.fc-today-button.fc-button.fc-button-primary {
+    background-color: white;
+    color: #004B9C;
+    border-color: #004B9C;
     text-transform: uppercase;
-    background-color: #003e7b;
-    color: white;
 }
 
 a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {

@@ -28,6 +28,7 @@
 /* week and day number styling */
 .fc-day-top.fc-other-month {
   opacity: 0.3;
+  text-align: center;
 }
 
 .fc-dayGrid-view .fc-week-number,
@@ -42,7 +43,7 @@
 }
 
 .fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {
-  float: right;
+  /*float: right;*/
 }
 
 .fc-rtl .fc-dayGrid-view .fc-day-top .fc-day-number {

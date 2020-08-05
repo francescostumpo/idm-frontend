@@ -140,6 +140,13 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         })
     }
 
+    $scope.missingDataForCreationNewSupplier = function(){
+        if($scope.supplier === undefined || $scope.supplier.name === ""){
+            return true
+        }
+        return false
+    }
+
 
     $scope.openModalEditTender = function () {
         $('#datepickerModify').datepicker({
@@ -242,6 +249,14 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         return false;
     }
 
+    $scope.highlightCard = function(document){
+        for(var i = 0; i < $scope.selectedDocuments.length ; i++){
+            if(document._idAttachment === $scope.selectedDocuments[i]._idAttachment){
+                return {'background-color' : '#DCF4F2'}
+            }
+        }
+    }
+
     $scope.selectDocument = function (document) {
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
@@ -261,6 +276,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         }else if(found && $scope.selectedDocuments.length == 0){
             $scope.show(document, 'hide');
         }
+        console.log('selected documents ' , $scope.selectedDocuments)
     }
 
     $scope.show = function(document, action) {

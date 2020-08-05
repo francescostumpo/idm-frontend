@@ -31,13 +31,6 @@ public class ViewController {
 	public ModelAndView dashboard(Principal principal, HttpServletResponse response, HttpServletRequest request) {
 		logger.info("getting dashboard");
 		HttpSession session = request.getSession();
-		/*Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
-		Object detailsToken = authenticationToken.getDetails();
-		String bearerToken = "";
-		if (detailsToken instanceof OAuth2AuthenticationDetails) {
-			OAuth2AuthenticationDetails oauthsDetails = (OAuth2AuthenticationDetails) detailsToken;
-			bearerToken = oauthsDetails.getTokenValue();
-		}*/
 		String bearerToken = getActiveToken();
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("dashboard");
@@ -45,13 +38,10 @@ public class ViewController {
 		Cookie cookieContextPath = new Cookie("contextPath", "/dashboard");
 		Cookie cookieBearerToken = new Cookie("bearerToken", bearerToken);
 		Cookie cookieBackendUrl = new Cookie("backendUrl", System.getenv("BACKEND_URL"));
-
 		response.addCookie(cookieContextPath);
 		response.addCookie(cookieBearerToken);
 		response.addCookie(cookieBackendUrl);
-
 		session.setAttribute("authenticated", true);
-
 		response.addHeader("Cache-Control", "no-store");
 		return modelAndView;
 	}
