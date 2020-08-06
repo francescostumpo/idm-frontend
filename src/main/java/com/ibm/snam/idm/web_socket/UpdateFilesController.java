@@ -4,7 +4,6 @@ import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
-import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -21,9 +20,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Controller
-public class CreateSupplierController {
+public class UpdateFilesController {
 
-    Logger logger = LoggerFactory.getLogger(CreateSupplierController.class);
+    Logger logger = LoggerFactory.getLogger(UpdateFilesController.class);
 
     @Autowired
     AnalyzerMicroservice analyzerMicroservice;
@@ -31,12 +30,12 @@ public class CreateSupplierController {
     @Autowired
     BackendMicroservice backendMicroservice;
 
-    @MessageMapping("/createSupplier")
-    @SendToUser("/queue/reply/supplier")
-    public String crateSupplier(@Payload  JSONObject supplier){
+    @MessageMapping("/updateFiles")
+    @SendToUser("/queue/reply/updateFiles")
+    public String updateFiles(@Payload  JSONObject updateFiles){
         JSONObject response = new JSONObject();
         try{
-            JSONArray files = supplier.getJSONArray("files");
+            JSONArray files = updateFiles.getJSONArray("files");
             List<JSONObject> attachmentsId = new LinkedList<>();
             JSONObject responseFromAnalyzer = new JSONObject();
             for(int i = 0 ; i < files.size() ; i++){
@@ -51,18 +50,28 @@ public class CreateSupplierController {
                 attachmentId.put("fileName", fileName);
                 attachmentsId.add(attachmentId);
             }
-            supplier.remove("files");
-            supplier.put("attachmentsId", attachmentsId);
-            supplier.put("responseFromAnalyzer", responseFromAnalyzer);
-            JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(supplier, "/supplier/createSupplier");
+            updateFiles.remove("files");
+            updateFiles.put("attachmentsId", attachmentsId);
+            updateFiles.put("responseFromAnalyzer", responseFromAnalyzer);
+            JSONObject responseFromBackend = null;
+            if(updateFiles.has("idSupplier")){
+                responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForSupplier");
+                responseFromBackend.put("updated", "supplier");
+                responseFromBackend.put("idSupplier", updateFiles.getString("idSupplier"));
+            }
+            else{
+                responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForTender");
+                responseFromBackend.put("updated", "tender");
+            }
+            responseFromBackend.put("cig", updateFiles.getString("cig"));
+            responseFromBackend.put("idTender", updateFiles.getString("idTender"));
             logger.info("Response from backend : " + responseFromBackend);
             return responseFromBackend.toString();
         }catch (Exception e){
             e.printStackTrace();
             response.put("status", Constants.HTTP_STATUS_ERROR);
-            response.put("message", Constants.ERROR_CREATING_SUPPLIER);
+            response.put("message", Constants.ERROR_CALLING_BACKEND);
             return response.toString();
         }
     }
-
 }

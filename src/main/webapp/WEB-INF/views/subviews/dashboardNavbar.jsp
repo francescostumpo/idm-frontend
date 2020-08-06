@@ -57,6 +57,22 @@
 											<span style="color: black" class="text-size-16 text-bold">Gara creata con successo</span>
 										</div>
 									</div>
+									<div class="row" ng-if="notification.notificationType === 'uploadFileTender'">
+										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
+											<i style="color: #00B200" class="fas fa-check"></i>
+										</div>
+										<div class="col-auto">
+											<span style="color: black" class="text-size-16 text-bold">File caricato con successo</span>
+										</div>
+									</div>
+									<div class="row" ng-if="notification.notificationType === 'uploadFileSupplier'">
+										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
+											<i style="color: #00B200" class="fas fa-check"></i>
+										</div>
+										<div class="col-auto">
+											<span style="color: black" class="text-size-16 text-bold">File caricato con successo</span>
+										</div>
+									</div>
 								</div>
 								<div class="mb-1 col-md-12 col-sm-12 col-lg-12">
 									<div class="row">
@@ -111,7 +127,7 @@
 				aria-expanded="false">
 			<i style="cursor:pointer; color: white" class="far fa-user-circle fa-1point5 fa-sm fa-fw mr-2" style="color:white;"></i>
 			<span class="mr-2 d-none d-lg-inline"	style="color: white" id="userName">
-				Claudia Boselli
+				{{userId}}
 			</span>
 		</a>
 	</li>

@@ -22,11 +22,11 @@ public class BackendMicroservice {
     Config config;
 
 
-    public JSONObject  saveObjectOnDb(JSONObject object, String service){
-        logger.info("saveTenderOnDb -- INIT --");
+    public JSONObject saveObjectOnDb(JSONObject object, String service){
+        logger.info("saveObjectOnDb -- INIT --");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String serverBackend = "http://localhost:8080";
+        String serverBackend = config.getBackendUrl();
         String url = serverBackend + service;
         RestTemplate httpRestTemplate = new RestTemplate();
         httpRestTemplate.getMessageConverters()
@@ -35,7 +35,7 @@ public class BackendMicroservice {
         logger.info("calling url : " + url);
         logger.info("JSON: " + object);
         JSONObject responseAsJsonObject = httpRestTemplate.postForObject(url, request, JSONObject.class);
-        logger.info("saveTenderOnDb -- END --");
+        logger.info("saveObjectOnDb -- END --");
         return responseAsJsonObject;
     }
 

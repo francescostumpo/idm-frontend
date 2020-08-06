@@ -5,10 +5,8 @@
     <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="text-primary font-weight-bold modal-header">
-                <div class="modal-title" id="exampleModalLabel">AGGIUNGI DOCUMENTI - CIG</div>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="text-primary fas fa-times"></i></span>
-                </button>
+                <div class="modal-title" id="exampleModalLabel">AGGIUNGI DOCUMENTI</div>
+                <span aria-hidden="true"><i data-dismiss="modal" class="text-primary fas fa-times pointer text-size-18"></i></span>
             </div>
             <div class="modal-body">
                 <div class="mt-3">
@@ -60,7 +58,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button type="button" class="btn button-secondary-buyer" data-dismiss="modal" style="width: 50%; height: 50px;">
+                        <button ng-click="updateAttachmentsForSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" style="width: 50%; height: 50px;">
                             CARICA
                         </button>
                     </div>

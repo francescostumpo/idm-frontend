@@ -6,9 +6,7 @@
         <div class="modal-content">
             <div class="text-primary font-weight-bold modal-header">
                 <div class="modal-title" id="exampleModalLabel">CREA NUOVA GARA</div>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="text-primary fas fa-times"></i></span>
-                </button>
+                <span aria-hidden="true"><i data-dismiss="modal" class="text-primary fas fa-times pointer text-size-18"></i></span>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -30,7 +28,15 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
+                        <div>
+                            <span class="text-medium-size-custom">Numero SAP*</span>
+                        </div>
+                        <div class="text-primary mt-3">
+                            <input type="text" class="text-primary form-control" ng-model="tender.sapNumber" placeholder="Numero SAP">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
                         <div>
                             <span class="text-medium-size-custom">Società*</span>
                         </div>
@@ -38,7 +44,7 @@
                             <input type="text" class="text-primary form-control" ng-model="tender.supplier" placeholder="Nome società">
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                         <div>
                             <span class="text-medium-size-custom">Scadenza*</span>
                         </div>

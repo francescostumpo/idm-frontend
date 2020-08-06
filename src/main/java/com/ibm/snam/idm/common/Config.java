@@ -9,8 +9,12 @@ public class Config {
     @Value("${BACKEND_URL}")
     private String BACKEND_URL;
 
+    @Value("${ANALYZER_URL}")
+    private String ANALYZER_URL;
+
     public String getBackendUrl() {
         return BACKEND_URL;
     }
 
+    public String getAnalyzerUrl() { return ANALYZER_URL; }
 }

@@ -1,6 +1,8 @@
 snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootScope', '$timeout', function($scope, $http, $location,$rootScope, $timeout) {
     console.log("[INFO] Hello World from navbarController");
 
+    $scope.userId = mainController.getUserName()
+
     $scope.deselectFile = function() {
         $scope.file = null;
         $scope.contractIsSelected = false;

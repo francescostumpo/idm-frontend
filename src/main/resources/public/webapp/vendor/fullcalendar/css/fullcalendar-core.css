@@ -119,7 +119,7 @@ hr.fc-divider {
 .fc th,
 .fc td {
   border-style: solid;
-  border-width: 1px;
+  border-width: 0px;
   padding: 0;
   vertical-align: top;
 }
@@ -221,6 +221,7 @@ temporary rendered events).
   background: none;
   /* in case <td>s are globally styled */
   border-color: transparent;
+  text-align: center;
 }
 
 .fc-row .fc-content-skeleton td,
@@ -578,7 +579,10 @@ TODO: more distinction between this file and common.css
 }
 
 .fc-unthemed td.fc-today {
-  background: #fcf8e3;
+  /*background: #fcf8e3;*/
+  font-weight: bold;
+  text-decoration: underline;
+  color: #004B9C;
 }
 
 .fc-unthemed .fc-disabled-day {
@@ -763,7 +767,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
   display: -ms-inline-flexbox;
   display: inline-flex;
   vertical-align: middle;
-  background-color: #004AA2;
+  background-color: white;
   color: white;
 }
 

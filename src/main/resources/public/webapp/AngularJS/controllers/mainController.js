@@ -12,6 +12,19 @@ mainController = {
 		return dateInMillis
 	},
 
+	convertDateToStringForEvents : function(date){
+		var day = date.dayOfMonth;
+		if(day < 10){
+			day = '0' + day
+		}
+		var month = date.monthValue; // Month is 0-indexed
+		if(month < 10){
+			month = '0' + month
+		}
+		var year = date.year;
+		return year + '-' + month + '-' + day
+	},
+
 	convertLocalDateToDate : function(localDate){
 		var day = localDate.dayOfMonth;
 		var month = localDate.monthValue - 1; // Month is 0-indexed
@@ -117,16 +130,7 @@ mainController = {
 
 	getHost: function(){
 		var location = window.location.hostname;
-		var host = ""
-		if(location.includes("localhost")){
-			host = "http://localhost:8080"
-		}
-		else if(location.includes("dev")){
-			host = "https://snam-ai4cm-backend-dev.eu-de.mybluemix.net";
-		}
-		else{
-			host = "https://snam-ai4cm-backend.eu-de.mybluemix.net";
-		}
+		var host = mainController.getCookie("backendUrl");
 		return host
 	},
     
@@ -211,24 +215,45 @@ mainController = {
 		var userId = tokenBody.preferred_username.toUpperCase();
 		console.log("LoggedIn as: " + userId);
 		return userId;
+	},
+
+	getUserName: function(){
+		var bearerToken = this.getCookie('bearerToken');
+		var tokenBody = JSON.parse(atob(bearerToken.split('.')[1]));
+		var userId = tokenBody.name;
+		return userId;
 	}
 
 }
 
+snamApp.factory('AuthInterceptor', function () {
+	return {
+		request: function (config) {
+			config.headers = config.headers || {};
+			var token = mainController.getCookie('bearerToken')
+			config.headers.Authorization = 'Bearer ' + token;
+			return config
+		}
+	};
+});
+
 snamApp.config(['$httpProvider', function ($httpProvider) {
 	//console.log('token : ' + mainController.getCookie('bearerToken'))
-	//$httpProvider.interceptors.push('authInterceptor')
-	$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
+	$httpProvider.interceptors.push('AuthInterceptor')
+	//$httpProvider.defaults.headers.common['Content-MD5'] = mainController.getCookie('bearerToken')
 	//$httpProvider.defaults.headers.common['Content-Type'] = "text/plain"
 }]);
 
-host = mainController.getFrontendHost()
+host = mainController.getFrontendHost();
 
 ws = new SockJS(host + "/createTender");
 stompClient = Stomp.over(ws);
 
 ws = new SockJS(host + "/createSupplier");
 stompClientSupplier = Stomp.over(ws);
+
+ws = new SockJS(host + "/updateFiles");
+stompClientFiles = Stomp.over(ws);
 
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "customtime-pre": function ( a ) {
