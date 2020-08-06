@@ -38,7 +38,7 @@ public class UserNotificationService {
                 userNotification.setIdTender(notification.getString("idTender"));
             }
             if (notification.has("idSupplier")) {
-                userNotification.setIdSupplier("idSupplier");
+                userNotification.setIdSupplier(notification.getString("idTender"));
             }
             logger.info("Saving notification : " + userNotification);
             userNotificationRepository.save(userNotification);

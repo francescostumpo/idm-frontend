@@ -5,10 +5,10 @@
     <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="text-primary font-weight-bold modal-header">
-                <div class="modal-title" id="exampleModalLabel">AGGIUNGI FORNITORE - CIG</div>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="text-primary fas fa-times"></i></span>
-                </button>
+                <div class="modal-title" id="exampleModalLabel">AGGIUNGI FORNITORE</div>
+                <!--<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                </button>-->
+                <span aria-hidden="true"><i data-dismiss="modal" class="text-primary fas fa-times pointer text-size-18"></i></span>
             </div>
             <div class="modal-body">
                 <div class="mt-3">
@@ -68,7 +68,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button ng-click="createSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
+                        <button ng-click="createSupplier()" ng-disabled="missingDataForCreationNewSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
                             AGGIUNGI
                         </button>
                     </div>
