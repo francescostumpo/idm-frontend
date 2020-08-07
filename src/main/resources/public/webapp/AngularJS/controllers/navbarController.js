@@ -3,27 +3,54 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.userId = mainController.getUserName()
 
-    $scope.deselectFile = function() {
-        $scope.file = null;
-        $scope.contractIsSelected = false;
-        $scope.contractSelectedName = "";
+    $scope.deselectFile = function(file) {
+        var newFiles = []
+        for (var i = 0; i < $scope.files.length; i++){
+            if (file !== $scope.files[i]){
+                newFiles.push($scope.files[i])
+            }
+        }
+        $scope.files = newFiles
     };
 
+    $scope.addFiles = function (files){
+        var newFiles = []
+        for (var i = 0; i < $scope.files.length; i++){
+            newFiles.push($scope.files[i])
+        }
+        for (var i = 0; i < files.length; i++){
+            newFiles.push(files[i])
+        }
+        $scope.files = newFiles
+    }
+
     $scope.createTender = function(){
+        $scope.tender.files = []
         console.log('createTender -- INIT -- tender : ', $scope.tender);
-        var fileBase64 = null;
-        var reader = new FileReader();
-        reader.readAsBinaryString($scope.file);
-        reader.onload = function() {
-            fileBase64 = reader.result;
-            var base64String = window.btoa(fileBase64);
-            if (base64String !== null) {
-                $scope.tender.file = base64String;
-                $scope.tender.fileName = $scope.contractSelectedName;
-            }
+        var promises = []
+        for (var i = 0; i < $Scope.files.length;i++){
+            var filePromise = new Promise(resolve =>{
+                var fileBase64 = null;
+                var reader = new FileReader();
+                reader.readAsBinaryString($scope.files[i]);
+                reader.onload = function() {
+                    fileBase64 = reader.result;
+                    var base64String = window.btoa(fileBase64);
+                    if (base64String !== null) {
+                        $scope.tender.files.push({
+                            file: base64String,
+                            fileName: file[i].name
+                        });
+                    }
+                    resolve()
+                }
+            })
+            promises.push(filePromise)
+        }
+        Promise.all(promises).then(() => {
             stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
             mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
-        }
+        });
     };
 
     $scope.openModalCreateTender = function () {
@@ -36,11 +63,7 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
         $('#createTenderModal').modal()
     }
 
-    $scope.file = null;
-    $scope.fileToUpload = null;
-
-    $scope.contractIsSelected = false;
-    $scope.contractSelectedName = "";
+    $scope.files = [];
 
     (function() {
         // getElementById
@@ -69,15 +92,11 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             console.log(e.target.id)
             // fetch FileList object
             var files = e.target.files || e.dataTransfer.files;
-            $scope.file = files[0];
+            $scope.addFiles(files)
 
             if(e.target.id === "filedrag" || e.target.id === "imageUpload" || e.target.id === "fileselect"){
-                var name = processName($scope.file.name);
-                console.log('file = ', $scope.file)
-                $('#fileToUpload').html(name);
+                console.log('files = ', $scope.files)
                 $timeout(function () {
-                    $scope.contractIsSelected = true;
-                    $scope.contractSelectedName = $scope.file.name
                     console.log('set contract selected')
                 }, 200)
 

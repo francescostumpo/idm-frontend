@@ -38,10 +38,10 @@
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div>
-                            <span class="text-medium-size-custom">Società*</span>
+                            <span class="text-medium-size-custom">Societï¿½*</span>
                         </div>
                         <div class="text-primary mt-3">
-                            <input type="text" class="text-primary form-control" ng-model="tender.supplier" placeholder="Nome società">
+                            <input type="text" class="text-primary form-control" ng-model="tender.supplier" placeholder="Nome societï¿½">
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
@@ -58,7 +58,7 @@
                 <div class="mt-5">
                     <span class="text-medium-size-custom">Carica documenti*</span>
                 </div>
-                <div ng-show="!contractIsSelected">
+                <div>
                     <div class="mt-3" id="filedrag">
                         <img id="imageUpload" src="webapp/img/uploadIcon.png" class="mt-1 mx-auto d-block" style="color:blue" />
                     </div>
@@ -77,8 +77,8 @@
                         </button>
                     </div>
                 </div>
-                <div class="mt-3" ng-show="contractIsSelected">
-                    <div style="padding-left: 0px" class="col-sm-6 col-md-6">
+                <div class="row mt-3">
+                    <div style="padding-left: 0px" class="col-sm-5 col-md-5 m-1" ng-repeat="file in files">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -86,7 +86,7 @@
                                         <span>{{file.name}}</span>
                                     </div>
                                     <div class="col-sm-1 col-md-1">
-                                        <i ng-click="deselectFile()" style="cursor: pointer" class="text-primary fas fa-times"></i>
+                                        <i ng-click="deselectFile(file)" style="cursor: pointer" class="text-primary fas fa-times"></i>
                                     </div>
                                 </div>
                             </div>
