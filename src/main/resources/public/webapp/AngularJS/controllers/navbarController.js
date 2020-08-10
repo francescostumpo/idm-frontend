@@ -26,6 +26,16 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
         }
     };
 
+    $scope.deleteNotification = function (notification) {
+        console.log('eliminating notification ', notification)
+        var endPoint = mainController.getFrontendHost() + '/deleteNotification?'
+        var params = 'idNotification=' + notification.id + "&" + 'idUser=' + mainController.getUserId()
+        var url = endPoint + params
+        $http.delete(url).then(function (response) {
+            console.log('response from ', url ,' : ', response)
+        })
+    };
+
     $scope.openModalCreateTender = function () {
         $('#datepicker2').datepicker({
             locale: 'it-it',

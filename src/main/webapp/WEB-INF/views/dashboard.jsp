@@ -143,6 +143,9 @@
                             <div style="font-size: 28px" class="mb-0">
                                 Prossime scadenze
                             </div>
+                            <span ng-show="!showCalendarCard" class="text-bold text-alert-color">
+                                {{firstEndDate.endDateMoment}} - Gara in scadenza
+                            </span>
                             <span ng-show="showCalendarCard" ng-click="toggleCalendarCard()"
                                 style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">
                                 <i class="fas fa-chevron-up text-size-18"></i>
@@ -168,18 +171,18 @@
                             <div class=" col-md-7 col-lg-7 col-sm-12">
                                 <div style="max-height: 80vh" class="scrollable mt-4 card-body">
                                     <!-- today event -->
-                                    <div class="mb-4">
-                                        <div class="text-bold text-primary">
-                                            03 Agosto 2020
+                                    <div ng-show="!thereIsAEndDateToday" class="mb-4">
+                                        <div class="text-bold text-size-18 text-primary">
+                                            {{momentTodayAsString}}
                                         </div>
                                         <div class="mt-3 card-events-dashboard-today card shadow">
-                                            <div class="card-body">
+                                            <div class="text-secondary card-body">
                                                 Nessuna scadenza prevista per oggi
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mb-4" ng-repeat="tenderEvent in events">
-                                        <div>
+                                        <div class="text-size-18">
                                             {{tenderEvent.endDateMoment}}
                                         </div>
                                         <div class="mt-3 card-events-dashboard-alert card shadow">

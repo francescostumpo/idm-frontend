@@ -62,15 +62,16 @@ public class UserNotificationService {
         return userNotificationList;
     }
 
-    public void deleteNotification(JSONObject notification){
-        logger.info("deleteNotification -- INIT -- notification : " + notification);
+    public boolean deleteNotification(int idNotification){
+        logger.info("deleteNotification -- INIT -- idNotification : " + idNotification);
         try {
-            int id = notification.getInt("id");
-            userNotificationRepository.deleteById(id);
+            userNotificationRepository.deleteById(idNotification);
             logger.info("deleteNotification -- END --");
+            return true;
         }catch (Exception e){
             e.printStackTrace();
             logger.error("Error in deleteNotification");
+            return false;
         }
     }
 
