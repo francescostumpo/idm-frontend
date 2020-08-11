@@ -96,7 +96,7 @@
 						</a>
 					</div>
 					<div>
-						<a style="cursor: pointer "class="dropdown-item text-primary">
+						<a ng-click="deleteAllNotificationsForUser()" style="cursor: pointer "class="dropdown-item text-primary">
 							<div class="col-md-12 col-sm-12 col-lg-12">
 								<span>Elimina tutte</span>
 							</div>

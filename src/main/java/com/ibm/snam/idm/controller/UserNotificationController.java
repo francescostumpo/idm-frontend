@@ -1,5 +1,6 @@
 package com.ibm.snam.idm.controller;
 
+import com.ibm.db2.jcc.am.lo;
 import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.model.UserNotification;
 import com.ibm.snam.idm.service.UserNotificationService;
@@ -58,6 +59,29 @@ public class UserNotificationController {
         }catch (Exception e){
             e.printStackTrace();
             response.put("status", Constants.HTTP_STATUS_ERROR );
+        }
+        return new ResponseEntity<JSONObject>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/deleteAllNotificationsForUser")
+    public ResponseEntity<JSONObject> deleteAllNotificationsForUser(@RequestParam String idUser){
+        logger.info("deleteAllNotificationsForUser -- INIT -- user : " + idUser);
+        JSONObject response = new JSONObject();
+        try{
+            int eliminated = userNotificationService.deleteAllNotificationsForUser(idUser);
+            logger.info("eliminated " + eliminated + " notifications for user " + idUser);
+            if(eliminated == -1){
+                response.put("status", Constants.HTTP_STATUS_ERROR );
+                response.put("message", Constants.ERROR_DELETING_NOTIFICATION);
+            }
+            else{
+                response.put("status", Constants.HTTP_STATUS_OK);
+                response.put("message", "OK");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            response.put("status", Constants.HTTP_STATUS_ERROR );
+            response.put("message", Constants.ERROR_DELETING_NOTIFICATION);
         }
         return new ResponseEntity<JSONObject>(response, HttpStatus.OK);
     }

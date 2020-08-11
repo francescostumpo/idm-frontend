@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.management.Notification;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
@@ -62,6 +63,21 @@ public class UserNotificationService {
         return userNotificationList;
     }
 
+    @Transactional
+    public int deleteAllNotificationsForUser(String userId){
+        logger.info("deleteAllNotificationsForUser -- INIT -- user : " + userId);
+        try {
+            int eliminated = userNotificationRepository.deleteByUserId(userId);
+            logger.info("deleteAllNotificationsForUser -- END --");
+            return eliminated;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("Error in deleteAllNotificationsForUser");
+            return -1;
+        }
+    }
+
+    @Transactional
     public boolean deleteNotification(int idNotification){
         logger.info("deleteNotification -- INIT -- idNotification : " + idNotification);
         try {

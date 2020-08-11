@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserNotificationRepository extends CrudRepository<UserNotification, Integer> {
 
     public List<UserNotification> findByUserId(String userId);
-
+    public Integer deleteByUserId(String userId);
 }

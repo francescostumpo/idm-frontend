@@ -80,6 +80,7 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
             event.start = date
             event.allDay = true
             event.extendedProps = groupByDate[date]
+            event.id = event.extendedProps[0].id
             moment.locale('it')
             let endDate = event.extendedProps[0].endDate
             if(endDate === $scope.todayFormatted){
@@ -151,17 +152,19 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
         calendar.render();
         calendar.on("eventClick", function(info) {
             $timeout(function() {
+                var eventId = info.event.id
                 $scope.eventTitle = info.event.title;
                 $scope.selectedEventTender = Object.values(info.event.extendedProps);
                 console.log('$scope.selectedEventContracts', $scope.selectedEventTender)
                 moment.locale('it')
-                let endDate = $scope.selectedEventTender[5]
-                let endDateString = mainController.convertDateToStringForEvents(endDate)
-                let momentDate = moment(endDateString, "YYYY-MM-DD");
-                let date = momentDate.format("DD MMMM, YYYY");
-                $scope.selectedEventDate = date.toUpperCase();
-                $('#eventModalTender').modal()
-            }, 200)
+                var idCardEvent = '#event_' + eventId;
+                location.href = idCardEvent
+                //$(idCardEvent).removeClass('highlightCardEvent')
+                $(idCardEvent).addClass('highlightCardEvent2')
+                setTimeout(function () {
+                    $(idCardEvent).removeClass('highlightCardEvent2')
+                }, 2500)
+            }, 100)
         })
     }
 

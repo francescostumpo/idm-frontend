@@ -54,7 +54,7 @@
                             <div class="carousel-item active">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_0">
-                                        <div class="card shadow">
+                                        <div ng-click="goToGaraOverview(tender)" class="pointer card shadow">
                                             <div class="card-body">
                                                 <div class="text-size-18 font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
@@ -88,7 +88,7 @@
                             <div ng-if="recentTenders_wip_1.length > 0" class="carousel-item">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_1">
-                                        <div class="card shadow">
+                                        <div ng-click="goToGaraOverview(tender)" class="pointer card shadow">
                                             <div class="card-body">
                                                 <div style="font-size: 18px" class="font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
@@ -182,10 +182,10 @@
                                         </div>
                                     </div>
                                     <div class="mb-4" ng-repeat="tenderEvent in events">
-                                        <div class="text-size-18">
+                                        <div class="text-secondary text-size-18">
                                             {{tenderEvent.endDateMoment}}
                                         </div>
-                                        <div class="mt-3 card-events-dashboard-alert card shadow">
+                                        <div id="event_{{tenderEvent.id}}" class="mt-3 card-events-dashboard-alert card shadow">
                                             <div class="card-body">
                                                 <div class="text-alert-color">
                                                     <span class="text-size-18 text-bold">{{tenderEvent.extendedProps.length}}</span><span class="ml-1 text-size-16 text-bold">Gara in scadenza</span>
@@ -194,8 +194,13 @@
                                                     <div class="text-secondary text-size-14 text-bold mt-2">
                                                         {{tender.sapNumber}}
                                                     </div>
-                                                    <div class="mt-2 text-size-16 text-bold">
-                                                        {{tender.object}}
+                                                    <div class="row mt-2 ">
+                                                        <div class="text-size-16 text-bold col-md-11 col-lg-11 col-sm-11">
+                                                            {{tender.object}}
+                                                        </div>
+                                                        <div class="col-md-1 col-sm-1 col-lg-1">
+                                                            <i ng-click="goToGaraOverview(tender)" class="float-right pointer text-primary fas fa-chevron-right"></i>
+                                                        </div>
                                                     </div>
                                                     <div class="break mt-3 mb-3"></div>
                                                 </div>

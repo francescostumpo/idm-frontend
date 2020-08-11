@@ -10,13 +10,17 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     $scope.getTenderAttachmentsByTenderId = {};
     $scope.requiredAttachmentsCommon = {};
 
-    var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
-    $http.get(url).then(function (response) {
-        console.log('response from url ', url ,' : ', response)
-        if(response.data.status === 200){
-            $scope.userNotifications = response.data.userNotifications
-        }
-    })
+    $scope.getNotificationForUser = function() {
+        var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
+        $http.get(url).then(function (response) {
+            console.log('response from url ', url, ' : ', response)
+            if (response.data.status === 200) {
+                $scope.userNotifications = response.data.userNotifications
+            }
+        })
+    }
+
+    $scope.getNotificationForUser()
 
     stompClientFiles.connect({}, function(frame){
         stompClientFiles.subscribe("/topic/pushNotification", function(message){
@@ -150,6 +154,11 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             return nameProcessed
         }
         return name
+    }
+
+    $scope.goToGaraOverview = function(tender){
+        sessionStorage.setItem("bandoGara", JSON.stringify(tender));
+        location.href = '/garaOverview'
     }
 
     $scope.sort = {
