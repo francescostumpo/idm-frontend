@@ -10,4 +10,5 @@ public class Constants {
     public static final int HTTP_STATUS_OK = 200;
     public static final int HTTP_STATUS_ERROR = 500;
 
+    public static final String ERROR_DELETING_NOTIFICATION = "Errore durante l'eliminazione della notifica";
 }

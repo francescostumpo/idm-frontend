@@ -613,19 +613,19 @@ button:hover:enabled.button-searchView-action{
   height: 230px;
 }
 
-.highlightCardComment{
-    border-bottom: 2px solid;
-    border-top: 2px solid;
-    border-right: 2px solid;
-    border-left: 2px solid;
-    background-color: lightgray;
+.highlightCardEvent{
+    border-bottom: 2px solid !important;
+    border-top: 2px solid !important;
+    border-right: 2px solid !important;
+    border-left: 2px solid !important;
+    background-color: lightgray !important;
 }
 
-.highlightCardComment2{
-    background-color: white;
-    -webkit-transition: background-color 1000ms linear;
-    -ms-transition: background-color 1000ms linear;
-    transition: background-color 1000ms linear;
+.highlightCardEvent2{
+    background-color: lightgray !important;
+    /*-webkit-transition: background-color 1000ms linear !important;
+    -ms-transition: background-color 1000ms linear !important;*/
+    transition: background-color 1000ms linear !important;
 }
 
 .max-height {

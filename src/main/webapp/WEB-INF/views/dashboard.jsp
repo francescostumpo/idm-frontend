@@ -54,7 +54,7 @@
                             <div class="carousel-item active">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_0">
-                                        <div class="card shadow">
+                                        <div ng-click="goToGaraOverview(tender)" class="pointer card shadow">
                                             <div class="card-body">
                                                 <div class="text-size-18 font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
@@ -88,7 +88,7 @@
                             <div ng-if="recentTenders_wip_1.length > 0" class="carousel-item">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_1">
-                                        <div class="card shadow">
+                                        <div ng-click="goToGaraOverview(tender)" class="pointer card shadow">
                                             <div class="card-body">
                                                 <div style="font-size: 18px" class="font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
@@ -143,6 +143,9 @@
                             <div style="font-size: 28px" class="mb-0">
                                 Prossime scadenze
                             </div>
+                            <span ng-show="!showCalendarCard" class="text-bold text-alert-color">
+                                {{firstEndDate.endDateMoment}} - Gara in scadenza
+                            </span>
                             <span ng-show="showCalendarCard" ng-click="toggleCalendarCard()"
                                 style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">
                                 <i class="fas fa-chevron-up text-size-18"></i>
@@ -168,21 +171,21 @@
                             <div class=" col-md-7 col-lg-7 col-sm-12">
                                 <div style="max-height: 80vh" class="scrollable mt-4 card-body">
                                     <!-- today event -->
-                                    <div class="mb-4">
-                                        <div class="text-bold text-primary">
-                                            03 Agosto 2020
+                                    <div ng-show="!thereIsAEndDateToday" class="mb-4">
+                                        <div class="text-bold text-size-18 text-primary">
+                                            {{momentTodayAsString}}
                                         </div>
                                         <div class="mt-3 card-events-dashboard-today card shadow">
-                                            <div class="card-body">
+                                            <div class="text-secondary card-body">
                                                 Nessuna scadenza prevista per oggi
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mb-4" ng-repeat="tenderEvent in events">
-                                        <div>
+                                        <div class="text-secondary text-size-18">
                                             {{tenderEvent.endDateMoment}}
                                         </div>
-                                        <div class="mt-3 card-events-dashboard-alert card shadow">
+                                        <div id="event_{{tenderEvent.id}}" class="mt-3 card-events-dashboard-alert card shadow">
                                             <div class="card-body">
                                                 <div class="text-alert-color">
                                                     <span class="text-size-18 text-bold">{{tenderEvent.extendedProps.length}}</span><span class="ml-1 text-size-16 text-bold">Gara in scadenza</span>
@@ -191,8 +194,13 @@
                                                     <div class="text-secondary text-size-14 text-bold mt-2">
                                                         {{tender.sapNumber}}
                                                     </div>
-                                                    <div class="mt-2 text-size-16 text-bold">
-                                                        {{tender.object}}
+                                                    <div class="row mt-2 ">
+                                                        <div class="text-size-16 text-bold col-md-11 col-lg-11 col-sm-11">
+                                                            {{tender.object}}
+                                                        </div>
+                                                        <div class="col-md-1 col-sm-1 col-lg-1">
+                                                            <i ng-click="goToGaraOverview(tender)" class="float-right pointer text-primary fas fa-chevron-right"></i>
+                                                        </div>
                                                     </div>
                                                     <div class="break mt-3 mb-3"></div>
                                                 </div>
