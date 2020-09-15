@@ -282,7 +282,7 @@
                                                                     class="my-auto pointer">-->
                                                             <i   class="ml-2 fa fa-check-circle" style="color: limegreen"></i>
                                                         </div>
-                                                        <div ng-click="selectDocument(document)" class="pointer col-lg-9 col-md-9 col-sm-9">
+                                                        <div ng-click="selectDocument(document)" class="pointer col-lg-10 col-md-10 col-sm-10">
                                                             <div class="row flex-long-text">
                                                                 <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x fa-lg"
                                                                     style="color: red;"></i>

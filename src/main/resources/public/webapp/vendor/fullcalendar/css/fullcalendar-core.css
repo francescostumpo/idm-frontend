@@ -583,6 +583,7 @@ TODO: more distinction between this file and common.css
   font-weight: bold;
   text-decoration: underline;
   color: #004B9C;
+  font-size: 24px;
 }
 
 .fc-unthemed .fc-disabled-day {

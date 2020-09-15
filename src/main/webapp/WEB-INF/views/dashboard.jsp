@@ -77,7 +77,8 @@
                                                     <div class="col-auto">
                                                         <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
                                                         <div style="font-size: 16px" class=" mb-0 font-weight-bold">
-                                                            {{tender.endDate}}</div>
+                                                            {{tender.endDate | date: 'dd/MM/yyyy'}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,7 +113,8 @@
                                                     <div class="col-auto">
                                                         <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
                                                         <div style="font-size: 16px" class=" mb-0 font-weight-bold">
-                                                            {{tender.endDate}}</div>
+                                                            {{tender.endDate | date: 'dd/MM/yyyy'}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,16 +149,16 @@
                                 {{firstEndDate.endDateMoment}} - Gara in scadenza
                             </span>
                             <span ng-show="showCalendarCard" ng-click="toggleCalendarCard()"
-                                style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">
+                                class="text-bold pointer text-primary d-sm-inline-block">
                                 <i class="fas fa-chevron-up text-size-18"></i>
                             </span>
                             <span ng-show="!showCalendarCard" ng-click="toggleCalendarCard()"
-                                style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">
+                                class="text-bold pointer text-primary d-sm-inline-block">
                                 <i class="fas fa-chevron-down text-size-18"></i>
                             </span>
                         </div>
                         <div ng-show="showCalendarCard" class="col-lg-12 col-sm-12 col-md-12 row">
-                            <div  class="col-md-5 col-lg-5 col-sm-12">
+                            <div class="col-md-5 col-lg-5 col-sm-12">
                                 <div class="card-body">
                                     <div id="calendar" class="calendar"></div>
                                     <div class="break mt-3 mb-3"></div>
@@ -188,7 +190,9 @@
                                         <div id="event_{{tenderEvent.id}}" class="mt-3 card-events-dashboard-alert card shadow">
                                             <div class="card-body">
                                                 <div class="text-alert-color">
-                                                    <span class="text-size-18 text-bold">{{tenderEvent.extendedProps.length}}</span><span class="ml-1 text-size-16 text-bold">Gara in scadenza</span>
+                                                    <span class="text-size-18 text-bold">{{tenderEvent.extendedProps.length}}</span>
+                                                    <span ng-if="tenderEvent.extendedProps.length === 1" class="ml-1 text-size-16 text-bold">Gara in scadenza</span>
+                                                    <span ng-if="tenderEvent.extendedProps.length > 1" class="ml-1 text-size-16 text-bold">Gare in scadenza</span>
                                                 </div>
                                                 <div ng-repeat="tender in tenderEvent.extendedProps">
                                                     <div class="text-secondary text-size-14 text-bold mt-2">

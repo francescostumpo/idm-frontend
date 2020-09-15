@@ -2,7 +2,6 @@ var snamApp = angular.module("snamApp", ["angularjs-gauge", "checklist-model", "
 
 type = ['primary', 'info', 'success', 'warning', 'danger'];
 
-
 mainController = {
 
 	convertStringToDate: function(stringDate) {
