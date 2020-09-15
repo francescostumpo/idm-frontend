@@ -50,6 +50,11 @@
                                                 </button>
                                             </div>
                                             <div class="mr-4">
+                                                <button class="btn button-primary-buyer" ng-disabled="bandiSelected.length !== 1" ng-click="goToPage('compare')">
+                                                    <i class="fas fa-info pointer"></i><span class="ml-2">VEDI DETTAGLI</span>
+                                                </button>
+                                            </div>
+                                            <div class="mr-4">
                                                 <button ng-click="deleteTenders()" class="btn button-primary-buyer" ng-disabled="bandiSelected.length === 0" ng-click="goToPage('compare')">
                                                     <i class="far fa-trash-alt fa-fw fa-lg pointer"></i><span class="ml-2">ELIMINA</span>
                                                 </button>

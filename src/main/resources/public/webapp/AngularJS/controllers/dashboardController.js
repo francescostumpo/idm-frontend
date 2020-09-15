@@ -31,9 +31,8 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
                 $scope.createEventsFromTender()
                 $scope.recentTenders.forEach(tender => {
                     moment.locale('it')
-                    let endDate = tender.endDate
-                    let momentDate = moment(endDate, "YYYY-MM-DD");
-                    tender.endDate = momentDate.format("DD MMMM, YYYY");
+                    let endDate = mainController.convertLocalDateToDate(tender.endDate)
+                    tender.endDate = endDate
                     tender.fornitori = tender.suppliers.length
                 })
                 console.log('tender list : ', $scope.recentTenders)
@@ -68,8 +67,8 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
 
     $scope.createEventsFromTender = function() {
         var groupByDate = $scope.recentTenders.reduce((r, a) => {
-            a.endDate = mainController.convertDateToStringForEvents(a.endDate)
-            r[a.endDate] = [...r[a.endDate] || [], a];
+            a.endDateAsString = mainController.convertDateToStringForEvents(a.endDate)
+            r[a.endDateAsString] = [...r[a.endDateAsString] || [], a];
             return r;
         }, {});
 
@@ -82,12 +81,11 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
             event.extendedProps = groupByDate[date]
             event.id = event.extendedProps[0].id
             moment.locale('it')
-            let endDate = event.extendedProps[0].endDate
+            let endDate = event.extendedProps[0].endDateAsString
             if(endDate === $scope.todayFormatted){
                 $scope.thereIsAEndDateToday = true
             }
-            let momentDate = moment(endDate, "YYYY-MM-DD");
-            event.endDateMoment = momentDate.format("DD MMMM, YYYY");
+            event.endDateMoment = endDate
             $scope.events.push(event)
         }
         $scope.events.sort(function(event1, event2)  {
