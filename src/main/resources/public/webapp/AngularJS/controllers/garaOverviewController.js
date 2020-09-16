@@ -186,25 +186,35 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     }
 
     $scope.createSupplier = function(){
-        var fileBase64 = null;
-        var reader = new FileReader();
-        reader.readAsBinaryString($scope.listOfFiles[0]);
-        reader.onload = function() {
-            fileBase64 = reader.result;
-            var base64String = window.btoa(fileBase64);
-            var file = {}
-            var files = []
-            if (base64String !== null) {
-                file.file = base64String
-                file.fileName = $scope.listOfFiles[0].name
-                files.push(file)
-            }
-            $scope.supplier.files = files
+        $scope.supplier.files = []
+        console.log('createSupplier -- INIT -- supplier : ', $scope.supplier);
+        var promises = []
+        for (var i = 0; i < $scope.listOfFiles.length;i++){
+            var filePromise = new Promise(resolve =>{
+                var fileBase64 = null;
+                var filename = $scope.listOfFiles[i].name
+                var reader = new FileReader();
+                reader.readAsBinaryString($scope.listOfFiles[i]);
+                reader.onload = function() {
+                    fileBase64 = reader.result;
+                    var base64String = window.btoa(fileBase64);
+                    if (base64String !== null) {
+                        $scope.supplier.files.push({
+                            file: base64String,
+                            fileName: filename
+                        });
+                    }
+                    resolve()
+                }
+            })
+            promises.push(filePromise)
+        }
+        Promise.all(promises).then(() => {
             $scope.supplier.idTender = $scope.bandoGara.id
             $scope.supplier.sapNumber = $scope.bandoGara.sapNumber
             stompClientSupplier.send("/app/createSupplier", {}, JSON.stringify($scope.supplier));
             mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info');
-        }
+        });
     }
 
     $scope.deleteTender = function(){
