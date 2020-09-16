@@ -149,9 +149,11 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     }
 
     $scope.processName = function(name, length, subString){
-        if(name.length > length){
-            var nameProcessed = name.substring(0, subString) + '...';
-            return nameProcessed
+        if(name != undefined) {
+            if (name.length > length) {
+                var nameProcessed = name.substring(0, subString) + '...';
+                return nameProcessed
+            }
         }
         return name
     }
@@ -268,7 +270,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             if(e.target.id === 'fileselect2' || e.target.id === 'filedrag2' || e.target.id === 'fileselect2'
                 || e.target.id === 'fileselect' || e.target.id === 'filedrag' || e.target.id === 'fileselect'
                 || e.target.id === 'fileselect3' || e.target.id === 'filedrag3' || e.target.id === 'fileselect3'
-                || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'){
+                || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'
+                || e.target.id === 'fileselect5' || e.target.id === 'filedrag5' || e.target.id === 'fileselect5'){
                 console.log('file = ', file)
                 $timeout(function () {
                     $scope.listOfFiles.push(file)
@@ -317,6 +320,17 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 filedrag.addEventListener("drop", FileSelectHandler, false);
                 filedrag.style.display = "block";
             }
+
+            var fileselect5 = $id('fileselect5'),
+                filedrag5 = $id('filedrag5')
+            if(fileselect5 !== null && filedrag5 !== null) {
+                fileselect5.addEventListener("change", FileSelectHandler, false);
+                filedrag5.addEventListener("dragover", FileDragHover, false);
+                filedrag5.addEventListener("dragleave", FileDragHover, false);
+                filedrag5.addEventListener("drop", FileSelectHandler, false);
+                filedrag5.style.display = "block";
+            }
+
         }
         if (window.File && window.FileList && window.FileReader) {
             Init();

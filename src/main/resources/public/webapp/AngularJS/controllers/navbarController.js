@@ -3,26 +3,45 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.userId = mainController.getUserName()
 
-    $scope.deselectFile = function() {
+    $scope.deselectFile = function(tag) {
         $scope.file = null;
-        $scope.contractIsSelected = false;
-        $scope.contractSelectedName = "";
+        if(tag === 'fileRdo'){
+            $scope.rdoIsSelected = false
+            $scope.fileRdo = null
+            $scope.rdoSelectedName = ""
+        }
+        else{
+            $scope.letterIsSelected = false
+            $scope.fileLetter = null
+            $scope.letterSelectedName = ""
+        }
     };
 
     $scope.createTender = function(){
         console.log('createTender -- INIT -- tender : ', $scope.tender);
-        var fileBase64 = null;
-        var reader = new FileReader();
-        reader.readAsBinaryString($scope.file);
-        reader.onload = function() {
-            fileBase64 = reader.result;
-            var base64String = window.btoa(fileBase64);
+        var fileBase64Rdo = null;
+        var readerRdo = new FileReader();
+        readerRdo.readAsBinaryString($scope.fileRdo);
+        readerRdo.onload = function() {
+            fileBase64Rdo = readerRdo.result;
+            var base64String = window.btoa(fileBase64Rdo);
             if (base64String !== null) {
-                $scope.tender.file = base64String;
-                $scope.tender.fileName = $scope.contractSelectedName;
+                $scope.tender.fileRdo = base64String;
+                $scope.tender.fileNameRdo = $scope.rdoSelectedName;
             }
-            stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
-            mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
+            var fileBase64Letter = null;
+            var readerLetter = new FileReader();
+            readerLetter.readAsBinaryString($scope.fileLetter);
+            readerLetter.onload = function() {
+                fileBase64Letter = readerLetter.result;
+                var base64String = window.btoa(fileBase64Letter);
+                if (base64String !== null) {
+                    $scope.tender.fileLetter = base64String;
+                    $scope.tender.fileNameLetter = $scope.letterSelectedName;
+                }
+                stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
+                mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
+            }
         }
     };
 
@@ -68,11 +87,15 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
         $('#createTenderModal').modal()
     }
 
-    $scope.file = null;
+    $scope.fileRdo = null;
+    $scope.fileLetter = null
     $scope.fileToUpload = null;
 
-    $scope.contractIsSelected = false;
-    $scope.contractSelectedName = "";
+    $scope.rdoIsSelected = false;
+    $scope.rdoSelectedName = "";
+
+    $scope.letterIsSelected = false;
+    $scope.letterSelectedName = "";
 
     (function() {
         // getElementById
@@ -101,24 +124,38 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             console.log(e.target.id)
             // fetch FileList object
             var files = e.target.files || e.dataTransfer.files;
-            $scope.file = files[0];
-
+            $scope.file = files[0]
             if(e.target.id === "filedrag" || e.target.id === "imageUpload" || e.target.id === "fileselect"){
                 var name = processName($scope.file.name);
                 console.log('file = ', $scope.file)
                 $('#fileToUpload').html(name);
                 $timeout(function () {
-                    $scope.contractIsSelected = true;
-                    $scope.contractSelectedName = $scope.file.name
-                    console.log('set contract selected')
+                    $scope.fileRdo = files[0];
+                    $scope.rdoIsSelected = true;
+                    $scope.rdoSelectedName = $scope.file.name
+                    console.log('set rdo selected')
                 }, 200)
-
             }
+
+            if(e.target.id === "filedrag5" || e.target.id === "imageUpload5" || e.target.id === "fileselect5"){
+                var name = processName($scope.file.name);
+                console.log('file = ', $scope.file)
+                $('#fileToUpload').html(name);
+                $timeout(function () {
+                    $scope.fileLetter = files[0]
+                    $scope.letterIsSelected = true;
+                    $scope.letterSelectedName = $scope.file.name
+                    console.log('set letter selected')
+                }, 200)
+            }
+
         }
         // initialize
         function Init() {
             var fileselect = $id("fileselect"),
-                filedrag = $id("filedrag")
+                filedrag = $id("filedrag"),
+                fileselect5 = $id("fileselect5"),
+                filedrag5 = $id("filedrag5")
 
             fileselect.addEventListener("change", FileSelectHandler, false);
 
@@ -127,6 +164,12 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             filedrag.addEventListener("drop", FileSelectHandler, false);
             filedrag.style.display = "block";
 
+            fileselect5.addEventListener("change", FileSelectHandler, false);
+
+            filedrag5.addEventListener("dragover", FileDragHover, false);
+            filedrag5.addEventListener("dragleave", FileDragHover, false);
+            filedrag5.addEventListener("drop", FileSelectHandler, false);
+            filedrag5.style.display = "block";
         }
 
         if (window.File && window.FileList && window.FileReader) {

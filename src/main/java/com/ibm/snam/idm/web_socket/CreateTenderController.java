@@ -3,6 +3,7 @@ package com.ibm.snam.idm.web_socket;
 import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
+import com.ibm.snam.idm.thread.AnalyzerThread;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -19,6 +20,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Base64;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Controller
 public class CreateTenderController {
@@ -35,25 +39,32 @@ public class CreateTenderController {
     @SendToUser("/queue/reply")
     public String createTender(@Payload JSONObject request){
         try{
-            String base64File = request.getString("file");
-            String fileName = request.getString("fileName");
-            byte [] data = Base64.getDecoder().decode(base64File);
-            MultipartFile document = new Base64DecodedMultipartFile(data, fileName);
-            JSONObject responseFromAnalyzer = analyzerMicroservice.analyzeFile(document);
-            if(responseFromAnalyzer.getInt("status") != HttpStatus.OK.value()){
+            MultipartFile documentRdo = getMultipartFileFromRequest(request, "fileRdo", "fileNameRdo");
+            MultipartFile documentLetter = getMultipartFileFromRequest(request, "fileLetter", "fileNameLetter");
+            AnalyzerThread analyzerThreadRdo = new AnalyzerThread();
+            AnalyzerThread analyzerThreadLetter = new AnalyzerThread();
+
+            analyzeRdoAndLetter(analyzerThreadRdo, analyzerThreadLetter, documentRdo, documentLetter);
+
+            JSONObject responseFromAnalyzerRdo = analyzerThreadRdo.getResponseFromAnalyzer();
+            JSONObject responseFromAnalyzerLetter = analyzerThreadLetter.getResponseFromAnalyzer();
+
+            if(responseFromAnalyzerRdo.getInt("status") != HttpStatus.OK.value()
+                || responseFromAnalyzerLetter.getInt("status") != HttpStatus.OK.value()){
                 logger.error("Error calling analyzer microservice");
                 JSONObject response = new JSONObject();
-                response.put("status", responseFromAnalyzer.getInt("status"));
+                response.put("status", 500);
                 response.put("message", Constants.ERROR_CALLING_ANALYZER);
                 return response.toString();
             }
-            request.remove("file");
-            request.put("responseFromAnalyzer", responseFromAnalyzer);
+            request.remove("fileRdo");
+            request.remove("fileLetter");
+            request.put("responseFromAnalyzerLetter", responseFromAnalyzerLetter);
             JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(request, "/tender/createTender");
             if(responseFromBackend.getInt("status") != HttpStatus.OK.value()){
                 logger.error("Error calling backend microservice");
                 JSONObject response = new JSONObject();
-                response.put("status", responseFromAnalyzer.getInt("status"));
+                //response.put("status", responseFromAnalyzer.getInt("status"));
                 response.put("message", Constants.ERROR_CALLING_BACKEND);
                 return response.toString();
             }
@@ -67,6 +78,37 @@ public class CreateTenderController {
             response.put("message", Constants.ERROR_CREATING_TENDER);
             return response.toString();
         }
+    }
+
+    private void analyzeRdoAndLetter(AnalyzerThread analyzerThreadRdo, AnalyzerThread analyzerThreadLetter, MultipartFile documentRdo, MultipartFile documentLetter) {
+        logger.info("analyzeRdoAndLetter -- INIT --");
+        try {
+            ExecutorService executorService = Executors.newFixedThreadPool(2);
+            CountDownLatch latch = new CountDownLatch(2);
+
+            analyzerThreadRdo.setAnalyzerMicroservice(analyzerMicroservice);
+            analyzerThreadRdo.setDocument(documentRdo);
+            analyzerThreadRdo.setLatch(latch);
+
+            analyzerThreadLetter.setAnalyzerMicroservice(analyzerMicroservice);
+            analyzerThreadLetter.setDocument(documentLetter);
+            analyzerThreadLetter.setLatch(latch);
+
+            executorService.submit(analyzerThreadRdo);
+            executorService.submit(analyzerThreadLetter);
+            latch.await();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        logger.info("analyzeRdoAndLetter -- END --");
+    }
+
+    private MultipartFile getMultipartFileFromRequest(JSONObject request, String file, String name) {
+        String base64File = request.getString(file);
+        String fileName = request.getString(name);
+        byte [] data = Base64.getDecoder().decode(base64File);
+        MultipartFile document = new Base64DecodedMultipartFile(data, fileName);
+        return document;
     }
 
 }
