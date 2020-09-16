@@ -70,29 +70,37 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
 
     $scope.uploadTenderFile = function(){
-        for(var i = 0; i < $scope.listOfFiles.length; i++){
-            var fileBase64 = null;
-            var reader = new FileReader();
-            $scope.fileName = $scope.listOfFiles[i].name
-            reader.readAsBinaryString($scope.listOfFiles[i]);
-            reader.onload = function() {
-                fileBase64 = reader.result;
-                var base64String = window.btoa(fileBase64);
-                var file = {}
-                var files = []
-                if (base64String !== null) {
-                    file.file = base64String;
-                    file.fileName = $scope.fileName
-                    files.push(file)
+        console.log('uploadTenderFile -- INIT -- tender : ', $scope.bandoGara);
+        var fileToBeUploaded = {};
+        fileToBeUploaded.files = [];
+        var promises = []
+        for (var i = 0; i < $scope.listOfFiles.length;i++){
+            var filePromise = new Promise(resolve =>{
+                var fileBase64 = null;
+                var filename = $scope.listOfFiles[i].name
+                var reader = new FileReader();
+                reader.readAsBinaryString($scope.listOfFiles[i]);
+                reader.onload = function() {
+                    fileBase64 = reader.result;
+                    var base64String = window.btoa(fileBase64);
+                    if (base64String !== null) {
+                        fileToBeUploaded.files.push({
+                            file: base64String,
+                            fileName: filename
+                        });
+                    }
+                    resolve()
                 }
-                var fileToBeUploaded = {};
-                fileToBeUploaded.cig = $scope.bandoGara.cig[0]
-                fileToBeUploaded.files = files;
-                fileToBeUploaded.idTender = $scope.bandoGara.id;
-                stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
-            }
+            })
+            promises.push(filePromise)
         }
-        mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
+        Promise.all(promises).then(() => {
+            fileToBeUploaded.cig = $scope.bandoGara.cig[0]
+            fileToBeUploaded.files = files;
+            fileToBeUploaded.idTender = $scope.bandoGara.id;
+            stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
+            mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
+        });
     };
 
     $scope.deleteSupplier = function(supplier){
