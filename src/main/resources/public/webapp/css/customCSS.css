@@ -618,11 +618,11 @@ button:hover:enabled.button-searchView-action{
     border-top: 2px solid !important;
     border-right: 2px solid !important;
     border-left: 2px solid !important;
-    background-color: lightgray !important;
+    background-color: #DCF4F2 !important;
 }
 
 .highlightCardEvent2{
-    background-color: lightgray !important;
+    background-color: #DCF4F2 !important;
     /*-webkit-transition: background-color 1000ms linear !important;
     -ms-transition: background-color 1000ms linear !important;*/
     transition: background-color 1000ms linear !important;

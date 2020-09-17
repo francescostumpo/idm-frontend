@@ -16,9 +16,6 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.Base64;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -57,20 +54,28 @@ public class CreateTenderController {
                 response.put("message", Constants.ERROR_CALLING_ANALYZER);
                 return response.toString();
             }
-            request.remove("fileRdo");
-            request.remove("fileLetter");
-            request.put("responseFromAnalyzerLetter", responseFromAnalyzerLetter);
-            JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(request, "/tender/createTender");
-            if(responseFromBackend.getInt("status") != HttpStatus.OK.value()){
-                logger.error("Error calling backend microservice");
+            JSONObject responseFromBackendCreateTender = createTenderOnBackend(request, responseFromAnalyzerLetter);
+            if(responseFromBackendCreateTender.getInt("status") == Constants.HTTP_STATUS_ERROR){
+                return responseFromBackendCreateTender.toString();
+            }
+            else if(responseFromBackendCreateTender.getString("creationStatus").equals(Constants.TENDER_ALREADY_EXIST)){
+                logger.info("There is already a tender with the same SAP number");
                 JSONObject response = new JSONObject();
-                //response.put("status", responseFromAnalyzer.getInt("status"));
-                response.put("message", Constants.ERROR_CALLING_BACKEND);
+                response.put("status", Constants.HTTP_STATUS_OK);
+                response.put("message", Constants.TENDER_ALREADY_PRESENT);
+                response.put("creationStatus", responseFromBackendCreateTender.getString("creationStatus"));
                 return response.toString();
             }
-            logger.info("responseFromBackend : " + responseFromBackend);
+            JSONObject responseFromBackendUpdateRequiredAttachments = updateRequiredAttachmentsOnBackend(responseFromBackendCreateTender, request, responseFromAnalyzerRdo);
+            if(responseFromBackendUpdateRequiredAttachments.getInt("status") == Constants.HTTP_STATUS_ERROR){
+                return responseFromBackendUpdateRequiredAttachments.toString();
+            }
+            if(responseFromBackendCreateTender.getString("creationStatus").equals(Constants.TENDER_CREATED_WITH_MISSING_DATA)){
+                logger.info("Tender created with missing data");
+                responseFromBackendUpdateRequiredAttachments.put("message", Constants.MESSAGE_TENDER_CREATED_WITH_MISSING_DATA);
+            }
             logger.info("Returning message");
-            return responseFromBackend.toString();
+            return responseFromBackendCreateTender.toString();
         } catch (Exception e) {
             e.printStackTrace();
             JSONObject response = new JSONObject();
@@ -78,6 +83,39 @@ public class CreateTenderController {
             response.put("message", Constants.ERROR_CREATING_TENDER);
             return response.toString();
         }
+    }
+
+    private JSONObject updateRequiredAttachmentsOnBackend(JSONObject responseFromBackend, JSONObject request, JSONObject responseFromAnalyzerRdo) {
+        request.remove("responseFromAnalyzerLetter");
+        request.put("responseFromAnalyzerRdo", responseFromAnalyzerRdo);
+        JSONObject tender = responseFromBackend.getJSONObject("tender");
+        request.put("idTender", tender.getString("id"));
+        JSONObject responseFromBackendUpdateRequiredAttachments = backendMicroservice.saveObjectOnDb(request, "/tender/updateTenderRequiredAttachments");
+        logger.info("responseFromBackendUpdateRequiredAttachments : " + responseFromBackendUpdateRequiredAttachments);
+        if(responseFromBackendUpdateRequiredAttachments.getInt("status") != HttpStatus.OK.value()){
+            logger.error("Error calling backend microservice (update required attachments)");
+            JSONObject response = new JSONObject();
+            response.put("status", Constants.HTTP_STATUS_ERROR);
+            response.put("message", Constants.ERROR_CALLING_BACKEND);
+            return response;
+        }
+        return responseFromBackendUpdateRequiredAttachments;
+    }
+
+    private JSONObject createTenderOnBackend(JSONObject request, JSONObject responseFromAnalyzerLetter) {
+        request.remove("fileRdo");
+        request.remove("fileLetter");
+        request.put("responseFromAnalyzerLetter", responseFromAnalyzerLetter);
+        JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(request, "/tender/createTender");
+        logger.info("responseFromBackend : " + responseFromBackend);
+        if(responseFromBackend.getInt("status") != HttpStatus.OK.value()){
+            logger.error("Error calling backend microservice (create tender)");
+            JSONObject response = new JSONObject();
+            response.put("status", Constants.HTTP_STATUS_ERROR);
+            response.put("message", Constants.ERROR_CALLING_BACKEND);
+            return response;
+        }
+        return responseFromBackend;
     }
 
     private void analyzeRdoAndLetter(AnalyzerThread analyzerThreadRdo, AnalyzerThread analyzerThreadLetter, MultipartFile documentRdo, MultipartFile documentLetter) {

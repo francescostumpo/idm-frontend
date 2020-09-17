@@ -9,7 +9,7 @@
                 <span aria-hidden="true"><i data-dismiss="modal" class="text-primary fas fa-times pointer text-size-18"></i></span>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-md-8 col-sm-8">
                         <div>
                             <span class="text-medium-size-custom">Oggetto gara*</span>
@@ -26,9 +26,9 @@
                             <input type="text" class="text-primary form-control" ng-model="tender.cig" placeholder="000000000">
                         </div>
                     </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-4 col-sm-4">
+                </div>-->
+                <div class="row">
+                    <!--<div class="col-md-4 col-sm-4">
                         <div>
                             <span class="text-medium-size-custom">Numero SAP*</span>
                         </div>
@@ -43,8 +43,8 @@
                         <div class="text-primary mt-3">
                             <input type="text" class="text-primary form-control" ng-model="tender.supplier" placeholder="Nome società">
                         </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4">
+                    </div>-->
+                    <div class="col-md-6 col-sm-6">
                         <div>
                             <span class="text-medium-size-custom">Scadenza*</span>
                         </div>
@@ -54,8 +54,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-sm-6"></div>
                 </div>
-                <div class="mt-5">
+                <div class="mt-4">
                     <span class="text-medium-size-custom">Carica documenti*</span>
                 </div>
                 <div class="mt-3 row no-gutters col-md-12 col-lg-12 col-sm-12">

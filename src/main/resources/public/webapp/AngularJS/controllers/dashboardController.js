@@ -85,7 +85,7 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
             if(endDate === $scope.todayFormatted){
                 $scope.thereIsAEndDateToday = true
             }
-            event.endDateMoment = endDate
+            event.endDateMoment = mainController.convertDateToMomentDateAsString(endDate)
             $scope.events.push(event)
         }
         $scope.events.sort(function(event1, event2)  {
@@ -156,7 +156,8 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
                 console.log('$scope.selectedEventContracts', $scope.selectedEventTender)
                 moment.locale('it')
                 var idCardEvent = '#event_' + eventId;
-                location.href = idCardEvent
+                $(idCardEvent)[0].scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
+                //location.href = idCardEvent
                 //$(idCardEvent).removeClass('highlightCardEvent')
                 $(idCardEvent).addClass('highlightCardEvent2')
                 setTimeout(function () {
