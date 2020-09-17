@@ -247,15 +247,24 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     }
 
     $scope.removeFileFromListOfFile = function(file){
-        var tmp = []
-        for(var i = 0 ; i < $scope.listOfFiles.length; i++){
-            var fileName = $scope.listOfFiles[i].name
-            var size = $scope.listOfFiles[i].size
-            if(file.name !== fileName || file.size !== size){
-                tmp.push($scope.listOfFiles[i])
+        var newFiles = []
+        for (var i = 0; i < $scope.listOfFiles.length; i++){
+            if (file !== $scope.listOfFiles[i]){
+                newFiles.push($scope.listOfFiles[i])
             }
         }
-        $scope.listOfFiles = tmp
+        $scope.listOfFiles = newFiles
+    }
+
+    $scope.addFilesToListOfFile = function (files){
+        var newFiles = []
+        for (var i = 0; i < $scope.listOfFiles.length; i++){
+            newFiles.push($scope.listOfFiles[i])
+        }
+        for (var i = 0; i < files.length; i++){
+            newFiles.push(files[i])
+        }
+        $scope.listOfFiles = newFiles
     }
 
     $scope.listOfFiles = [];
@@ -277,13 +286,15 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             console.log(e.target.id)
             // fetch FileList object
             var files = e.target.files || e.dataTransfer.files;
-            var file = files[0];
+            $scope.addFilesToListOfFile(files)
             if(e.target.id === 'fileselect2' || e.target.id === 'filedrag2' || e.target.id === 'fileselect2'
                 || e.target.id === 'fileselect' || e.target.id === 'filedrag' || e.target.id === 'fileselect'
                 || e.target.id === 'fileselect3' || e.target.id === 'filedrag3' || e.target.id === 'fileselect3'
                 || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'
                 || e.target.id === 'fileselect5' || e.target.id === 'filedrag5' || e.target.id === 'fileselect5'){
                 console.log('file = ', file)
+                || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'){
+                console.log('files = ', $scope.listOfFiles)
                 $timeout(function () {
                     $scope.listOfFiles.push(file)
                     console.log('set contract selected')

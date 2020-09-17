@@ -38,10 +38,10 @@
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div>
-                            <span class="text-medium-size-custom">Società*</span>
+                            <span class="text-medium-size-custom">Societï¿½*</span>
                         </div>
                         <div class="text-primary mt-3">
-                            <input type="text" class="text-primary form-control" ng-model="tender.supplier" placeholder="Nome società">
+                            <input type="text" class="text-primary form-control" ng-model="tender.supplier" placeholder="Nome societï¿½">
                         </div>
                     </div>-->
                     <div class="col-md-6 col-sm-6">
