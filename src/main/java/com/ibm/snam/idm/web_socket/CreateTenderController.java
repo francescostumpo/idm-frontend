@@ -72,7 +72,7 @@ public class CreateTenderController {
             }
             if(responseFromBackendCreateTender.getString("creationStatus").equals(Constants.TENDER_CREATED_WITH_MISSING_DATA)){
                 logger.info("Tender created with missing data");
-                responseFromBackendUpdateRequiredAttachments.put("message", Constants.MESSAGE_TENDER_CREATED_WITH_MISSING_DATA);
+                responseFromBackendCreateTender.replace("message", Constants.MESSAGE_TENDER_CREATED_WITH_MISSING_DATA);
             }
             logger.info("Returning message");
             return responseFromBackendCreateTender.toString();
