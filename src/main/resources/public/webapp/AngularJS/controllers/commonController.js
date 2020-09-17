@@ -292,11 +292,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 || e.target.id === 'fileselect3' || e.target.id === 'filedrag3' || e.target.id === 'fileselect3'
                 || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'
                 || e.target.id === 'fileselect5' || e.target.id === 'filedrag5' || e.target.id === 'fileselect5'){
-                console.log('file = ', file)
-                || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'){
                 console.log('files = ', $scope.listOfFiles)
                 $timeout(function () {
-                    $scope.listOfFiles.push(file)
                     console.log('set contract selected')
                 }, 200)
             }
