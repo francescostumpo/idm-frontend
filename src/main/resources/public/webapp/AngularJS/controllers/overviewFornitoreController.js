@@ -64,20 +64,23 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         $scope.requiredAttachments = []
         $scope.documentCheckList = []
         $scope.notRequiredAttachments = []
-        for (var i = 0; i < $scope.bandoGara.requiredAttachments.length; i++) {
-            var tagRequired = {}
-            tagRequired.uploadedOn = 'N/A'
-            tagRequired.fileName = 'N/A'
-            tagRequired._idAttachment = 'N/A'
-            tagRequired.isPresent = false
-            tagRequired.compliant = true
-            tagRequired.tag = $scope.bandoGara.requiredAttachments[i]
-            tagRequired.label = $scope.getLabelAssociatedToTag(tagRequired.tag);
-            $scope.requiredAttachments.push(tagRequired)
-            if(null != tagRequired.compliant && undefined != tagRequired.compliant && tagRequired.compliant === false){
-                $scope.notCompliants++;
+        if($scope.bandoGara.requiredAttachments) {
+            for (var i = 0; i < $scope.bandoGara.requiredAttachments.length; i++) {
+                var tagRequired = {}
+                tagRequired.uploadedOn = 'N/A'
+                tagRequired.fileName = 'N/A'
+                tagRequired._idAttachment = 'N/A'
+                tagRequired.isPresent = false
+                tagRequired.compliant = true
+                tagRequired.tag = $scope.bandoGara.requiredAttachments[i]
+                tagRequired.label = $scope.getLabelAssociatedToTag(tagRequired.tag);
+                $scope.requiredAttachments.push(tagRequired)
+                if(null != tagRequired.compliant && undefined != tagRequired.compliant && tagRequired.compliant === false){
+                    $scope.notCompliants++;
+                }
             }
         }
+
         $scope.documents = $scope.fornitoreOverview.attachments;
         for (var i = 0; i < $scope.documents.length; i++) {
             var document = $scope.documents[i]

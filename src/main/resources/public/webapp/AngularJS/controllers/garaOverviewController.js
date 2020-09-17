@@ -54,15 +54,17 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             var document = supplier.attachments[i];
             var tag = document.tag;
             var found = false
-            for (var j = 0; j < $scope.bandoGara.requiredAttachments.length; j++) {
-                var tagRequired = $scope.bandoGara.requiredAttachments[j];
-                if (tag === tagRequired) {
-                    documentCheckList.push(tagRequired);
+            if($scope.bandoGara.requiredAttachments) {
+                for (var j = 0; j < $scope.bandoGara.requiredAttachments.length; j++) {
+                    var tagRequired = $scope.bandoGara.requiredAttachments[j];
+                    if (tag === tagRequired) {
+                        documentCheckList.push(tagRequired);
+                    }
                 }
             }
         }
         supplier.compliantAttachments = documentCheckList.length;
-        var progressBarCompliant = Math.floor(documentCheckList.length / $scope.bandoGara.requiredAttachments.length * 100);
+        var progressBarCompliant = $scope.bandoGara.requiredAttachments? Math.floor(documentCheckList.length / $scope.bandoGara.requiredAttachments.length * 100) : 0;
 
         return {'width': progressBarCompliant + '%'};
     };
