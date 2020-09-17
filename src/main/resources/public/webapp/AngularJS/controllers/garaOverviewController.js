@@ -76,6 +76,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         var fileToBeUploaded = {};
         fileToBeUploaded.files = [];
         var promises = []
+        console.log("$scope.listOfFiles: ", $scope.listOfFiles); 
         for (var i = 0; i < $scope.listOfFiles.length;i++){
             var filePromise = new Promise(resolve =>{
                 var fileBase64 = null;
@@ -98,7 +99,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         }
         Promise.all(promises).then(() => {
             fileToBeUploaded.cig = $scope.bandoGara.cig[0]
-            fileToBeUploaded.files = files;
+            //fileToBeUploaded.files = files;
             fileToBeUploaded.idTender = $scope.bandoGara.id;
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
