@@ -41,10 +41,10 @@ mainController = {
 	showNotification: function(from, align, message, color, type) {
 		var icon = ''
 		if(type === 'info'){
-			icon = 'far fa-check-square'
+			icon = 'fas fa-info'
 		}
 		else if(type === 'success'){
-			icon = 'far fa-check-square'
+			icon = 'far fa-check'
 		}
 		else if(type === 'danger'){
 			icon = "fas fa-times"
