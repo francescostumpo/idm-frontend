@@ -5,10 +5,8 @@
     <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="text-primary font-weight-bold modal-header">
-                <div class="modal-title" id="exampleModalLabel">MODIFICA GARA {{bandoSelected.cig}}</div>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="text-primary fas fa-times"></i></span>
-                </button>
+                <div class="modal-title" id="exampleModalLabel">MODIFICA GARA {{bandoSelected.sapNumber}}</div>
+                <span aria-hidden="true"><i data-dismiss="modal" class="text-primary fas fa-times pointer text-size-18"></i></span>
             </div>
             <div class="modal-body">
                 <div class="row">

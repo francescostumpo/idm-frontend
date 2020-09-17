@@ -31,15 +31,15 @@ public class UserNotification {
     @Column(name = "READING_DATE")
     private String readingDate;
 
-    @Column(name = "CIG")
-    private String cig;
+    @Column(name = "TENDER_NUMBER")
+    private String tenderNumber;
 
-    public String getCig() {
-        return cig;
+    public String getTenderNumber() {
+        return tenderNumber;
     }
 
-    public void setCig(String cig) {
-        this.cig = cig;
+    public void setTenderNumber(String tenderNumber) {
+        this.tenderNumber = tenderNumber;
     }
 
     public Integer getId() {

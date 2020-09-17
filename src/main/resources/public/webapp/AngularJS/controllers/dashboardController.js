@@ -10,22 +10,29 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
     $scope.recentTenders_wip_0 = []
     $scope.recentTenders_wip_1 = []
 
+    $scope.calendarIsInitialized = false
+
     $scope.getAllTendersByDefault.getFromParent = function(){
         $scope.recentTenders = []
         $scope.recentTenders_wip_0 = []
         $scope.recentTenders_wip_1 = []
-        $scope.getRecentTenders();
+        $scope.events = []
+        $scope.thereIsAEndDateToday = false
+        $scope.getRecentTenders()
     };
 
     $scope.getRecentTenders = function(){
         mainController.startProgressIndicator('#loading')
+
         $http.get(url).then(function (response) {
             console.log('response from ', url, ' : ', response)
             if(response.data.status === 200){
                 $scope.recentTenders = response.data.tenderList;
                 $scope.createEventsFromTender()
                 $scope.recentTenders.forEach(tender => {
-                    tender.endDate = $filter('date')(mainController.convertLocalDateToDate(tender.endDate), 'dd/MM/yyyy')
+                    moment.locale('it')
+                    let endDate = mainController.convertLocalDateToDate(tender.endDate)
+                    tender.endDate = endDate
                     tender.fornitori = tender.suppliers.length
                 })
                 console.log('tender list : ', $scope.recentTenders)
@@ -38,19 +45,58 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
         })
     };
 
+    $scope.formatDate = function(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        return [year, month, day].join('-');
+    }
+
     $scope.events = []
+    $scope.thereIsAEndDateToday = false
+    $scope.today = new Date()
+    $scope.todayFormatted = $scope.formatDate($scope.today)
+    moment.locale('it')
+    let momentToday = moment($scope.todayFormatted, "YYYY-MM-DD");
+    $scope.momentTodayAsString = momentToday.format("DD MMMM, YYYY");
 
     $scope.createEventsFromTender = function() {
-        for (var i = 0; i < $scope.recentTenders.length; i++) {
+        var groupByDate = $scope.recentTenders.reduce((r, a) => {
+            a.endDateAsString = mainController.convertDateToStringForEvents(a.endDate)
+            r[a.endDateAsString] = [...r[a.endDateAsString] || [], a];
+            return r;
+        }, {});
+
+        for (date in groupByDate) {
             var event = {}
-            var tender = $scope.recentTenders[i]
-            event.title = $scope.processName(tender.object, 17, 17)
-            event.color = '#FF6C00'
-            event.start = mainController.convertDateToStringForEvents(tender.endDate)
-            event.extendedProps = tender
+            event.title = ''//$scope.processName(tender.object, 17, 17)
+            event.color = 'white'
+            event.start = date
+            event.allDay = true
+            event.extendedProps = groupByDate[date]
+            event.id = event.extendedProps[0].id
+            moment.locale('it')
+            let endDate = event.extendedProps[0].endDateAsString
+            if(endDate === $scope.todayFormatted){
+                $scope.thereIsAEndDateToday = true
+            }
+            event.endDateMoment = mainController.convertDateToMomentDateAsString(endDate)
             $scope.events.push(event)
         }
-        $scope.initCalendar()
+        $scope.events.sort(function(event1, event2)  {
+            var difference = event1.start.toString().localeCompare(event2.start)
+            return difference
+        })
+        $scope.firstEndDate = $scope.events[0]
+        if(!$scope.calendarIsInitialized) {
+            $scope.initCalendar()
+            $scope.calendarIsInitialized = true
+        }
     }
 
     $scope.populateTenderListWip = function(){
@@ -82,7 +128,8 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
             minTime: '09:00:00',
             maxTime: '24:00:00',
             defaultDate: new Date(),
-            aspectRatio: 3,
+            aspectRatio: 1.5,
+            height : 600,
             fixedWeekCount: false,
             locale: 'it',
             headerToolbar: {
@@ -92,24 +139,32 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
             },
             eventColor: '#FF6C00',
             eventTextColor: '#FFF',
-            events: $scope.events
+            events: $scope.events,
+            eventRender : function (event) {
+                var element = event.el.childNodes[0]
+                var node = document.createElement('i')
+                node.className = 'text-alert-color fas fa-circle'
+                element.appendChild(node)
+            }
         });
         calendar.render();
         calendar.on("eventClick", function(info) {
             $timeout(function() {
+                var eventId = info.event.id
                 $scope.eventTitle = info.event.title;
                 $scope.selectedEventTender = Object.values(info.event.extendedProps);
                 console.log('$scope.selectedEventContracts', $scope.selectedEventTender)
                 moment.locale('it')
-                let endDate = $scope.selectedEventTender[5]
-                let endDateString = mainController.convertDateToStringForEvents(endDate)
-                let momentDate = moment(endDateString, "YYYY-MM-DD");
-                let date = momentDate.format("DD MMMM, YYYY");
-                $scope.selectedEventDate = date.toUpperCase();
-                $('#eventModalTender').modal()
-            }, 200)
+                var idCardEvent = '#event_' + eventId;
+                $(idCardEvent)[0].scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
+                //location.href = idCardEvent
+                //$(idCardEvent).removeClass('highlightCardEvent')
+                $(idCardEvent).addClass('highlightCardEvent2')
+                setTimeout(function () {
+                    $(idCardEvent).removeClass('highlightCardEvent2')
+                }, 2500)
+            }, 100)
         })
     }
-
 
 }]);

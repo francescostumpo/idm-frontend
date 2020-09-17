@@ -42,12 +42,19 @@
                             style="cursor:pointer;font-weight: bold; text-decoration: underline"
                             class="text-primary d-sm-inline-block">Vedi tutte</a>
                     </div>
+                    <div class="mb-5" ng-show="recentTenders.length === 0">
+                        <div class="card">
+                            <div class="text-center card-body">
+                                <span>Nessuna gara recente</span>
+                            </div>
+                        </div>
+                    </div>
                     <div id="carouselExampleIndicators_recent_tenders" class="carousel slide col-xl-12 col-md-12" data-ride="carousel"  data-interval="10000000">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_0">
-                                        <div class="card shadow">
+                                        <div ng-click="goToGaraOverview(tender)" class="pointer card shadow">
                                             <div class="card-body">
                                                 <div class="text-size-18 font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
@@ -63,14 +70,15 @@
                                                 <div class="break"></div>
                                                 <div class="mt-2 text-secondary row no-gutters align-items-center">
                                                     <div class="col mr-2">
-                                                        <div style="font-size: 14px" class="text-xs mb-1">CIG</div>
-                                                        <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.cig[0]}}
+                                                        <div style="font-size: 14px" class="text-xs mb-1">Società</div>
+                                                        <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.company}}
                                                         </div>
                                                     </div>
                                                     <div class="col-auto">
                                                         <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
                                                         <div style="font-size: 16px" class=" mb-0 font-weight-bold">
-                                                            {{tender.endDate}}</div>
+                                                            {{tender.endDate | date: 'dd/MM/yyyy'}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +89,7 @@
                             <div ng-if="recentTenders_wip_1.length > 0" class="carousel-item">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_1">
-                                        <div class="card shadow">
+                                        <div ng-click="goToGaraOverview(tender)" class="pointer card shadow">
                                             <div class="card-body">
                                                 <div style="font-size: 18px" class="font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
@@ -98,14 +106,15 @@
                                                 <div class="break"></div>
                                                 <div class="mt-2 text-secondary row no-gutters align-items-center">
                                                     <div class="col mr-2">
-                                                        <div style="font-size: 14px" class="text-xs mb-1">CIG</div>
-                                                        <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.cig[0]}}
+                                                        <div style="font-size: 14px" class="text-xs mb-1">Società</div>
+                                                        <div style="font-size: 16px" class=" mb-0 font-weight-bold">{{tender.company}}
                                                         </div>
                                                     </div>
                                                     <div class="col-auto">
                                                         <div style="font-size: 14px" class="text-xs mb-1">Scadenza</div>
                                                         <div style="font-size: 16px" class=" mb-0 font-weight-bold">
-                                                            {{tender.endDate}}</div>
+                                                            {{tender.endDate | date: 'dd/MM/yyyy'}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,29 +133,86 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <ol class="carousel-indicators">
+                        <ol ng-show="recentTenders.length > 0" class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators_recent_tenders" data-slide-to="0" class="dot active"></li>
                             <li ng-show="recentTenders_wip_1.length > 0" data-target="#carouselExampleIndicators_recent_tenders" data-slide-to="1" class="dot"></li>
                         </ol>
                     </div>
 
                     <!-- Calendar -->
-                    <div class="d-sm-flex align-items-center justify-content-between mt-5 mb-3">
-                        <div style="font-size: 28px" class="mb-0">Prossime scadenze</div>
-                        <a ng-show="showCalendarCard" ng-click="toggleCalendarCard()"
-                            style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">Comprimi
-                            calendario</a>
-                        <a ng-show="!showCalendarCard" ng-click="toggleCalendarCard()"
-                            style="cursor:pointer;font-weight: bold;" class="text-primary d-sm-inline-block">Espandi
-                            calendario</a>
-                    </div>
-                    <div ng-show="showCalendarCard" class="card">
-                        <div class="card-body">
-                            <div id="calendar" class="calendar"></div>
-                            <div class="mt-3 ml-3 row">
-                                <div class="row ml-4">
-                                    <i style="color: #FF6C00" class="my-auto mr-2 fas fa-circle text-size-16"></i>
-                                    <div style="font-size: 16px" class="font-weight-bold my-auto">Scadenza</div>
+                    <div class="card">
+                        <div style="background-color: white" class="d-sm-flex align-items-center justify-content-between mt-1 card-header">
+                            <div style="font-size: 28px" class="mb-0">
+                                Prossime scadenze
+                            </div>
+                            <span ng-show="!showCalendarCard" class="text-bold text-alert-color">
+                                <span ng-if="events.length > 0">
+                                    {{firstEndDate.endDateMoment}} - Gara in scadenza
+                                </span>
+                            </span>
+                            <span ng-show="showCalendarCard" ng-click="toggleCalendarCard()"
+                                class="text-bold pointer text-primary d-sm-inline-block">
+                                <i class="fas fa-chevron-up text-size-18"></i>
+                            </span>
+                            <span ng-show="!showCalendarCard" ng-click="toggleCalendarCard()"
+                                class="text-bold pointer text-primary d-sm-inline-block">
+                                <i class="fas fa-chevron-down text-size-18"></i>
+                            </span>
+                        </div>
+                        <div ng-show="showCalendarCard" class="col-lg-12 col-sm-12 col-md-12 row">
+                            <div class="col-md-5 col-lg-5 col-sm-12">
+                                <div class="card-body">
+                                    <div id="calendar" class="calendar"></div>
+                                    <div class="break mt-3 mb-3"></div>
+                                    <div class="mt-3 ml-3 row">
+                                        <div class="row ml-4">
+                                            <i style="color: #FF6C00" class="my-auto mr-2 fas fa-circle text-size-16"></i>
+                                            <div style="font-size: 16px" class="font-weight-bold my-auto">Scadenza</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-7 col-lg-7 col-sm-12">
+                                <div style="max-height: 80vh" class="scrollable mt-4 card-body">
+                                    <!-- today event -->
+                                    <div ng-show="!thereIsAEndDateToday" class="mb-4">
+                                        <div class="text-bold text-size-18 text-primary">
+                                            {{momentTodayAsString}}
+                                        </div>
+                                        <div class="mt-3 card-events-dashboard-today card shadow">
+                                            <div class="text-secondary card-body">
+                                                Nessuna scadenza prevista per oggi
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4" ng-repeat="tenderEvent in events">
+                                        <div class="text-secondary text-size-18">
+                                            {{tenderEvent.endDateMoment}}
+                                        </div>
+                                        <div id="event_{{tenderEvent.id}}" class="mt-3 card-events-dashboard-alert card shadow">
+                                            <div class="card-body">
+                                                <div class="text-alert-color">
+                                                    <span class="text-size-18 text-bold">{{tenderEvent.extendedProps.length}}</span>
+                                                    <span ng-if="tenderEvent.extendedProps.length === 1" class="ml-1 text-size-16 text-bold">Gara in scadenza</span>
+                                                    <span ng-if="tenderEvent.extendedProps.length > 1" class="ml-1 text-size-16 text-bold">Gare in scadenza</span>
+                                                </div>
+                                                <div ng-repeat="tender in tenderEvent.extendedProps">
+                                                    <div class="text-secondary text-size-14 text-bold mt-2">
+                                                        {{tender.sapNumber}}
+                                                    </div>
+                                                    <div class="row mt-2 ">
+                                                        <div class="text-size-16 text-bold col-md-11 col-lg-11 col-sm-11">
+                                                            {{tender.object}}
+                                                        </div>
+                                                        <div class="col-md-1 col-sm-1 col-lg-1">
+                                                            <i ng-click="goToGaraOverview(tender)" class="float-right pointer text-primary fas fa-chevron-right"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="break mt-3 mb-3"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

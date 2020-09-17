@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.management.Notification;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
@@ -32,7 +33,7 @@ public class UserNotificationService {
             LocalDate now  = LocalDate.now();
             logger.info("Create notification for user " + userId + " at time : " + now.toString());
             userNotification.setCreationDate(Util.getNow());
-            userNotification.setCig(notification.getString("cig"));
+            userNotification.setTenderNumber(notification.getString("tenderNumber"));
             userNotification.setNotificationType(notification.getString("notificationType"));
             if (notification.has("idTender")) {
                 userNotification.setIdTender(notification.getString("idTender"));
@@ -62,15 +63,31 @@ public class UserNotificationService {
         return userNotificationList;
     }
 
-    public void deleteNotification(JSONObject notification){
-        logger.info("deleteNotification -- INIT -- notification : " + notification);
+    @Transactional
+    public int deleteAllNotificationsForUser(String userId){
+        logger.info("deleteAllNotificationsForUser -- INIT -- user : " + userId);
         try {
-            int id = notification.getInt("id");
-            userNotificationRepository.deleteById(id);
+            int eliminated = userNotificationRepository.deleteByUserId(userId);
+            logger.info("deleteAllNotificationsForUser -- END --");
+            return eliminated;
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("Error in deleteAllNotificationsForUser");
+            return -1;
+        }
+    }
+
+    @Transactional
+    public boolean deleteNotification(int idNotification){
+        logger.info("deleteNotification -- INIT -- idNotification : " + idNotification);
+        try {
+            userNotificationRepository.deleteById(idNotification);
             logger.info("deleteNotification -- END --");
+            return true;
         }catch (Exception e){
             e.printStackTrace();
             logger.error("Error in deleteNotification");
+            return false;
         }
     }
 

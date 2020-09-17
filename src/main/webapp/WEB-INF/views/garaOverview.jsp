@@ -192,10 +192,10 @@
                                         </button>
                                     </div>
                                     <div class="card mt-2 no-border">
-                                        <div class="card-header d-flex justify-content-center">
+                                        <div class="card-header background-color-application d-flex justify-content-center">
                                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                             <div ng-click="sortCardsByColumnName('name')"
-                                                class="col-lg-7 col-md-7 col-sm-7 text-size-14 no-select">
+                                                class="col-lg-7 col-md-7 col-sm-7 text-size-16 no-select">
                                                 DOCUMENTO
                                                 <i ng-if="sort.name === 'desc'"
                                                     class="fas fa-sort-down hoverable sort-chev"></i>
@@ -203,7 +203,7 @@
                                                     class="fas fa-sort-up hoverable sort-chev"></i>
                                             </div>
                                             <div ng-click="sortCardsByColumnName('uploadedOn')"
-                                                class="col-lg-3 col-md-3 col-sm-3 text-size-14 no-select">
+                                                class="col-lg-3 col-md-3 col-sm-3 text-size-16 no-select">
                                                 CARICATO IL
                                                 <i ng-if="sort.uploadedOn === 'desc'"
                                                     class="fas fa-sort-down hoverable sort-chev"></i>
@@ -216,13 +216,13 @@
                                     <div class="card" ng-repeat="document in tenderAttachments">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="my-auto col-lg-1 col-md-1 col-sm-1">
-                                                    <input ng-checked="checkDocument(document)"
+                                                <div ng-click="selectDocument(document)" class="pointer  my-auto col-lg-1 col-md-1 col-sm-1">
+                                                    <!--<input ng-checked="checkDocument(document)"
                                                         ng-click="selectDocument(document)" type="checkbox"
-                                                        class="ml-3 my-auto pointer">
+                                                        class="ml-3 my-auto pointer">-->
                                                     <i class="ml-4 fa fa-check-circle" style="color: limegreen"></i>
                                                 </div>
-                                                <div class="col-lg-7 col-md-7 col-sm-7">
+                                                <div ng-click="selectDocument(document)" class="pointer col-lg-7 col-md-7 col-sm-7">
                                                     <div class="row flex-long-text">
                                                         <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x"
                                                             style="color: red;"></i>
@@ -231,7 +231,7 @@
                                                             {{document.fileName}}</p>
                                                     </div>
                                                 </div>
-                                                <div class="my-auto col-lg-3 col-md-3 col-sm-3">
+                                                <div ng-click="selectDocument(document)" class="pointer my-auto col-lg-3 col-md-3 col-sm-3">
                                                     <p class="my-auto no-margin-bottom text-size-16 text-bold">
                                                         {{ document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                                 </div>
@@ -256,11 +256,11 @@
                                                     <span class="ml-1 text-size-12">ELIMINA</span>
                                                 </button>
                                             </div>
-                                            <div class="card mt-2 no-border">
-                                                <div class="card-header d-flex">
-                                                    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                                            <div class="background-color-application card mt-2 no-border">
+                                                <div class="card-body row">
+                                                    <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                                     <div ng-click="sortCardsByColumnName('name')"
-                                                        class="col-lg-9 col-md-9 col-sm-9 text-size-12 no-select">
+                                                        class="col-lg-10 col-md-10 col-sm-10 text-size-16 no-select">
                                                         DOCUMENTO
                                                         <i ng-if="sort.name === 'desc'"
                                                             class="fas fa-sort-down hoverable sort-chev"></i>
@@ -273,24 +273,21 @@
                                                 </div>
                                             </div>
                                             <div class="card" ng-repeat="document in tenderAttachments">
-                                                <div class="card-body">
+                                                <div ng-style="highlightCard(document)" class="card-body">
                                                     <div class="row">
-                                                        <div class="col-lg-2 col-md-2 col-sm-2">
-                                                            <div class="row">
-                                                                <input ng-checked="checkDocument(document)"
+                                                        <div  ng-click="selectDocument(document)" class="pointer my-auto col-lg-1 col-md-1 col-sm-1">
+                                                            <!--<input ng-checked="checkDocument(document)"
                                                                     ng-click="selectDocument(document)"
                                                                     type="checkbox"
-                                                                    class="my-auto  col-lg-7 col-md-7 col-sm-12 pointer">
-                                                                <i class="ml-2 fa fa-check-circle"
-                                                                    style="color: limegreen"></i>
-                                                            </div>
+                                                                    class="my-auto pointer">-->
+                                                            <i   class="ml-2 fa fa-check-circle" style="color: limegreen"></i>
                                                         </div>
-                                                        <div class="col-lg-9 col-md-9 col-sm-9">
+                                                        <div ng-click="selectDocument(document)" class="pointer col-lg-10 col-md-10 col-sm-10">
                                                             <div class="row flex-long-text">
-                                                                <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
+                                                                <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x fa-lg"
                                                                     style="color: red;"></i>
                                                                 <p
-                                                                    class="my-auto no-margin-bottom text-size-14 text-bold crop">
+                                                                    class="my-auto no-margin-bottom text-size-16 text-bold crop">
                                                                     {{document.fileName}}</p>
                                                             </div>
                                                         </div>

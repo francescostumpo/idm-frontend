@@ -54,15 +54,17 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             var document = supplier.attachments[i];
             var tag = document.tag;
             var found = false
-            for (var j = 0; j < $scope.bandoGara.requiredAttachments.length; j++) {
-                var tagRequired = $scope.bandoGara.requiredAttachments[j];
-                if (tag === tagRequired) {
-                    documentCheckList.push(tagRequired);
+            if($scope.bandoGara.requiredAttachments) {
+                for (var j = 0; j < $scope.bandoGara.requiredAttachments.length; j++) {
+                    var tagRequired = $scope.bandoGara.requiredAttachments[j];
+                    if (tag === tagRequired) {
+                        documentCheckList.push(tagRequired);
+                    }
                 }
             }
         }
         supplier.compliantAttachments = documentCheckList.length;
-        var progressBarCompliant = Math.floor(documentCheckList.length / $scope.bandoGara.requiredAttachments.length * 100);
+        var progressBarCompliant = $scope.bandoGara.requiredAttachments? Math.floor(documentCheckList.length / $scope.bandoGara.requiredAttachments.length * 100) : 0;
 
         return {'width': progressBarCompliant + '%'};
     };
@@ -70,29 +72,38 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
 
     $scope.uploadTenderFile = function(){
-        for(var i = 0; i < $scope.listOfFiles.length; i++){
-            var fileBase64 = null;
-            var reader = new FileReader();
-            $scope.fileName = $scope.listOfFiles[i].name
-            reader.readAsBinaryString($scope.listOfFiles[i]);
-            reader.onload = function() {
-                fileBase64 = reader.result;
-                var base64String = window.btoa(fileBase64);
-                var file = {}
-                var files = []
-                if (base64String !== null) {
-                    file.file = base64String;
-                    file.fileName = $scope.fileName
-                    files.push(file)
+        console.log('uploadTenderFile -- INIT -- tender : ', $scope.bandoGara);
+        var fileToBeUploaded = {};
+        fileToBeUploaded.files = [];
+        var promises = []
+        console.log("$scope.listOfFiles: ", $scope.listOfFiles); 
+        for (var i = 0; i < $scope.listOfFiles.length;i++){
+            var filePromise = new Promise(resolve =>{
+                var fileBase64 = null;
+                var filename = $scope.listOfFiles[i].name
+                var reader = new FileReader();
+                reader.readAsBinaryString($scope.listOfFiles[i]);
+                reader.onload = function() {
+                    fileBase64 = reader.result;
+                    var base64String = window.btoa(fileBase64);
+                    if (base64String !== null) {
+                        fileToBeUploaded.files.push({
+                            file: base64String,
+                            fileName: filename
+                        });
+                    }
+                    resolve()
                 }
-                var fileToBeUploaded = {};
-                fileToBeUploaded.cig = $scope.bandoGara.cig[0]
-                fileToBeUploaded.files = files;
-                fileToBeUploaded.idTender = $scope.bandoGara.id;
-                stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
-            }
+            })
+            promises.push(filePromise)
         }
-        mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
+        Promise.all(promises).then(() => {
+            fileToBeUploaded.cig = $scope.bandoGara.cig[0]
+            //fileToBeUploaded.files = files;
+            fileToBeUploaded.idTender = $scope.bandoGara.id;
+            stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
+            mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
+        });
     };
 
     $scope.deleteSupplier = function(supplier){
@@ -140,6 +151,13 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         })
     }
 
+    $scope.missingDataForCreationNewSupplier = function(){
+        if($scope.supplier === undefined || $scope.supplier.name === ""){
+            return true
+        }
+        return false
+    }
+
 
     $scope.openModalEditTender = function () {
         $('#datepickerModify').datepicker({
@@ -179,25 +197,35 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     }
 
     $scope.createSupplier = function(){
-        var fileBase64 = null;
-        var reader = new FileReader();
-        reader.readAsBinaryString($scope.listOfFiles[0]);
-        reader.onload = function() {
-            fileBase64 = reader.result;
-            var base64String = window.btoa(fileBase64);
-            var file = {}
-            var files = []
-            if (base64String !== null) {
-                file.file = base64String
-                file.fileName = $scope.listOfFiles[0].name
-                files.push(file)
-            }
-            $scope.supplier.files = files
+        $scope.supplier.files = []
+        console.log('createSupplier -- INIT -- supplier : ', $scope.supplier);
+        var promises = []
+        for (var i = 0; i < $scope.listOfFiles.length;i++){
+            var filePromise = new Promise(resolve =>{
+                var fileBase64 = null;
+                var filename = $scope.listOfFiles[i].name
+                var reader = new FileReader();
+                reader.readAsBinaryString($scope.listOfFiles[i]);
+                reader.onload = function() {
+                    fileBase64 = reader.result;
+                    var base64String = window.btoa(fileBase64);
+                    if (base64String !== null) {
+                        $scope.supplier.files.push({
+                            file: base64String,
+                            fileName: filename
+                        });
+                    }
+                    resolve()
+                }
+            })
+            promises.push(filePromise)
+        }
+        Promise.all(promises).then(() => {
             $scope.supplier.idTender = $scope.bandoGara.id
             $scope.supplier.sapNumber = $scope.bandoGara.sapNumber
             stompClientSupplier.send("/app/createSupplier", {}, JSON.stringify($scope.supplier));
             mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info');
-        }
+        });
     }
 
     $scope.deleteTender = function(){
@@ -242,6 +270,14 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         return false;
     }
 
+    $scope.highlightCard = function(document){
+        for(var i = 0; i < $scope.selectedDocuments.length ; i++){
+            if(document._idAttachment === $scope.selectedDocuments[i]._idAttachment){
+                return {'background-color' : '#DCF4F2'}
+            }
+        }
+    }
+
     $scope.selectDocument = function (document) {
         var found = false;
         for(var i = 0; i < $scope.selectedDocuments.length; i++){
@@ -261,6 +297,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         }else if(found && $scope.selectedDocuments.length == 0){
             $scope.show(document, 'hide');
         }
+        console.log('selected documents ' , $scope.selectedDocuments)
     }
 
     $scope.show = function(document, action) {

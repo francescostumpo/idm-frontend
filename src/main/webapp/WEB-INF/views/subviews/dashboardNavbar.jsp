@@ -53,24 +53,33 @@
 										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
 											<i style="color: #00B200" class="fas fa-check"></i>
 										</div>
-										<div class="col-auto">
+										<div class="col-md-10 col-sm-10 col-lg-10">
 											<span style="color: black" class="text-size-16 text-bold">Gara creata con successo</span>
+										</div>
+										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
+											<i ng-click="deleteNotification(notification)" class="pointer text-primary fas fa-times"></i>
 										</div>
 									</div>
 									<div class="row" ng-if="notification.notificationType === 'uploadFileTender'">
 										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
 											<i style="color: #00B200" class="fas fa-check"></i>
 										</div>
-										<div class="col-auto">
+										<div class="col-md-10 col-sm-10 col-lg-10">
 											<span style="color: black" class="text-size-16 text-bold">File caricato con successo</span>
+										</div>
+										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
+											<i ng-click="deleteNotification(notification)" class="pointer text-primary fas fa-times"></i>
 										</div>
 									</div>
 									<div class="row" ng-if="notification.notificationType === 'uploadFileSupplier'">
 										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
 											<i style="color: #00B200" class="fas fa-check"></i>
 										</div>
-										<div class="col-auto">
+										<div class="col-md-10 col-sm-10 col-lg-10">
 											<span style="color: black" class="text-size-16 text-bold">File caricato con successo</span>
+										</div>
+										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
+											<i ng-click="deleteNotification(notification)" class="pointer text-primary fas fa-times"></i>
 										</div>
 									</div>
 								</div>
@@ -87,7 +96,7 @@
 						</a>
 					</div>
 					<div>
-						<a style="cursor: pointer "class="dropdown-item text-primary">
+						<a ng-click="deleteAllNotificationsForUser()" style="cursor: pointer "class="dropdown-item text-primary">
 							<div class="col-md-12 col-sm-12 col-lg-12">
 								<span>Elimina tutte</span>
 							</div>
