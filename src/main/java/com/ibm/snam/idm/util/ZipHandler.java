@@ -43,6 +43,26 @@ public class ZipHandler {
             
             while(ze != null){   	 	
                 String fileName = ze.getName(); 
+                
+                /* 
+                 * Gestisce il caso di sottocartelle 
+                 * (il modulo OCR va in errore nel caso
+                 * il nome del file contenga il path
+                 * della sottocartella) 
+                 */
+                if(fileName.contains("/")) {
+                	String[] fileNameArray= fileName.split("/"); 
+                	if(fileNameArray.length < 2 || ze.isDirectory()) {
+                		ze = zis.getNextEntry(); 
+                		continue; 
+                	}
+                	fileName = fileNameArray[fileNameArray.length - 1]; 
+                	if(fileName.equals("") || fileName.contains("DS_Store")) {
+                		ze = zis.getNextEntry(); 
+                		continue; 
+                	}
+                } 
+                
                 ByteArrayOutputStream fos = new ByteArrayOutputStream(); 
                 copyStream(zis, fos, ze); 
                 
