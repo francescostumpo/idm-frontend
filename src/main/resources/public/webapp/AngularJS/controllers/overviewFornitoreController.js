@@ -97,6 +97,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                     tagRequired.compliant = true
                     tagRequired.label = $scope.getLabelAssociatedToTag(tag);
                     $scope.compliants++
+
                 }
             }
             if (!found) {

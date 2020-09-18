@@ -11,6 +11,12 @@ mainController = {
 		return dateInMillis
 	},
 
+	convertDateToMomentDateAsString : function(date) {
+		moment.locale('it')
+		let momentToday = moment(date, "YYYY-MM-DD");
+		return momentToday.format("DD MMMM, YYYY");
+	},
+
 	convertDateToStringForEvents : function(date){
 		var day = date.dayOfMonth;
 		if(day < 10){
@@ -35,12 +41,15 @@ mainController = {
 	showNotification: function(from, align, message, color, type) {
 		var icon = ''
 		if(type === 'info'){
-			icon = 'far fa-check-square'
+			icon = 'fas fa-info'
 		}
 		else if(type === 'success'){
-			icon = 'far fa-check-square'
+			icon = 'far fa-check'
 		}
 		else if(type === 'danger'){
+			icon = "fas fa-times"
+		}
+		else if(type === 'warning'){
 			icon = "fas fa-exclamation-triangle"
 		}
 		$.notify({
