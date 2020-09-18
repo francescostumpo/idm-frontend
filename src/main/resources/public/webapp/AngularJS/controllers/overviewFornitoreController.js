@@ -72,6 +72,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 tagRequired._idAttachment = 'N/A'
                 tagRequired.isPresent = false
                 tagRequired.compliant = true
+                tagRequired.conformity = {}
                 tagRequired.tag = $scope.bandoGara.requiredAttachments[i]
                 tagRequired.label = $scope.getLabelAssociatedToTag(tagRequired.tag);
                 $scope.requiredAttachments.push(tagRequired)
@@ -95,6 +96,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                     tagRequired.isPresent = true
                     found = true
                     tagRequired.compliant = true
+                    tagRequired.conformity = $scope.checkConformityForDocument(document.conformity)
                     tagRequired.label = $scope.getLabelAssociatedToTag(tag);
                     $scope.compliants++
 
@@ -104,6 +106,20 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 $scope.notRequiredAttachments.push(document)
             }
         }
+    }
+
+    $scope.checkConformityForDocument = function(conformity){
+        var tagConformity = true
+        if(conformity.tagConformity.conformity === false){
+            tagConformity = false
+        }
+        if(tagConformity && !conformity.exceptionConformity && conformity.cigConformity === 0 && conformity.sapConformity === 0){
+            return 0
+        }
+        if(!tagConformity || conformity.exceptionConformity || conformity.cigConformity === 1 || conformity.sapConformity === 1){
+            return 1
+        }
+        return 2
     }
 
     $scope.getLabelAssociatedToTag = function(tag){

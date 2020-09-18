@@ -81,7 +81,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             console.log('message ', message)
             var response = JSON.parse(message.body)
             if(response.status === 200) {
-                mainController.showNotification('bottom', 'right', response.message, '', 'info')
+                mainController.showNotification('bottom', 'right', response.message, '', 'success')
                 console.log("called from parent component");
                 $scope.getSuppliersByTenderId.getFromParent();
             }

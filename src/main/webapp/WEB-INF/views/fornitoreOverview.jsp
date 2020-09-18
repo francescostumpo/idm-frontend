@@ -184,8 +184,15 @@
                                         </div>
                                         <div class="my-auto col-lg-2 col-md-2 col-sm-2 text-size-14">
                                             <div ng-if="document.isPresent">
-                                                <div class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green">
-                                                <i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                                <div ng-if="document.conformity === 0"
+                                                     class="my-auto  col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green text-size-16">
+                                                    <i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                                <div ng-if="document.conformity === 1"
+                                                     class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red text-size-16">
+                                                    <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
+                                                <div ng-if="document.conformity === 2"
+                                                     class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange text-size-16">
+                                                    <i class="mr-2 fas fa-exclamation"></i>NON CONTROLLATO</div>
                                             </div>
                                             <div ng-if="!document.isPresent">
                                                 <p style="font-style: italic; color: #727888" class="my-auto  no-margin-bottom text-size-16 text-bold">
@@ -267,14 +274,14 @@
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                                     <div ng-if="document.conformity === 0"
-                                                        class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-12">
+                                                        class="my-auto  col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green text-size-12">
                                                         <i class="mr-2 fas fa-check"></i>CONFORME</div>
                                                     <div ng-if="document.conformity === 1"
-                                                        class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-12">
+                                                        class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red text-size-12">
                                                         <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
                                                     <div ng-if="document.conformity === 2"
-                                                        class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-12">
-                                                        <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
+                                                        class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange text-size-12">
+                                                        <i class="mr-2 fas fa-exclamation"></i>NON CONTROLLATO</div>
                                                 </div>
                                                 <div class="col-sm-2 col-lg-2 col-md-2 row icon-group">
                                                     <!--<div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>-->
@@ -433,10 +440,15 @@
                                             {{document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                     </div>
                                     <div class="my-auto col-lg-2 col-md-2 col-sm-2 text-size-14">
-                                        <div>
-                                            <div class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green">
-                                                <i class="mr-2 fas fa-check"></i>CONFORME</div>
-                                        </div>
+                                        <div ng-show="document.conformity === 0"
+                                             class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-12">
+                                            <i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                        <div ng-show="document.conformity === 1"
+                                             class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-12">
+                                            <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
+                                        <div ng-show="document.conformity === 2"
+                                             class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-12">
+                                            <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
                                     </div>
                                     <div class="text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
                                         <div class="m-1">
@@ -504,7 +516,7 @@
                                                class="my-auto ml-2 fas fa-exclamation pointer"
                                                style="color: orange"></i>
                                         </div>
-                                        <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div class="col-lg-8 col-md-8 col-sm-8">
                                             <div class="row flex-long-text">
                                                 <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
                                                    style="color: red;"></i>
@@ -512,7 +524,7 @@
                                                     {{document.fileName}}</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <!--<div class="col-lg-3 col-md-3 col-sm-3">
                                             <div ng-if="document.conformity === 0"
                                                  class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-12">
                                                 <i class="mr-2 fas fa-check"></i>CONFORME</div>
@@ -522,7 +534,7 @@
                                             <div ng-if="document.conformity === 2"
                                                  class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-12">
                                                 <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
-                                        </div>
+                                        </div>-->
                                         <div class="col-sm-2 col-lg-2 col-md-2 row icon-group">
                                             <!--<div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>-->
                                             <div class="m-1"><i
