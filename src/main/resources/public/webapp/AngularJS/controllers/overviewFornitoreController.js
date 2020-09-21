@@ -23,7 +23,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         {tag : "D_12_11_16_DSS",	label : "Impegno a redigere e aggiornare il DSS"},
         {tag : "D_12_11_17_DSSC",	label : "Impegno a sottoscrivere e rispettare il DSSC"},
         {tag : "D_12_11_18_OBBLIGHI_SICUREZZA",	label : "Dichiarazione relativa alle disposizioni in materia di salute e sicurezza"},
-        {tag : "D_12_11_19_SiCUREZZA_INQUINAMENTO",	label : "Dichiarazione sulla sicurezza relativa ad ambienti sospetti di inquinamento o confinati"},
+        {tag : "D_12_11_19_SICUREZZA_INQUINAMENTO",	label : "Dichiarazione sulla sicurezza relativa ad ambienti sospetti di inquinamento o confinati"},
         {tag : "D_12_11_20_DOCUMENTAZIONE_624_1996",	label : "Impegno a fornire la documentazione prevista dal D.Lgs.624/1996"},
         {tag : "D_12_11_21_RADIAZIONI",	label : "Impegno a rispettare i documenti relativi a 'Attivita' in aree EX e radiazioni ionizzanti'"},
         {tag : "D_12_11_22_IDONEITA_DIRETTORE_SORVEGLIANTI",	label : "Dichiarazione sull'idoneita' di 'Direttore Responsabile' e 'Sorveglianti' "},
@@ -76,14 +76,17 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
 
         { tag : "D_13_04_01_REQUISITI_PARTECIPAZIONE", label : "Dichiarazione possesso dei requisiti di partecipazione"},
         { tag : "D_13_04_02_MEZZI", label : "Dichiarazione dei mezzi e attrezzature"},
-        { tag : "D_13_04_03_FIRMA_LEGALE_RAPPRESENTANTE\n", label : "Dichiarazione firma legale rappresentante"},
+        { tag : "D_13_04_03_FIRMA_LEGALE_RAPPRESENTANTE", label : "Dichiarazione firma legale rappresentante"},
         { tag : "D_13_05_NOMINATIVI_FUNZIONI", label : "Nominativi funzioni di interesse"},
         { tag : "D_13_07_01_ATTIVITA_SUBAPPALTO", label : "Attivita' subappalto"},
         { tag : "D_13_07_02_IMPORTO_SUBAPPALTO", label : "Importo subappalto"},
         { tag : "D_13_08_ESCLUSIONE_COOPERAZIONE", label : "Nominativi, prestazioni e assenza motivi esclusione in caso di cooperazione"},
         { tag : "M_22_COSTI_CHIUSI", label : "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti chiusi"},
         { tag : "M_10_IDONEITA_TECNICA", label : "Autocertificazione idoneita' tecnica"},
-        { tag : "M_21_PROVENIENZA_PRODOTTI", label : "Dichiarazione provenienza prodotti"}
+        { tag : "M_21_PROVENIENZA_PRODOTTI", label : "Dichiarazione provenienza prodotti"},
+
+        { tag : "M_23_COSTI_APERTI", label : "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti aperti"},
+        { tag : "M_24_CONFERMA_COSTI", label : "Dichiarazione di conferma/integrazione costi già dichiariati"},
     ];
 
     $scope.requiredAttachments = [];

@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="card mt-2 no-border">
-                                <div class="card-header d-flex justify-content-center">
+                                <div class="row card-body background-color-application justify-content-center">
                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                     <div ng-click="sortCardsByColumnName('name')"
                                         class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
@@ -226,7 +226,7 @@
                                         </button>
                                     </div>
                                     <div class="card mt-2 no-border">
-                                        <div class="card-header d-flex">
+                                        <div class="row card-body background-color-application justify-content-center">
                                             <div class="col-lg-2 col-md-2 col-sm-2"></div>
                                             <div ng-click="sortCardsByColumnName('name')"
                                                 class="col-lg-5 col-md-5 col-sm-5 text-size-14 no-select">
@@ -288,7 +288,7 @@
                                                     <div class="m-1"><i
                                                             class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
                                                     </div>
-                                                    <div class="m-1"><i
+                                                    <div class="m-1"><i ng-click="deleteDocument(document)"
                                                             class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                     </div>
                                                 </div>
@@ -390,7 +390,7 @@
                         </div>
                     </div>
                     <div class="card mt-2 no-border">
-                        <div class="card-header d-flex justify-content-center">
+                        <div class="row card-body background-color-application justify-content-center">
                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
                             <div ng-click="sortCardsByColumnName('name')"
                                  class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
@@ -409,7 +409,7 @@
                             </div>
                             <div ng-click="sortCardsByColumnName('conformity')"
                                  class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
-                                CONFORMIT&Agrave;
+                                <!--CONFORMIT&Agrave;-->
                                 <i ng-if="sort.conformity === 'desc'"
                                    class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.conformity === 'asc'"
@@ -457,7 +457,7 @@
                                             <i class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
                                         </div>
                                         <div class="m-1">
-                                            <i class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                            <i ng-click="deleteDocument(document)" class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -480,7 +480,7 @@
                                 </button>
                             </div>
                             <div class="card mt-2 no-border">
-                                <div class="card-header d-flex">
+                                <div class="row card-body background-color-application justify-content-center">
                                     <div class="col-lg-2 col-md-2 col-sm-2"></div>
                                     <div ng-click="sortCardsByColumnName('name')"
                                          class="col-lg-5 col-md-5 col-sm-5 text-size-14 no-select">
@@ -492,7 +492,7 @@
                                     </div>
                                     <div ng-click="sortCardsByColumnName('conformity')"
                                          class="col-lg-3 col-md-3 col-sm-3 text-size-14">
-                                        CONFORMIT&Agrave;
+                                        <!--CONFORMIT&Agrave; -->
                                         <i ng-if="sort.conformity === 'desc'"
                                            class="fas fa-sort-down hoverable sort-chev"></i>
                                         <i ng-if="sort.conformity === 'asc'"
@@ -542,7 +542,7 @@
                                             <div class="m-1"><i
                                                     class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
                                             </div>
-                                            <div class="m-1"><i
+                                            <div class="m-1"><i ng-click="deleteDocument(document)"
                                                     class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
                                             </div>
                                         </div>
@@ -555,22 +555,22 @@
                                 <div class="card-header card-header-document-viewer">
                                     <div class="row text-size-14">
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <div class="form-group document-viewer-br"
+                                            <!--<div class="form-group document-viewer-br"
                                                  style="height: 75%; margin-top: 5%;">
                                                 <label class="label-item"
                                                        style="padding-top: 7%; float: left;">DATA</label>
                                                 <div> <i *ngIf="document.fileName"
                                                          class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                          style="padding-top: 8%;"> </i>
-                                                    <!-- <i *ngIf="!document.fileName"
+                                                    <i *ngIf="!document.fileName"
                                                         class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
-                                                        style="padding-top: 8%;"> </i> -->
+                                                        style="padding-top: 8%;"> </i>
                                                 </div>
-                                                <!-- <p>Presente</p> -->
-                                            </div>
+                                                <p>Presente</p>
+                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <div class="form-group document-viewer-br"
+                                            <!--<div class="form-group document-viewer-br"
                                                  style="height: 75%; margin-top: 5%;">
                                                 <label class="label-item"
                                                        style="padding-top: 7%; float: left;">FIRMA</label>
@@ -578,10 +578,10 @@
                                                          class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                          style="padding-top: 8%;"> </i>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <div class="form-group document-viewer-br"
+                                            <!--<div class="form-group document-viewer-br"
                                                  style="height: 75%; margin-top: 5%;">
                                                 <label class="label-item"
                                                        style="padding-top: 7%; float: left;">TIMBRO</label>
@@ -589,10 +589,10 @@
                                                          class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                          style="padding-top: 8%;"> </i>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <div class="form-group document-viewer-br"
+                                            <!--<div class="form-group document-viewer-br"
                                                  style="height: 75%; margin-top: 5%;">
                                                 <label class="label-item" style="padding-top: 7%; float: left;">
                                                     CIG </label>
@@ -600,16 +600,16 @@
                                                          class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                          style="padding-top: 8%;"> </i>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <label class="label-item" style="padding-top: 12%; float: left;">
+                                            <!--<label class="label-item" style="padding-top: 12%; float: left;">
                                                 NUMERO GARA </label>
                                             <div>
                                                 <i *ngIf="document.fileName"
                                                    class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
                                                    style="padding-top: 13%;"> </i>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
                                             <div class="form-group expand-document-button">

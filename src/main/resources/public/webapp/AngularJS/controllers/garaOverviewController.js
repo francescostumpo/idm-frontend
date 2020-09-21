@@ -64,11 +64,8 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         }
         supplier.compliantAttachments = documentCheckList.length;
         var progressBarCompliant = $scope.bandoGara.requiredAttachments? Math.floor(documentCheckList.length / $scope.bandoGara.requiredAttachments.length * 100) : 0;
-
         return {'width': progressBarCompliant + '%'};
     };
-
-
 
     $scope.uploadTenderFile = function(){
         console.log('uploadTenderFile -- INIT -- tender : ', $scope.bandoGara);

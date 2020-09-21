@@ -12,7 +12,7 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
         }
         else if(tag === 'fileRdoAndLetter'){
             $scope.fileRdoAndLetter = null
-            $scope.fileRdoAndLetter = false
+            $scope.rdoAndLetterIsSelected = false
             $scope.rdoAndLetterSelectedName = ""
         }
         else{
