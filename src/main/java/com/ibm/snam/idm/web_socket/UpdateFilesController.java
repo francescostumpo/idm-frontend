@@ -10,6 +10,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,11 @@ public class UpdateFilesController {
         JSONObject response = new JSONObject();
         try{
             JSONArray files = updateFiles.getJSONArray("files");
-            List<JSONObject> attachmentsId = new LinkedList<>();
-            JSONObject responseFromAnalyzer = new JSONObject();
+            updateFiles.remove("files");
+            List<String> failedDocuments = new ArrayList<>();
             for(int i = 0 ; i < files.size() ; i++){
+                List<JSONObject> attachmentsId = new LinkedList<>();
+                JSONObject responseFromAnalyzer = new JSONObject();
                 JSONObject file = files.getJSONObject(i);
                 String base64File = file.getString("file");
                 String fileName = file.getString("fileName");
@@ -60,8 +63,8 @@ public class UpdateFilesController {
                         JSONObject attachmentId = new JSONObject(); 
                     	attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment")); 
                     	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
-                    	attachmentsId.add(attachmentId); 
-
+                    	attachmentsId.add(attachmentId);
+                        uploadAttachmentsForSupplierOrTender(updateFiles, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
                 	}
                 }
                 // Gestisce il caso tradizionale in cui i file non sono zippati 
@@ -76,32 +79,49 @@ public class UpdateFilesController {
                     attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
                     attachmentId.put("fileName", fileName);
                     attachmentsId.add(attachmentId);
+                    uploadAttachmentsForSupplierOrTender(updateFiles, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
                 }
+
+
             }
-            updateFiles.remove("files");
-            updateFiles.put("attachmentsId", attachmentsId);
-            updateFiles.put("responseFromAnalyzer", responseFromAnalyzer);
-            JSONObject responseFromBackend = null;
-            if(updateFiles.has("idSupplier")){
-                logger.info("Response from analyzer : " + responseFromAnalyzer);
-                responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForSupplier");
-                responseFromBackend.put("updated", "supplier");
-                responseFromBackend.put("idSupplier", updateFiles.getString("idSupplier"));
-                responseFromBackend.put("tenderNumber", updateFiles.getString("tenderNumber"));
+
+            if (failedDocuments.isEmpty()){
+                response.put("status", Constants.HTTP_STATUS_OK);
+                response.put("message", Constants.UPLOAD_DOCUMENTS_OK);
+            } else {
+                response.put("status", Constants.HTTP_STATUS_ERROR);
+                String message = Constants.UPLOAD_DOCUMENTS_ERROR + ": " + String.join(", ", failedDocuments);
+                response.put("message", message);
             }
-            else{
-                responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForTender");
-                responseFromBackend.put("updated", "tender");
-            }
-            responseFromBackend.put("cig", updateFiles.getString("cig"));
-            responseFromBackend.put("idTender", updateFiles.getString("idTender"));
-            logger.info("Response from backend : " + responseFromBackend);
-            return responseFromBackend.toString();
+            return response.toString();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
             response.put("status", Constants.HTTP_STATUS_ERROR);
             response.put("message", Constants.ERROR_CALLING_BACKEND);
             return response.toString();
+        }
+    }
+
+    private void uploadAttachmentsForSupplierOrTender(@Payload JSONObject updateFiles, List<String> failedDocuments, List<JSONObject> attachmentsId, JSONObject responseFromAnalyzer, String fileName) {
+        updateFiles.put("attachmentsId", attachmentsId);
+        updateFiles.put("responseFromAnalyzer", responseFromAnalyzer);
+        JSONObject responseFromBackend = null;
+        if(updateFiles.has("idSupplier")){
+            logger.info("Response from analyzer : " + responseFromAnalyzer);
+            responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForSupplier");
+            responseFromBackend.put("updated", "supplier");
+            responseFromBackend.put("idSupplier", updateFiles.getString("idSupplier"));
+            responseFromBackend.put("tenderNumber", updateFiles.getString("tenderNumber"));
+        }
+        else{
+            responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForTender");
+            responseFromBackend.put("updated", "tender");
+        }
+        responseFromBackend.put("cig", updateFiles.getString("cig"));
+        responseFromBackend.put("idTender", updateFiles.getString("idTender"));
+        logger.info("Response from backend : " + responseFromBackend);
+        if (!responseFromBackend.get("status").equals(HttpStatus.SC_OK)){
+            failedDocuments.add(fileName);
         }
     }
 }
