@@ -11,10 +11,10 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.annotation.SendToUser;
@@ -43,10 +43,15 @@ public class CreateSupplierController {
         JSONObject response = new JSONObject();
         try{
             JSONArray files = supplier.getJSONArray("files");
-            List<JSONObject> attachmentsId = new LinkedList<>();
-            JSONObject responseFromAnalyzer = new JSONObject(); 
-            JSONObject responseFromBackend = new JSONObject(); 
+            supplier.remove("files");
+            JSONObject supplierCreationResponse = backendMicroservice.saveObjectOnDb(supplier, "/supplier/createSupplier");
+            logger.info("supplierCreationResponse", supplierCreationResponse.toString());
+            JSONObject savedSupplier = supplierCreationResponse.getJSONObject("supplier");
+            supplier.put("idSupplier", savedSupplier.getString("id"));
+            List<String> failedDocuments = new ArrayList<>();
             for(int i = 0 ; i < files.size() ; i++){
+                List<JSONObject> attachmentsId = new LinkedList<>();
+                JSONObject responseFromAnalyzer = new JSONObject();
                 JSONObject file = files.getJSONObject(i);
                 String base64File = file.getString("file");
                 String fileName = file.getString("fileName"); 
@@ -66,8 +71,8 @@ public class CreateSupplierController {
                         JSONObject attachmentId = new JSONObject(); 
                     	attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment")); 
                     	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
-                    	attachmentsId.add(attachmentId); 
-
+                    	attachmentsId.add(attachmentId);
+                        saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
                 	} 
                 	
                    
@@ -83,33 +88,45 @@ public class CreateSupplierController {
                     MultipartFile document = new Base64DecodedMultipartFile(data, fileName);
                     JSONObject attachmentId = new JSONObject();
                     responseFromAnalyzer = analyzerMicroservice.analyzeFile(document);
+                    logger.info("Response from analyzer", responseFromAnalyzer);
                     attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
                     attachmentId.put("fileName", fileName);
                     attachmentsId.add(attachmentId);
-                    /*byte [] data = Base64.getDecoder().decode(base64File); 
-                    MultipartFile document = new Base64DecodedMultipartFile(data, fileName);
-                    JSONObject attachmentId = new JSONObject();
-                    responseFromAnalyzer = analyzerMicroservice.analyzeFile(document);
-                    attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
-                    attachmentId.put("fileName", fileName);
-                    attachmentsId.add(attachmentId);   */            
-                    
-
+                    saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
                 }
 
             }
 
-            supplier.remove("files");
-            supplier.put("attachmentsId", attachmentsId);
-            supplier.put("responseFromAnalyzer", responseFromAnalyzer);
-            responseFromBackend = backendMicroservice.saveObjectOnDb(supplier, "/supplier/createSupplier");
-            logger.info("Response from backend : " + responseFromBackend);
-            return responseFromBackend.toString();
+            if (failedDocuments.isEmpty()){
+                response.put("status", Constants.HTTP_STATUS_OK);
+                response.put("message", Constants.CREATE_SUPPLIER_OK);
+            } else {
+                response.put("status", Constants.HTTP_STATUS_ERROR);
+                String message = Constants.ERROR_CREATING_SUPPLIER + ": " + String.join(", ", failedDocuments);
+                response.put("message", message);
+            }
+            return response.toString();
+
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
             response.put("status", Constants.HTTP_STATUS_ERROR);
             response.put("message", Constants.ERROR_CREATING_SUPPLIER);
             return response.toString();
+        }
+    }
+
+    private void saveDocumentsForSupplier(JSONObject supplier, List<String> failedDocuments, List<JSONObject> attachmentsId, JSONObject responseFromAnalyzer, String fileName) {
+        JSONObject filesToUpdate = new JSONObject();
+        filesToUpdate.put("idSupplier", supplier.get("idSupplier"));
+        filesToUpdate.put("idTender", supplier.get("idTender"));
+        filesToUpdate.put("attachmentsId", attachmentsId);
+        filesToUpdate.put("responseFromAnalyzer", responseFromAnalyzer);
+        JSONObject responseFromBackend = null;
+        logger.info("Response from analyzer : " + responseFromAnalyzer);
+        responseFromBackend = backendMicroservice.saveObjectOnDb(filesToUpdate, "/attachment/uploadAttachmentsForSupplier");
+        logger.info("Response from backend : " + responseFromBackend);
+        if (!responseFromBackend.get("status").equals(HttpStatus.SC_OK)){
+            failedDocuments.add(fileName);
         }
     }
 
