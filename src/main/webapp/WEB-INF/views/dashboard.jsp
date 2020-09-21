@@ -146,7 +146,9 @@
                                 Prossime scadenze
                             </div>
                             <span ng-show="!showCalendarCard" class="text-bold text-alert-color">
-                                {{firstEndDate.endDateMoment}} - Gara in scadenza
+                                <span ng-if="events.length > 0">
+                                    {{firstEndDate.endDateMoment}} - Gara in scadenza
+                                </span>
                             </span>
                             <span ng-show="showCalendarCard" ng-click="toggleCalendarCard()"
                                 class="text-bold pointer text-primary d-sm-inline-block">

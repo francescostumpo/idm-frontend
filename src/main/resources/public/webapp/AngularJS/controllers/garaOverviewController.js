@@ -48,7 +48,6 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     $scope.getTenderAttachments();
 
     $scope.retrieveProgressBarLength = function(supplier){
-        console.log(supplier);
         var documentCheckList = [];
         for(var i = 0; i < supplier.attachments.length; i++) {
             var document = supplier.attachments[i];

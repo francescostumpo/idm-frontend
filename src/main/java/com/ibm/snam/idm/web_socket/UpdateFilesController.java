@@ -46,12 +46,9 @@ public class UpdateFilesController {
             for(int i = 0 ; i < files.size() ; i++){
                 JSONObject file = files.getJSONObject(i);
                 String base64File = file.getString("file");
-                String fileName = file.getString("fileName"); 
-                
-                
+                String fileName = file.getString("fileName");
                 // Tratta il caso in cui l'elemento i-esimo sia uno .zip 
                 if(FilenameUtils.getExtension(fileName).equals("zip")) {
-                   
                 	// Estrae i documenti dallo .zip e li invia a Watson per l'analisi 
                 	ArrayList<MultipartFile> zipFilesArrayList = ZipHandler.unzipToMultipartArray(base64File); 
                 	ArrayList<JSONObject> responsesFromAnalyzerZip = new ArrayList<JSONObject>(); 
@@ -65,10 +62,8 @@ public class UpdateFilesController {
                     	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
                     	attachmentsId.add(attachmentId); 
 
-                	}                 
-
-                } 
-                
+                	}
+                }
                 // Gestisce il caso tradizionale in cui i file non sono zippati 
                 else {
                     file = files.getJSONObject(i);
@@ -82,17 +77,17 @@ public class UpdateFilesController {
                     attachmentId.put("fileName", fileName);
                     attachmentsId.add(attachmentId);
                 }
-                
             }
-            
             updateFiles.remove("files");
             updateFiles.put("attachmentsId", attachmentsId);
             updateFiles.put("responseFromAnalyzer", responseFromAnalyzer);
             JSONObject responseFromBackend = null;
             if(updateFiles.has("idSupplier")){
+                logger.info("Response from analyzer : " + responseFromAnalyzer);
                 responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForSupplier");
                 responseFromBackend.put("updated", "supplier");
                 responseFromBackend.put("idSupplier", updateFiles.getString("idSupplier"));
+                responseFromBackend.put("tenderNumber", updateFiles.getString("tenderNumber"));
             }
             else{
                 responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForTender");

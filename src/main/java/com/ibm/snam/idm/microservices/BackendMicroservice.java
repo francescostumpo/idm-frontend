@@ -33,7 +33,6 @@ public class BackendMicroservice {
                 .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         HttpEntity<String> request = new HttpEntity<String>(object.toString(), headers);
         logger.info("calling url : " + url);
-        logger.info("JSON: " + object);
         JSONObject responseAsJsonObject = httpRestTemplate.postForObject(url, request, JSONObject.class);
         logger.info("saveObjectOnDb -- END --");
         return responseAsJsonObject;

@@ -33,13 +33,13 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             console.log('message ', message)
             var response = JSON.parse(message.body)
             if(response.status === 200) {
-                mainController.showNotification('bottom', 'right', response.message, '', 'info')
+                mainController.showNotification('bottom', 'right', response.message, '', 'success')
                 var url = mainController.getFrontendHost() + '/createNotification'
                 if(response.updated === 'tender'){
                     $scope.getTenderAttachmentsByTenderId.getFromParent();
-                    var tenderNotification = $scope.createNotificationForUploadFile(response.idTender, null, response.cig,'uploadFileTender')
+                    var tenderNotification = $scope.createNotificationForUploadFile(response.idTender, null, response.cig,'uploadFileTender', response.tenderNumber)
                     $http.post(url, tenderNotification).then(function (response) {
-                        console.log(' responde from ', url, ' : ', response)
+                        console.log('response from ', url, ' : ', response)
                         if(response.data.status === 200){
                             $scope.userNotifications.push(response.data.userNotification);
                             $scope.getAllTendersByDefault.getFromParent();
@@ -48,9 +48,9 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 }
                 else if(response.updated === 'supplier'){
                     $scope.requiredAttachmentsCommon.getFromParent();
-                    var tenderNotification = $scope.createNotificationForUploadFile(response.idTender, response.idSupplier, response.cig, 'uploadFileSupplier')
+                    var tenderNotification = $scope.createNotificationForUploadFile(response.idTender, response.idSupplier, response.cig, 'uploadFileSupplier', response.tenderNumber)
                     $http.post(url, tenderNotification).then(function (response) {
-                        console.log(' responde from ', url, ' : ', response)
+                        console.log('response from ', url, ' : ', response)
                         if(response.data.status === 200){
                             $scope.userNotifications.push(response.data.userNotification);
                             $scope.getAllTendersByDefault.getFromParent();
@@ -81,7 +81,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             console.log('message ', message)
             var response = JSON.parse(message.body)
             if(response.status === 200) {
-                mainController.showNotification('bottom', 'right', response.message, '', 'info')
+                mainController.showNotification('bottom', 'right', response.message, '', 'success')
                 console.log("called from parent component");
                 $scope.getSuppliersByTenderId.getFromParent();
             }
@@ -107,16 +107,27 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             console.log('message ', message)
             var response = JSON.parse(message.body)
             if(response.status === 200){
-                mainController.showNotification('bottom', 'right', response.message, '', 'info')
-                var url = mainController.getFrontendHost() + '/createNotification'
-                var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation')
-                $http.post(url, tenderNotification).then(function (response) {
-                    console.log(' response from ', url, ' : ', response);
-                    if(response.data.status === 200){
-                        $scope.userNotifications.push(response.data.userNotification);
-                        $scope.getAllTendersByDefault.getFromParent();
+                var creationStatus = response.creationStatus
+                if(creationStatus === 'TENDER_ALREADY_EXIST'){
+                    mainController.showNotification('bottom', 'right', response.message, '', 'warning')
+                }
+                else {
+                    if(creationStatus === 'TENDER_CREATED'){
+                        mainController.showNotification('bottom', 'right', response.message, '', 'success')
                     }
-                })
+                    else if(creationStatus === 'TENDER_CREATED_WITH_MISSING_DATA'){
+                        mainController.showNotification('bottom', 'right', response.message, '', 'warning')
+                    }
+                    var url = mainController.getFrontendHost() + '/createNotification'
+                    var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation')
+                    $http.post(url, tenderNotification).then(function (response) {
+                        console.log(' response from ', url, ' : ', response);
+                        if(response.data.status === 200){
+                            $scope.userNotifications.push(response.data.userNotification);
+                            $scope.getAllTendersByDefault.getFromParent();
+                        }
+                    })
+                }
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
@@ -129,29 +140,32 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         console.log("STOMP protocol error: ", error);
     });
 
-    $scope.createNotificationForUploadFile = function(idTender, idSupplier, cig, notificationType){
+    $scope.createNotificationForUploadFile = function(idTender, idSupplier, cig, notificationType, notificationNumber){
         var notification = {}
         notification.userId = mainController.getUserId()
         notification.idTender = idTender
         notification.idSupplier = idSupplier
         notification.cig = cig
         notification.notificationType = notificationType
+        notification.tenderNumber = notificationNumber
         return notification
     }
 
     $scope.createNotificationFromTender = function(tender, notificationType){
         var notification = {}
         notification.userId = mainController.getUserId()
-        notification.cig = tender.cig[0]
+        notification.tenderNumber = tender.sapNumber
         notification.idTender = tender.id
         notification.notificationType = notificationType
         return notification
     }
 
     $scope.processName = function(name, length, subString){
-        if(name.length > length){
-            var nameProcessed = name.substring(0, subString) + '...';
-            return nameProcessed
+        if(name != undefined) {
+            if (name.length > length) {
+                var nameProcessed = name.substring(0, subString) + '...';
+                return nameProcessed
+            }
         }
         return name
     }
@@ -233,6 +247,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         $('#' + idModal).modal()
     }
 
+
+
     $scope.removeFileFromListOfFile = function(file){
         var newFiles = []
         for (var i = 0; i < $scope.listOfFiles.length; i++){
@@ -277,7 +293,9 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             if(e.target.id === 'fileselect2' || e.target.id === 'filedrag2' || e.target.id === 'fileselect2'
                 || e.target.id === 'fileselect' || e.target.id === 'filedrag' || e.target.id === 'fileselect'
                 || e.target.id === 'fileselect3' || e.target.id === 'filedrag3' || e.target.id === 'fileselect3'
-                || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'){
+                || e.target.id === 'fileselect4' || e.target.id === 'filedrag4' || e.target.id === 'fileselect4'
+                || e.target.id === 'fileselect5' || e.target.id === 'filedrag5' || e.target.id === 'fileselect5'
+                || e.target.id === 'fileselect6' || e.target.id === 'filedrag6' || e.target.id === 'fileselect6'){
                 console.log('files = ', $scope.listOfFiles)
                 $timeout(function () {
                     console.log('set contract selected')
@@ -325,6 +343,27 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 filedrag.addEventListener("drop", FileSelectHandler, false);
                 filedrag.style.display = "block";
             }
+
+            var fileselect5 = $id('fileselect5'),
+                filedrag5 = $id('filedrag5')
+            if(fileselect5 !== null && filedrag5 !== null) {
+                fileselect5.addEventListener("change", FileSelectHandler, false);
+                filedrag5.addEventListener("dragover", FileDragHover, false);
+                filedrag5.addEventListener("dragleave", FileDragHover, false);
+                filedrag5.addEventListener("drop", FileSelectHandler, false);
+                filedrag5.style.display = "block";
+            }
+
+            var fileselect6 = $id('fileselect6'),
+                filedrag6 = $id('filedrag6')
+            if(fileselect6 !== null && filedrag5 !== null) {
+                fileselect6.addEventListener("change", FileSelectHandler, false);
+                filedrag6.addEventListener("dragover", FileDragHover, false);
+                filedrag6.addEventListener("dragleave", FileDragHover, false);
+                filedrag6.addEventListener("drop", FileSelectHandler, false);
+                filedrag6.style.display = "block";
+            }
+
         }
         if (window.File && window.FileList && window.FileReader) {
             Init();

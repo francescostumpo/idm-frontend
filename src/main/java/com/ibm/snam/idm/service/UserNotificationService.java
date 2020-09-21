@@ -33,7 +33,7 @@ public class UserNotificationService {
             LocalDate now  = LocalDate.now();
             logger.info("Create notification for user " + userId + " at time : " + now.toString());
             userNotification.setCreationDate(Util.getNow());
-            userNotification.setCig(notification.getString("cig"));
+            userNotification.setTenderNumber(notification.getString("tenderNumber"));
             userNotification.setNotificationType(notification.getString("notificationType"));
             if (notification.has("idTender")) {
                 userNotification.setIdTender(notification.getString("idTender"));
