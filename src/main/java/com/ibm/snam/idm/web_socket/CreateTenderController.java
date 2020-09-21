@@ -5,6 +5,7 @@ import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
 import com.ibm.snam.idm.thread.AnalyzerThread;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
+import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,15 +37,27 @@ public class CreateTenderController {
     @SendToUser("/queue/reply")
     public String createTender(@Payload JSONObject request){
         try{
-            MultipartFile documentRdo = getMultipartFileFromRequest(request, "fileRdo", "fileNameRdo");
-            MultipartFile documentLetter = getMultipartFileFromRequest(request, "fileLetter", "fileNameLetter");
-            AnalyzerThread analyzerThreadRdo = new AnalyzerThread();
-            AnalyzerThread analyzerThreadLetter = new AnalyzerThread();
-
-            analyzeRdoAndLetter(analyzerThreadRdo, analyzerThreadLetter, documentRdo, documentLetter);
-
-            JSONObject responseFromAnalyzerRdo = analyzerThreadRdo.getResponseFromAnalyzer();
-            JSONObject responseFromAnalyzerLetter = analyzerThreadLetter.getResponseFromAnalyzer();
+            boolean createWithOneFile = request.getBoolean("uploadOneFile");
+            JSONObject responseFromAnalyzerRdo;
+            JSONObject responseFromAnalyzerLetter;
+            if(createWithOneFile){
+                logger.info("Creating tender from one file");
+                MultipartFile document = getMultipartFileFromRequest(request, "file", "fileName");
+                AnalyzerThread analyzerThread = new AnalyzerThread();
+                analyzeFile(analyzerThread, document);
+                responseFromAnalyzerRdo = analyzerThread.getResponseFromAnalyzer();
+                responseFromAnalyzerLetter = analyzerThread.getResponseFromAnalyzer();
+            }
+            else{
+                logger.info("Creating tender from two files");
+                MultipartFile documentRdo = getMultipartFileFromRequest(request, "fileRdo", "fileNameRdo");
+                MultipartFile documentLetter = getMultipartFileFromRequest(request, "fileLetter", "fileNameLetter");
+                AnalyzerThread analyzerThreadRdo = new AnalyzerThread();
+                AnalyzerThread analyzerThreadLetter = new AnalyzerThread();
+                analyzeRdoAndLetter(analyzerThreadRdo, analyzerThreadLetter, documentRdo, documentLetter);
+                responseFromAnalyzerRdo = analyzerThreadRdo.getResponseFromAnalyzer();
+                responseFromAnalyzerLetter = analyzerThreadLetter.getResponseFromAnalyzer();
+            }
 
             if(responseFromAnalyzerRdo.getInt("status") != HttpStatus.OK.value()
                 || responseFromAnalyzerLetter.getInt("status") != HttpStatus.OK.value()){
@@ -116,6 +129,23 @@ public class CreateTenderController {
             return response;
         }
         return responseFromBackend;
+    }
+
+    private void analyzeFile(AnalyzerThread analyzerThread, MultipartFile document){
+        logger.info("analyzeFile -- INIT --");
+        try{
+            ExecutorService executorService = Executors.newFixedThreadPool(1);
+            CountDownLatch latch = new CountDownLatch(1);
+
+            analyzerThread.setAnalyzerMicroservice(analyzerMicroservice);
+            analyzerThread.setDocument(document);
+            analyzerThread.setLatch(latch);
+
+            executorService.submit(analyzerThread);
+            latch.await();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void analyzeRdoAndLetter(AnalyzerThread analyzerThreadRdo, AnalyzerThread analyzerThreadLetter, MultipartFile documentRdo, MultipartFile documentLetter) {
