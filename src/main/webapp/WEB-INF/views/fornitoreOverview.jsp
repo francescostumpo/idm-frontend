@@ -41,9 +41,9 @@
                                 <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" style="cursor: pointer;"></i>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                    <p ng-click="openModalEditSupplier()" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                         <i class="far fa-edit fa-fw fa-lg pointer"></i>
-                                        <span ng-click="openModalEditSupplier()" class="ml-2">Modifica</span>
+                                        <span  class="ml-2">Modifica</span>
                                     </p>
                                     <div class="dropdown-divider"></div>
                                     <p class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
@@ -184,8 +184,15 @@
                                         </div>
                                         <div class="my-auto col-lg-2 col-md-2 col-sm-2 text-size-14">
                                             <div ng-if="document.isPresent">
-                                                <div class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green">
-                                                <i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                                <!--<div ng-if="document.conformity === 0"
+                                                     class="my-auto  col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green text-size-16">
+                                                    <i class="mr-2 fas fa-check"></i>CONFORME</div>-->
+                                                <div ng-if="document.conformity === 1"
+                                                     class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red text-size-16">
+                                                    <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
+                                                <!--<div ng-if="document.conformity === 2"
+                                                     class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange text-size-16">
+                                                    <i class="mr-2 fas fa-exclamation"></i>NON CONTROLLATO</div>-->
                                             </div>
                                             <div ng-if="!document.isPresent">
                                                 <p style="font-style: italic; color: #727888" class="my-auto  no-margin-bottom text-size-16 text-bold">
@@ -266,15 +273,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3">
-                                                    <div ng-if="document.conformity === 0"
-                                                        class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-12">
-                                                        <i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                                    <!--<div ng-if="document.conformity === 0"
+                                                        class="my-auto  col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green text-size-12">
+                                                        <i class="mr-2 fas fa-check"></i>CONFORME</div>-->
                                                     <div ng-if="document.conformity === 1"
-                                                        class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-12">
+                                                        class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red text-size-12">
                                                         <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
-                                                    <div ng-if="document.conformity === 2"
-                                                        class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-12">
-                                                        <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
+                                                    <!--<div ng-if="document.conformity === 2"
+                                                        class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange text-size-12">
+                                                        <i class="mr-2 fas fa-exclamation"></i>NON CONTROLLATO</div>-->
                                                 </div>
                                                 <div class="col-sm-2 col-lg-2 col-md-2 row icon-group">
                                                     <!--<div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>-->
@@ -293,22 +300,20 @@
                                     <div class="card">
                                         <div class="card-header card-header-document-viewer">
                                             <div class="row text-size-14">
-                                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                                    <div class="form-group document-viewer-br"
-                                                        style="height: 75%; margin-top: 5%;">
+                                                <!--<div class="col-lg-2 col-md-2 col-sm-12">
+                                                    <div class="form-group document-viewer-br" style="height: 75%; margin-top: 5%;">
                                                         <label class="label-item"
                                                             style="padding-top: 7%; float: left;">DATA</label>
                                                         <div> <i *ngIf="document.fileName"
                                                                 class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
                                                                 style="padding-top: 8%;"> </i>
-                                                            <!-- <i *ngIf="!document.fileName"
+                                                             <i *ngIf="!document.fileName"
                                                                 class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
-                                                                style="padding-top: 8%;"> </i> --> 
+                                                                style="padding-top: 8%;"> </i>
                                                         </div>
-                                                        <!-- <p>Presente</p> -->
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-2 col-md-2 col-sm-12">
+                                                </div>-->
+                                                <!--<div class="col-lg-2 col-md-2 col-sm-12">
                                                     <div class="form-group document-viewer-br"
                                                         style="height: 75%; margin-top: 5%;">
                                                         <label class="label-item"
@@ -318,8 +323,8 @@
                                                                 style="padding-top: 8%;"> </i>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-2 col-md-2 col-sm-12">
+                                                </div>-->
+                                                <!--<div class="col-lg-2 col-md-2 col-sm-12">
                                                     <div class="form-group document-viewer-br"
                                                         style="height: 75%; margin-top: 5%;">
                                                         <label class="label-item"
@@ -329,28 +334,32 @@
                                                                 style="padding-top: 8%;"> </i>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                                    <div class="form-group document-viewer-br"
-                                                        style="height: 75%; margin-top: 5%;">
-                                                        <label class="label-item" style="padding-top: 7%; float: left;">
-                                                            CIG </label>
-                                                        <div> <i *ngIf="document.fileName"
-                                                                class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
-                                                                style="padding-top: 8%;"> </i>
+                                                </div>-->
+                                                <div class="my-auto col-lg-2 col-md-2 col-sm-12">
+                                                    <div class="row form-group document-viewer-br">
+                                                        <div class="col-md-8 label-item" >
+                                                            CIG
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <i ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 0"  class="conformity-color my-auto ml-3 fas fa-check-circle ng-scope"> </i>
+                                                            <i ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 1"  class="not-conformity-color my-auto ml-3 fas fa-times-circle ng-scope"> </i>
+                                                            <i ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 2"  class="not-checked-conformity-color my-auto ml-3 fas fa-exclamation-circle ng-scope"> </i>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                                    <label class="label-item" style="padding-top: 12%; float: left;">
-                                                        NUMERO GARA </label>
-                                                    <div>
-                                                        <i *ngIf="document.fileName"
-                                                            class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
-                                                            style="padding-top: 13%;"> </i>
+                                                <div class="my-auto col-lg-2 col-md-2 col-sm-12">
+                                                    <div class="row form-group">
+                                                        <div class="col-md-8 label-item">
+                                                            NUMERO GARA
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <i ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 0"  class="conformity-color my-auto ml-3 fas fa-check-circle ng-scope"> </i>
+                                                            <i ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 1"  class="not-conformity-color my-auto ml-3 fas fa-times-circle ng-scope"> </i>
+                                                            <i ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 2"  class="not-checked-conformity-color my-auto ml-3 fas fa-exclamation-circle ng-scope"> </i>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="col-lg-8 col-md-8 col-sm-8">
                                                     <div class="form-group expand-document-button">
                                                         <a class="document-fullview" target="_blank" href="/documentDetail">
                                                             <i class="fas fa-expand-arrows-alt fa-2x"></i>
@@ -433,10 +442,15 @@
                                             {{document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                     </div>
                                     <div class="my-auto col-lg-2 col-md-2 col-sm-2 text-size-14">
-                                        <div>
-                                            <div class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green">
-                                                <i class="mr-2 fas fa-check"></i>CONFORME</div>
-                                        </div>
+                                        <div ng-show="document.conformity === 0"
+                                             class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-12">
+                                            <i class="mr-2 fas fa-check"></i>CONFORME</div>
+                                        <div ng-show="document.conformity === 1"
+                                             class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-12">
+                                            <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
+                                        <div ng-show="document.conformity === 2"
+                                             class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-12">
+                                            <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
                                     </div>
                                     <div class="text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
                                         <div class="m-1">
@@ -504,7 +518,7 @@
                                                class="my-auto ml-2 fas fa-exclamation pointer"
                                                style="color: orange"></i>
                                         </div>
-                                        <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div class="col-lg-8 col-md-8 col-sm-8">
                                             <div class="row flex-long-text">
                                                 <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
                                                    style="color: red;"></i>
@@ -512,7 +526,7 @@
                                                     {{document.fileName}}</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <!--<div class="col-lg-3 col-md-3 col-sm-3">
                                             <div ng-if="document.conformity === 0"
                                                  class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-12">
                                                 <i class="mr-2 fas fa-check"></i>CONFORME</div>
@@ -522,7 +536,7 @@
                                             <div ng-if="document.conformity === 2"
                                                  class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-12">
                                                 <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
-                                        </div>
+                                        </div>-->
                                         <div class="col-sm-2 col-lg-2 col-md-2 row icon-group">
                                             <!--<div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>-->
                                             <div class="m-1"><i

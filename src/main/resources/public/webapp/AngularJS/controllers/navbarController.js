@@ -10,6 +10,11 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             $scope.fileRdo = null
             $scope.rdoSelectedName = ""
         }
+        else if(tag === 'fileRdoAndLetter'){
+            $scope.fileRdoAndLetter = null
+            $scope.fileRdoAndLetter = false
+            $scope.rdoAndLetterSelectedName = ""
+        }
         else{
             $scope.letterIsSelected = false
             $scope.fileLetter = null
@@ -17,7 +22,37 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
         }
     };
 
+    $scope.creatingTender = {
+        "uploadOneFile" : false
+    }
+
     $scope.createTender = function(){
+        if($scope.creatingTender.uploadOneFile){
+            $scope.createTenderWithOneFile()
+        }
+        else{
+            $scope.createTenderWithTwoFiles()
+        }
+    }
+
+    $scope.createTenderWithOneFile = function() {
+        var fileBase64 = null;
+        var reader = new FileReader();
+        reader.readAsBinaryString($scope.fileRdoAndLetter);
+        reader.onload = function() {
+            fileBase64 = reader.result;
+            var base64String = window.btoa(fileBase64);
+            if (base64String !== null) {
+                $scope.tender.file = base64String;
+                $scope.tender.fileName = $scope.rdoAndLetterSelectedName;
+            }
+            $scope.tender.uploadOneFile = $scope.creatingTender.uploadOneFile
+            stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
+            mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
+        }
+    }
+
+    $scope.createTenderWithTwoFiles = function(){
         console.log('createTender -- INIT -- tender : ', $scope.tender);
         var fileBase64Rdo = null;
         var readerRdo = new FileReader();
@@ -39,6 +74,7 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
                     $scope.tender.fileLetter = base64String;
                     $scope.tender.fileNameLetter = $scope.letterSelectedName;
                 }
+                $scope.tender.uploadOneFile = $scope.creatingTender.uploadOneFile
                 stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
                 mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
             }
@@ -83,6 +119,9 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             uiLibrary: 'bootstrap4',
             format: 'dd/mm/yyyy'
         });
+        $scope.creatingTender = {
+            "uploadOneFile" : false
+        }
 
         $('#createTenderModal').modal()
     }
@@ -90,12 +129,16 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
     $scope.fileRdo = null;
     $scope.fileLetter = null
     $scope.fileToUpload = null;
+    $scope.fileRdoAndLetter = null
 
     $scope.rdoIsSelected = false;
     $scope.rdoSelectedName = "";
 
     $scope.letterIsSelected = false;
     $scope.letterSelectedName = "";
+
+    $scope.rdoAndLetterIsSelected = false;
+    $scope.rdoAndLetterSelectedName = "";
 
     (function() {
         // getElementById
@@ -149,13 +192,27 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
                 }, 200)
             }
 
+            if(e.target.id === "filedrag6" || e.target.id === "imageUpload6" || e.target.id === "fileselect6"){
+                var name = processName($scope.file.name);
+                console.log('file = ', $scope.file)
+                $('#fileToUpload').html(name);
+                $timeout(function () {
+                    $scope.fileRdoAndLetter = files[0];
+                    $scope.rdoAndLetterIsSelected = true;
+                    $scope.rdoAndLetterSelectedName = $scope.file.name
+                    console.log('set rdo and letter selected')
+                }, 200)
+            }
+
         }
         // initialize
         function Init() {
             var fileselect = $id("fileselect"),
                 filedrag = $id("filedrag"),
                 fileselect5 = $id("fileselect5"),
-                filedrag5 = $id("filedrag5")
+                filedrag5 = $id("filedrag5"),
+                fileselect6 = $id("fileselect6"),
+                filedrag6 = $id("filedrag6")
 
             fileselect.addEventListener("change", FileSelectHandler, false);
 
@@ -170,6 +227,13 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             filedrag5.addEventListener("dragleave", FileDragHover, false);
             filedrag5.addEventListener("drop", FileSelectHandler, false);
             filedrag5.style.display = "block";
+
+            fileselect6.addEventListener("change", FileSelectHandler, false);
+
+            filedrag6.addEventListener("dragover", FileDragHover, false);
+            filedrag6.addEventListener("dragleave", FileDragHover, false);
+            filedrag6.addEventListener("drop", FileSelectHandler, false);
+            filedrag6.style.display = "block";
         }
 
         if (window.File && window.FileList && window.FileReader) {

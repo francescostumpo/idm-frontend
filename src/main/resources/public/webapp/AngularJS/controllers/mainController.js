@@ -44,7 +44,7 @@ mainController = {
 			icon = 'fas fa-info'
 		}
 		else if(type === 'success'){
-			icon = 'far fa-check'
+			icon = 'fas fa-check'
 		}
 		else if(type === 'danger'){
 			icon = "fas fa-times"

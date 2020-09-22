@@ -5,6 +5,36 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.fornitoreOverview = JSON.parse(sessionStorage.getItem("fornitoreOverview"));
 
     $scope.labelsAssociatedToTag = [
+        {tag : "D_12_11_01_RSPP", label : "Nominativo del RSPP"},
+        {tag : "D_12_11_02_RESPONSABILE_LAVORI",	label : "Nominativi del Responsabile/Direttore dei Lavori e del Coordinatore"},
+        {tag : "D_12_11_03_RSPP",	label : "Nominativi del RSPP e del ASPP"},
+        {tag : "D_12_11_04_PROVVEDIMENTI_SOSPENSIONE",	label : "Dichiarazione relativa ai provvedimenti di sospensione o interdettivi"},
+        {tag : "D_12_11_05_SOGGETTO_FORMAZIONE",	label : "Impegno a fornire il nominativo del soggetto di cui all’art. 97 del D.Lgs. 81/08"},
+        {tag : "D_12_11_06_ASPP",	label : "Impegno a nominare un Addetto del Servizio di Prevenzione e Protezione (ASPP)"},
+        {tag : "D_12_11_07_ANTINCENDIO",	label : "impegno a nominare gli Addetti Antincendio e Pronto Soccorso"},
+        {tag : "D_12_11_08_DPI",	label : "Dichiarazione relativa ai DPI"},
+        {tag : "D_12_11_09_MEZZI",	label : "Dichiarazione sull'adeguatezza dei mezzi impiegati"},
+        {tag : "D_12_11_10_ATMOSFERE_ESPLOSIVE",	label : "Dichiarazione sull'adeguatezza dei mezzi impiegati in caso di 'atmosfere esplosive'"},
+        {tag : "D_12_11_11_PIANO_SICUREZZA",	label : "Accettazione del 'Piano di Sicurezza e Coordinamento'"},
+        {tag : "D_12_11_12_POS",	label : "Impegno a redigere il POS"},
+        {tag : "D_12_11_13_SICUREZZA_SUBAPPALTATORI",	label : "Impegno a richiedere la documentazione a subappaltatori/subcontraenti"},
+        {tag : "D_12_11_14_ONERI",	label : "Dichiarazione relativa alle imprese esecutrici e agli oneri della sicurezza"},
+        {tag : "D_12_11_15_COSTI_SICUREZZA",	label : "Idoneita' dei costi indicati nel Piano di Sicurezza e di Coordinamento"},
+        {tag : "D_12_11_16_DSS",	label : "Impegno a redigere e aggiornare il DSS"},
+        {tag : "D_12_11_17_DSSC",	label : "Impegno a sottoscrivere e rispettare il DSSC"},
+        {tag : "D_12_11_18_OBBLIGHI_SICUREZZA",	label : "Dichiarazione relativa alle disposizioni in materia di salute e sicurezza"},
+        {tag : "D_12_11_19_SiCUREZZA_INQUINAMENTO",	label : "Dichiarazione sulla sicurezza relativa ad ambienti sospetti di inquinamento o confinati"},
+        {tag : "D_12_11_20_DOCUMENTAZIONE_624_1996",	label : "Impegno a fornire la documentazione prevista dal D.Lgs.624/1996"},
+        {tag : "D_12_11_21_RADIAZIONI",	label : "Impegno a rispettare i documenti relativi a 'Attivita' in aree EX e radiazioni ionizzanti'"},
+        {tag : "D_12_11_22_IDONEITA_DIRETTORE_SORVEGLIANTI",	label : "Dichiarazione sull'idoneita' di 'Direttore Responsabile' e 'Sorveglianti' "},
+        {tag : "D_12_11_23_SICUREZZA_105_2015",	label : "Legge Seveso"},
+        {tag : "D_12_11_24_PERICOLI_INCIDENTI",	label : "Dichiarazione relativa ai pericoli di incidenti rilevanti e alla security"},
+        {tag : "D_12_11_25_ DOCUMENTAZIONE_SICUREZZA",	label : "Dichiarazione sulla prevenzione degli incidenti, sui rischi e sulle norme di comportamento, sul PEI e sul DSSC"},
+        {tag : "D_12_11_26_SUPERVISIONE_COLLAUDO",	label : "Impegno a fornire la congrua documentazione in in occasione di visite di supervisione/collaudo"},
+        {tag : "D_12_11_27_NOMINA_FIGURE",	label : "Lettere di nomina e attestati dei corsi di formazione previsti."},
+        {tag : "D_12_11_28_DVR_POS",	label : "Impegno ad redigere/aggiornare D.V.R. e/o POS"},
+        {tag : "D_12_11_29_DUVRI",	label : "Dichiarazione riguardante il DUVRI"},
+        {tag : "D_12_11_30_TABELLA_RISCHI",	label : "Dichiarazione di presa visione della Tabella rischi specifici, misure di prevenzione e di emergenza"},
         { tag : "M_01_ETICO", label : "Patto Etico e d'Integrita'"},
         { tag : "M_02_ESCLUSIONE", label : "Autocertificazione assenza motivi di esclusione"},
         { tag : "M_03_RESPONSABILITA", label : "Dichiarazione responsabilita' amministrativa e anticorruzione"},
@@ -39,7 +69,21 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         { tag : "D_12_11_10_ADDETTI", label : "Numero di addetti"},
         { tag : "D_12_18_01_SICILIA", label : "Protocollo di legalita' - Regione Siciliana"},
         { tag : "D_12_18_02_CALTANISETTA", label : "Protocollo di legalita' - Provincia di Caltanisetta"},
-        { tag : "D_12_18_03_PEDEMONTANA", label : "Protocollo di legalita' - Pedemontana veneta"}
+        { tag : "D_12_18_03_PEDEMONTANA", label : "Protocollo di legalita' - Pedemontana veneta"},
+        { tag : "D_13_01_PROGRAMMA_LAVORI", label : "Programma lavori"},
+        { tag : "D_13_02_DESCRIZIONE_ATTIVITA", label : "Descrizione attivita'"},
+        { tag : "D_13_03_VARIANTI", label : "Varianti formulate dall'offerente"},
+
+        { tag : "D_13_04_01_REQUISITI_PARTECIPAZIONE", label : "Dichiarazione possesso dei requisiti di partecipazione"},
+        { tag : "D_13_04_02_MEZZI", label : "Dichiarazione dei mezzi e attrezzature"},
+        { tag : "D_13_04_03_FIRMA_LEGALE_RAPPRESENTANTE\n", label : "Dichiarazione firma legale rappresentante"},
+        { tag : "D_13_05_NOMINATIVI_FUNZIONI", label : "Nominativi funzioni di interesse"},
+        { tag : "D_13_07_01_ATTIVITA_SUBAPPALTO", label : "Attivita' subappalto"},
+        { tag : "D_13_07_02_IMPORTO_SUBAPPALTO", label : "Importo subappalto"},
+        { tag : "D_13_08_ESCLUSIONE_COOPERAZIONE", label : "Nominativi, prestazioni e assenza motivi esclusione in caso di cooperazione"},
+        { tag : "M_22_COSTI_CHIUSI", label : "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti chiusi"},
+        { tag : "M_10_IDONEITA_TECNICA", label : "Autocertificazione idoneita' tecnica"},
+        { tag : "M_21_PROVENIENZA_PRODOTTI", label : "Dichiarazione provenienza prodotti"}
     ];
 
     $scope.requiredAttachments = [];
@@ -51,6 +95,8 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         $http.get(url).then(function (response) {
             console.log('response from url ', url ,' : ', response)
             if(response.data.status === 200){
+                $scope.compliants = 0
+                $scope.notCompliants = 0
                 $scope.fornitoreOverview = response.data.supplier
                 sessionStorage.setItem('fornitoreOverview', JSON.stringify($scope.fornitoreOverview))
                 $scope.getRequiredAttachments()
@@ -59,6 +105,14 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         })
     }
     $scope.notRequiredAttachments = [];
+
+    $scope.initProgressBar = function(documents){
+        var required = $scope.requiredAttachments.length;
+        var percConform = Math.floor(documents.filter(d => d.conformity === 0 || d.conformity === 2).length /required * 100);
+        var percNotConform =  Math.floor(documents.filter(d =>  d.conformity === 1).length / required * 100);
+        $(".pg-presence").css('width', percConform + '%').attr('aria-valuenow', percConform);
+        $(".pg-check").css('width', percNotConform + '%').attr('aria-valuenow', percNotConform);
+    }
 
     $scope.getRequiredAttachments = function() {
         $scope.requiredAttachments = []
@@ -72,12 +126,11 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 tagRequired._idAttachment = 'N/A'
                 tagRequired.isPresent = false
                 tagRequired.compliant = true
+                tagRequired.conformityDetail = {}
+                tagRequired.conformity = -1
                 tagRequired.tag = $scope.bandoGara.requiredAttachments[i]
                 tagRequired.label = $scope.getLabelAssociatedToTag(tagRequired.tag);
                 $scope.requiredAttachments.push(tagRequired)
-                if(null != tagRequired.compliant && undefined != tagRequired.compliant && tagRequired.compliant === false){
-                    $scope.notCompliants++;
-                }
             }
         }
 
@@ -95,15 +148,38 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                     tagRequired.isPresent = true
                     found = true
                     tagRequired.compliant = true
+                    tagRequired.conformityDetail = document.conformity
+                    tagRequired.conformity = $scope.checkConformityForDocument(document.conformity)
                     tagRequired.label = $scope.getLabelAssociatedToTag(tag);
                     $scope.compliants++
-
                 }
             }
             if (!found) {
                 $scope.notRequiredAttachments.push(document)
             }
         }
+        $scope.initProgressBar($scope.requiredAttachments)
+    }
+
+    $scope.checkConformityForDocument = function(conformity){
+        if(conformity !== undefined) {
+            var tagConformity = true
+            if(conformity.tagConformity !== undefined) {
+                if (conformity.tagConformity.conformity === false) {
+                    tagConformity = false
+                }
+                if (tagConformity && !conformity.exceptionConformity && conformity.cigConformity === 0 && conformity.sapConformity === 0) {
+                    return 0
+                }
+                if (!tagConformity || conformity.exceptionConformity || conformity.cigConformity === 1 || conformity.sapConformity === 1) {
+                    $scope.notCompliants++
+                    return 1
+                }
+                return 2
+            }
+            return -1
+        }
+        return -1
     }
 
     $scope.getLabelAssociatedToTag = function(tag){
@@ -115,8 +191,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.documents = $scope.fornitoreOverview.attachments;
-
-
 
 
     $scope.getRequiredAttachments()
@@ -135,6 +209,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.tempDocumentUrl = null;
 
     $scope.openModalEditSupplier = function () {
+        console.log('openModalEditSupplier -- init --')
         $scope.supplierModified = {}
         $scope.supplierSelected = $scope.fornitoreOverview
         $('#editSupplierModal').modal()
@@ -217,6 +292,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             fileToBeUploaded.cig = $scope.bandoGara.cig[0]
             fileToBeUploaded.idTender = $scope.bandoGara.id
             fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
+            fileToBeUploaded.tenderNumber = $scope.bandoGara.sapNumber
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         });
@@ -292,12 +368,15 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
     }
 
+    $scope.documentSelectedForDetail = {}
+
     $scope.show = function(document, action) {
         console.log('showDocument called');
         if(action === 'hide'){
             $scope.showDocument = false;
         }else{
             $scope.showDocument = true;
+            $scope.documentSelectedForDetail = document
             mainController.startProgressIndicator('#loading')
             $http.get(urlDocumentContent + "/" + document._idAttachment, {responseType: 'blob'}).then(function(res) {
                 $scope.setDocument(res.data);
@@ -322,17 +401,8 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
     }
 
-    $scope.initProgressBar = function(documents){
-        var required = $scope.requiredAttachments.length;
-        //var percPresence =  Math.floor(documents.filter(d => d.compliant == 0).length / required* 100);
-        //var percCheck =  Math.floor(documents.filter(d => d.compliant == 2).length / required * 100);
-        var percPresence = Math.floor(documents.filter(d => d.isPresent === true).length /required * 100);
-        var percCheck =  Math.floor(documents.filter(d => d.compliant === false).length / required * 100);
-        $(".pg-presence").css('width', percPresence + '%').attr('aria-valuenow', percPresence);
-        $(".pg-check").css('width', percCheck + '%').attr('aria-valuenow', percCheck);
-    }
 
-    $scope.initProgressBar($scope.requiredAttachments);
+
     mainController.stopProgressIndicator('#loading');
 
 }]);

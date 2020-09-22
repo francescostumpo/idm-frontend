@@ -17,4 +17,10 @@ public class Constants {
     public static final String TENDER_CREATED = "TENDER_CREATED";
 
     public static final Object MESSAGE_TENDER_CREATED_WITH_MISSING_DATA = "Gara creata con parametri mancanti";
+
+    public static final String UPLOAD_DOCUMENTS_OK = "Documentazione caricata con successo";
+    public static final String UPLOAD_DOCUMENTS_ERROR = "Errore durante il caricamento documentazione";
+    public static final String CREATE_SUPPLIER_OK = "Fornitore creato con successo";
+
+
 }
