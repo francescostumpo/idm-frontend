@@ -54,12 +54,9 @@ public class CreateSupplierController {
                 JSONObject responseFromAnalyzer = new JSONObject();
                 JSONObject file = files.getJSONObject(i);
                 String base64File = file.getString("file");
-                String fileName = file.getString("fileName"); 
-                
-                
+                String fileName = file.getString("fileName");
                 // Tratta il caso in cui l'elemento i-esimo sia uno .zip 
                 if(FilenameUtils.getExtension(fileName).equals("zip")) {
-                   
                 	// Estrae i documenti dallo .zip e li invia a Watson per l'analisi 
                 	ArrayList<MultipartFile> zipFilesArrayList = ZipHandler.unzipToMultipartArray(base64File); 
                 	ArrayList<JSONObject> responsesFromAnalyzerZip = new ArrayList<JSONObject>(); 
@@ -73,12 +70,8 @@ public class CreateSupplierController {
                     	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
                     	attachmentsId.add(attachmentId);
                         saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
-                	} 
-                	
-                   
-
+                	}
                 }
-                
                 // Caso file non zippati 
                 else {   
                     file = files.getJSONObject(i);
@@ -94,7 +87,6 @@ public class CreateSupplierController {
                     attachmentsId.add(attachmentId);
                     saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
                 }
-
             }
 
             if (failedDocuments.isEmpty()){

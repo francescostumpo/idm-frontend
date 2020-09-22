@@ -77,6 +77,7 @@ public class CreateTenderController {
                 response.put("status", Constants.HTTP_STATUS_OK);
                 response.put("message", Constants.TENDER_ALREADY_PRESENT);
                 response.put("creationStatus", responseFromBackendCreateTender.getString("creationStatus"));
+                response.put("tender", responseFromBackendCreateTender.getString("tender"));
                 return response.toString();
             }
             JSONObject responseFromBackendUpdateRequiredAttachments = updateRequiredAttachmentsOnBackend(responseFromBackendCreateTender, request, responseFromAnalyzerRdo);

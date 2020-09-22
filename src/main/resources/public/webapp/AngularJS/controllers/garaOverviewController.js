@@ -8,7 +8,6 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
     var urlDocumentPage = mainController.getFrontendHost() + '/documentDetail';
 
     $scope.showDocument = false;
-    $scope.selectedDocuments = [];
     $scope.tempDocumentUrl = null;
     $scope.suppliers = [];
 
@@ -216,6 +215,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
             })
             promises.push(filePromise)
         }
+
         Promise.all(promises).then(() => {
             $scope.supplier.idTender = $scope.bandoGara.id
             $scope.supplier.sapNumber = $scope.bandoGara.sapNumber
@@ -254,24 +254,6 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         $scope.tempDocumentUrl = window.URL.createObjectURL(file);
         $("object.document-container").attr("data", $scope.tempDocumentUrl);
         $("embed.document-container").attr("src", $scope.tempDocumentUrl);
-    }
-
-    $scope.checkDocument = function (document) {
-        for(i = 0;i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachment;
-            if(id === $scope.selectedDocuments[i]._idAttachment){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    $scope.highlightCard = function(document){
-        for(var i = 0; i < $scope.selectedDocuments.length ; i++){
-            if(document._idAttachment === $scope.selectedDocuments[i]._idAttachment){
-                return {'background-color' : '#DCF4F2'}
-            }
-        }
     }
 
     $scope.selectDocument = function (document) {

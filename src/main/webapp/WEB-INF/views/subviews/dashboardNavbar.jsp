@@ -51,10 +51,14 @@
 								<div class="mb-1 col-md-12 col-sm-12 col-lg-12">
 									<div class="row" ng-if="notification.notificationType === 'tenderCreation'">
 										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
-											<i style="color: #00B200" class="fas fa-check"></i>
+											<i ng-if="notification.status === 'TENDER_CREATED'" class="ok-color fas fa-check"></i>
+											<i ng-if="notification.status === 'TENDER_ALREADY_EXIST'" class="danger-color fas fa-times"></i>
+											<i ng-if="notification.status === 'TENDER_CREATED_WITH_MISSING_DATA'" class="alert-color fas fa-exclamation"></i>
 										</div>
 										<div class="col-md-10 col-sm-10 col-lg-10">
-											<span style="color: black" class="text-size-16 text-bold">Gara creata con successo</span>
+											<span ng-if="notification.status === 'TENDER_CREATED'" style="color: black" class="text-size-16 text-bold">Gara creata con successo</span>
+											<span ng-if="notification.status === 'TENDER_CREATED_WITH_MISSING_DATA'" style="color: black" class="text-size-16 text-bold">Gara creata con dati mancanti</span>
+											<span ng-if="notification.status === 'TENDER_ALREADY_EXIST'" style="color: black" class="text-size-16 text-bold">Gara già esistente</span>
 										</div>
 										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
 											<i ng-click="deleteNotification(notification)" class="pointer text-primary fas fa-times"></i>
@@ -88,7 +92,7 @@
 										<div class="col-md-1 col-sm-1 col-lg-1">
 										</div>
 										<div class="col-auto">
-											<span class="text-size-14 text-secondary">Gara {{notification.cig}}</span>
+											<span class="text-size-14 text-secondary">Gara {{notification.tenderNumber}}</span>
 										</div>
 									</div>
 								</div>

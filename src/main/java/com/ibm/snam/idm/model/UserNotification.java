@@ -34,6 +34,17 @@ public class UserNotification {
     @Column(name = "TENDER_NUMBER")
     private String tenderNumber;
 
+    @Column(name = "STATUS")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getTenderNumber() {
         return tenderNumber;
     }

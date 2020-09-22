@@ -33,8 +33,15 @@ public class UserNotificationService {
             LocalDate now  = LocalDate.now();
             logger.info("Create notification for user " + userId + " at time : " + now.toString());
             userNotification.setCreationDate(Util.getNow());
-            userNotification.setTenderNumber(notification.getString("tenderNumber"));
-            userNotification.setNotificationType(notification.getString("notificationType"));
+            if(notification.has("tenderNumber")){
+                userNotification.setTenderNumber(notification.getString("tenderNumber"));
+            }
+            if(notification.has("notificationType")){
+                userNotification.setNotificationType(notification.getString("notificationType"));
+            }
+            if(notification.has("status")){
+                userNotification.setStatus(notification.getString("status"));
+            }
             if (notification.has("idTender")) {
                 userNotification.setIdTender(notification.getString("idTender"));
             }
@@ -68,7 +75,7 @@ public class UserNotificationService {
         logger.info("deleteAllNotificationsForUser -- INIT -- user : " + userId);
         try {
             int eliminated = userNotificationRepository.deleteByUserId(userId);
-            logger.info("deleteAllNotificationsForUser -- END --");
+            logger.info("deleteAllNotificationsForUser -- END -- Eliminated : " + eliminated);
             return eliminated;
         }catch (Exception e){
             e.printStackTrace();

@@ -310,8 +310,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     console.log("$scope.showOptionalDocument: ", $scope.showOptionalDocument);
 
 
-    $scope.selectedDocuments = [];
-
     $scope.setDocument = function(data) {
         var file = new File([data], 'document.pdf', { type: 'application/pdf' });
         if ($scope.tempDocumentUrl) {
@@ -333,40 +331,42 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.selectDocument = function (document, optional) {
-        var found = false;
-        for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachment;
-            if(id === $scope.selectedDocuments[i]._idAttachment){
-                found = true;
-                $scope.selectedDocuments.splice(i, 1)
+        if(document._idAttachment != undefined && document._idAttachment != null && document._idAttachment !== "N/A") {
+            var found = false;
+            for (var i = 0; i < $scope.selectedDocuments.length; i++) {
+                var id = document._idAttachment;
+                if (id === $scope.selectedDocuments[i]._idAttachment) {
+                    found = true;
+                    $scope.selectedDocuments.splice(i, 1)
+                }
             }
-        }
-        if (!found && $scope.selectedDocuments.length == 0) {
-            $scope.selectedDocuments.push(document);
-            if(optional != true){
-                $scope.show(document, 'show');
-                location.href = '#page-requiredDoc-view';
-            }else{
-                $scope.showOptionalDocumentFunction(document, 'show');
-                location.href = '#page-notRequiredDoc-view';
-            }
-        }else if(!found && !$scope.selectedDocuments.length == 0){
-            $scope.selectedDocuments = [];
-            $scope.selectedDocuments.push(document);
-            if(optional != true){
-                $scope.show(document, 'show');
-                location.href = '#page-requiredDoc-view';
-            }else{
-                $scope.showOptionalDocumentFunction(document, 'show');
-                location.href = '#page-notRequiredDoc-view';
-            }
-        }else if(found && $scope.selectedDocuments.length == 0){
-            if(optional != true){
-                $scope.show(document, 'hide');
-                location.href = '#page-requiredDoc-view';
-            }else{
-                $scope.showOptionalDocumentFunction(document, 'hide');
-                location.href = '#page-notRequiredDoc-view';
+            if (!found && $scope.selectedDocuments.length == 0) {
+                $scope.selectedDocuments.push(document);
+                if (optional != true) {
+                    $scope.show(document, 'show');
+                    location.href = '#page-requiredDoc-view';
+                } else {
+                    $scope.showOptionalDocumentFunction(document, 'show');
+                    location.href = '#page-notRequiredDoc-view';
+                }
+            } else if (!found && !$scope.selectedDocuments.length == 0) {
+                $scope.selectedDocuments = [];
+                $scope.selectedDocuments.push(document);
+                if (optional != true) {
+                    $scope.show(document, 'show');
+                    location.href = '#page-requiredDoc-view';
+                } else {
+                    $scope.showOptionalDocumentFunction(document, 'show');
+                    location.href = '#page-notRequiredDoc-view';
+                }
+            } else if (found && $scope.selectedDocuments.length == 0) {
+                if (optional != true) {
+                    $scope.show(document, 'hide');
+                    location.href = '#page-requiredDoc-view';
+                } else {
+                    $scope.showOptionalDocumentFunction(document, 'hide');
+                    location.href = '#page-notRequiredDoc-view';
+                }
             }
         }
     }

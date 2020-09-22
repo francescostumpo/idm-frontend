@@ -37,7 +37,7 @@
                 </div>-->
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-3">
-                        <div class="text-size-28 mb-0">Ciao Claudia, ecco le tua gare recenti</div>
+                        <div class="text-size-28 mb-0">Ciao {{Claudia}}, ecco le tua gare recenti</div>
                         <a ng-click="goToViewNavigation('/bandiList')"
                             style="cursor:pointer;font-weight: bold; text-decoration: underline"
                             class="text-primary d-sm-inline-block">Vedi tutte</a>

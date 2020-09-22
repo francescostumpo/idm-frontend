@@ -863,6 +863,14 @@ button:hover:enabled.button-searchView-action{
    color: #e74a3b;
 }
 
+.ok-color{
+    color: green;
+}
+
+.alert-color{
+    color: orange;
+}
+
 .custom-link-underline{
     text-decoration: underline;
     color: #004B9C;

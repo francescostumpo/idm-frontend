@@ -52,6 +52,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     $scope.deleteTender = function(tender){
         console.log('deleting bando ', tender)
         var url = mainController.getHost() + '/tender/deleteTender/' + tender.id
+        mainController.startProgressIndicator('#loading')
         $http.delete(url).then(function (response) {
             console.log('response from ', url ,' : ', response)
             if(response.data.status == 200){
@@ -60,6 +61,7 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
             else{
                 mainController.showNotification('bottom', 'right', response.data.message, '', 'danger')
             }
+            mainController.stopProgressIndicator('#loading')
         })
     }
 

@@ -10,6 +10,8 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     $scope.getTenderAttachmentsByTenderId = {};
     $scope.requiredAttachmentsCommon = {};
 
+    $scope.selectedDocuments = [];
+
     $scope.getNotificationForUser = function() {
         var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
         $http.get(url).then(function (response) {
@@ -111,23 +113,22 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 if(creationStatus === 'TENDER_ALREADY_EXIST'){
                     mainController.showNotification('bottom', 'right', response.message, '', 'warning')
                 }
-                else {
-                    if(creationStatus === 'TENDER_CREATED'){
-                        mainController.showNotification('bottom', 'right', response.message, '', 'success')
-                    }
-                    else if(creationStatus === 'TENDER_CREATED_WITH_MISSING_DATA'){
-                        mainController.showNotification('bottom', 'right', response.message, '', 'warning')
-                    }
-                    var url = mainController.getFrontendHost() + '/createNotification'
-                    var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation')
-                    $http.post(url, tenderNotification).then(function (response) {
-                        console.log(' response from ', url, ' : ', response);
-                        if(response.data.status === 200){
-                            $scope.userNotifications.push(response.data.userNotification);
-                            $scope.getAllTendersByDefault.getFromParent();
-                        }
-                    })
+                else if(creationStatus === 'TENDER_CREATED'){
+                    mainController.showNotification('bottom', 'right', response.message, '', 'success')
                 }
+                else if(creationStatus === 'TENDER_CREATED_WITH_MISSING_DATA'){
+                    mainController.showNotification('bottom', 'right', response.message, '', 'warning')
+                }
+                var url = mainController.getFrontendHost() + '/createNotification'
+                var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation', creationStatus)
+                $http.post(url, tenderNotification).then(function (response) {
+                    console.log(' response from ', url, ' : ', response);
+                    if(response.data.status === 200){
+                        $scope.userNotifications.push(response.data.userNotification);
+                        $scope.getAllTendersByDefault.getFromParent();
+                    }
+                })
+
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
@@ -151,13 +152,23 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         return notification
     }
 
-    $scope.createNotificationFromTender = function(tender, notificationType){
+    $scope.createNotificationFromTender = function(tender, notificationType, statusCreation){
         var notification = {}
         notification.userId = mainController.getUserId()
         notification.tenderNumber = tender.sapNumber
         notification.idTender = tender.id
         notification.notificationType = notificationType
+        notification.status = statusCreation
         return notification
+    }
+
+    $scope.highlightCard = function(document){
+        for(var i = 0; i < $scope.selectedDocuments.length ; i++){
+            if(document._idAttachment === $scope.selectedDocuments[i]._idAttachment
+               && (document.tag === $scope.selectedDocuments[i].tag || document.tag === "no_tag")){
+                return {'background-color' : '#DCF4F2'}
+            }
+        }
     }
 
     $scope.processName = function(name, length, subString){

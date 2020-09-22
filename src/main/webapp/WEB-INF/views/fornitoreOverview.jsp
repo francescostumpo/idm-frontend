@@ -155,19 +155,13 @@
                                 </div>
                             </div>
                             <div class="card" ng-repeat="document in requiredAttachments">
-                                <div class="card-body">
+                                <div ng-style="highlightCard(document)" class="card-body">
                                     <div class="row">
-                                        <div class="my-auto col-lg-1 col-md-1 col-sm-1">
-                                            <i ng-if="document.isPresent" class="my-auto ml-2 fa fa-check-circle pointer"
-                                                    style="color: limegreen;"></i>
+                                        <div ng-click="selectDocument(document, false)" class="text-center pointer my-auto col-lg-1 col-md-1 col-sm-1">
+                                            <i ng-if="document.isPresent" class="ok-color my-auto ml-2 fa fa-check-circle pointer"></i>
                                             <i  ng-if="!document.isPresent" class="danger-color my-auto fas fa-exclamation-triangle ml-2"></i>
-                                            <!--<span class="ml-4 col-lg-7 col-md-7 col-sm-12" >-->
-                                                <input ng-if="document.isPresent" ng-checked="checkDocument(document)"
-                                                       ng-click="selectDocument(document, false)" type="checkbox"
-                                                       class="ml-4 my-auto  pointer">
-                                            <!--</span>-->
                                         </div>
-                                        <div class="my-auto  col-lg-6 col-md-6 col-sm-6">
+                                        <div ng-click="selectDocument(document, false)" class="pointer my-auto  col-lg-6 col-md-6 col-sm-6">
                                             <div class="row flex-long-text">
                                                 <i ng-if="document.isPresent" class="my-auto ml-2 mr-4 fas fa-file-pdf fa-2x"
                                                     style="color: red;"></i>
@@ -176,7 +170,7 @@
                                                     {{document.label}}</p>
                                             </div>
                                         </div>
-                                        <div class="my-auto col-lg-2 col-md-2 col-sm-2">
+                                        <div ng-click="selectDocument(document, false)" class="pointer my-auto col-lg-2 col-md-2 col-sm-2">
                                             <p ng-if="document.isPresent" class="my-auto  no-margin-bottom text-size-16 text-bold">
                                                 {{document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                             <p style="font-style: italic; color: #727888" ng-if="!document.isPresent" class="my-auto  no-margin-bottom text-size-16 text-bold">
@@ -200,12 +194,14 @@
                                             </div>
                                         </div>
                                         <div class="text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
-                                                 <div class="m-1">
-                                                    <i ng-if="document.isPresent" class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
-                                                </div>
-                                                <div class="m-1">
-                                                    <i ng-click="deleteDocument(document)" ng-if="document.isPresent" class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
-                                                </div>
+                                            <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
+                                               aria-expanded="false" style="cursor: pointer;"></i>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <p ng-click="deleteDocument(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                    <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                    <span class="ml-2">Elimina</span>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -215,16 +211,6 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 mb-5" ng-show="showDocument" id="page-requiredDoc-view">
                             <div class="row">
                                 <div class="col-lg-5 col-md-5 col-sm-5">
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn button-neutral-compare-advise m-1">
-                                            <i class="fas fa-sync fa-flip-horizontal"></i>
-                                            <span class="ml-1 text-size-12">SOSTITUISCI</span>
-                                        </button>
-                                        <button class="btn button-neutral-compare-advise m-1">
-                                            <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
-                                            <span class="ml-1 text-size-12">ELIMINA</span>
-                                        </button>
-                                    </div>
                                     <div class="card mt-2 no-border">
                                         <div class="row card-body background-color-application justify-content-center">
                                             <div class="col-lg-2 col-md-2 col-sm-2"></div>
@@ -248,23 +234,17 @@
                                         </div>
                                     </div>
                                     <div class="card" ng-repeat="document in requiredAttachments">
-                                        <div class="card-body" >
+                                        <div ng-style="highlightCard(document)"  class="card-body" >
                                             <div class="row">
-                                                <div class="col-lg-2 col-md-2 col-sm-2">
-                                                    <input ng-checked="checkDocument(document)"
-                                                        ng-click="selectDocument(document)" type="checkbox"
-                                                        class="my-auto col-lg-7 col-md-7 col-sm-12 pointer">
-                                                    <i ng-if="document.presence === -1"
-                                                        class="my-auto ml-2 fas fa-exclamation-triangle pointer"
-                                                        style="color: red;"></i>
-                                                    <i ng-if="document.presence === 0"
-                                                        class="my-auto ml-2 fa fa-check-circle pointer"
-                                                        style="color: limegreen;"></i>
-                                                    <i ng-if="document.presence === 1"
-                                                        class="my-auto ml-2 fas fa-exclamation pointer"
-                                                        style="color: orange"></i>
+                                                <div ng-click="selectDocument(document)" class="text-center pointer col-lg-2 col-md-2 col-sm-2">
+                                                    <i ng-if="!document.isPresent"
+                                                        class="danger-color my-auto ml-2 fas fa-exclamation-triangle pointer"
+                                                        ></i>
+                                                    <i ng-if="document.isPresent"
+                                                        class="ok-color my-auto ml-2 fa fa-check-circle pointer"
+                                                        ></i>
                                                 </div>
-                                                <div class="col-lg-5 col-md-5 col-sm-5">
+                                                <div ng-click="selectDocument(document)" class="pointer  col-lg-6 col-md-6 col-sm-6">
                                                     <div class="row flex-long-text">
                                                         <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
                                                             style="color: red;"></i>
@@ -283,13 +263,14 @@
                                                         class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange text-size-12">
                                                         <i class="mr-2 fas fa-exclamation"></i>NON CONTROLLATO</div>-->
                                                 </div>
-                                                <div class="col-sm-2 col-lg-2 col-md-2 row icon-group">
-                                                    <!--<div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>-->
-                                                    <div class="m-1"><i
-                                                            class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
-                                                    </div>
-                                                    <div class="m-1"><i ng-click="deleteDocument(document)"
-                                                            class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                <div class="col-sm-1 col-lg-1 col-md-1 row icon-group">
+                                                    <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
+                                                       aria-expanded="false" style="cursor: pointer;"></i>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <p ng-click="deleteDocument(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                            <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                            <span class="ml-2">Elimina</span>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -385,7 +366,7 @@
             <div ng-hide="notRequiredAttachments.length === 0" class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12" ng-hide="showOptionalDocument">
                     <div class="d-flex justify-content">
-                        <div class="col-lg-10 col-md-10 col-sm-10">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
                             <span style="font-family: Ubuntu; font-size: 22px; color: #1D2A30; letter-spacing: 0; font-weight: bold;">Altri Documenti</span>
                         </div>
                     </div>
@@ -393,7 +374,7 @@
                         <div class="row card-body background-color-application justify-content-center">
                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
                             <div ng-click="sortCardsByColumnName('name')"
-                                 class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
+                                 class="col-lg-8 col-md-8 col-sm-8 text-size-14 no-select">
                                 DOCUMENTO
                                 <i ng-if="sort.name === 'desc'"
                                    class="fas fa-sort-down hoverable sort-chev"></i>
@@ -407,57 +388,34 @@
                                 <i ng-if="sort.uploadedAt === 'asc'"
                                    class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
-                            <div ng-click="sortCardsByColumnName('conformity')"
-                                 class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select">
-                                <!--CONFORMIT&Agrave;-->
-                                <i ng-if="sort.conformity === 'desc'"
-                                   class="fas fa-sort-down hoverable sort-chev"></i>
-                                <i ng-if="sort.conformity === 'asc'"
-                                   class="fas fa-sort-up hoverable sort-chev"></i>
-                            </div>
                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
                         </div>
                     </div>
                     <div class="mb-5">
                         <div class="card" ng-repeat="document in notRequiredAttachments">
-                            <div class="card-body">
+                            <div ng-style="highlightCard(document)" class="card-body">
                                 <div class="row">
-                                    <div class="my-auto col-lg-1 col-md-1 col-sm-1">
-                                        <i class="my-auto ml-2 fa fa-check-circle pointer"
-                                           style="color: limegreen;"></i>
-                                        <input ng-checked="checkDocument(document)"
-                                               ng-click="selectDocument(document, true)" type="checkbox"
-                                               class="my-auto col-lg-7 col-md-7 col-sm-12 pointer">
+                                    <div ng-click="selectDocument(document, true)" class="pointer my-auto text-center col-lg-1 col-md-1 col-sm-1">
+                                        <i class="my-auto ml-2 fas fa-file-pdf fa-2x"
+                                           style="color: red;"></i>
                                     </div>
-                                    <div class="my-auto  col-lg-6 col-md-6 col-sm-6">
-                                        <div class="row flex-long-text">
-                                            <i class="my-auto ml-2 mr-4 fas fa-file-pdf fa-2x"
-                                               style="color: red;"></i>
-                                            <p class="my-auto no-margin-bottom text-size-16 text-bold crop">
-                                                {{document.fileName}}</p>
-                                        </div>
+                                    <div ng-click="selectDocument(document, true)" class="pointer my-auto  col-lg-8 col-md-8 col-sm-8">
+                                        <p class="my-auto no-margin-bottom text-size-16 text-bold crop">
+                                            {{document.fileName}}
+                                        </p>
                                     </div>
                                     <div class="my-auto col-lg-2 col-md-2 col-sm-2">
                                         <p class="my-auto  no-margin-bottom text-size-16 text-bold">
                                             {{document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                     </div>
-                                    <div class="my-auto col-lg-2 col-md-2 col-sm-2 text-size-14">
-                                        <div ng-show="document.conformity === 0"
-                                             class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-12">
-                                            <i class="mr-2 fas fa-check"></i>CONFORME</div>
-                                        <div ng-show="document.conformity === 1"
-                                             class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-12">
-                                            <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
-                                        <div ng-show="document.conformity === 2"
-                                             class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-12">
-                                            <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
-                                    </div>
                                     <div class="text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
-                                        <div class="m-1">
-                                            <i class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
-                                        </div>
-                                        <div class="m-1">
-                                            <i ng-click="deleteDocument(document)" class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                        <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" style="cursor: pointer;"></i>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <p ng-click="deleteDocument(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                <span class="ml-2">Elimina</span>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -470,80 +428,45 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-5">
                             <div class="d-flex justify-content-end">
-                                <button class="btn button-neutral-compare-advise m-1">
-                                    <i class="fas fa-sync fa-flip-horizontal"></i>
-                                    <span class="ml-1 text-size-12">SOSTITUISCI</span>
-                                </button>
-                                <button class="btn button-neutral-compare-advise m-1">
-                                    <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
-                                    <span class="ml-1 text-size-12">ELIMINA</span>
-                                </button>
+                                <div class="col-lg-10 col-md-10 col-sm-10">
+                                    <span style="font-family: Ubuntu; font-size: 22px; color: #1D2A30; letter-spacing: 0; font-weight: bold;">Altri Documenti</span>
+                                </div>
                             </div>
                             <div class="card mt-2 no-border">
                                 <div class="row card-body background-color-application justify-content-center">
-                                    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1">
+                                    </div>
                                     <div ng-click="sortCardsByColumnName('name')"
-                                         class="col-lg-5 col-md-5 col-sm-5 text-size-14 no-select">
+                                         class="col-lg-9 col-md-9 col-sm-9 text-size-14 no-select">
                                         DOCUMENTO
                                         <i ng-if="sort.name === 'desc'"
                                            class="fas fa-sort-down hoverable sort-chev"></i>
                                         <i ng-if="sort.name === 'asc'"
                                            class="fas fa-sort-up hoverable sort-chev"></i>
                                     </div>
-                                    <div ng-click="sortCardsByColumnName('conformity')"
-                                         class="col-lg-3 col-md-3 col-sm-3 text-size-14">
-                                        <!--CONFORMIT&Agrave; -->
-                                        <i ng-if="sort.conformity === 'desc'"
-                                           class="fas fa-sort-down hoverable sort-chev"></i>
-                                        <i ng-if="sort.conformity === 'asc'"
-                                           class="fas fa-sort-up hoverable sort-chev"></i>
-                                    </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2"></div>
                                 </div>
                             </div>
                             <div class="card" ng-repeat="document in notRequiredAttachments">
-                                <div class="card-body" >
+                                <div ng-style="highlightCard(document)" class="card-body" >
                                     <div class="row">
-                                        <div class="col-lg-2 col-md-2 col-sm-2">
-                                            <input ng-checked="checkDocument(document)"
-                                                   ng-click="selectDocument(document, true)" type="checkbox"
-                                                   class="my-auto col-lg-7 col-md-7 col-sm-12 pointer">
-                                            <i ng-if="document.presence === -1"
-                                               class="my-auto ml-2 fas fa-exclamation-triangle pointer"
+                                        <div ng-click="selectDocument(document, true)" class="pointer col-lg-1 col-md-1 col-sm-1">
+                                            <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
                                                style="color: red;"></i>
-                                            <i ng-if="document.presence === 0"
-                                               class="my-auto ml-2 fa fa-check-circle pointer"
-                                               style="color: limegreen;"></i>
-                                            <i ng-if="document.presence === 1"
-                                               class="my-auto ml-2 fas fa-exclamation pointer"
-                                               style="color: orange"></i>
                                         </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <div class="row flex-long-text">
-                                                <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
-                                                   style="color: red;"></i>
-                                                <p class="my-auto no-margin-bottom text-size-16 text-bold crop">
-                                                    {{document.fileName}}</p>
-                                            </div>
+                                        <div ng-click="selectDocument(document, true)" class="pointer col-lg-9 col-md-9 col-sm-9">
+                                            <p class="my-auto no-margin-bottom text-size-16 text-bold crop">
+                                                {{document.fileName}}
+                                            </p>
                                         </div>
-                                        <!--<div class="col-lg-3 col-md-3 col-sm-3">
-                                            <div ng-if="document.conformity === 0"
-                                                 class="my-auto  col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-green text-size-12">
-                                                <i class="mr-2 fas fa-check"></i>CONFORME</div>
-                                            <div ng-if="document.conformity === 1"
-                                                 class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-red text-size-12">
-                                                <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
-                                            <div ng-if="document.conformity === 2"
-                                                 class="my-auto col-lg-12 col-md-12 col-sm-12 conformity-box conformity-box-orange text-size-12">
-                                                <i class="mr-2 fas fa-times"></i>NON PREVISTO</div>
-                                        </div>-->
-                                        <div class="col-sm-2 col-lg-2 col-md-2 row icon-group">
-                                            <!--<div class="m-1"><i class="my-auto  far fa-edit fa-fw fa-lg pointer"></i></div>-->
-                                            <div class="m-1"><i
-                                                    class="my-auto  fas fa-sync fa-flip-horizontal fa-fw fa-lg pointer"></i>
-                                            </div>
-                                            <div class="m-1"><i ng-click="deleteDocument(document)"
-                                                    class="my-auto  far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                        <div class="my-auto col-sm-2 col-lg-2 col-md-2 row icon-group">
+                                            <i class="my-auto text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
+                                               aria-expanded="false" style="cursor: pointer;"></i>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <p ng-click="deleteDocument(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                    <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
+                                                    <span class="ml-2">Elimina</span>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -555,61 +478,14 @@
                                 <div class="card-header card-header-document-viewer">
                                     <div class="row text-size-14">
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <!--<div class="form-group document-viewer-br"
-                                                 style="height: 75%; margin-top: 5%;">
-                                                <label class="label-item"
-                                                       style="padding-top: 7%; float: left;">DATA</label>
-                                                <div> <i *ngIf="document.fileName"
-                                                         class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
-                                                         style="padding-top: 8%;"> </i>
-                                                    <i *ngIf="!document.fileName"
-                                                        class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
-                                                        style="padding-top: 8%;"> </i>
-                                                </div>
-                                                <p>Presente</p>
-                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <!--<div class="form-group document-viewer-br"
-                                                 style="height: 75%; margin-top: 5%;">
-                                                <label class="label-item"
-                                                       style="padding-top: 7%; float: left;">FIRMA</label>
-                                                <div> <i *ngIf="document.fileName"
-                                                         class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
-                                                         style="padding-top: 8%;"> </i>
-                                                </div>
-                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <!--<div class="form-group document-viewer-br"
-                                                 style="height: 75%; margin-top: 5%;">
-                                                <label class="label-item"
-                                                       style="padding-top: 7%; float: left;">TIMBRO</label>
-                                                <div> <i *ngIf="document.fileName"
-                                                         class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
-                                                         style="padding-top: 8%;"> </i>
-                                                </div>
-                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <!--<div class="form-group document-viewer-br"
-                                                 style="height: 75%; margin-top: 5%;">
-                                                <label class="label-item" style="padding-top: 7%; float: left;">
-                                                    CIG </label>
-                                                <div> <i *ngIf="document.fileName"
-                                                         class="my-auto ml-3 fa fa-check-circle pointer ng-scope"
-                                                         style="padding-top: 8%;"> </i>
-                                                </div>
-                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
-                                            <!--<label class="label-item" style="padding-top: 12%; float: left;">
-                                                NUMERO GARA </label>
-                                            <div>
-                                                <i *ngIf="document.fileName"
-                                                   class="my-auto ml-2 fas fa-exclamation-triangle pointer ng-scope"
-                                                   style="padding-top: 13%;"> </i>
-                                            </div>-->
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12">
                                             <div class="form-group expand-document-button">
