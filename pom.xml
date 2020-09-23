@@ -15,6 +15,7 @@
 	<name>idm-frontend</name>
 	<description>Demo project for Spring Boot</description>
 
+	
 	<properties>
 		<java.version>1.8</java.version>
 		<keycloak.version>10.0.1</keycloak.version>
