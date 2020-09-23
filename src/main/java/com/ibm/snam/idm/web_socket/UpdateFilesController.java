@@ -1,14 +1,13 @@
 package com.ibm.snam.idm.web_socket;
 
 import com.ibm.snam.idm.common.Constants;
-import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
 import com.ibm.snam.idm.util.ZipHandler;
-
+import com.ibm.snam.idm.web_socket.upload.UploadFileService;
+import com.ibm.snam.idm.web_socket.upload.UploadResult;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.io.FilenameUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
@@ -24,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @Controller
 public class UpdateFilesController {
@@ -31,10 +32,7 @@ public class UpdateFilesController {
     Logger logger = LoggerFactory.getLogger(UpdateFilesController.class);
 
     @Autowired
-    AnalyzerMicroservice analyzerMicroservice;
-
-    @Autowired
-    BackendMicroservice backendMicroservice;
+    UploadFileService uploadFileService;
 
     @MessageMapping("/updateFiles")
     @SendToUser("/queue/reply/updateFiles")
@@ -43,6 +41,7 @@ public class UpdateFilesController {
         try{
             JSONArray files = updateFiles.getJSONArray("files");
             updateFiles.remove("files");
+            List<Future<UploadResult>> uploadResults = new ArrayList<>();
             List<String> failedDocuments = new ArrayList<>();
             for(int i = 0 ; i < files.size() ; i++){
                 List<JSONObject> attachmentsId = new LinkedList<>();
@@ -56,15 +55,14 @@ public class UpdateFilesController {
                 	ArrayList<MultipartFile> zipFilesArrayList = ZipHandler.unzipToMultipartArray(base64File); 
                 	ArrayList<JSONObject> responsesFromAnalyzerZip = new ArrayList<JSONObject>(); 
                 	for(MultipartFile fileInZip : zipFilesArrayList) {
-                		logger.info("Uploading document: " + fileInZip.getOriginalFilename()); 
-                        responseFromAnalyzer = analyzerMicroservice.analyzeFile(fileInZip); 
-                        responsesFromAnalyzerZip.add(responseFromAnalyzer); 
-                        
-                        JSONObject attachmentId = new JSONObject(); 
-                    	attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment")); 
-                    	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
-                    	attachmentsId.add(attachmentId);
-                        uploadAttachmentsForSupplierOrTender(updateFiles, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
+                		logger.info("Uploading document: " + fileInZip.getOriginalFilename());
+                        Future<UploadResult> uploadResult;
+                        if (updateFiles.has("idSupplier")) {
+                            uploadResult = uploadFileService.uploadSupplierFile(fileInZip, fileName, updateFiles);
+                        } else {
+                            uploadResult = uploadFileService.uploadTenderFile(fileInZip, fileName, updateFiles);
+                        }
+                        uploadResults.add(uploadResult);
                 	}
                 }
                 // Gestisce il caso tradizionale in cui i file non sono zippati 
@@ -72,17 +70,34 @@ public class UpdateFilesController {
                     file = files.getJSONObject(i);
                     base64File = file.getString("file");
                     fileName = file.getString("fileName");
+                    logger.info("Uploading document: " + fileName);
                     byte [] data = Base64.getDecoder().decode(base64File);
                     MultipartFile document = new Base64DecodedMultipartFile(data, fileName);
-                    JSONObject attachmentId = new JSONObject();
-                    responseFromAnalyzer = analyzerMicroservice.analyzeFile(document);
-                    attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
-                    attachmentId.put("fileName", fileName);
-                    attachmentsId.add(attachmentId);
-                    uploadAttachmentsForSupplierOrTender(updateFiles, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
+                    Future<UploadResult> uploadResult;
+                    if (updateFiles.has("idSupplier")) {
+                        uploadResult = uploadFileService.uploadSupplierFile(document, fileName, updateFiles);
+                    } else {
+                        uploadResult = uploadFileService.uploadTenderFile(document, fileName, updateFiles);
+                    }
+                    uploadResults.add(uploadResult);
                 }
 
 
+            }
+
+            for (Future<UploadResult> uploadResultFuture: uploadResults) {
+                UploadResult uploadResult = null;
+                try {
+                    uploadResult = uploadResultFuture.get();
+                    logger.info("uploadResult " + uploadResult);
+
+                } catch (InterruptedException | ExecutionException e) {
+                    logger.error(e.getMessage());
+                }
+
+                if (uploadResult.isFailed()){
+                    failedDocuments.add(uploadResult.getFilename());
+                }
             }
 
             if (failedDocuments.isEmpty()){
@@ -102,26 +117,4 @@ public class UpdateFilesController {
         }
     }
 
-    private void uploadAttachmentsForSupplierOrTender(@Payload JSONObject updateFiles, List<String> failedDocuments, List<JSONObject> attachmentsId, JSONObject responseFromAnalyzer, String fileName) {
-        updateFiles.put("attachmentsId", attachmentsId);
-        updateFiles.put("responseFromAnalyzer", responseFromAnalyzer);
-        JSONObject responseFromBackend = null;
-        if(updateFiles.has("idSupplier")){
-            logger.info("Response from analyzer : " + responseFromAnalyzer);
-            responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForSupplier");
-            responseFromBackend.put("updated", "supplier");
-            responseFromBackend.put("idSupplier", updateFiles.getString("idSupplier"));
-            responseFromBackend.put("tenderNumber", updateFiles.getString("tenderNumber"));
-        }
-        else{
-            responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForTender");
-            responseFromBackend.put("updated", "tender");
-        }
-        responseFromBackend.put("cig", updateFiles.getString("cig"));
-        responseFromBackend.put("idTender", updateFiles.getString("idTender"));
-        logger.info("Response from backend : " + responseFromBackend);
-        if (!responseFromBackend.get("status").equals(HttpStatus.SC_OK)){
-            failedDocuments.add(fileName);
-        }
-    }
 }
