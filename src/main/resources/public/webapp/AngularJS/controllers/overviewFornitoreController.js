@@ -309,7 +309,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             fileToBeUploaded.idTender = $scope.bandoGara.id
             fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
             fileToBeUploaded.tenderNumber = $scope.bandoGara.sapNumber
-            fileToBeUploaded.supplierName = $scope.fornitoreOverview
+            fileToBeUploaded.supplierName = $scope.fornitoreOverview.name
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         });

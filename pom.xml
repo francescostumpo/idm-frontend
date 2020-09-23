@@ -15,7 +15,6 @@
 	<name>idm-frontend</name>
 	<description>Demo project for Spring Boot</description>
 
-	
 	<properties>
 		<java.version>1.8</java.version>
 		<keycloak.version>10.0.1</keycloak.version>
@@ -113,6 +112,22 @@
            <artifactId>commons-io</artifactId>
            <version>2.6</version>
         </dependency>
+        <dependency>
+           <groupId>com.google.guava</groupId>
+           <artifactId>guava</artifactId>
+           <version>29.0-jre</version>
+        </dependency> 
+        <dependency>
+          <groupId>org.tukaani</groupId>
+          <artifactId>xz</artifactId>
+          <version>1.8</version>
+        </dependency>
+        <dependency>
+          <groupId>com.github.junrar</groupId>
+          <artifactId>junrar</artifactId>
+          <version>7.3.0</version>
+        </dependency>
+        
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -37,7 +37,7 @@
                 </div>-->
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-3">
-                        <div class="text-size-28 mb-0">Ciao {{Claudia}}, ecco le tua gare recenti</div>
+                        <div class="text-size-28 mb-0">Ciao {{userName}}, ecco alcune gare</div>
                         <a ng-click="goToViewNavigation('/bandiList')"
                             style="cursor:pointer;font-weight: bold; text-decoration: underline"
                             class="text-primary d-sm-inline-block">Vedi tutte</a>
@@ -142,7 +142,7 @@
                     <!-- Calendar -->
                     <div class="card">
                         <div style="background-color: white" class="d-sm-flex align-items-center justify-content-between mt-1 card-header">
-                            <div style="font-size: 28px" class="mb-0">
+                            <div class="text-size-24 text-bold mb-0">
                                 Prossime scadenze
                             </div>
                             <span ng-show="!showCalendarCard" class="text-bold text-alert-color">
@@ -196,7 +196,7 @@
                                                     <span ng-if="tenderEvent.extendedProps.length === 1" class="ml-1 text-size-16 text-bold">Gara in scadenza</span>
                                                     <span ng-if="tenderEvent.extendedProps.length > 1" class="ml-1 text-size-16 text-bold">Gare in scadenza</span>
                                                 </div>
-                                                <div ng-repeat="tender in tenderEvent.extendedProps">
+                                                <div class="pointer" ng-click="goToGaraOverview(tender)" ng-repeat="tender in tenderEvent.extendedProps">
                                                     <div class="text-secondary text-size-14 text-bold mt-2">
                                                         {{tender.sapNumber}}
                                                     </div>
@@ -205,10 +205,9 @@
                                                             {{tender.object}}
                                                         </div>
                                                         <div class="col-md-1 col-sm-1 col-lg-1">
-                                                            <i ng-click="goToGaraOverview(tender)" class="float-right pointer text-primary fas fa-chevron-right"></i>
+                                                            <i  class="float-right pointer text-primary fas fa-chevron-right"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="break mt-3 mb-3"></div>
                                                 </div>
                                             </div>
                                         </div>

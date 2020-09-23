@@ -4,6 +4,8 @@ import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
+import com.ibm.snam.idm.util.RarHandler;
+import com.ibm.snam.idm.util.SevenZipHandler;
 import com.ibm.snam.idm.util.ZipHandler;
 
 import net.sf.json.JSON;
@@ -57,21 +59,47 @@ public class CreateSupplierController {
                 JSONObject file = files.getJSONObject(i);
                 String base64File = file.getString("file");
                 String fileName = file.getString("fileName");
+                ArrayList<MultipartFile> zipFilesArrayList;
+                ArrayList<JSONObject> responsesFromAnalyzerZip = new ArrayList<>();
+                /*
+                 * Codice per la gestione di file compressi
+                 */
                 // Tratta il caso in cui l'elemento i-esimo sia uno .zip 
                 if(FilenameUtils.getExtension(fileName).equals("zip")) {
                 	// Estrae i documenti dallo .zip e li invia a Watson per l'analisi 
-                	ArrayList<MultipartFile> zipFilesArrayList = ZipHandler.unzipToMultipartArray(base64File); 
-                	ArrayList<JSONObject> responsesFromAnalyzerZip = new ArrayList<JSONObject>(); 
-                	for(MultipartFile fileInZip : zipFilesArrayList) {
-                		logger.info("Uploading document: " + fileInZip.getOriginalFilename()); 
-                        responseFromAnalyzer = analyzerMicroservice.analyzeFile(fileInZip); 
+                	zipFilesArrayList = ZipHandler.unzipToMultipartArray(base64File);
+                	 for(MultipartFile fileInZip : zipFilesArrayList) {
+                 		logger.info("Uploading document (zip): " + fileInZip.getOriginalFilename());
+                 		JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip);
+                 		responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer");
                         responsesFromAnalyzerZip.add(responseFromAnalyzer);
-                        JSONObject attachmentId = new JSONObject(); 
-                    	attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment")); 
-                    	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
-                    	attachmentsId.add(attachmentId);
-                        saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
-                	}
+                        attachmentsId.add((JSONObject) result.get("attachmentId"));
+                         saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileInZip.getOriginalFilename());
+                     }
+                }
+                // Tratta il caso SevenZip
+                else if(FilenameUtils.getExtension(fileName).equals("7z")) {
+                	zipFilesArrayList = SevenZipHandler.unzipToMultipartArray(base64File);
+               	    for(MultipartFile fileInZip : zipFilesArrayList) {
+               	        logger.info("Uploading document (7z): " + fileInZip.getOriginalFilename());
+              		    JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip);
+              		    responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer");
+                        responsesFromAnalyzerZip.add(responseFromAnalyzer);
+                        attachmentsId.add((JSONObject) result.get("attachmentId"));
+                        saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileInZip.getOriginalFilename());
+                    }
+                }
+                // Caso .rar: supportate tutte le versioni sino alla RAR4
+                else if(FilenameUtils.getExtension(fileName).equals("rar")) {
+                	zipFilesArrayList = RarHandler.unzipToMultipartArray(base64File);
+               	    for(MultipartFile fileInZip : zipFilesArrayList) {
+               	        logger.info("Uploading document (rar): " + fileInZip.getOriginalFilename());
+              		    JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip);
+              		    responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer");
+                        responsesFromAnalyzerZip.add(responseFromAnalyzer);
+                        attachmentsId.add((JSONObject) result.get("attachmentId"));
+                        saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileInZip.getOriginalFilename());
+                    }
                 }
                 // Caso file non zippati 
                 else {   
@@ -110,7 +138,24 @@ public class CreateSupplierController {
         }
     }
 
+
+
+
+    private JSONObject extractWatsonEnrichedDataFromUnzippedFile(MultipartFile zipFile) {
+        JSONObject responseFromAnalyzer;
+        JSONObject result = new JSONObject();
+        logger.info("Uploading document: " + zipFile.getOriginalFilename());
+        responseFromAnalyzer = analyzerMicroservice.analyzeFile(zipFile);
+        result.put("responseFromAnalyzer", responseFromAnalyzer);
+        JSONObject attachmentId = new JSONObject();
+        attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
+        attachmentId.put("fileName", zipFile.getOriginalFilename());
+        result.put("attachmentId", attachmentId);
+        return result;
+    }
+
     private void saveDocumentsForSupplier(JSONObject supplier, List<String> failedDocuments, List<JSONObject> attachmentsId, JSONObject responseFromAnalyzer, String fileName) {
+        logger.info("saveDocumentsForSupplier -- INIT --");
         JSONObject filesToUpdate = new JSONObject();
         filesToUpdate.put("idSupplier", supplier.get("idSupplier"));
         filesToUpdate.put("idTender", supplier.get("idTender"));
@@ -123,6 +168,7 @@ public class CreateSupplierController {
         if (!responseFromBackend.get("status").equals(HttpStatus.SC_OK)){
             failedDocuments.add(fileName);
         }
+        logger.info("saveDocumentsForSupplier -- END --");
     }
 
 }

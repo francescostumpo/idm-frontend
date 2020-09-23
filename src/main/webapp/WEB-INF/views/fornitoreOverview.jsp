@@ -126,10 +126,12 @@
                             </div>
                             <div class="card mt-2 no-border">
                                 <div class="row card-body background-color-application justify-content-center">
-                                    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
+                                        CHECK
+                                    </div>
                                     <div ng-click="sortCardsByColumnName('name')"
                                         class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
-                                        DOCUMENTO
+                                            DOCUMENTO
                                         <i ng-if="sort.name === 'desc'"
                                             class="fas fa-sort-down hoverable sort-chev"></i>
                                         <i ng-if="sort.name === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
@@ -219,9 +221,11 @@
                                     </div>
                                     <div class="card mt-2 no-border">
                                         <div class="row card-body background-color-application justify-content-center">
-                                            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                                            <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
+                                                CHECK
+                                            </div>
                                             <div ng-click="sortCardsByColumnName('name')"
-                                                class="col-lg-5 col-md-5 col-sm-5 text-size-14 no-select">
+                                                class="col-lg-6 col-md-6 col-sm-6 text-size-14 no-select">
                                                 DOCUMENTO
                                                 <i ng-if="sort.name === 'desc'"
                                                     class="fas fa-sort-down hoverable sort-chev"></i>
@@ -420,7 +424,9 @@
                     </div>
                     <div class="card mt-2 no-border">
                         <div class="row card-body background-color-application justify-content-center">
-                            <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
+                                CHECK
+                            </div>
                             <div ng-click="sortCardsByColumnName('name')"
                                  class="col-lg-8 col-md-8 col-sm-8 text-size-14 no-select">
                                 DOCUMENTO
@@ -482,7 +488,8 @@
                             </div>
                             <div class="card mt-2 no-border">
                                 <div class="row card-body background-color-application justify-content-center">
-                                    <div class="col-lg-1 col-md-1 col-sm-1">
+                                    <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
+                                        CHECK
                                     </div>
                                     <div ng-click="sortCardsByColumnName('name')"
                                          class="col-lg-9 col-md-9 col-sm-9 text-size-14 no-select">

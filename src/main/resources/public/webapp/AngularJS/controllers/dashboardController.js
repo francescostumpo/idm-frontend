@@ -1,6 +1,8 @@
 snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$rootScope', '$filter', '$timeout', function($scope, $http, $location,$rootScope, $filter, $timeout) {
     console.log("[INFO] Hello World from dashboardController");
 
+    $scope.userName = mainController.getUserName().split(' ')[0]
+
     mainController.startProgressIndicator('#loading')
 
     var url = mainController.getHost() + '/tender/getAllTenders';
@@ -148,6 +150,14 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
             }
         });
         calendar.render();
+        $timeout(function(){
+            var today = $(".fc-today")
+            var child = today[1].children[0]
+            child.style.backgroundColor = '#004B9C'
+            child.style.color = 'white'
+            child.style.borderRadius = '10px'
+        }, 200)
+
         calendar.on("eventClick", function(info) {
             $timeout(function() {
                 var eventId = info.event.id

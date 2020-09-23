@@ -150,6 +150,10 @@
     font-weight: bold;
 }
 
+.text-size-24{
+    font-size: 24px;
+}
+
 .text-size-18{
     font-size: 18px;
 }
@@ -1782,6 +1786,10 @@ th.dateUpload, td.dateUpload {
 
 .fc-day-grid-container {
     margin-top: 2rem;
+}
+
+.fc-left{
+    font-size: 14px;
 }
 
 .calendar {

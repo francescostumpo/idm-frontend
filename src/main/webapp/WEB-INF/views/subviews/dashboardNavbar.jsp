@@ -29,7 +29,7 @@
 			role="button" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false"> <i style="color:white;cursor:pointer;" class="fas fa-bell fa-1point5 "></i> <!--  Counter - Alerts -->
 				<div>
-					<span ng-show="userNotifications.length > 0" class="badge badge-danger badge-counter">{{userNotifications.length}}</span>
+					<span ng-show="userNotifications.length > 0" class="text-size-14 badge badge-danger badge-counter">{{userNotifications.length}}</span>
 				</div>
 			</a>
 			<div style="width: 450px!important;"
