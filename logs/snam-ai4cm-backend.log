@@ -3625,3 +3625,201 @@ java.net.ConnectException: Connection refused (Connection refused)
 2020-09-23 18:01:04,339 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-1] getUserNotification -- INIT --
 2020-09-23 18:01:04,472 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-1] Found 1 notification(s) for user RIDP86Z
 2020-09-23 18:01:04,473 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-1] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:38:14,741 INFO org.springframework.boot.StartupInfoLogger [main] Starting IdmFrontendApplication on DESKTOP-D7RNNC6 with PID 9184 (C:\progetti\Legal_IDM\workspace\idm-frontend\target\classes started by PietroGerace in C:\progetti\Legal_IDM\workspace\idm-frontend)
+2020-09-23 18:38:14,746 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-09-23 18:38:15,815 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-09-23 18:38:15,905 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 73ms. Found 1 JPA repository interfaces.
+2020-09-23 18:38:16,925 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3030 (http)
+2020-09-23 18:38:16,939 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-3030"]
+2020-09-23 18:38:16,941 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-09-23 18:38:16,942 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-09-23 18:38:17,554 INFO org.apache.juli.logging.DirectJDKLog [main] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-09-23 18:38:17,562 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-09-23 18:38:17,563 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2756 ms
+2020-09-23 18:38:17,660 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-09-23 18:38:17,668 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connecting to Datasource....
+2020-09-23 18:38:17,669 INFO com.ibm.snam.idm.datasource.DatasourceConfiguration [main] Connected to Datasource - url : jdbc:db2://dashdb-txn-flex-yp-fra02-566.services.eu-de.bluemix.net:50000/BLUDB
+2020-09-23 18:38:17,797 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2020-09-23 18:38:19,298 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-09-23 18:38:19,447 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-09-23 18:38:19,542 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-09-23 18:38:19,750 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-09-23 18:38:20,071 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.DB2Dialect
+2020-09-23 18:38:21,802 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-09-23 18:38:21,820 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-09-23 18:38:22,475 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@ad3f70a, org.springframework.security.web.context.SecurityContextPersistenceFilter@c9b5a99, org.springframework.security.web.header.HeaderWriterFilter@5384ce66, org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter@1e6060f1, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter@6c9b44bf, org.springframework.security.web.authentication.logout.LogoutFilter@7f0766ef, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2aee0704, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3de79067, org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter@2478b629, org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter@39023dbf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@54ccb3, org.springframework.security.web.session.SessionManagementFilter@13192275, org.springframework.security.web.access.ExceptionTranslationFilter@241b971f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@53125718]
+2020-09-23 18:38:22,550 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientInboundChannelExecutor'
+2020-09-23 18:38:22,555 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
+2020-09-23 18:38:22,562 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
+2020-09-23 18:38:22,602 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'brokerChannelExecutor'
+2020-09-23 18:38:22,832 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [public/index.html]
+2020-09-23 18:38:22,977 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-3030"]
+2020-09-23 18:38:23,009 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3030 (http) with context path ''
+2020-09-23 18:38:23,014 INFO org.springframework.core.log.CompositeLog [main] Starting...
+2020-09-23 18:38:23,014 INFO org.springframework.core.log.CompositeLog [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
+2020-09-23 18:38:23,015 INFO org.springframework.core.log.CompositeLog [main] Started.
+2020-09-23 18:38:23,016 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-09-23 18:38:23,469 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-09-23 18:38:23,489 INFO org.springframework.boot.StartupInfoLogger [main] Started IdmFrontendApplication in 9.256 seconds (JVM running for 11.341)
+2020-09-23 18:38:26,631 INFO org.apache.juli.logging.DirectJDKLog [http-nio-3030-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-23 18:38:26,632 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-09-23 18:38:26,644 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-3030-exec-1] Completed initialization in 11 ms
+2020-09-23 18:38:28,938 INFO org.keycloak.adapters.KeycloakDeployment [http-nio-3030-exec-2] Loaded URLs from http://158.177.78.141:8080/auth/realms/idm-realm/.well-known/openid-configuration
+2020-09-23 18:38:29,702 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-09-23 18:38:29,721 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] getting dashboard
+2020-09-23 18:38:29,723 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-5] returning dashboard
+2020-09-23 18:38:36,722 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:38:36,752 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] getUserNotification -- INIT --
+2020-09-23 18:38:37,560 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] Found 1 notification(s) for user RIDP86Z
+2020-09-23 18:38:37,764 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:38:44,296 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting garaOverview
+2020-09-23 18:38:44,298 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning garaOverview
+2020-09-23 18:38:46,211 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:38:46,212 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] getUserNotification -- INIT --
+2020-09-23 18:38:46,215 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- INIT --
+2020-09-23 18:38:46,234 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:38:46,498 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] Found 1 notification(s) for user RIDP86Z
+2020-09-23 18:38:46,499 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:38:47,690 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- END --
+2020-09-23 18:38:47,713 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-1] getSuppliersByTenderId -- INIT --
+2020-09-23 18:38:47,719 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-1] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:38:49,009 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-1] getSuppliersByTenderId -- END --
+2020-09-23 18:38:50,051 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting fornitoreOverview
+2020-09-23 18:38:50,053 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning fornitoreOverview
+2020-09-23 18:38:50,893 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:38:50,894 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] getUserNotification -- INIT --
+2020-09-23 18:38:51,192 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Found 1 notification(s) for user RIDP86Z
+2020-09-23 18:38:51,202 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:39:00,395 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-6] getting garaOverview
+2020-09-23 18:39:00,397 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-6] returning garaOverview
+2020-09-23 18:39:00,802 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-2] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:39:00,803 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-2] getUserNotification -- INIT --
+2020-09-23 18:39:00,813 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] getSuppliersByTenderId -- INIT --
+2020-09-23 18:39:00,823 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:39:01,418 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-2] Found 1 notification(s) for user RIDP86Z
+2020-09-23 18:39:01,420 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-2] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:39:02,918 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-4] getSuppliersByTenderId -- END --
+2020-09-23 18:39:02,943 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- INIT --
+2020-09-23 18:39:02,948 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:39:04,753 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- END --
+2020-09-23 18:39:09,366 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-18] saveObjectOnDb -- INIT --
+2020-09-23 18:39:09,384 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-18] calling url : http://localhost:8080/supplier/createSupplier
+2020-09-23 18:39:10,178 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-18] saveObjectOnDb -- END -- response : {"status":200,"message":"Fornitore creato con successo","supplier":{"id":"5f6b7a2de8eb2a01bb568d2d","name":"MAR","tenderSapNumber":"MAM19/025C"}}
+2020-09-23 18:39:10,224 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-10] createNotification -- INIT --
+2020-09-23 18:39:10,225 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-10] createNotification -- INIT -- notification : {"userId":"RIDP86Z","tenderNumber":"MAM19/025C","idTender":"5f6b7a2de8eb2a01bb568d2d","notificationType":"supplierCreation","status":"SUPPLIER_CREATED","idSupplier":"5f6b7a2de8eb2a01bb568d2d","supplierName":"MAR"}
+2020-09-23 18:39:10,237 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-10] Create notification for user RIDP86Z at time : 2020-09-23
+2020-09-23 18:39:10,241 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-10] Saving notification : UserNotification{id=null, userId='RIDP86Z', notificationType='supplierCreation', idTender='5f6b7a2de8eb2a01bb568d2d', creationDate=23.09.2020 18:39, idSupplier='5f6b7a2de8eb2a01bb568d2d', readingDate='null'}
+2020-09-23 18:39:10,890 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-10] createNotification -- END -- 
+2020-09-23 18:39:10,908 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- INIT --
+2020-09-23 18:39:10,914 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:39:13,231 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- END --
+2020-09-23 18:39:17,009 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-09-23 18:39:17,010 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] returning fornitoreOverview
+2020-09-23 18:39:17,494 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:39:17,495 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] getUserNotification -- INIT --
+2020-09-23 18:39:17,907 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Found 2 notification(s) for user RIDP86Z
+2020-09-23 18:39:17,910 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:39:22,612 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-5] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 15 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(15)-CONNECTED(15)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 264], outboundChannel[pool size = 24, active threads = 0, queued tasks = 0, completed tasks = 28], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 30]
+2020-09-23 18:39:29,141 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-4] analyzeFile -- INIT --
+2020-09-23 18:39:29,142 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-4] bytes : [B@137ec144
+2020-09-23 18:39:29,142 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-4] name : 2 - Sez. 1 Contenuto RDO.docx
+2020-09-23 18:39:29,152 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-4] Calling URL : http://158.177.78.140:8080/analyzerDocument/analyze/document
+2020-09-23 18:39:42,844 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-4] analyzeFile --END--
+2020-09-23 18:39:42,852 INFO com.ibm.snam.idm.web_socket.UpdateFilesController [clientInboundChannel-4] Response from analyzer : {"entities":[{"type":"D_12_09_WHITE_LIST","text":"Dichiarazione sostitutiva ex DPR 445/00 di iscrizione nella White-List","mentions":[{"text":"Dichiarazione sostitutiva ex DPR 445/00 di iscrizione nella White-List","location":[11281,11351]}],"count":1},{"type":"D_12_11_18_OBBLIGHI_SICUREZZA","text":"tenuto conto degli obblighi relativi alle disposizioni in materia di sicurezza","mentions":[{"text":"tenuto conto degli obblighi relativi alle disposizioni in materia di sicurezza","location":[11525,11603]}],"count":1},{"type":"M_02_ESCLUSIONE","text":"Autocertificazione dell’Offerente ex DPR 445/2000 attestante l’assenza di motivi di esclusione","mentions":[{"text":"Autocertificazione dell’Offerente ex DPR 445/2000 attestante l’assenza di motivi di esclusione","location":[4830,4924]}],"count":1},{"type":"M_03_RESPONSABILITA","text":"(modello 3)","mentions":[{"text":"(modello 3)","location":[8579,8590]}],"count":1},{"type":"M_05_CONSENSO","text":"Dichiarazione di consenso ai sensi del Regolamento (UE) 679/2016 (modello 5)","mentions":[{"text":"Dichiarazione di consenso ai sensi del Regolamento (UE) 679/2016 (modello 5)","location":[5392,5468]}],"count":1},{"type":"M_03_RESPONSABILITA","text":"dichiarazione di impegno sulla Responsabilità amministrativa e Anticorruzione","mentions":[{"text":"dichiarazione di impegno sulla Responsabilità amministrativa e Anticorruzione","location":[8471,8548]}],"count":1},{"type":"M_01_ETICO","text":"Patto Etico e d’Integrità (modello 1)","mentions":[{"text":"Patto Etico e d’Integrità (modello 1)","location":[4773,4810]}],"count":1},{"type":"M_06_ISCRIZIONE_CAMERA","text":"445/2000 del Certificato di Iscrizione alla Camera di Commercio","mentions":[{"text":"445/2000 del Certificato di Iscrizione alla Camera di Commercio","location":[5585,5648]}],"count":1},{"type":"M_01_ETICO","text":"Patto Etico e di Integrità","mentions":[{"text":"Patto Etico e di Integrità","location":[3635,3661]}],"count":1},{"type":"M_07_AUTOCERT_445","text":"(modello 7)","mentions":[{"text":"(modello 7)","location":[5856,5867]}],"count":1},{"type":"M_02_ESCLUSIONE","text":"(modello 2)","mentions":[{"text":"(modello 2)","location":[4977,4988]}],"count":1},{"type":"M_01_ETICO","text":"(modello 1)","mentions":[{"text":"(modello 1)","location":[3697,3708]},{"text":"(modello 1)","location":[7914,7925]}],"count":2},{"type":"M_02_ESCLUSIONE","text":"modello 2","mentions":[{"text":"modello 2","location":[8116,8125]}],"count":1},{"type":"M_02_ESCLUSIONE","text":"dichiarazione dell’Offerente ex DPR 445/2000 attestante l’assenza dei motivi di esclusione","mentions":[{"text":"dichiarazione dell’Offerente ex DPR 445/2000 attestante l’assenza dei motivi di esclusione","location":[7930,8020]}],"count":1},{"type":"M_05_CONSENSO","text":"dichiarazione di consenso ai sensi del Regolamento (UE) 679/2016 (modello 5)","mentions":[{"text":"dichiarazione di consenso ai sensi del Regolamento (UE) 679/2016 (modello 5)","location":[8595,8671]}],"count":1},{"type":"ACCETTAZIONE_D1201","text":"di condividerne ed accettarne i contenuti","mentions":[{"text":"di condividerne ed accettarne i contenuti","location":[7812,7853]}],"count":1},{"type":"M_01_ETICO","text":"PATTO ETICO E DI INTEGRITÀ","mentions":[{"text":"PATTO ETICO E DI INTEGRITÀ","location":[3551,3577]}],"count":1},{"type":"M_03_RESPONSABILITA","text":"Modulo Dichiarazione di impegno sulla Responsabilità amministrativa e Anticorruzione (modello 3)","mentions":[{"text":"Modulo Dichiarazione di impegno sulla Responsabilità amministrativa e Anticorruzione (modello 3)","location":[4998,5094]}],"count":1},{"type":"D_12_08_CONTROLLO","text":"dichiarazione di non trovarsi in una delle situazioni di controllo di cui all'art. 2359","mentions":[{"text":"dichiarazione di non trovarsi in una delle situazioni di controllo di cui all'art. 2359","location":[8867,8954]}],"count":1},{"type":"DATA_DOCUMENTO","text":"6 settembre 2011","mentions":[{"text":"6 settembre 2011","location":[994,1010]}],"count":1},{"type":"M_06_ISCRIZIONE_CAMERA","text":"(modello 6)","mentions":[{"text":"(modello 6)","location":[5650,5661]}],"count":1},{"type":"NO_CONTROLLO_D1208","text":"non trovarsi in una delle situazioni di controllo","mentions":[{"text":"non trovarsi in una delle situazioni di controllo","location":[8884,8933]}],"count":1},{"type":"M_01_ETICO","text":"Patto Etico ed Integrità (Modello 1)","mentions":[{"text":"Patto Etico ed Integrità (Modello 1)","location":[22298,22334]}],"count":1},{"type":"D_12_01_VISIONE","text":"dichiarazione con la quale l’Offerente attesta di aver preso visione e conoscenza di tutta la documentazione di gara","mentions":[{"text":"dichiarazione con la quale l’Offerente attesta di aver preso visione e conoscenza di tutta la documentazione di gara","location":[7454,7570]}],"count":1},{"type":"DATA_DOCUMENTO","text":"18 aprile 2016","mentions":[{"text":"18 aprile 2016","location":[1831,1845]}],"count":1},{"type":"D_12_08_CONTROLLO","text":"situazione di controllo di cui all'art. 2359","mentions":[{"text":"situazione di controllo di cui all'art. 2359","location":[9043,9087]}],"count":1}],"language":"it","status":200,"idAttachment":"5f6b7a42115b3374bb5e9493"}
+2020-09-23 18:39:42,853 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-4] saveObjectOnDb -- INIT --
+2020-09-23 18:39:42,861 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-4] calling url : http://localhost:8080/attachment/uploadAttachmentsForSupplier
+2020-09-23 18:39:43,612 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-4] saveObjectOnDb -- END -- response : {"status":200,"message":"Documento caricato con successo"}
+2020-09-23 18:39:43,614 INFO com.ibm.snam.idm.web_socket.UpdateFilesController [clientInboundChannel-4] Response from backend : {"status":200,"message":"Documento caricato con successo","updated":"supplier","idSupplier":"5f6b7a2de8eb2a01bb568d2d","tenderNumber":"MAM19/025C","cig":"8047769D0F","idTender":"5f6b53247cb27d07a0bd3b82"}
+2020-09-23 18:39:43,672 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] createNotification -- INIT --
+2020-09-23 18:39:43,673 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] createNotification -- INIT -- notification : {"userId":"RIDP86Z","idTender":"5f6b53247cb27d07a0bd3b82","idSupplier":"5f6b7a2de8eb2a01bb568d2d","notificationType":"uploadFileSupplier","tenderNumber":"MAM19/025C","supplierName":{"attachments":[],"id":"5f6b7a2de8eb2a01bb568d2d","name":"MAR","tenderSapNumber":"MAM19/025C"},"status":"FILE_UPDATED"}
+2020-09-23 18:39:43,674 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Create notification for user RIDP86Z at time : 2020-09-23
+2020-09-23 18:39:43,675 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Saving notification : UserNotification{id=null, userId='RIDP86Z', notificationType='uploadFileSupplier', idTender='5f6b53247cb27d07a0bd3b82', creationDate=23.09.2020 18:39, idSupplier='5f6b53247cb27d07a0bd3b82', readingDate='null'}
+2020-09-23 18:39:44,278 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] createNotification -- END -- 
+2020-09-23 18:39:50,726 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] getDocumentContent -- INIT --
+2020-09-23 18:39:50,736 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] calling url : http://localhost:8080/document/5f6b7a42115b3374bb5e9493/content
+2020-09-23 18:39:54,301 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] getDocumentContent -- END --
+2020-09-23 18:39:59,251 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting garaOverview
+2020-09-23 18:39:59,253 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning garaOverview
+2020-09-23 18:39:59,977 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:39:59,977 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] getSuppliersByTenderId -- INIT --
+2020-09-23 18:39:59,979 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] getUserNotification -- INIT --
+2020-09-23 18:39:59,986 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:40:00,244 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-3] Found 3 notification(s) for user RIDP86Z
+2020-09-23 18:40:00,248 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-3] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:40:02,565 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-5] getSuppliersByTenderId -- END --
+2020-09-23 18:40:02,588 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- INIT --
+2020-09-23 18:40:02,597 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:40:05,638 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- END --
+2020-09-23 18:40:07,037 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] getting fornitoreOverview
+2020-09-23 18:40:07,040 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] returning fornitoreOverview
+2020-09-23 18:40:07,598 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:40:07,600 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] getUserNotification -- INIT --
+2020-09-23 18:40:07,899 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-5] Found 3 notification(s) for user RIDP86Z
+2020-09-23 18:40:07,904 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-5] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:41:53,112 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-3] getting fornitoreOverview
+2020-09-23 18:41:53,113 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-3] returning fornitoreOverview
+2020-09-23 18:41:53,609 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-1] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:41:53,610 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-1] getUserNotification -- INIT --
+2020-09-23 18:41:53,862 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-1] Found 3 notification(s) for user RIDP86Z
+2020-09-23 18:41:53,870 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-1] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:42:22,834 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] getting fornitoreOverview
+2020-09-23 18:42:22,835 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-4] returning fornitoreOverview
+2020-09-23 18:42:23,422 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:42:23,423 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] getUserNotification -- INIT --
+2020-09-23 18:42:23,665 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-9] Found 3 notification(s) for user RIDP86Z
+2020-09-23 18:42:23,669 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-9] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:43:12,306 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-1] getting fornitoreOverview
+2020-09-23 18:43:12,307 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-1] returning fornitoreOverview
+2020-09-23 18:43:13,218 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-2] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:43:13,220 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-2] getUserNotification -- INIT --
+2020-09-23 18:43:13,464 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-2] Found 3 notification(s) for user RIDP86Z
+2020-09-23 18:43:13,466 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-2] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:44:15,080 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] getting garaOverview
+2020-09-23 18:44:15,082 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-10] returning garaOverview
+2020-09-23 18:44:15,760 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-10] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:44:15,763 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-10] getUserNotification -- INIT --
+2020-09-23 18:44:15,766 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] getSuppliersByTenderId -- INIT --
+2020-09-23 18:44:15,776 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:44:16,069 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-10] Found 3 notification(s) for user RIDP86Z
+2020-09-23 18:44:16,072 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-10] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 18:44:19,056 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-6] getSuppliersByTenderId -- END --
+2020-09-23 18:44:19,070 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- INIT --
+2020-09-23 18:44:19,080 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:44:22,228 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-7] getSuppliersByTenderId -- END --
+2020-09-23 18:44:32,388 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-55] saveObjectOnDb -- INIT --
+2020-09-23 18:44:32,393 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-55] calling url : http://localhost:8080/supplier/createSupplier
+2020-09-23 18:44:32,943 INFO com.ibm.snam.idm.microservices.BackendMicroservice [clientInboundChannel-55] saveObjectOnDb -- END -- response : {"status":200,"message":"Fornitore creato con successo","supplier":{"id":"5f6b7b70e8eb2a01bb568d2e","name":"ZIP","tenderSapNumber":"MAM19/025C"}}
+2020-09-23 18:44:32,982 INFO com.ibm.snam.idm.web_socket.CreateSupplierController [clientInboundChannel-55] Uploading document: Documento - Off Topic.docx
+2020-09-23 18:44:32,982 INFO com.ibm.snam.idm.web_socket.CreateSupplierController [clientInboundChannel-55] Uploading document: Documento - Off Topic.docx
+2020-09-23 18:44:32,983 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] analyzeFile -- INIT --
+2020-09-23 18:44:32,983 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] bytes : [B@c01c6d6
+2020-09-23 18:44:32,985 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] name : Documento - Off Topic.docx
+2020-09-23 18:44:32,991 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] Calling URL : http://158.177.78.140:8080/analyzerDocument/analyze/document
+2020-09-23 18:44:39,104 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] analyzeFile --END--
+2020-09-23 18:44:39,105 INFO com.ibm.snam.idm.web_socket.CreateSupplierController [clientInboundChannel-55] Uploading document: Lettera_invito_MAM19-023C - Prova RIC_v3.docx
+2020-09-23 18:44:39,106 INFO com.ibm.snam.idm.web_socket.CreateSupplierController [clientInboundChannel-55] Uploading document: Lettera_invito_MAM19-023C - Prova RIC_v3.docx
+2020-09-23 18:44:39,106 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] analyzeFile -- INIT --
+2020-09-23 18:44:39,107 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] bytes : [B@83e438e
+2020-09-23 18:44:39,107 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] name : Lettera_invito_MAM19-023C - Prova RIC_v3.docx
+2020-09-23 18:44:39,113 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] Calling URL : http://158.177.78.140:8080/analyzerDocument/analyze/document
+2020-09-23 18:45:05,604 INFO com.ibm.snam.idm.microservices.AnalyzerMicroservice [clientInboundChannel-55] analyzeFile --END--
+2020-09-23 18:45:05,628 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-7] createNotification -- INIT --
+2020-09-23 18:45:05,628 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] createNotification -- INIT -- notification : {"userId":"RIDP86Z","tenderNumber":"MAM19/025C","idTender":"5f6b7b70e8eb2a01bb568d2e","notificationType":"supplierCreation","status":"SUPPLIER_CREATED","idSupplier":"5f6b7b70e8eb2a01bb568d2e","supplierName":"ZIP"}
+2020-09-23 18:45:05,629 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Create notification for user RIDP86Z at time : 2020-09-23
+2020-09-23 18:45:05,629 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] Saving notification : UserNotification{id=null, userId='RIDP86Z', notificationType='supplierCreation', idTender='5f6b7b70e8eb2a01bb568d2e', creationDate=23.09.2020 18:45, idSupplier='5f6b7b70e8eb2a01bb568d2e', readingDate='null'}
+2020-09-23 18:45:06,498 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-7] createNotification -- END -- 
+2020-09-23 18:45:06,529 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- INIT --
+2020-09-23 18:45:06,538 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] calling url : http://localhost:8080/tender/5f6b53247cb27d07a0bd3b82/suppliers
+2020-09-23 18:45:09,571 INFO com.ibm.snam.idm.microservices.BackendMicroservice [http-nio-3030-exec-9] getSuppliersByTenderId -- END --
+2020-09-23 18:45:11,945 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] getting fornitoreOverview
+2020-09-23 18:45:11,947 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-8] returning fornitoreOverview
+2020-09-23 18:45:12,643 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-4] getUserNotification -- INIT -- userId : RIDP86Z
+2020-09-23 18:45:12,645 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-4] getUserNotification -- INIT --
+2020-09-23 18:45:12,919 INFO com.ibm.snam.idm.service.UserNotificationService [http-nio-3030-exec-4] Found 4 notification(s) for user RIDP86Z
+2020-09-23 18:45:12,923 INFO com.ibm.snam.idm.controller.UserNotificationController [http-nio-3030-exec-4] getUserNotification -- END -- userId : RIDP86Z
+2020-09-23 19:09:22,627 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-11] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 36 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(36)-CONNECTED(36)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 648], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 72], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 1308]
+2020-09-23 19:39:22,634 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-5] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 36 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(36)-CONNECTED(36)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 648], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 72], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 2605]
+2020-09-23 20:09:22,638 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-2] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 36 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(36)-CONNECTED(36)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 648], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 72], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 3902]
+2020-09-23 20:39:22,645 INFO org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-4] WebSocketSession[3 current WS(3)-HttpStream(0)-HttpPoll(0), 36 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(36)-CONNECTED(36)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 648], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 72], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 6, completed tasks = 5199]
+2020-09-23 20:41:37,219 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-7] getting garaOverview
+2020-09-23 20:41:37,221 INFO com.ibm.snam.idm.controller.ViewController [http-nio-3030-exec-7] returning garaOverview
