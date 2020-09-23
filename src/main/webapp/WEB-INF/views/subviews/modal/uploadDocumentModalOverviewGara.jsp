@@ -58,7 +58,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button type="button" ng-click="uploadTenderFile()" class="btn button-secondary-buyer" data-dismiss="modal">
+                        <button type="button" ng-disabled="missingDataForUploadFileForTender()" ng-click="uploadTenderFile()" class="btn button-secondary-buyer" data-dismiss="modal">
                             CARICA
                         </button>
                     </div>

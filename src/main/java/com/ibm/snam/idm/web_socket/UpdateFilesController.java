@@ -44,6 +44,7 @@ public class UpdateFilesController {
             JSONArray files = updateFiles.getJSONArray("files");
             updateFiles.remove("files");
             List<String> failedDocuments = new ArrayList<>();
+            String updated = "";
             for(int i = 0 ; i < files.size() ; i++){
                 List<JSONObject> attachmentsId = new LinkedList<>();
                 JSONObject responseFromAnalyzer = new JSONObject();
@@ -64,7 +65,7 @@ public class UpdateFilesController {
                     	attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment")); 
                     	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
                     	attachmentsId.add(attachmentId);
-                        uploadAttachmentsForSupplierOrTender(updateFiles, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
+                        updated = uploadAttachmentsForSupplierOrTender(updateFiles, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
                 	}
                 }
                 // Gestisce il caso tradizionale in cui i file non sono zippati 
@@ -79,34 +80,49 @@ public class UpdateFilesController {
                     attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
                     attachmentId.put("fileName", fileName);
                     attachmentsId.add(attachmentId);
-                    uploadAttachmentsForSupplierOrTender(updateFiles, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
+                    updated = uploadAttachmentsForSupplierOrTender(updateFiles, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
                 }
-
-
             }
-
-            if (failedDocuments.isEmpty()){
-                response.put("status", Constants.HTTP_STATUS_OK);
-                response.put("message", Constants.UPLOAD_DOCUMENTS_OK);
-            } else {
-                response.put("status", Constants.HTTP_STATUS_ERROR);
-                String message = Constants.UPLOAD_DOCUMENTS_ERROR + ": " + String.join(", ", failedDocuments);
-                response.put("message", message);
-            }
+            fillResponse(response, updated, updateFiles, failedDocuments);
             return response.toString();
         }catch (Exception e){
             logger.error(e.getMessage());
             response.put("status", Constants.HTTP_STATUS_ERROR);
             response.put("message", Constants.ERROR_CALLING_BACKEND);
+            response.put("creationStatus", Constants.FILE_NOT_UPDATED);
             return response.toString();
         }
     }
 
-    private void uploadAttachmentsForSupplierOrTender(@Payload JSONObject updateFiles, List<String> failedDocuments, List<JSONObject> attachmentsId, JSONObject responseFromAnalyzer, String fileName) {
+    private void fillResponse(JSONObject response, String updated, JSONObject updateFiles, List<String> failedDocuments) {
+        response.put("updated", updated);
+        response.put("idTender", updateFiles.getString("idTender"));
+        response.put("creationStatus", Constants.FILE_UPDATED);
+        if(updated.equals("supplier")){
+            response.put("sapNumber", updateFiles.getString("tenderNumber"));
+            response.put("idSupplier", updateFiles.getString("idSupplier"));
+            response.put("supplierName", updateFiles.getString("supplierName"));
+        }
+        else{
+            response.put("sapNumber", updateFiles.getString("sapNumber"));
+        }
+        if (failedDocuments.isEmpty()){
+            response.put("status", Constants.HTTP_STATUS_OK);
+            response.put("message", Constants.UPLOAD_DOCUMENTS_OK);
+        } else {
+            response.put("status", Constants.HTTP_STATUS_ERROR);
+            String message = Constants.UPLOAD_DOCUMENTS_ERROR + ": " + String.join(", ", failedDocuments);
+            response.put("message", message);
+        }
+    }
+
+    private String uploadAttachmentsForSupplierOrTender(@Payload JSONObject updateFiles, List<String> failedDocuments, List<JSONObject> attachmentsId, JSONObject responseFromAnalyzer, String fileName) {
         updateFiles.put("attachmentsId", attachmentsId);
         updateFiles.put("responseFromAnalyzer", responseFromAnalyzer);
         JSONObject responseFromBackend = null;
+        String updated = "";
         if(updateFiles.has("idSupplier")){
+            updated = "supplier";
             logger.info("Response from analyzer : " + responseFromAnalyzer);
             responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForSupplier");
             responseFromBackend.put("updated", "supplier");
@@ -114,6 +130,7 @@ public class UpdateFilesController {
             responseFromBackend.put("tenderNumber", updateFiles.getString("tenderNumber"));
         }
         else{
+            updated = "tender";
             responseFromBackend = backendMicroservice.saveObjectOnDb(updateFiles, "/attachment/uploadAttachmentsForTender");
             responseFromBackend.put("updated", "tender");
         }
@@ -123,5 +140,6 @@ public class UpdateFilesController {
         if (!responseFromBackend.get("status").equals(HttpStatus.SC_OK)){
             failedDocuments.add(fileName);
         }
+        return updated;
     }
 }

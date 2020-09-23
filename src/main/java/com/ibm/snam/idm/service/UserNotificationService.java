@@ -48,6 +48,9 @@ public class UserNotificationService {
             if (notification.has("idSupplier")) {
                 userNotification.setIdSupplier(notification.getString("idTender"));
             }
+            if(notification.has("supplierName")){
+                userNotification.setSupplierName(notification.getString("supplierName"));
+            }
             logger.info("Saving notification : " + userNotification);
             userNotificationRepository.save(userNotification);
         }catch (Exception e){

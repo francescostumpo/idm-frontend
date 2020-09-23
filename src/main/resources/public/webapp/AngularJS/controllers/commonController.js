@@ -33,35 +33,25 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         });
         stompClientFiles.subscribe("/user/queue/reply/updateFiles", function(message) {
             console.log('message ', message)
+            var url = mainController.getFrontendHost() + '/createNotification'
             var response = JSON.parse(message.body)
             if(response.status === 200) {
                 mainController.showNotification('bottom', 'right', response.message, '', 'success')
-                var url = mainController.getFrontendHost() + '/createNotification'
                 if(response.updated === 'tender'){
                     $scope.getTenderAttachmentsByTenderId.getFromParent();
-                    var tenderNotification = $scope.createNotificationForUploadFile(response.idTender, null, response.cig,'uploadFileTender', response.tenderNumber)
-                    $http.post(url, tenderNotification).then(function (response) {
-                        console.log('response from ', url, ' : ', response)
-                        if(response.data.status === 200){
-                            $scope.userNotifications.push(response.data.userNotification);
-                            $scope.getAllTendersByDefault.getFromParent();
-                        }
-                    })
+                    var notification = $scope.createNotificationForUploadFile(response, 'uploadFileTender',response.creationStatus)
+                    $scope.sendNotification(url, notification)
                 }
                 else if(response.updated === 'supplier'){
                     $scope.requiredAttachmentsCommon.getFromParent();
-                    var tenderNotification = $scope.createNotificationForUploadFile(response.idTender, response.idSupplier, response.cig, 'uploadFileSupplier', response.tenderNumber)
-                    $http.post(url, tenderNotification).then(function (response) {
-                        console.log('response from ', url, ' : ', response)
-                        if(response.data.status === 200){
-                            $scope.userNotifications.push(response.data.userNotification);
-                            $scope.getAllTendersByDefault.getFromParent();
-                        }
-                    })
+                    var notification = $scope.createNotificationForUploadFile(response, 'uploadFileSupplier',response.creationStatus)
+                    $scope.sendNotification(url, notification)
                 }
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
+                var notification = $scope.createNotificationForUploadFile({}, 'uploadFileSupplier',response.creationStatus)
+                $scope.sendNotification(url, notification)
             }
         });
         stompClientFiles.subscribe("/user/queue/success", function(message) {
@@ -83,12 +73,22 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
             console.log('message ', message)
             var response = JSON.parse(message.body)
             if(response.status === 200) {
-                mainController.showNotification('bottom', 'right', response.message, '', 'success')
-                console.log("called from parent component");
-                $scope.getSuppliersByTenderId.getFromParent();
+                var creationStatus = response.creationStatus
+                if(creationStatus === 'SUPPLIER_CREATED'){
+                    mainController.showNotification('bottom', 'right', response.message, '', 'success')
+                }
+                else if(creationStatus === 'SUPPLIER_CREATED_WITH_FILE_ERROR'){
+                    mainController.showNotification('bottom', 'right', response.message, '', 'warning')
+                }
+                var url = mainController.getFrontendHost() + '/createNotification'
+                var supplierNotification = $scope.createNotificationForSupplier(response.supplier, 'supplierCreation', creationStatus)
+                $scope.sendNotification(url, supplierNotification, $scope.getSuppliersByTenderId)
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
+                var url = mainController.getFrontendHost() + '/createNotification'
+                var supplierNotification = $scope.createNotificationForSupplier({}, 'supplierCreation', 'SUPPLIER_NOT_CREATED')
+                $scope.sendNotification(url, supplierNotification, $scope.getSuppliersByTenderId)
             }
         });
         stompClientSupplier.subscribe("/user/queue/success", function(message) {
@@ -120,18 +120,13 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                     mainController.showNotification('bottom', 'right', response.message, '', 'warning')
                 }
                 var url = mainController.getFrontendHost() + '/createNotification'
-                var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation', creationStatus)
-                $http.post(url, tenderNotification).then(function (response) {
-                    console.log(' response from ', url, ' : ', response);
-                    if(response.data.status === 200){
-                        $scope.userNotifications.push(response.data.userNotification);
-                        $scope.getAllTendersByDefault.getFromParent();
-                    }
-                })
-
+                var tenderNotification = $scope.createNotificationFromTender({}, 'tenderCreation', creationStatus)
+                $scope.sendNotification(url, tenderNotification, $scope.getAllTendersByDefault)
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
+                var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation', 'TENDER_NOT_CREATED')
+                $scope.sendNotification(url, tenderNotification, $scope.getAllTendersByDefault)
             }
         });
         stompClient.subscribe("/user/queue/success", function(message) {
@@ -141,14 +136,39 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         console.log("STOMP protocol error: ", error);
     });
 
-    $scope.createNotificationForUploadFile = function(idTender, idSupplier, cig, notificationType, notificationNumber){
+    $scope.sendNotification = function(url, notification, parent){
+        $http.post(url, notification).then(function (response) {
+            console.log(' response from ', url, ' : ', response);
+            if(response.data.status === 200){
+                $scope.userNotifications.push(response.data.userNotification);
+                if(parent !== undefined) {
+                    parent.getFromParent()
+                }
+            }
+        })
+    }
+
+    $scope.createNotificationForUploadFile = function(response, notificationType, creationStatus){
         var notification = {}
         notification.userId = mainController.getUserId()
-        notification.idTender = idTender
-        notification.idSupplier = idSupplier
-        notification.cig = cig
+        notification.idTender = response.idTender
+        notification.idSupplier = response.idSupplier
         notification.notificationType = notificationType
-        notification.tenderNumber = notificationNumber
+        notification.tenderNumber = response.sapNumber
+        notification.supplierName = response.supplierName
+        notification.status = creationStatus
+        return notification
+    }
+
+    $scope.createNotificationForSupplier = function(supplier, notificationType, statusCreation){
+        var notification = {}
+        notification.userId = mainController.getUserId()
+        notification.tenderNumber = supplier.tenderSapNumber
+        notification.idTender = supplier.id
+        notification.notificationType = notificationType
+        notification.status = statusCreation
+        notification.idSupplier = supplier.id
+        notification.supplierName = supplier.name
         return notification
     }
 

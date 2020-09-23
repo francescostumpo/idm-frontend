@@ -45,7 +45,9 @@ public class CreateSupplierController {
             JSONArray files = supplier.getJSONArray("files");
             supplier.remove("files");
             JSONObject supplierCreationResponse = backendMicroservice.saveObjectOnDb(supplier, "/supplier/createSupplier");
-            logger.info("supplierCreationResponse", supplierCreationResponse.toString());
+            if(supplierCreationResponse.getInt("status") == HttpStatus.SC_INTERNAL_SERVER_ERROR){
+                return supplierCreationResponse.toString();
+            }
             JSONObject savedSupplier = supplierCreationResponse.getJSONObject("supplier");
             supplier.put("idSupplier", savedSupplier.getString("id"));
             List<String> failedDocuments = new ArrayList<>();
@@ -63,8 +65,7 @@ public class CreateSupplierController {
                 	for(MultipartFile fileInZip : zipFilesArrayList) {
                 		logger.info("Uploading document: " + fileInZip.getOriginalFilename()); 
                         responseFromAnalyzer = analyzerMicroservice.analyzeFile(fileInZip); 
-                        responsesFromAnalyzerZip.add(responseFromAnalyzer); 
-                        
+                        responsesFromAnalyzerZip.add(responseFromAnalyzer);
                         JSONObject attachmentId = new JSONObject(); 
                     	attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment")); 
                     	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
@@ -88,17 +89,19 @@ public class CreateSupplierController {
                     saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
                 }
             }
-
+            savedSupplier.put("idTender", supplier.getString("idTender"));
+            response.put("supplier", savedSupplier);
             if (failedDocuments.isEmpty()){
                 response.put("status", Constants.HTTP_STATUS_OK);
                 response.put("message", Constants.CREATE_SUPPLIER_OK);
+                response.put("creationStatus", Constants.SUPPLIER_CREATED);
             } else {
-                response.put("status", Constants.HTTP_STATUS_ERROR);
+                response.put("status", Constants.HTTP_STATUS_OK);
                 String message = Constants.ERROR_CREATING_SUPPLIER + ": " + String.join(", ", failedDocuments);
                 response.put("message", message);
+                response.put("creationStatus", Constants.SUPPLIER_CREATED_WITH_FILE_ERROR);
             }
             return response.toString();
-
         }catch (Exception e){
             logger.error(e.getMessage());
             response.put("status", Constants.HTTP_STATUS_ERROR);

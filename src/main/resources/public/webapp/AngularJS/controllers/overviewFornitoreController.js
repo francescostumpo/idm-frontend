@@ -93,6 +93,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.notCompliants = 0;
     $scope.compliants = 0;
     $scope.requiredAttachmentsCommon.getFromParent = function(){
+        console.log('requiredAttachmentsCommon.getFromParent -- init --')
         var url = mainController.getHost() + '/supplier/getSupplierById/' + $scope.fornitoreOverview.id
         mainController.startProgressIndicator('#loading')
         $http.get(url).then(function (response) {
@@ -161,6 +162,11 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 $scope.notRequiredAttachments.push(document)
             }
         }
+        $scope.requiredAttachments.sort((att1 , att2) => {
+            if(att1.isPresent && att2.isPresent) return 0
+            if(att1.isPresent) return -1
+            return 1
+        })
         $scope.initProgressBar($scope.requiredAttachments)
     }
 
@@ -266,6 +272,13 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
     }
 
+    $scope.missingDataForUploadFileForTender = function(){
+        if($scope.listOfFiles === undefined || $scope.listOfFiles.length === 0){
+            return true
+        }
+        return false;
+    }
+
     $scope.updateAttachmentsForSupplier = function(){
         var fileToBeUploaded = {};
         fileToBeUploaded.files = [];
@@ -296,6 +309,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             fileToBeUploaded.idTender = $scope.bandoGara.id
             fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
             fileToBeUploaded.tenderNumber = $scope.bandoGara.sapNumber
+            fileToBeUploaded.supplierName = $scope.fornitoreOverview
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         });

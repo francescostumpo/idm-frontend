@@ -53,12 +53,12 @@
             <div class="modal-footer" style="height: 100px;">
                 <div class="col-md-12 row">
                     <div class="text-center col-md-6">
-                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer" style="width: 50%; height: 50px;">
+                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer" >
                             ANNULLA
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button ng-click="updateAttachmentsForSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" style="width: 50%; height: 50px;">
+                        <button ng-click="updateAttachmentsForSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
                             CARICA
                         </button>
                     </div>

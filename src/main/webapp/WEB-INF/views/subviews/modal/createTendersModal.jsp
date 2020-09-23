@@ -205,12 +205,12 @@
             <div class="modal-footer" style="height: 100px;">
                 <div class="col-md-12 row">
                     <div class="text-center col-md-6">
-                        <button style="width: 50%; height: 50px;" type="button" data-dismiss="modal" class="btn button-primary-buyer" >
+                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer" >
                             ANNULLA
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button style="width: 50%; height: 50px;" ng-click="createTender()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
+                        <button ng-disabled="missingDataForCreationNewTender()" ng-click="createTender()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
                             PROCEDI
                         </button>
                     </div>

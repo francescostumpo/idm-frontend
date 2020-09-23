@@ -3,6 +3,18 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
 
     $scope.userId = mainController.getUserName()
 
+    $scope.missingDataForCreationNewTender = function() {
+        if($scope.tender === undefined || $scope.tender.endDate === ""){
+            return true
+        }
+        if($scope.creatingTender.uploadOneFile){
+            return !$scope.rdoAndLetterIsSelected
+        }
+        else{
+            return !$scope.rdoIsSelected || !$scope.letterIsSelected
+        }
+    }
+
     $scope.deselectFile = function(tag) {
         $scope.file = null;
         if(tag === 'fileRdo'){

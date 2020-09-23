@@ -34,7 +34,7 @@ public class BackendMicroservice {
         HttpEntity<String> request = new HttpEntity<String>(object.toString(), headers);
         logger.info("calling url : " + url);
         JSONObject responseAsJsonObject = httpRestTemplate.postForObject(url, request, JSONObject.class);
-        logger.info("saveObjectOnDb -- END --");
+        logger.info("saveObjectOnDb -- END -- response : " + responseAsJsonObject);
         return responseAsJsonObject;
     }
 

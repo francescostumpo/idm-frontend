@@ -1,7 +1,6 @@
 snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$anchorScroll', '$rootScope', function($scope, $http, $location,$rootScope) {
     console.log("[INFO] Hello World from garaOverviewController");
 
-
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
     $scope.tenderAttachments = $scope.bandoGara.tenderAttachments
     var urlDocumentContent = mainController.getFrontendHost() + '/api/documentContent';
@@ -46,25 +45,80 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
 
     $scope.getTenderAttachments();
 
-    $scope.retrieveProgressBarLength = function(supplier){
-        var documentCheckList = [];
+    $scope.countNumberOfNotConformDocument = function(supplier){
+        var notConformDocuments = 0
         for(var i = 0; i < supplier.attachments.length; i++) {
             var document = supplier.attachments[i];
-            var tag = document.tag;
-            var found = false
-            if($scope.bandoGara.requiredAttachments) {
-                for (var j = 0; j < $scope.bandoGara.requiredAttachments.length; j++) {
-                    var tagRequired = $scope.bandoGara.requiredAttachments[j];
-                    if (tag === tagRequired) {
-                        documentCheckList.push(tagRequired);
-                    }
+            var conformity = $scope.checkConformityForDocument(document.conformity)
+            if(conformity === 1){
+                notConformDocuments++
+            }
+        }
+        return notConformDocuments;
+    }
+
+    $scope.countUploadedDocument = function(supplier){
+        var documentUploaded = 0
+        for(var i = 0; i < supplier.attachments.length; i++) {
+            var document = supplier.attachments[i];
+            if(document.tag !== 'no_tag') {
+                var conformity = $scope.checkConformityForDocument(document.conformity)
+                if (conformity === 0 || conformity === 1 || conformity === 2) {
+                    documentUploaded++
                 }
             }
         }
-        supplier.compliantAttachments = documentCheckList.length;
-        var progressBarCompliant = $scope.bandoGara.requiredAttachments? Math.floor(documentCheckList.length / $scope.bandoGara.requiredAttachments.length * 100) : 0;
-        return {'width': progressBarCompliant + '%'};
+        return documentUploaded
+    }
+
+    $scope.retrieveProgressBarLengthOk = function(supplier){
+        var conformDocuments = 0
+        for(var i = 0; i < supplier.attachments.length; i++) {
+            var document = supplier.attachments[i];
+            if(document.tag !== 'no_tag') {
+                var conformity = $scope.checkConformityForDocument(document.conformity)
+                if (conformity === 0 || conformity === 2) {
+                    conformDocuments++
+                }
+            }
+        }
+        var percentage = Math.floor((conformDocuments/$scope.bandoGara.requiredAttachments.length) * 100)
+        return {'width': percentage + '%'};
     };
+
+    $scope.retrieveProgressBarLengthDanger = function(supplier){
+        var notConformDocuments = $scope.countNumberOfNotConformDocument(supplier)
+        var percentage = Math.floor((notConformDocuments/$scope.bandoGara.requiredAttachments.length) * 100)
+        return {'width': percentage + '%'};
+    };
+
+    $scope.checkConformityForDocument = function(conformity){
+        if(conformity !== undefined) {
+            var tagConformity = true
+            if(conformity.tagConformity !== undefined) {
+                if (conformity.tagConformity.conformity === false) {
+                    tagConformity = false
+                }
+                if (tagConformity && !conformity.exceptionConformity && conformity.cigConformity === 0 && conformity.sapConformity === 0) {
+                    return 0
+                }
+                if (!tagConformity || conformity.exceptionConformity || conformity.cigConformity === 1 || conformity.sapConformity === 1) {
+                    $scope.notCompliants++
+                    return 1
+                }
+                return 2
+            }
+            return -1
+        }
+        return -1
+    }
+
+    $scope.missingDataForUploadFileForTender = function(){
+        if($scope.listOfFiles === undefined || $scope.listOfFiles.length === 0){
+            return true
+        }
+        return false;
+    }
 
     $scope.uploadTenderFile = function(){
         console.log('uploadTenderFile -- INIT -- tender : ', $scope.bandoGara);
@@ -95,6 +149,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         Promise.all(promises).then(() => {
             fileToBeUploaded.cig = $scope.bandoGara.cig[0]
             //fileToBeUploaded.files = files;
+            fileToBeUploaded.sapNumber = $scope.bandoGara.sapNumber
             fileToBeUploaded.idTender = $scope.bandoGara.id;
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');

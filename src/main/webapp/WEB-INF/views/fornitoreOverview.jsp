@@ -109,11 +109,10 @@
                         <!-- Show list -->
                         <div ng-hide="showDocument" class="col-lg-12 col-md-12 col-sm-12">
                             <div class="d-flex justify-content">
-                                <div class="col-lg-10 col-md-10 col-sm-10;"
-                                    style="float: left; padding-top: 1%; padding-bottom:2%;">
-                                    <span
-                                        style="font-family: Ubuntu; font-size: 22px; color: #1D2A30; letter-spacing: 0; font-weight: bold;">
-                                        Checklist Documenti Richiesti </span>
+                                <div class="col-lg-10 col-md-10 col-sm-10;" style="float: left; padding-top: 1%; padding-bottom:2%;">
+                                    <span style="font-family: Ubuntu; font-size: 22px; color: #1D2A30; letter-spacing: 0; font-weight: bold;">
+                                        Checklist Documenti Richiesti
+                                    </span>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2" style="height: 5rem;">
                                     <button
@@ -182,7 +181,7 @@
                                                      class="my-auto  col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-green text-size-16">
                                                     <i class="mr-2 fas fa-check"></i>CONFORME</div>-->
                                                 <div ng-if="document.conformity === 1"
-                                                     class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red text-size-16">
+                                                     class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-red text-size-14">
                                                     <i class="mr-2 fas fa-times"></i>NON CONFORME</div>
                                                 <!--<div ng-if="document.conformity === 2"
                                                      class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange text-size-16">
@@ -193,7 +192,7 @@
                                                     N/A </p>
                                             </div>
                                         </div>
-                                        <div class="text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
+                                        <div class=" justify-content-end text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
                                             <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                                                aria-expanded="false" style="cursor: pointer;"></i>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -211,6 +210,13 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 mb-5" ng-show="showDocument" id="page-requiredDoc-view">
                             <div class="row">
                                 <div class="col-lg-5 col-md-5 col-sm-5">
+                                    <div class="d-flex justify-content">
+                                        <div class="col-lg-12 col-md-12 col-sm-12" style="float: left; padding-top: 1%; padding-bottom:2%;">
+                                            <span style="font-family: Ubuntu; font-size: 22px; color: #1D2A30; letter-spacing: 0; font-weight: bold;">
+                                                Checklist Documenti Richiesti
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div class="card mt-2 no-border">
                                         <div class="row card-body background-color-application justify-content-center">
                                             <div class="col-lg-2 col-md-2 col-sm-2"></div>
@@ -263,7 +269,7 @@
                                                         class="my-auto col-lg-10 col-md-10 col-sm-10 conformity-box conformity-box-orange text-size-12">
                                                         <i class="mr-2 fas fa-exclamation"></i>NON CONTROLLATO</div>-->
                                                 </div>
-                                                <div class="col-sm-1 col-lg-1 col-md-1 row icon-group">
+                                                <div class="my-auto justify-content-end col-sm-1 col-lg-1 col-md-1 row icon-group">
                                                     <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                                                        aria-expanded="false" style="cursor: pointer;"></i>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -318,29 +324,71 @@
                                                 </div>-->
                                                 <div class="my-auto col-lg-2 col-md-2 col-sm-12">
                                                     <div class="row form-group document-viewer-br">
-                                                        <div class="col-md-8 label-item" >
+                                                        <div class="col-md-8 col-lg-8 col-sm-8" >
                                                             CIG
                                                         </div>
-                                                        <div class="col-auto">
-                                                            <i ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 0"  class="conformity-color my-auto ml-3 fas fa-check-circle ng-scope"> </i>
-                                                            <i ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 1"  class="not-conformity-color my-auto ml-3 fas fa-times-circle ng-scope"> </i>
-                                                            <i ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 2"  class="not-checked-conformity-color my-auto ml-3 fas fa-exclamation-circle ng-scope"> </i>
+                                                        <div class="col-md-4 col-lg-4 col-sm-4">
+                                                            <span ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 0" class="tooltip-custom">
+                                                                <i   class="conformity-color my-auto fas fa-check-circle ng-scope"> </i>
+                                                                <span class="tooltiptext">
+                                                                    <div>
+                                                                        Coerente
+                                                                    </div>
+                                                                </span>
+                                                            </span>
+                                                            <span ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 1"  class="tooltip-custom">
+                                                                <i  class="not-conformity-color my-auto  fas fa-times-circle ng-scope"> </i>
+                                                                 <span class="tooltiptext">
+                                                                    <div>
+                                                                        Non Coerente
+                                                                    </div>
+                                                                </span>
+                                                            </span >
+                                                            <span ng-show="documentSelectedForDetail.conformityDetail.cigConformity === 2"  class="tooltip-custom">
+                                                                <i  class="not-checked-conformity-color my-auto fas fa-exclamation-circle ng-scope"> </i>
+                                                                <span class="tooltiptext">
+                                                                    <div>
+                                                                        Non Trovato
+                                                                    </div>
+                                                                </span>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="my-auto col-lg-2 col-md-2 col-sm-12">
+                                                <div class="my-auto col-lg-3 col-md-3 col-sm-12">
                                                     <div class="row form-group">
-                                                        <div class="col-md-8 label-item">
+                                                        <div class="col-md-8 col-lg-8 col-sm-8" >
                                                             NUMERO GARA
                                                         </div>
-                                                        <div class="col-auto">
-                                                            <i ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 0"  class="conformity-color my-auto ml-3 fas fa-check-circle ng-scope"> </i>
-                                                            <i ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 1"  class="not-conformity-color my-auto ml-3 fas fa-times-circle ng-scope"> </i>
-                                                            <i ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 2"  class="not-checked-conformity-color my-auto ml-3 fas fa-exclamation-circle ng-scope"> </i>
+                                                        <div class="col-md-4 col-lg-4 col-sm-4">
+                                                            <span ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 0" class="tooltip-custom">
+                                                                <i class="conformity-color my-auto fas fa-check-circle ng-scope"> </i>
+                                                                <span class="tooltiptext">
+                                                                    <div>
+                                                                        Coerente
+                                                                    </div>
+                                                                </span>
+                                                            </span>
+                                                            <span ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 1" class="tooltip-custom">
+                                                                <i   class="not-conformity-color my-auto  fas fa-times-circle ng-scope"> </i>
+                                                                 <span class="tooltiptext">
+                                                                    <div>
+                                                                        Non Coerente
+                                                                    </div>
+                                                                </span>
+                                                            </span >
+                                                            <span ng-show="documentSelectedForDetail.conformityDetail.sapConformity === 2"  class="tooltip-custom">
+                                                                <i  class="not-checked-conformity-color my-auto fas fa-exclamation-circle ng-scope"> </i>
+                                                                <span class="tooltiptext">
+                                                                    <div>
+                                                                        Non Trovato
+                                                                    </div>
+                                                                </span>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                                <div class="col-lg-7 col-md-7 col-sm-7">
                                                     <div class="form-group expand-document-button">
                                                         <a class="document-fullview" target="_blank" href="/documentDetail">
                                                             <i class="fas fa-expand-arrows-alt fa-2x"></i>
@@ -408,7 +456,7 @@
                                         <p class="my-auto  no-margin-bottom text-size-16 text-bold">
                                             {{document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                     </div>
-                                    <div class="text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
+                                    <div class="justify-content-end text-primary row my-auto col-lg-1 col-md-1 col-sm-1">
                                         <i class="text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" style="cursor: pointer;"></i>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -428,7 +476,7 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-5">
                             <div class="d-flex justify-content-end">
-                                <div class="col-lg-10 col-md-10 col-sm-10">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
                                     <span style="font-family: Ubuntu; font-size: 22px; color: #1D2A30; letter-spacing: 0; font-weight: bold;">Altri Documenti</span>
                                 </div>
                             </div>
@@ -459,7 +507,7 @@
                                                 {{document.fileName}}
                                             </p>
                                         </div>
-                                        <div class="my-auto col-sm-2 col-lg-2 col-md-2 row icon-group">
+                                        <div class="my-auto justify-content-end my-auto col-sm-2 col-lg-2 col-md-2 row icon-group">
                                             <i class="my-auto text-primary fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                                                aria-expanded="false" style="cursor: pointer;"></i>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
