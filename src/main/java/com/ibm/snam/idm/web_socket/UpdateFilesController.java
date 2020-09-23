@@ -4,6 +4,8 @@ import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
+import com.ibm.snam.idm.util.RarHandler;
+import com.ibm.snam.idm.util.SevenZipHandler;
 import com.ibm.snam.idm.util.ZipHandler;
 
 import net.sf.json.JSONArray;
@@ -47,27 +49,58 @@ public class UpdateFilesController {
                 JSONObject file = files.getJSONObject(i);
                 String base64File = file.getString("file");
                 String fileName = file.getString("fileName"); 
+                ArrayList<MultipartFile> zipFilesArrayList = new ArrayList<MultipartFile>(); 
+            	ArrayList<JSONObject> responsesFromAnalyzerZip = new ArrayList<JSONObject>(); 
+
                 
                 
+                /* 
+                 * Codice per la gestione di file compressi 
+                 */
                 // Tratta il caso in cui l'elemento i-esimo sia uno .zip 
                 if(FilenameUtils.getExtension(fileName).equals("zip")) {
                    
                 	// Estrae i documenti dallo .zip e li invia a Watson per l'analisi 
-                	ArrayList<MultipartFile> zipFilesArrayList = ZipHandler.unzipToMultipartArray(base64File); 
-                	ArrayList<JSONObject> responsesFromAnalyzerZip = new ArrayList<JSONObject>(); 
-                	for(MultipartFile fileInZip : zipFilesArrayList) {
-                		logger.info("Uploading document: " + fileInZip.getOriginalFilename()); 
-                        responseFromAnalyzer = analyzerMicroservice.analyzeFile(fileInZip); 
+                	zipFilesArrayList = ZipHandler.unzipToMultipartArray(base64File); 
+                	 for(MultipartFile fileInZip : zipFilesArrayList) {
+                		 
+                 		logger.info("Uploading document: " + fileInZip.getOriginalFilename()); 
+                 		JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip); 
+                 		responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer"); 
                         responsesFromAnalyzerZip.add(responseFromAnalyzer); 
-                        
-                        JSONObject attachmentId = new JSONObject(); 
-                    	attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment")); 
-                    	attachmentId.put("fileName", fileInZip.getOriginalFilename()); 
-                    	attachmentsId.add(attachmentId); 
+                        attachmentsId.add((JSONObject) result.get("attachmentId")); 
 
-                	}                 
+                	 }
+                } 
+                // Tratta il caso SevenZip
+                else if(FilenameUtils.getExtension(fileName).equals("7z")) {
+                	
+                	zipFilesArrayList = SevenZipHandler.unzipToMultipartArray(base64File); 
+               	    for(MultipartFile fileInZip : zipFilesArrayList) {           		 
+              		  logger.info("Uploading document: " + fileInZip.getOriginalFilename()); 
+              		  JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip); 
+              		  responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer"); 
+                       responsesFromAnalyzerZip.add(responseFromAnalyzer); 
+                       attachmentsId.add((JSONObject) result.get("attachmentId")); 
+             	 }
 
                 } 
+                // Caso .rar: supportate tutte le versioni sino alla RAR4
+                else if(FilenameUtils.getExtension(fileName).equals("rar")) {
+                	
+                	zipFilesArrayList = RarHandler.unzipToMultipartArray(base64File); 
+               	    for(MultipartFile fileInZip : zipFilesArrayList) {           		 
+              		  logger.info("Uploading document: " + fileInZip.getOriginalFilename()); 
+              		  JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip); 
+              		  responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer"); 
+                       responsesFromAnalyzerZip.add(responseFromAnalyzer); 
+                       attachmentsId.add((JSONObject) result.get("attachmentId")); 
+             	 }
+
+                }
+                
+                
+                
                 
                 // Gestisce il caso tradizionale in cui i file non sono zippati 
                 else {
@@ -108,5 +141,27 @@ public class UpdateFilesController {
             response.put("message", Constants.ERROR_CALLING_BACKEND);
             return response.toString();
         }
+    }
+    
+    
+    
+    
+    private JSONObject extractWatsonEnrichedDataFromUnzippedFile(MultipartFile zipFile) {
+    	
+        JSONObject responseFromAnalyzer = new JSONObject(); 
+        JSONObject result = new JSONObject(); 
+
+
+        logger.info("Uploading document: " + zipFile.getOriginalFilename()); 
+        responseFromAnalyzer = analyzerMicroservice.analyzeFile(zipFile); 
+        result.put("responseFromAnalyzer", responseFromAnalyzer); 
+            
+        JSONObject attachmentId = new JSONObject(); 
+        attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment")); 
+        attachmentId.put("fileName", zipFile.getOriginalFilename()); 
+        result.put("attachmentId", attachmentId); 
+
+        return result;   
+        
     }
 }

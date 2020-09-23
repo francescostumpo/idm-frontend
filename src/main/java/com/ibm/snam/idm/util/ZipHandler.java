@@ -14,6 +14,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.io.ByteSource;
@@ -30,6 +32,8 @@ public class ZipHandler {
     } */ 
 	
 	
+    private static Logger logger = LoggerFactory.getLogger(ZipHandler.class);
+
 
     public static ArrayList<MultipartFile> unzipToMultipartArray(String zipBase64String) {
 
@@ -73,11 +77,6 @@ public class ZipHandler {
                     String[] fileNameSplittedByDots = fileName.split("\\."); 
 
                     if (fileNameSplittedByDots[fileNameSplittedByDots.length - 1].equals("zip")) {
-                    	//String nameOth = ze.getName().split("/")[1]; 
-                        //ZipInputStream subZipContentAsInputStream = new ZipInputStream(findEntry(originalZis, ze.getName().split("/")[1])); 
-                    	//byte[] subzipContentAsByteArray = getByteArrayFromZipInputStream(zis, ze); 
-
-                    	//InputStream subZipContentAsInputStream = convertZipInputStreamToInputStream(zis, ze); 
 
                     	ZipInputStream subZipContentAsZipStream = new ZipInputStream(zis); 
                     	
