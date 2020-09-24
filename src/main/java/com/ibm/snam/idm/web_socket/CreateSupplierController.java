@@ -7,8 +7,8 @@ import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
 import com.ibm.snam.idm.util.RarHandler;
 import com.ibm.snam.idm.util.SevenZipHandler;
 import com.ibm.snam.idm.util.ZipHandler;
-
-import net.sf.json.JSON;
+import com.ibm.snam.idm.web_socket.upload.UploadFileService;
+import com.ibm.snam.idm.web_socket.upload.UploadResult;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -27,6 +27,10 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Controller
 public class CreateSupplierController {
@@ -39,10 +43,14 @@ public class CreateSupplierController {
     @Autowired
     BackendMicroservice backendMicroservice;
 
+    @Autowired
+    UploadFileService uploadFileService;
+
     @MessageMapping("/createSupplier")
     @SendToUser("/queue/reply/supplier")
-    public String crateSupplier(@Payload  JSONObject supplier){
+    public String createSupplier(@Payload  JSONObject supplier){
         JSONObject response = new JSONObject();
+        List<Future<UploadResult>> uploadResults = new ArrayList<>();
         try{
             JSONArray files = supplier.getJSONArray("files");
             supplier.remove("files");
@@ -54,13 +62,10 @@ public class CreateSupplierController {
             supplier.put("idSupplier", savedSupplier.getString("id"));
             List<String> failedDocuments = new ArrayList<>();
             for(int i = 0 ; i < files.size() ; i++){
-                List<JSONObject> attachmentsId = new LinkedList<>();
-                JSONObject responseFromAnalyzer = new JSONObject();
                 JSONObject file = files.getJSONObject(i);
                 String base64File = file.getString("file");
                 String fileName = file.getString("fileName");
                 ArrayList<MultipartFile> zipFilesArrayList;
-                ArrayList<JSONObject> responsesFromAnalyzerZip = new ArrayList<>();
                 /*
                  * Codice per la gestione di file compressi
                  */
@@ -69,54 +74,55 @@ public class CreateSupplierController {
                 	// Estrae i documenti dallo .zip e li invia a Watson per l'analisi 
                 	zipFilesArrayList = ZipHandler.unzipToMultipartArray(base64File);
                 	 for(MultipartFile fileInZip : zipFilesArrayList) {
-                 		logger.info("Uploading document (zip): " + fileInZip.getOriginalFilename());
-                 		JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip);
-                 		responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer");
-                        responsesFromAnalyzerZip.add(responseFromAnalyzer);
-                        attachmentsId.add((JSONObject) result.get("attachmentId"));
-                         saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileInZip.getOriginalFilename());
-                     }
+                	     logger.info("Uploading document (zip): " + fileInZip.getOriginalFilename());
+                         Future<UploadResult> uploadResult = uploadFileService.uploadSupplierFile(fileInZip, fileName, supplier);
+                         uploadResults.add(uploadResult);
+                	 }
                 }
                 // Tratta il caso SevenZip
                 else if(FilenameUtils.getExtension(fileName).equals("7z")) {
                 	zipFilesArrayList = SevenZipHandler.unzipToMultipartArray(base64File);
                	    for(MultipartFile fileInZip : zipFilesArrayList) {
                	        logger.info("Uploading document (7z): " + fileInZip.getOriginalFilename());
-              		    JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip);
-              		    responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer");
-                        responsesFromAnalyzerZip.add(responseFromAnalyzer);
-                        attachmentsId.add((JSONObject) result.get("attachmentId"));
-                        saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileInZip.getOriginalFilename());
-                    }
+                        Future<UploadResult> uploadResult = uploadFileService.uploadSupplierFile(fileInZip, fileName, supplier);
+                        uploadResults.add(uploadResult);
+               	    }
                 }
                 // Caso .rar: supportate tutte le versioni sino alla RAR4
                 else if(FilenameUtils.getExtension(fileName).equals("rar")) {
                 	zipFilesArrayList = RarHandler.unzipToMultipartArray(base64File);
                	    for(MultipartFile fileInZip : zipFilesArrayList) {
                	        logger.info("Uploading document (rar): " + fileInZip.getOriginalFilename());
-              		    JSONObject result = extractWatsonEnrichedDataFromUnzippedFile(fileInZip);
-              		    responseFromAnalyzer = (JSONObject) result.get("responseFromAnalyzer");
-                        responsesFromAnalyzerZip.add(responseFromAnalyzer);
-                        attachmentsId.add((JSONObject) result.get("attachmentId"));
-                        saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileInZip.getOriginalFilename());
-                    }
+                        Future<UploadResult> uploadResult = uploadFileService.uploadSupplierFile(fileInZip, fileName, supplier);
+                        uploadResults.add(uploadResult);
+               	    }
                 }
                 // Caso file non zippati 
                 else {   
                     file = files.getJSONObject(i);
                     base64File = file.getString("file");
                     fileName = file.getString("fileName");
+                    logger.info("Uploading document: " + fileName);
                     byte [] data = Base64.getDecoder().decode(base64File);
                     MultipartFile document = new Base64DecodedMultipartFile(data, fileName);
-                    JSONObject attachmentId = new JSONObject();
-                    responseFromAnalyzer = analyzerMicroservice.analyzeFile(document);
-                    logger.info("Response from analyzer", responseFromAnalyzer);
-                    attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
-                    attachmentId.put("fileName", fileName);
-                    attachmentsId.add(attachmentId);
-                    saveDocumentsForSupplier(supplier, failedDocuments, attachmentsId, responseFromAnalyzer, fileName);
+                    Future<UploadResult> uploadResult = uploadFileService.uploadSupplierFile(document, fileName, supplier);
+                    uploadResults.add(uploadResult);
                 }
             }
+
+            for (Future<UploadResult> uploadResultFuture: uploadResults) {
+                UploadResult uploadResult = null;
+                try {
+                    uploadResult = uploadResultFuture.get();
+                    logger.info("uploadResult " + uploadResult);
+                } catch (InterruptedException | ExecutionException e) {
+                    logger.error(e.getMessage());
+                }
+                if (uploadResult.isFailed()){
+                    failedDocuments.add(uploadResult.getFilename());
+                }
+            }
+
             savedSupplier.put("idTender", supplier.getString("idTender"));
             response.put("supplier", savedSupplier);
             if (failedDocuments.isEmpty()){
@@ -130,45 +136,13 @@ public class CreateSupplierController {
                 response.put("creationStatus", Constants.SUPPLIER_CREATED_WITH_FILE_ERROR);
             }
             return response.toString();
+
         }catch (Exception e){
             logger.error(e.getMessage());
             response.put("status", Constants.HTTP_STATUS_ERROR);
             response.put("message", Constants.ERROR_CREATING_SUPPLIER);
             return response.toString();
         }
-    }
-
-
-
-
-    private JSONObject extractWatsonEnrichedDataFromUnzippedFile(MultipartFile zipFile) {
-        JSONObject responseFromAnalyzer;
-        JSONObject result = new JSONObject();
-        logger.info("Uploading document: " + zipFile.getOriginalFilename());
-        responseFromAnalyzer = analyzerMicroservice.analyzeFile(zipFile);
-        result.put("responseFromAnalyzer", responseFromAnalyzer);
-        JSONObject attachmentId = new JSONObject();
-        attachmentId.put("idAttachment", responseFromAnalyzer.getString("idAttachment"));
-        attachmentId.put("fileName", zipFile.getOriginalFilename());
-        result.put("attachmentId", attachmentId);
-        return result;
-    }
-
-    private void saveDocumentsForSupplier(JSONObject supplier, List<String> failedDocuments, List<JSONObject> attachmentsId, JSONObject responseFromAnalyzer, String fileName) {
-        logger.info("saveDocumentsForSupplier -- INIT --");
-        JSONObject filesToUpdate = new JSONObject();
-        filesToUpdate.put("idSupplier", supplier.get("idSupplier"));
-        filesToUpdate.put("idTender", supplier.get("idTender"));
-        filesToUpdate.put("attachmentsId", attachmentsId);
-        filesToUpdate.put("responseFromAnalyzer", responseFromAnalyzer);
-        JSONObject responseFromBackend = null;
-        logger.info("Response from analyzer : " + responseFromAnalyzer);
-        responseFromBackend = backendMicroservice.saveObjectOnDb(filesToUpdate, "/attachment/uploadAttachmentsForSupplier");
-        logger.info("Response from backend : " + responseFromBackend);
-        if (!responseFromBackend.get("status").equals(HttpStatus.SC_OK)){
-            failedDocuments.add(fileName);
-        }
-        logger.info("saveDocumentsForSupplier -- END --");
     }
 
 }
