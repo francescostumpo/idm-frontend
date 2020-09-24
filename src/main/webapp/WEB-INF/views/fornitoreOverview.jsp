@@ -221,7 +221,7 @@
                                     </div>
                                     <div class="card mt-2 no-border">
                                         <div class="row card-body background-color-application justify-content-center">
-                                            <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 text-size-14">
                                                 CHECK
                                             </div>
                                             <div ng-click="sortCardsByColumnName('name')"
@@ -240,7 +240,7 @@
                                                 <i ng-if="sort.conformity === 'asc'"
                                                     class="fas fa-sort-up hoverable sort-chev"></i>
                                             </div>
-                                            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                                            <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                         </div>
                                     </div>
                                     <div class="card" ng-repeat="document in requiredAttachments">
@@ -425,7 +425,7 @@
                     <div class="card mt-2 no-border">
                         <div class="row card-body background-color-application justify-content-center">
                             <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
-                                CHECK
+
                             </div>
                             <div ng-click="sortCardsByColumnName('name')"
                                  class="col-lg-8 col-md-8 col-sm-8 text-size-14 no-select">
