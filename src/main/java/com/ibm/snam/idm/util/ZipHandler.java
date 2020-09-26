@@ -36,22 +36,16 @@ public class ZipHandler {
 
 
     public static ArrayList<MultipartFile> unzipToMultipartArray(String zipBase64String) {
-
         ByteArrayInputStream fis;
         //buffer for read and write data to file
-        byte[] buffer = new byte[1024]; 
-        ArrayList<MultipartFile> multipartFilesInZip = new ArrayList<MultipartFile>(); 
-        
+        ArrayList<MultipartFile> multipartFilesInZip = new ArrayList<MultipartFile>();
         try {
         	byte[] decodedBase64Zip = Base64.getDecoder().decode(zipBase64String); 
             fis = new ByteArrayInputStream(decodedBase64Zip); 
-            ZipInputStream originalZis = new ZipInputStream(fis); 
             ZipInputStream zis = new ZipInputStream(fis);
-            ZipEntry ze = zis.getNextEntry(); 
-            
+            ZipEntry ze = zis.getNextEntry();
             while(ze != null){   	 	
-                String fileName = ze.getName(); 
-                
+                String fileName = ze.getName();
                 /* 
                  * Gestisce il caso di sottocartelle 
                  * (il modulo OCR va in errore nel caso
@@ -68,137 +62,67 @@ public class ZipHandler {
                 	if(fileName.equals("") || fileName.contains("DS_Store") || fileName.startsWith(".") || fileName.contains("MACOSX")) {
                 		ze = zis.getNextEntry(); 
                 		continue; 
-                	}         
-                    
+                	}
                 }
-                
-                
-                
-                    String[] fileNameSplittedByDots = fileName.split("\\."); 
-
-                    if (fileNameSplittedByDots[fileNameSplittedByDots.length - 1].equals("zip")) {
-
-                    	ZipInputStream subZipContentAsZipStream = new ZipInputStream(zis); 
-                    	
-                        ZipEntry subZipEntry = subZipContentAsZipStream.getNextEntry(); 
-
-                        
-                        while(subZipEntry != null) {
-                            String fileNameSubZip = subZipEntry.getName(); 
-                            
-                            if(fileNameSubZip.contains("/")) {
-                            	String[] fileNameArraySubZip= fileNameSubZip.split("/"); 
-                            	if(fileNameArraySubZip.length < 2 || subZipEntry.isDirectory()) {
-                            		subZipEntry = subZipContentAsZipStream.getNextEntry(); 
-                            		continue; 
-                            	}
-                            	fileNameSubZip = fileNameArraySubZip[fileNameArraySubZip.length - 1]; 
-                            	if(fileNameSubZip.equals("") || fileNameSubZip.contains("DS_Store") || fileNameSubZip.startsWith(".") || fileNameSubZip.contains("MACOSX")) {
-                            		subZipEntry = subZipContentAsZipStream.getNextEntry(); 
-                            		continue; 
-                            	}
+                String[] fileNameSplittedByDots = fileName.split("\\.");
+                if (fileNameSplittedByDots[fileNameSplittedByDots.length - 1].equals("zip")) {
+                    ZipInputStream subZipContentAsZipStream = new ZipInputStream(zis);
+                    ZipEntry subZipEntry = subZipContentAsZipStream.getNextEntry();
+                    while(subZipEntry != null) {
+                        String fileNameSubZip = subZipEntry.getName();
+                        if(fileNameSubZip.contains("/")) {
+                            String[] fileNameArraySubZip= fileNameSubZip.split("/");
+                            if(fileNameArraySubZip.length < 2 || subZipEntry.isDirectory()) {
+                                subZipEntry = subZipContentAsZipStream.getNextEntry();
+                                continue;
                             }
-                                           
-                            ByteArrayOutputStream fosSubZip = new ByteArrayOutputStream(); 
-                            copyStream(subZipContentAsZipStream, fosSubZip, subZipEntry); 
-                            
-                            // Aggiunge il documento del sotto-zip alla lista dei documenti da ritornare 
-                            MultipartFile documentInSubZip = new Base64DecodedMultipartFile(fosSubZip.toByteArray(), fileNameSubZip); 
-                            multipartFilesInZip.add(documentInSubZip); 
+                            fileNameSubZip = fileNameArraySubZip[fileNameArraySubZip.length - 1];
+                            if(fileNameSubZip.equals("") || fileNameSubZip.contains("DS_Store") || fileNameSubZip.startsWith(".") || fileNameSubZip.contains("MACOSX")) {
+                                subZipEntry = subZipContentAsZipStream.getNextEntry();
+                                continue;
+                            }
+                        }
+                        ByteArrayOutputStream fosSubZip = new ByteArrayOutputStream();
+                        copyStream(subZipContentAsZipStream, fosSubZip);
 
-                            subZipContentAsZipStream.closeEntry();
-                            subZipEntry = subZipContentAsZipStream.getNextEntry(); 
+                        // Aggiunge il documento del sotto-zip alla lista dei documenti da ritornare
+                        MultipartFile documentInSubZip = new Base64DecodedMultipartFile(fosSubZip.toByteArray(), fileNameSubZip);
+                        multipartFilesInZip.add(documentInSubZip);
 
-  
-                            
-                         } 
-                        
-                        
-                        zis.closeEntry();
-                        ze = zis.getNextEntry();
-                        
+                        subZipContentAsZipStream.closeEntry();
+                        subZipEntry = subZipContentAsZipStream.getNextEntry();
                     }
-                    
-                    
-                 
-                 
-                
-
-                     
-                if(!fileName.endsWith("zip")) { 
-                    ByteArrayOutputStream fos = new ByteArrayOutputStream(); 
-                    copyStream(zis, fos, ze); 
-
-                    MultipartFile document = new Base64DecodedMultipartFile(fos.toByteArray(), fileName); 
-                    multipartFilesInZip.add(document); 
-
                     zis.closeEntry();
                     ze = zis.getNextEntry();
                 }
-
-
+                logger.info("fileName : " + fileName);
+                if(!fileName.endsWith("zip")) {
+                    try {
+                        ByteArrayOutputStream fos = new ByteArrayOutputStream();
+                        copyStream(zis, fos);
+                        MultipartFile document = new Base64DecodedMultipartFile(fos.toByteArray(), fileName);
+                        multipartFilesInZip.add(document);
+                        zis.closeEntry();
+                        ze = zis.getNextEntry();
+                    }catch (IllegalArgumentException e){
+                        e.printStackTrace();
+                        ze = zis.getNextEntry();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
             }
-
             zis.closeEntry();
             zis.close();
             fis.close();      
         } catch (IOException e) {
             e.printStackTrace();
         } 
-        
-        
-        return multipartFilesInZip; 
-        
+
+        return multipartFilesInZip;
     } 
-    
-    
-    
-    private static InputStream convertZipInputStreamToInputStream(ZipInputStream in, ZipEntry entry) throws IOException
-    {
-        final int BUFFER = 2048;
-        int count = 0;
-        byte data[] = new byte[BUFFER];
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        while ((count = in.read(data, 0, BUFFER)) != -1) {
-            out.write(data);
-        }       
-        InputStream is = new ByteArrayInputStream(out.toByteArray());
-        return is;
-    }
-    
-    /*
-    
-    public static byte[] getByteArrayFromZipInputStream(ZipInputStream zipStream, ZipEntry entry) throws IOException {
-    	
-    	long zipEntrySize = entry.getSize(); 
-    	if (zipEntrySize < 0) {
-    	    zipEntrySize = 0xffffffffl + zipEntrySize;
-    	}
-    	byte[] bytes = entry; 
-    	int i = 0;
-    	while (i < bytes.length) {
-    	    // .read doesn't always fill the buffer we give it.
-    	    // Keep calling it until we get all the bytes for this entry.
-    	    i += zipStream.read(bytes, i, bytes.length - i);
-    	}
-    	return bytes; 
-    } */ 
-    
-    
-    
-    public static ZipInputStream findEntry(ZipInputStream in, String name) throws IOException {
-        ZipEntry entry = null;
-        while ((entry = in.getNextEntry()) != null) {
-            if (entry.getName().contains(name)) {
-                return in;
-            }
-        }
-        return null;
-    }
-    
-        
-    private static void copyStream(InputStream in, OutputStream out,
-            ZipEntry entry) throws IOException {
+
+    private static void copyStream(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024 * 4];
         long count = 0;
         int n = 0;

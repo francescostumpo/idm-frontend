@@ -93,7 +93,7 @@
                         <li class="nav-item">
                             <p class="nav-link active" id="pills-supplier-tab" data-toggle="pill" role="tab"
                                 aria-controls="pills-suppliers" aria-selected="true"
-                                ng-click="makeVisibleTab('pills-supplier', 'pills-challenge')">Caricamenti Fornitori</p>
+                                ng-click="makeVisibleTab('pills-supplier', 'pills-challenge')">Caricamenti Offerenti</p>
                         </li>
                         <li class="nav-item">
                             <p class="nav-link" id="pills-challenge-tab" data-toggle="pill" role="tab"
@@ -108,15 +108,14 @@
                             aria-labelledby="pills-supplier-tab">
                             <div class="row mt-2">
                                 <div class="my-auto  col-lg-10 col-md-10 col-sm-12">
-                                    <p class="my-auto text-size-16 text-secondary ">{{suppliers.length}} FORNITORI
-                                        CARICATI</p>
+                                    <p class="my-auto text-size-16 text-secondary ">{{suppliers.length}} OFFERENTI CARICATI</p>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-12">
                                     <button
                                         ng-click="openModalUploadDocument('uploadDocumentModalNewFornitore','fileselect4','filedrag4','imageUpload4')"
                                         class="btn button-block button-primary-buyer">
                                         <i class="fa fa-plus"></i>
-                                        <span class="ml-2">AGGIUNGI FORNITORE</span>
+                                        <span class="ml-2">AGGIUNGI OFFERENTE</span>
                                     </button>
                                 </div>
                             </div>

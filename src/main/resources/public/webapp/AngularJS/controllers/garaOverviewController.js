@@ -50,8 +50,10 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         for(var i = 0; i < supplier.attachments.length; i++) {
             var document = supplier.attachments[i];
             var conformity = $scope.checkConformityForDocument(document.conformity)
-            if(conformity === 1){
-                notConformDocuments++
+            if(document.tag !== 'no_tag') {
+                if (conformity === 1) {
+                    notConformDocuments++
+                }
             }
         }
         return notConformDocuments;
@@ -250,6 +252,10 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         $scope.supplier.files = []
         console.log('createSupplier -- INIT -- supplier : ', $scope.supplier);
         var promises = []
+        if($scope.bandoGara.sapNumber === 'N/A' || $scope.bandoGara.sapNumber === undefined){
+            mainController.showNotification("bottom", "right", "Numero SAP della gara mancante. Impossibile creare il fornitore", '', 'warning');
+            return
+        }
         for (var i = 0; i < $scope.listOfFiles.length;i++){
             var filePromise = new Promise(resolve =>{
                 var fileBase64 = null;
@@ -274,6 +280,7 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         Promise.all(promises).then(() => {
             $scope.supplier.idTender = $scope.bandoGara.id
             $scope.supplier.sapNumber = $scope.bandoGara.sapNumber
+            $scope.supplier.userId = mainController.getUserId()
             stompClientSupplier.send("/app/createSupplier", {}, JSON.stringify($scope.supplier));
             mainController.showNotification("bottom", "right", "Creazione fornitore in corso", '', 'info');
         });
@@ -311,24 +318,29 @@ snamApp.controller("garaOverviewController", ['$scope', '$http', '$location', '$
         $("embed.document-container").attr("src", $scope.tempDocumentUrl);
     }
 
-    $scope.selectDocument = function (document) {
-        var found = false;
-        for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachment;
-            if(id === $scope.selectedDocuments[i]._idAttachment){
-                found = true;
-                $scope.selectedDocuments.splice(i, 1)
+    $scope.selectedDocument = undefined
+
+    $scope.highlightCard = function(document){
+        //for(var i = 0; i < $scope.selectedDocuments.length ; i++){
+        if($scope.selectedDocument !== undefined) {
+            if (document._idAttachment === $scope.selectedDocument._idAttachment
+                && (document.tag === $scope.selectedDocument.tag || document.tag === "no_tag")) {
+                return {'background-color': '#DCF4F2'}
             }
         }
-        if (!found && $scope.selectedDocuments.length == 0) {
-            $scope.selectedDocuments.push(document)
+        //}
+    }
+
+    $scope.selectDocument = function (document) {
+        if ($scope.selectedDocument == undefined) {
+            $scope.selectedDocument = document
             $scope.show(document, 'show');
-        }else if(!found && !$scope.selectedDocuments.length == 0){
-            $scope.selectedDocuments = [];
-            $scope.selectedDocuments.push(document);
-            $scope.show(document, 'show');
-        }else if(found && $scope.selectedDocuments.length == 0){
+        }else if($scope.selectedDocument._idAttachment == document._idAttachment &&
+            $scope.selectedDocument.tag == document.tag){
             $scope.show(document, 'hide');
+        }else{
+            $scope.selectedDocument = document;
+            $scope.show(document, 'show');
         }
         console.log('selected documents ' , $scope.selectedDocuments)
     }

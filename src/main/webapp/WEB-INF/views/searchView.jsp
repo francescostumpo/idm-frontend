@@ -261,7 +261,7 @@
                                     <div class="modal-span"
                                          style="padding-top: 5%; padding-left: 5.5%; padding-right: 3%; margin-bottom: 10%;">
                                         Sei sicuro di voler eliminare tutte le gare selezionate? Eliminerai anche i documenti caricati
-                                        per ciascun fornitore.
+                                        per ciascun offerente.
                                     </div>
                                     <div class="modal-buttons">
                                         <div class="cbutton">

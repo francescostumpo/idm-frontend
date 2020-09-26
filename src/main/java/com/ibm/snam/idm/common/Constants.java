@@ -14,6 +14,7 @@ public class Constants {
     public static final String ERROR_DELETING_NOTIFICATION = "Errore durante l'eliminazione della notifica";
     public static final String TENDER_ALREADY_EXIST = "TENDER_ALREADY_EXIST";
     public static final String TENDER_CREATED_WITH_MISSING_DATA = "TENDER_CREATED_WITH_MISSING_DATA";
+    public static final String TENDER_NOT_CREATED = "TENDER_NOT_CREATED";
 
     public static final String SUPPLIER_CREATED_WITH_FILE_ERROR = "SUPPLIER_CREATED_WITH_FILE_ERROR";
     public static final String SUPPLIER_CREATED = "SUPPLIER_CREATED";

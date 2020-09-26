@@ -116,7 +116,6 @@ snamApp.controller("bandiListController", ['$scope', '$http', '$location', '$roo
     }
 
     $scope.goToView = function (path, bandoGara) {
-
         sessionStorage.setItem('bandoGara', JSON.stringify(bandoGara));
         sessionStorage.setItem('bandoGaraOggetto', bandoGara.object)
         location.href = path;

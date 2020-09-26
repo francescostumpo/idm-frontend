@@ -56,19 +56,19 @@
 											<i ng-if="notification.status === 'SUPPLIER_CREATED_WITH_FILE_ERROR'" class="alert-color fas fa-exclamation"></i>
 										</div>
 										<div class="col-md-10 col-sm-10 col-lg-10">
-											<span ng-if="notification.status === 'SUPPLIER_CREATED'" style="color: black" class="text-size-16 text-bold">Fornitore creato con successo</span>
-											<span ng-if="notification.status === 'SUPPLIER_CREATED_WITH_FILE_ERROR'" style="color: black" class="text-size-16 text-bold">Fornitore creato con errori nei file</span>
-											<span ng-if="notification.status === 'SUPPLIER_NOT_CREATED'" style="color: black" class="text-size-16 text-bold">Errore nella creazione fornitore</span>
+											<span ng-if="notification.status === 'SUPPLIER_CREATED'" style="color: black" class="text-size-16 text-bold">Offerente creato con successo</span>
+											<span ng-if="notification.status === 'SUPPLIER_CREATED_WITH_FILE_ERROR'" style="color: black" class="text-size-16 text-bold">Offerente creato con errori nei file</span>
+											<span ng-if="notification.status === 'SUPPLIER_NOT_CREATED'" style="color: black" class="text-size-16 text-bold">Errore nella creazione offerente</span>
 										</div>
 										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
 											<i ng-click="deleteNotification(notification)" class="pointer text-primary fas fa-times"></i>
 										</div>
 									</div>
 									<div class="row" ng-if="notification.notificationType === 'tenderCreation'">
-										<div class="my-auto col-md-1 col-sm-1 col-lg-1">
+										<div class="text-center my-auto col-md-1 col-sm-1 col-lg-1">
 											<i ng-if="notification.status === 'TENDER_CREATED'" class="ok-color fas fa-check"></i>
-											<i ng-if="notification.status === 'TENDER_ALREADY_EXIST'" class="danger-color fas fa-times"></i>
-											<i ng-if="notification.status === 'TENDER_NOT_CREATED'" class="danger-color fas fa-times"></i>
+											<i ng-if="notification.status === 'TENDER_ALREADY_EXIST'" class="danger-color fas fa-exclamation"></i>
+											<i ng-if="notification.status === 'TENDER_NOT_CREATED'" class="danger-color fas fa-bug"></i>
 											<i ng-if="notification.status === 'TENDER_CREATED_WITH_MISSING_DATA'" class="alert-color fas fa-exclamation"></i>
 										</div>
 										<div class="col-md-10 col-sm-10 col-lg-10">

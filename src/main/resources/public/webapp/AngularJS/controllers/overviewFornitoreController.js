@@ -9,7 +9,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         {tag : "D_12_11_02_RESPONSABILE_LAVORI",	label : "Nominativi del Responsabile/Direttore dei Lavori e del Coordinatore"},
         {tag : "D_12_11_03_RSPP",	label : "Nominativi del RSPP e del ASPP"},
         {tag : "D_12_11_04_PROVVEDIMENTI_SOSPENSIONE",	label : "Dichiarazione relativa ai provvedimenti di sospensione o interdettivi"},
-        {tag : "D_12_11_05_SOGGETTO_FORMAZIONE",	label : "Impegno a fornire il nominativo del soggetto di cui all’art. 97 del D.Lgs. 81/08"},
+        {tag : "D_12_11_05_SOGGETTO_FORMAZIONE",	label : "Impegno a fornire il nominativo del soggetto di cui all'   art. 97 del D.Lgs. 81/08"},
         {tag : "D_12_11_06_ASPP",	label : "Impegno a nominare un Addetto del Servizio di Prevenzione e Protezione (ASPP)"},
         {tag : "D_12_11_07_ANTINCENDIO",	label : "impegno a nominare gli Addetti Antincendio e Pronto Soccorso"},
         {tag : "D_12_11_08_DPI",	label : "Dichiarazione relativa ai DPI"},
@@ -23,7 +23,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         {tag : "D_12_11_16_DSS",	label : "Impegno a redigere e aggiornare il DSS"},
         {tag : "D_12_11_17_DSSC",	label : "Impegno a sottoscrivere e rispettare il DSSC"},
         {tag : "D_12_11_18_OBBLIGHI_SICUREZZA",	label : "Dichiarazione relativa alle disposizioni in materia di salute e sicurezza"},
-        {tag : "D_12_11_19_SICUREZZA_INQUINAMENTO",	label : "Dichiarazione sulla sicurezza relativa ad ambienti sospetti di inquinamento o confinati"},
+        {tag : "D_12_11_19_SiCUREZZA_INQUINAMENTO",	label : "Dichiarazione sulla sicurezza relativa ad ambienti sospetti di inquinamento o confinati"},
         {tag : "D_12_11_20_DOCUMENTAZIONE_624_1996",	label : "Impegno a fornire la documentazione prevista dal D.Lgs.624/1996"},
         {tag : "D_12_11_21_RADIAZIONI",	label : "Impegno a rispettare i documenti relativi a 'Attivita' in aree EX e radiazioni ionizzanti'"},
         {tag : "D_12_11_22_IDONEITA_DIRETTORE_SORVEGLIANTI",	label : "Dichiarazione sull'idoneita' di 'Direttore Responsabile' e 'Sorveglianti' "},
@@ -310,6 +310,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
             fileToBeUploaded.tenderNumber = $scope.bandoGara.sapNumber
             fileToBeUploaded.supplierName = $scope.fornitoreOverview.name
+            fileToBeUploaded.userId = mainController.getUserId()
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         });
@@ -334,51 +335,44 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         $("embed.document-container").attr("src", $scope.tempDocumentUrl);
     }
 
-    $scope.checkDocument = function (document) {
-        for(i = 0;i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachment;
-            if(id === $scope.selectedDocuments[i]._idAttachment){
-                return true;
+    $scope.highlightCard = function(document){
+        if($scope.selectedDocument !== undefined) {
+            if (document._idAttachment === $scope.selectedDocument._idAttachment
+                && (document.tag === $scope.selectedDocument.tag || document.tag === "no_tag")) {
+                return {'background-color': '#DCF4F2'}
             }
         }
-        return false;
     }
 
     $scope.selectDocument = function (document, optional) {
         if(document._idAttachment != undefined && document._idAttachment != null && document._idAttachment !== "N/A") {
-            var found = false;
-            for (var i = 0; i < $scope.selectedDocuments.length; i++) {
-                var id = document._idAttachment;
-                if (id === $scope.selectedDocuments[i]._idAttachment) {
-                    found = true;
-                    $scope.selectedDocuments.splice(i, 1)
+            if($scope.selectedDocument === undefined){
+                $scope.selectedDocument = document
+                if (optional != true) {
+                    $scope.show(document, 'show');
+                    location.href = '#page-requiredDoc-view';
+                } else {
+                    $scope.showOptionalDocumentFunction(document, 'show');
+                    location.href = '#page-notRequiredDoc-view';
                 }
             }
-            if (!found && $scope.selectedDocuments.length == 0) {
-                $scope.selectedDocuments.push(document);
-                if (optional != true) {
-                    $scope.show(document, 'show');
-                    location.href = '#page-requiredDoc-view';
-                } else {
-                    $scope.showOptionalDocumentFunction(document, 'show');
-                    location.href = '#page-notRequiredDoc-view';
-                }
-            } else if (!found && !$scope.selectedDocuments.length == 0) {
-                $scope.selectedDocuments = [];
-                $scope.selectedDocuments.push(document);
-                if (optional != true) {
-                    $scope.show(document, 'show');
-                    location.href = '#page-requiredDoc-view';
-                } else {
-                    $scope.showOptionalDocumentFunction(document, 'show');
-                    location.href = '#page-notRequiredDoc-view';
-                }
-            } else if (found && $scope.selectedDocuments.length == 0) {
+            else if ($scope.selectedDocument._idAttachment == document._idAttachment &&
+                $scope.selectedDocument.tag == document.tag) {
+                $scope.selectedDocument = undefined
                 if (optional != true) {
                     $scope.show(document, 'hide');
                     location.href = '#page-requiredDoc-view';
                 } else {
                     $scope.showOptionalDocumentFunction(document, 'hide');
+                    location.href = '#page-notRequiredDoc-view';
+                }
+            } else {
+                $scope.selectedDocument = document
+                if (optional != true) {
+                    $scope.show(document, 'show');
+                    location.href = '#page-requiredDoc-view';
+                } else {
+                    $scope.showOptionalDocumentFunction(document, 'show');
                     location.href = '#page-notRequiredDoc-view';
                 }
             }

@@ -47,10 +47,10 @@ mainController = {
 			icon = 'fas fa-check'
 		}
 		else if(type === 'danger'){
-			icon = "fas fa-times"
+			icon = "fas fa-bug"
 		}
 		else if(type === 'warning'){
-			icon = "fas fa-exclamation-triangle"
+			icon = "fas fa-exclamation"
 		}
 		$.notify({
 			icon: icon,

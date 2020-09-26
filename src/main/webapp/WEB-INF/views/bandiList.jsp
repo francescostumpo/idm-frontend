@@ -45,30 +45,27 @@
 
                     <div class="card mt-2 no-border">
                         <div class="row card-body background-color-application justify-content-center">
-                            <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
-
-                            </div>
-                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'cig')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'cig')" class="col-lg-2 col-md-2 col-sm-2 text-size-16 no-select pointer">
                                 N. GARA
                                 <i ng-if="sort.cig === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.cig === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
-                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'object')" class="col-lg-3 col-md-3 col-sm-3 text-size-14 no-select pointer">
+                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'object')" class="col-lg-4 col-md-4 col-sm-4 text-size-16 no-select pointer">
                                 OGGETTO
                                 <i ng-if="sort.object === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.object === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
-                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'company')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'company')" class="col-lg-2 col-md-2 col-sm-2 text-size-16 no-select pointer">
                                 SOCIET&Agrave;
                                 <i ng-if="sort.company === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.company === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
-                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'endDate')" class="col-lg-2 col-md-2 col-sm-2 text-size-14 no-select pointer">
+                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'endDate')" class="col-lg-2 col-md-2 col-sm-2 text-size-16 no-select pointer">
                                 SCADENZA
                                 <i ng-if="sort.endDate === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.endDate === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
                             </div>
-                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'fornitori')" class="col-lg-1 col-md-1 col-sm-1 text-size-14 no-select pointer">
+                            <div ng-click="sortCardsByColumnName(bandiGaraList, 'fornitori')" class="col-lg-1 col-md-1 col-sm-1 text-size-16 no-select pointer">
                                 N. OFFERENTI
                                 <i ng-if="sort.fornitori === 'desc'" class="fas fa-sort-down hoverable sort-chev"></i>
                                 <i ng-if="sort.fornitori === 'asc'" class="fas fa-sort-up hoverable sort-chev"></i>
@@ -81,22 +78,19 @@
                     <div class="card" ng-repeat="bandoGara in bandiGaraList">
                         <div ng-style="highlightCard(bandoGara)" class="card-body">
                             <div class="row">
-                                <div class="text-center col-lg-1 col-md-1 col-sm-1 text-size-14">
-                                    <input ng-click="selectBando(bandoGara)" style="cursor: pointer" type="checkbox"/>
-                                </div>
-                                <div ng-click="goToView('/garaOverview', bandoGara)"  class="col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
+                                <div ng-click="goToView('/garaOverview', bandoGara)"  class="col-lg-2 col-md-2 col-sm-2 text-size-16 pointer no-select ">
                                     {{bandoGara.sapNumber}}
                                 </div>
-                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-3 col-md-3 col-sm-3 text-size-14 pointer no-select">
+                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-4 col-md-4 col-sm-4 text-size-16 pointer no-select">
                                     {{bandoGara.object}}
                                 </div>
-                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
+                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-2 col-md-2 col-sm-2 text-size-16 pointer no-select ">
                                     {{bandoGara.company}}
                                 </div>
-                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-2 col-md-2 col-sm-2 text-size-14 pointer no-select ">
+                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-2 col-md-2 col-sm-2 text-size-16 pointer no-select ">
                                     {{bandoGara.endDate | date: 'dd/MM/yyyy'}}
                                 </div>
-                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-1 col-md-1 col-sm-1 text-size-14 pointer no-select ">
+                                <div ng-click="goToView('/garaOverview', bandoGara)" class="col-lg-1 col-md-1 col-sm-1 text-size-16 pointer no-select ">
                                     {{bandoGara.fornitori}}
                                 </div>
                                 <div class="text-center col-lg-1 col-md-1 col-sm-1 text-size-14 pointer">

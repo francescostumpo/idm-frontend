@@ -3,6 +3,8 @@ package com.ibm.snam.idm.web_socket;
 import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
+import com.ibm.snam.idm.model.UserNotification;
+import com.ibm.snam.idm.service.UserNotificationService;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
 import com.ibm.snam.idm.util.RarHandler;
 import com.ibm.snam.idm.util.SevenZipHandler;
@@ -46,9 +48,13 @@ public class CreateSupplierController {
     @Autowired
     UploadFileService uploadFileService;
 
+    @Autowired
+    UserNotificationService userNotificationService;
+
     @MessageMapping("/createSupplier")
     @SendToUser("/queue/reply/supplier")
     public String createSupplier(@Payload  JSONObject supplier){
+        logger.info("createSupplier -- INIT --");
         JSONObject response = new JSONObject();
         List<Future<UploadResult>> uploadResults = new ArrayList<>();
         try{
@@ -60,6 +66,7 @@ public class CreateSupplierController {
             }
             JSONObject savedSupplier = supplierCreationResponse.getJSONObject("supplier");
             supplier.put("idSupplier", savedSupplier.getString("id"));
+            supplier.put("idTender", supplier.getString("idTender"));
             List<String> failedDocuments = new ArrayList<>();
             for(int i = 0 ; i < files.size() ; i++){
                 JSONObject file = files.getJSONObject(i);
@@ -109,7 +116,6 @@ public class CreateSupplierController {
                     uploadResults.add(uploadResult);
                 }
             }
-
             for (Future<UploadResult> uploadResultFuture: uploadResults) {
                 UploadResult uploadResult = null;
                 try {
@@ -122,7 +128,6 @@ public class CreateSupplierController {
                     failedDocuments.add(uploadResult.getFilename());
                 }
             }
-
             savedSupplier.put("idTender", supplier.getString("idTender"));
             response.put("supplier", savedSupplier);
             if (failedDocuments.isEmpty()){
@@ -135,14 +140,32 @@ public class CreateSupplierController {
                 response.put("message", message);
                 response.put("creationStatus", Constants.SUPPLIER_CREATED_WITH_FILE_ERROR);
             }
+            createNotificationForSupplier(response.getJSONObject("supplier"), "supplierCreation", response.getString("creationStatus"), supplier.getString("userId"));
             return response.toString();
-
         }catch (Exception e){
             logger.error(e.getMessage());
             response.put("status", Constants.HTTP_STATUS_ERROR);
             response.put("message", Constants.ERROR_CREATING_SUPPLIER);
+            createNotificationForSupplier(null, "supplierCreation", response.getString("creationStatus"), supplier.getString("userId"));
             return response.toString();
         }
+    }
+
+    private void createNotificationForSupplier(JSONObject supplier, String notificationType, String statusCreation, String userId){
+        logger.info("createNotificationForSupplier -- INIT -- user : " + userId);
+        JSONObject notification = new JSONObject();
+        notification.put("userId", userId);
+        notification.put("notificationType", notificationType);
+        notification.put("status", statusCreation);
+        if(supplier != null){
+            notification.put("tenderNumber", supplier.getString("tenderSapNumber"));
+            notification.put("idSupplier", supplier.getString("id"));
+            notification.put("supplierName", supplier.getString("name"));
+            notification.put("idTender", supplier.getString("idTender"));
+        }
+        UserNotification userNotification = userNotificationService.createNotification(notification);
+        logger.info("created notification : " + userNotification);
+        logger.info("createNotificationForSupplier -- END -- ");
     }
 
 }
