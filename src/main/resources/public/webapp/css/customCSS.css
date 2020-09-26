@@ -1967,3 +1967,15 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
 .tooltip-custom:hover .tooltiptext {
     visibility: visible;
 }
+
+.conforme-selected {
+    background: #004B9C; 
+    border: 1px solid #004AA2; 
+    color: #FFFFFF;
+}
+
+.richiesto-selected {
+    background: #004B9C; 
+    border: 1px solid #004AA2; 
+    color: #FFFFFF;
+}

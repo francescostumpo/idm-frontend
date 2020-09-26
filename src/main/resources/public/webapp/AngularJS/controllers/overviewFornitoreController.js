@@ -1,8 +1,23 @@
-snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location', '$rootScope', '$timeout', function($scope, $http, $location,$rootScope, $timeout) {
+snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location', '$rootScope', '$timeout', function ($scope, $http, $location, $rootScope, $timeout) {
     console.log("[INFO] Hello World from overviewFornitoreController");
 
     $scope.bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
     $scope.fornitoreOverview = JSON.parse(sessionStorage.getItem("fornitoreOverview"));
+    $scope.fornitoreOverviewName = sessionStorage.getItem("fornitoreOverviewName");
+
+    $scope.documentFeedback = {};
+    $scope.selectedTags = [];
+
+
+    // Toggle bottoni modal "Segnala"
+    $scope.modalIsDocConforme = false;
+    $scope.modalIsDocRichiesto = false;
+
+    // Documento selezionato nella modal "Segnala"
+    $scope.documentSelectedInModal;
+    $scope.tagDocumentSelectedInModal;
+    $scope.docInitialTag;
+    $scope.documentFeedbackComment = "";
 
     $scope.labelsAssociatedToTag = [
         {tag : "D_12_11_01_RSPP", label : "Nominativo del RSPP"},
@@ -74,31 +89,31 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         { tag : "D_13_02_DESCRIZIONE_ATTIVITA", label : "Descrizione attivita'"},
         { tag : "D_13_03_VARIANTI", label : "Varianti formulate dall'offerente"},
 
-        { tag : "D_13_04_01_REQUISITI_PARTECIPAZIONE", label : "Dichiarazione possesso dei requisiti di partecipazione"},
-        { tag : "D_13_04_02_MEZZI", label : "Dichiarazione dei mezzi e attrezzature"},
-        { tag : "D_13_04_03_FIRMA_LEGALE_RAPPRESENTANTE", label : "Dichiarazione firma legale rappresentante"},
-        { tag : "D_13_05_NOMINATIVI_FUNZIONI", label : "Nominativi funzioni di interesse"},
-        { tag : "D_13_07_01_ATTIVITA_SUBAPPALTO", label : "Attivita' subappalto"},
-        { tag : "D_13_07_02_IMPORTO_SUBAPPALTO", label : "Importo subappalto"},
-        { tag : "D_13_08_ESCLUSIONE_COOPERAZIONE", label : "Nominativi, prestazioni e assenza motivi esclusione in caso di cooperazione"},
-        { tag : "M_22_COSTI_CHIUSI", label : "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti chiusi"},
-        { tag : "M_10_IDONEITA_TECNICA", label : "Autocertificazione idoneita' tecnica"},
-        { tag : "M_21_PROVENIENZA_PRODOTTI", label : "Dichiarazione provenienza prodotti"},
+        { tag: "D_13_04_01_REQUISITI_PARTECIPAZIONE", label: "Dichiarazione possesso dei requisiti di partecipazione" },
+        { tag: "D_13_04_02_MEZZI", label: "Dichiarazione dei mezzi e attrezzature" },
+        { tag: "D_13_04_03_FIRMA_LEGALE_RAPPRESENTANTE", label: "Dichiarazione firma legale rappresentante" },
+        { tag: "D_13_05_NOMINATIVI_FUNZIONI", label: "Nominativi funzioni di interesse" },
+        { tag: "D_13_07_01_ATTIVITA_SUBAPPALTO", label: "Attivita' subappalto" },
+        { tag: "D_13_07_02_IMPORTO_SUBAPPALTO", label: "Importo subappalto" },
+        { tag: "D_13_08_ESCLUSIONE_COOPERAZIONE", label: "Nominativi, prestazioni e assenza motivi esclusione in caso di cooperazione" },
+        { tag: "M_22_COSTI_CHIUSI", label: "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti chiusi" },
+        { tag: "M_10_IDONEITA_TECNICA", label: "Autocertificazione idoneita' tecnica" },
+        { tag: "M_21_PROVENIENZA_PRODOTTI", label: "Dichiarazione provenienza prodotti" },
 
-        { tag : "M_23_COSTI_APERTI", label : "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti aperti"},
-        { tag : "M_24_CONFERMA_COSTI", label : "Dichiarazione di conferma/integrazione costi già dichiariati"},
+        { tag: "M_23_COSTI_APERTI", label: "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti aperti" },
+        { tag: "M_24_CONFERMA_COSTI", label: "Dichiarazione di conferma/integrazione costi già dichiariati" },
     ];
 
     $scope.requiredAttachments = [];
     $scope.notCompliants = 0;
     $scope.compliants = 0;
-    $scope.requiredAttachmentsCommon.getFromParent = function(){
+    $scope.requiredAttachmentsCommon.getFromParent = function () {
         console.log('requiredAttachmentsCommon.getFromParent -- init --')
         var url = mainController.getHost() + '/supplier/getSupplierById/' + $scope.fornitoreOverview.id
         mainController.startProgressIndicator('#loading')
         $http.get(url).then(function (response) {
-            console.log('response from url ', url ,' : ', response)
-            if(response.data.status === 200){
+            console.log('response from url ', url, ' : ', response)
+            if (response.data.status === 200) {
                 $scope.compliants = 0
                 $scope.notCompliants = 0
                 $scope.fornitoreOverview = response.data.supplier
@@ -110,15 +125,15 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
     $scope.notRequiredAttachments = [];
 
-    $scope.initProgressBar = function(documents){
+    $scope.initProgressBar = function (documents) {
         var required = $scope.requiredAttachments.length;
-        var percConform = Math.floor(documents.filter(d => d.conformity === 0 || d.conformity === 2).length /required * 100);
-        var percNotConform =  Math.floor(documents.filter(d =>  d.conformity === 1).length / required * 100);
+        var percConform = Math.floor(documents.filter(d => d.conformity === 0 || d.conformity === 2).length / required * 100);
+        var percNotConform = Math.floor(documents.filter(d => d.conformity === 1).length / required * 100);
         $(".pg-presence").css('width', percConform + '%').attr('aria-valuenow', percConform);
         $(".pg-check").css('width', percNotConform + '%').attr('aria-valuenow', percNotConform);
     }
 
-    $scope.getRequiredAttachments = function() {
+    $scope.getRequiredAttachments = function () {
         $scope.requiredAttachments = []
         $scope.documentCheckList = []
         $scope.notRequiredAttachments = []
@@ -224,18 +239,91 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         $('#editSupplierModal').modal()
     }
 
-    $scope.editSupplier = function(){
+    $scope.openFeedbackModal = function (document) {
+        $scope.selectedTags = [];
+        console.log('openModalSendFeedback -- init --')
+        $scope.supplierModified = {};
+        $scope.documentFeedbackComment = "";
+        $scope.supplierSelected = $scope.fornitoreOverview
+
+        $scope.documentSelectedInModal = document;
+
+        let elemWithLabelOfTag;
+
+        try{
+            elemWithLabelOfTag = $scope.labelsAssociatedToTag.filter(item => { return item.tag == document.tag })
+        }
+        catch(e) {
+            console.error("Doc not found in list of documents");
+        }
+
+        if(elemWithLabelOfTag.length == 0) {
+            $scope.selectedTags = [];
+            $scope.initialTag = "no_tag";
+        }
+        else if (elemWithLabelOfTag && !$scope.containsTagArraySelectedTag(elemWithLabelOfTag[0])) {
+            $scope.docInitialTag = elemWithLabelOfTag[0].label;
+            $scope.selectedTags.push(elemWithLabelOfTag[0].label);
+        }
+
+
+        if($scope.isDocConforme(document)) {
+            $scope.modalIsDocConforme = true;
+            if(!$scope.checkElementInArray($("#button-doc-conforme").attr("class").split(/\s+/), "conforme-selected")){
+                $("#button-doc-conforme").addClass("conforme-selected");
+                $("#button-doc-non-conforme").removeClass("conforme-selected");
+            }
+            if($scope.checkElementInArray($("#button-doc-non-conforme").attr("class").split(/\s+/), "conforme-selected")){
+                $("#button-doc-non-conforme").removeClass("conforme-selected");
+            }
+        }
+        else {
+            $scope.modalIsDocConforme = false;
+            if(!$scope.checkElementInArray($("#button-doc-non-conforme").attr("class").split(/\s+/), "conforme-selected")){
+                $("#button-doc-conforme").removeClass("conforme-selected");
+                $("#button-doc-non-conforme").addClass("conforme-selected");
+            }
+            if($scope.checkElementInArray($("#button-doc-conforme").attr("class").split(/\s+/), "conforme-selected")){
+                $("#button-doc-conforme").removeClass("conforme-selected");
+            }
+        }
+
+
+
+        if($scope.isDocRichiesto(document)) {
+            $scope.modalIsDocRichiesto = true;
+            if(!$scope.checkElementInArray($("#button-doc-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
+                $("#button-doc-richiesto").addClass("richiesto-selected");
+                $("#button-doc-non-richiesto").removeClass("richiesto-selected");
+            }
+        }
+        else {
+            $scope.modalIsDocRichiesto = false;
+            if($scope.checkElementInArray($("#button-doc-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
+                $("#button-doc-richiesto").removeClass("richiesto-selected");
+                $("#button-doc-non-richiesto").addClass("richiesto-selected");
+            }
+            if(!$scope.checkElementInArray($("#button-doc-non-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
+                $("#button-doc-non-richiesto").addClass("richiesto-selected");
+            }
+        }
+
+        $('#sendFeedbackModal').modal({ scope: $scope });
+
+    }
+
+    $scope.editSupplier = function () {
         var url = mainController.getHost() + '/supplier/editSupplier'
         var newSupplier = {
-            "id" : $scope.supplierSelected.id,
-            "name" : $scope.supplierModified.name
+            "id": $scope.supplierSelected.id,
+            "name": $scope.supplierModified.name
         }
-        $http.post(url, newSupplier).then(function(response){
-            console.log('response from url ', url ,' : ', response )
-            if(response.data.status === 200){
+        $http.post(url, newSupplier).then(function (response) {
+            console.log('response from url ', url, ' : ', response)
+            if (response.data.status === 200) {
                 $scope.fornitoreOverview = response.data.supplier
             }
-            else{
+            else {
                 mainController.showNotification("bottom", "right", response.data.message, '', 'danger');
             }
         })
@@ -310,22 +398,16 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
             fileToBeUploaded.tenderNumber = $scope.bandoGara.sapNumber
             fileToBeUploaded.supplierName = $scope.fornitoreOverview.name
-            fileToBeUploaded.userId = mainController.getUserId()
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         });
     }
 
-    console.log("$scope.documents: ", $scope.documents);
-
 
     $scope.showDocument = false;
     $scope.showOptionalDocument = false;
 
-    console.log("$scope.showOptionalDocument: ", $scope.showOptionalDocument);
-
-
-    $scope.setDocument = function(data) {
+    $scope.setDocument = function (data) {
         var file = new File([data], 'document.pdf', { type: 'application/pdf' });
         if ($scope.tempDocumentUrl) {
             window.URL.revokeObjectURL($scope.tempDocumentUrl)
@@ -342,6 +424,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 return {'background-color': '#DCF4F2'}
             }
         }
+        return false;
     }
 
     $scope.selectDocument = function (document, optional) {
@@ -413,6 +496,99 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
 
+    $scope.toggleButtonConforme = function () {
+        document.getElementById("button-doc-conforme").classList.toggle("conforme-selected");
+        document.getElementById("button-doc-non-conforme").classList.toggle("conforme-selected");
+        $scope.modalIsDocConforme = !$scope.modalIsDocConforme;
+        console.log("$scope.modalIsDocConforme after toggle: ", $scope.modalIsDocConforme);
+    }
+
+    $scope.toggleButtonRichiesto = function () {
+        document.getElementById("button-doc-richiesto").classList.toggle("richiesto-selected");
+        document.getElementById("button-doc-non-richiesto").classList.toggle("richiesto-selected");
+        $scope.modalIsDocRichiesto = !$scope.modalIsDocRichiesto;
+    }
+
+
+    $scope.changeButtonPlaceholder = function (label) {
+        document.getElementById("span-select-tag").innerHTML = label;
+    }
+
+    $scope.addToSelectedTags = function () {
+        let selectedTag = document.getElementById("span-select-tag").innerHTML;
+        if (selectedTag == "" || selectedTag.trim().startsWith("Scegli")) return;
+        if ($scope.containsTagArraySelectedTag(selectedTag)) return;
+        $scope.selectedTags.push(selectedTag);
+    }
+
+    $scope.deleteFromSelectedTags = function (tag) {
+        $scope.selectedTags = $scope.selectedTags.filter(function (item) {
+            return item !== tag
+        });
+    }
+
+    $scope.containsTagArraySelectedTag = function (tag) {
+        if ($scope.selectedTags.indexOf(tag) == -1) return false;
+        return true;
+    }
+
+    $scope.isDocConforme = function (document) {
+        return document.conformity == 2;
+    }
+
+    $scope.isDocRichiesto = function (document) {
+        let documentTag = document.tag;
+        let bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
+        if (document.tag == "no_tag") return false;
+        if (bandoGara.requiredAttachments.indexOf(documentTag) == -1) return false;
+        return true;
+    }
+
+    $scope.sendFeedback = function () {
+
+        var url = mainController.getHost() + '/feedback/send';
+
+        let feedback = { }
+        feedback.userId = mainController.getUserId();
+        feedback.attachmentId = $scope.documentSelectedInModal._idAttachment;
+        feedback.supplierId = JSON.parse(sessionStorage.getItem("fornitoreOverview")).id;
+        feedback.supplierName = sessionStorage.getItem("fornitoreOverviewName");
+        feedback.tenderId = JSON.parse(sessionStorage.getItem("bandoGara")).id;
+        feedback.tenderSapNumber = JSON.parse(sessionStorage.getItem("bandoGara")).sapNumber;
+
+        let userFeedback = {
+            initialTag: $scope.docInitialTag,
+            tags: $scope.selectedTags,
+            isDocConforme: $scope.modalIsDocConforme,
+            isDocRichiesto: $scope.modalIsDocRichiesto,
+            comment: $("#comment-box").val()
+        }
+
+        feedback.userFeedback = userFeedback;
+
+        console.log("Feedback to be sent is: ", feedback);
+
+        $http.post(url, feedback).then(function(response){
+            console.log('response from url ', url ,' : ', response )
+            if(response.data.status === 200){
+                mainController.showNotification("bottom", "right", response.data.message, '', 'success');
+            }
+            else{
+                mainController.showNotification("bottom", "right", response.data.message, '', 'danger');
+            }
+        })
+
+    }
+
+    $scope.getTitleDocToShowInFeedbackModal = function () {
+        if($scope.documentSelectedInModal == ""){
+
+        }
+        else return $scope.documentSelectedInModal;
+    }
+    $scope.checkElementInArray = function (array, element) {
+        array.indexOf(element) == -1 ? false : true;
+    }
 
     mainController.stopProgressIndicator('#loading');
 
