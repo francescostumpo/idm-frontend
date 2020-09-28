@@ -202,6 +202,10 @@
                                                     <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                     <span class="ml-2">Elimina</span>
                                                 </p>
+                                                <p ng-click="openFeedbackModal(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                    <i class="fa fa-exclamation-circle fa-fw fa-lg pointer"></i>
+                                                    <span class="ml-2">Segnala</span>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -280,6 +284,10 @@
                                                         <p ng-click="deleteDocument(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
                                                             <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                             <span class="ml-2">Elimina</span>
+                                                        </p>
+                                                        <p ng-click="openFeedbackModal(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                            <i class="fa fa-exclamation-circle fa-fw fa-lg pointer"></i>
+                                                            <span class="ml-2">Segnala</span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -470,6 +478,10 @@
                                                 <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                 <span class="ml-2">Elimina</span>
                                             </p>
+                                            <p ng-click="openFeedbackModal(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                <i class="fa fa-exclamation-circle fa-fw fa-lg pointer"></i>
+                                                <span class="ml-2">Segnala</span>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -522,6 +534,10 @@
                                                     <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                     <span class="ml-2">Elimina</span>
                                                 </p>
+                                                <p ng-click="openFeedbackModal(document)" class="text-primary dropdown-item no-margin-bottom" style="cursor: pointer;">
+                                                    <i class="fa fa-exclamation-circle fa-fw fa-lg pointer"></i>
+                                                    <span class="ml-2">Segnala</span>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -569,6 +585,7 @@
             <i class="fas fa-angle-up"></i>
         </a>
         <jsp:include page="subviews/modal/uploadDocumentModalOverviewFornitore.jsp"></jsp:include>
+        <jsp:include page="subviews/modal/sendFeedbackModalOverviewFornitore.jsp"></jsp:include>
         <jsp:include page="subviews/modal/editSupplierModal.jsp"></jsp:include>
     </div>
 
