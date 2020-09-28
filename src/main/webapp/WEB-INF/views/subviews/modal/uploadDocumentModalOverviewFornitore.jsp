@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <div class="mt-3">
-                    <span class="text-medium-size-custom" style="padding-left: 12%;">Carica documenti*</span>
+                    <span class="text-medium-size-custom">Carica documenti*</span>
                 </div>
                 <div class="mt-3">
                     <span>L'analisi dei documenti potrebbe richiedere tempo. Riceverai una notifica al termine dell'operazione. Puoi caricare file in formato .pdf, .docx e cartelle compresse (dimensione massima 16 MB)</span>

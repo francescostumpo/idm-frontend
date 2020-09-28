@@ -128,12 +128,12 @@ public class UpdateFilesController {
                 UploadResult uploadResult = null;
                 try {
                     uploadResult = uploadResultFuture.get();
+                    if (uploadResult.isFailed()){
+                        failedDocuments.add(uploadResult.getFilename());
+                    }
                 } catch (InterruptedException | ExecutionException e) {
                     logger.error(e.getMessage());
                     e.printStackTrace();
-                }
-                if (uploadResult.isFailed()){
-                    failedDocuments.add(uploadResult.getFilename());
                 }
             }
             fillResponse(response, updated, updateFiles, failedDocuments);
