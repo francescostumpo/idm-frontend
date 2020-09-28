@@ -311,14 +311,14 @@
                                                         <div class="col-lg-3 col-md-3 col-sm-12">
                                                             <div class="form-group document-viewer-br">
                                                                 <label class="label-item">DATA CARICAMENTO</label>
-                                                                <p>{{selectedDocuments[0].uploadedOn.time | date: 'dd/MM/yyyy' }}
+                                                                <p>{{selectedDocument.uploadedOn.time | date: 'dd/MM/yyyy' }}
                                                                 </p>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="label-item">NOME FILE</label>
-                                                                <p>{{selectedDocuments[0].fileName}}</p>
+                                                                <p>{{selectedDocument.fileName}}</p>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-1 col-md-1 col-sm-12">

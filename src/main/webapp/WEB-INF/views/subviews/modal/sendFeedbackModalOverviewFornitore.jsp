@@ -114,20 +114,17 @@
             <div class="modal-footer">
                 <div class="col-md-12 row">
                     <div class="text-center col-md-6">
-                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer"
-                            style="float: left; border: 2px solid #004B9C; width: 65%; border-radius: 4px; border-radius: 4px;">
-                            <span
-                                style="font-family: Ubuntu; font-size: 16px; color: #004B9C; letter-spacing: 0.43px; text-align: center;">
-                                ANNULLA </span>
+                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer">
+                            <span>
+                                ANNULLA
+                            </span>
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button ng-click="sendFeedback()" type="button" class="btn button-secondary-buyer"
-                            style="background: #004B9C; width: 65%; border-radius: 4px; border-radius: 4px;"
-                            data-dismiss="modal">
-                            <span
-                                style="font-family: Ubuntu; font-weight: bold; font-size: 16px; color: #FFFFFF; letter-spacing: 0.43px; text-align: center;">
-                                INVIA </span>
+                        <button ng-click="sendFeedback()" type="button" class="btn button-secondary-buyer" data-dismiss="modal">
+                            <span>
+                                INVIA
+                            </span>
                         </button>
                     </div>
                 </div>
