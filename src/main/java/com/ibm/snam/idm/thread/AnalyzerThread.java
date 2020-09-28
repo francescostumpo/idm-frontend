@@ -22,7 +22,7 @@ public class AnalyzerThread implements Runnable {
         logger.info("Starting thread for analyzer call... Document : " + document.getOriginalFilename());
         try {
             responseFromAnalyzer = analyzerMicroservice.analyzeFile(document);
-            logger.info("response from document : " + document.getOriginalFilename() + " : " + responseFromAnalyzer);
+            //logger.info("response from document : " + document.getOriginalFilename() + " : " + responseFromAnalyzer);
         }catch (Exception e){
             e.printStackTrace();
         }

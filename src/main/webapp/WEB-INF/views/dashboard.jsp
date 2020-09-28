@@ -22,10 +22,12 @@
     <div id="loading" style="background-color: white">
         <img id="loading-image" src="webapp/img/spinner-gif.gif" height="25%" />
     </div>
-    <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed"
-        class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow">
-        <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
-    </nav>
+    <div>
+        <nav id="dashboardNavbar" ng-if="!sidebarIsClosed" ng-controller="navbarController" ng-if="!sidebarIsClosed"
+            class="navbar navbar-expand navbar-light bg-white topbar navbar-background-snam shadow">
+            <jsp:include page="subviews/dashboardNavbar.jsp"></jsp:include>
+        </nav>
+    </div>
     <jsp:include page="subviews/dashboardSidebar.jsp"></jsp:include>
 
 
@@ -37,7 +39,7 @@
                 </div>-->
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-3">
-                        <div class="text-size-28 mb-0">Ciao Claudia, ecco le tua gare recenti</div>
+                        <div class="text-size-28 mb-0">Ciao {{userName}}, ecco alcune gare</div>
                         <a ng-click="goToViewNavigation('/bandiList')"
                             style="cursor:pointer;font-weight: bold; text-decoration: underline"
                             class="text-primary d-sm-inline-block">Vedi tutte</a>
@@ -53,16 +55,13 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_0">
+                                    <div class="mt-3 col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_0">
                                         <div ng-click="goToGaraOverview(tender)" class="pointer card shadow">
                                             <div class="card-body">
                                                 <div class="text-size-18 font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
                                                 </div>
-                                                <div class="text-size-16 font-weight-bold mt-2 text-secondary">
-                                                    {{tender.company}}
-                                                </div>
-                                                <div class="font-weight-bold mt-2" style="color: black; min-height: 80px; font-size: 16px">
+                                                <div class="overflow-hidden font-weight-bold mt-2" style="color: black; max-height: 80px; min-height: 80px; font-size: 16px">
                                                     <span style="font-weight: 400;">
                                                         {{processName(tender.object,120, 120)}}
                                                     </span>
@@ -88,17 +87,14 @@
                             </div>
                             <div ng-if="recentTenders_wip_1.length > 0" class="carousel-item">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_1">
+                                    <div class="mt-3 col-md-3 col-sm-12 col-lg-3" ng-repeat="tender in recentTenders_wip_1">
                                         <div ng-click="goToGaraOverview(tender)" class="pointer card shadow">
                                             <div class="card-body">
                                                 <div style="font-size: 18px" class="font-weight-bold text-primary">
                                                     {{tender.sapNumber}}
                                                 </div>
-                                                <div style="font-size: 16px" class="font-weight-bold mt-2 text-secondary">
-                                                    {{tender.company}}
-                                                </div>
-                                                <div class="font-weight-bold mt-2"
-                                                     style="color: black; min-height: 80px; font-size: 16px">
+                                                <div class="overflow-hidden flex-long-text font-weight-bold mt-2"
+                                                     style="color: black; max-height: 80px; min-height: 80px; font-size: 16px">
                                                     <span style="font-weight: 400;">
                                                         {{processName(tender.object,120, 120)}}
                                                     </span>
@@ -133,20 +129,20 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <ol ng-show="recentTenders.length > 0" class="carousel-indicators">
+                        <ol ng-show="recentTenders.length > 4" class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators_recent_tenders" data-slide-to="0" class="dot active"></li>
                             <li ng-show="recentTenders_wip_1.length > 0" data-target="#carouselExampleIndicators_recent_tenders" data-slide-to="1" class="dot"></li>
                         </ol>
                     </div>
 
                     <!-- Calendar -->
-                    <div class="card">
+                    <div class="card mt-4">
                         <div style="background-color: white" class="d-sm-flex align-items-center justify-content-between mt-1 card-header">
-                            <div style="font-size: 28px" class="mb-0">
+                            <div class="text-size-24 text-bold mb-0">
                                 Prossime scadenze
                             </div>
                             <span ng-show="!showCalendarCard" class="text-bold text-alert-color">
-                                <span ng-if="events.length > 0">
+                                <span class="pointer" ng-click="openFirstDateEvent(firstEndDate, true)" ng-if="events.length > 0">
                                     {{firstEndDate.endDateMoment}} - Gara in scadenza
                                 </span>
                             </span>
@@ -196,7 +192,7 @@
                                                     <span ng-if="tenderEvent.extendedProps.length === 1" class="ml-1 text-size-16 text-bold">Gara in scadenza</span>
                                                     <span ng-if="tenderEvent.extendedProps.length > 1" class="ml-1 text-size-16 text-bold">Gare in scadenza</span>
                                                 </div>
-                                                <div ng-repeat="tender in tenderEvent.extendedProps">
+                                                <div class="pointer" ng-click="goToGaraOverview(tender)" ng-repeat="tender in tenderEvent.extendedProps">
                                                     <div class="text-secondary text-size-14 text-bold mt-2">
                                                         {{tender.sapNumber}}
                                                     </div>
@@ -205,10 +201,9 @@
                                                             {{tender.object}}
                                                         </div>
                                                         <div class="col-md-1 col-sm-1 col-lg-1">
-                                                            <i ng-click="goToGaraOverview(tender)" class="float-right pointer text-primary fas fa-chevron-right"></i>
+                                                            <i  class="float-right pointer text-primary fas fa-chevron-right"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="break mt-3 mb-3"></div>
                                                 </div>
                                             </div>
                                         </div>

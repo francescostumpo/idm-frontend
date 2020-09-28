@@ -3,6 +3,8 @@ package com.ibm.snam.idm.web_socket;
 import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
+import com.ibm.snam.idm.model.UserNotification;
+import com.ibm.snam.idm.service.UserNotificationService;
 import com.ibm.snam.idm.thread.AnalyzerThread;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
 import net.sf.json.JSON;
@@ -32,6 +34,9 @@ public class CreateTenderController {
 
     @Autowired
     BackendMicroservice backendMicroservice;
+
+    @Autowired
+    UserNotificationService userNotificationService;
 
     @MessageMapping("/createTender")
     @SendToUser("/queue/reply")
@@ -77,6 +82,8 @@ public class CreateTenderController {
                 response.put("status", Constants.HTTP_STATUS_OK);
                 response.put("message", Constants.TENDER_ALREADY_PRESENT);
                 response.put("creationStatus", responseFromBackendCreateTender.getString("creationStatus"));
+                response.put("tender", responseFromBackendCreateTender.getString("tender"));
+                createNotificationForTender(responseFromBackendCreateTender, request.getString("userId"),responseFromBackendCreateTender.getString("creationStatus") );
                 return response.toString();
             }
             JSONObject responseFromBackendUpdateRequiredAttachments = updateRequiredAttachmentsOnBackend(responseFromBackendCreateTender, request, responseFromAnalyzerRdo);
@@ -87,6 +94,7 @@ public class CreateTenderController {
                 logger.info("Tender created with missing data");
                 responseFromBackendCreateTender.replace("message", Constants.MESSAGE_TENDER_CREATED_WITH_MISSING_DATA);
             }
+            createNotificationForTender(responseFromBackendCreateTender, request.getString("userId"),responseFromBackendCreateTender.getString("creationStatus") );
             logger.info("Returning message");
             return responseFromBackendCreateTender.toString();
         } catch (Exception e) {
@@ -94,8 +102,26 @@ public class CreateTenderController {
             JSONObject response = new JSONObject();
             response.put("status", Constants.HTTP_STATUS_ERROR);
             response.put("message", Constants.ERROR_CREATING_TENDER);
+            createNotificationForTender(new JSONObject(), request.getString("userId"), Constants.TENDER_NOT_CREATED);
             return response.toString();
         }
+    }
+
+    private void createNotificationForTender(JSONObject responseFromBackendCreateTender, String userId, String creationStatus){
+        logger.info("createNotificationForTender -- INIT -- userId : " +userId);
+        JSONObject notification = new JSONObject();
+        notification.put("userId", userId);
+        notification.put("notificationType", "tenderCreation");
+        notification.put("status", creationStatus);
+        if(notification.has("idTender")) {
+            notification.put("idTender", responseFromBackendCreateTender.getString("idTender"));
+        }
+        if(notification.has("tenderNumber")) {
+            notification.put("tenderNumber", responseFromBackendCreateTender.getString("sapNumber"));
+        }
+        UserNotification userNotification = userNotificationService.createNotification(notification);
+        logger.info("Created notification : " + userNotification);
+        logger.info("createNotificationForTender -- END -- ");
     }
 
     private JSONObject updateRequiredAttachmentsOnBackend(JSONObject responseFromBackend, JSONObject request, JSONObject responseFromAnalyzerRdo) {
@@ -118,6 +144,7 @@ public class CreateTenderController {
     private JSONObject createTenderOnBackend(JSONObject request, JSONObject responseFromAnalyzerLetter) {
         request.remove("fileRdo");
         request.remove("fileLetter");
+        request.remove("file");
         request.put("responseFromAnalyzerLetter", responseFromAnalyzerLetter);
         JSONObject responseFromBackend = backendMicroservice.saveObjectOnDb(request, "/tender/createTender");
         logger.info("responseFromBackend : " + responseFromBackend);

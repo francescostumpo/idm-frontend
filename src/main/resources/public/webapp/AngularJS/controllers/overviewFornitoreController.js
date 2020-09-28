@@ -9,7 +9,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         {tag : "D_12_11_02_RESPONSABILE_LAVORI",	label : "Nominativi del Responsabile/Direttore dei Lavori e del Coordinatore"},
         {tag : "D_12_11_03_RSPP",	label : "Nominativi del RSPP e del ASPP"},
         {tag : "D_12_11_04_PROVVEDIMENTI_SOSPENSIONE",	label : "Dichiarazione relativa ai provvedimenti di sospensione o interdettivi"},
-        {tag : "D_12_11_05_SOGGETTO_FORMAZIONE",	label : "Impegno a fornire il nominativo del soggetto di cui all’art. 97 del D.Lgs. 81/08"},
+        {tag : "D_12_11_05_SOGGETTO_FORMAZIONE",	label : "Impegno a fornire il nominativo del soggetto di cui all'   art. 97 del D.Lgs. 81/08"},
         {tag : "D_12_11_06_ASPP",	label : "Impegno a nominare un Addetto del Servizio di Prevenzione e Protezione (ASPP)"},
         {tag : "D_12_11_07_ANTINCENDIO",	label : "impegno a nominare gli Addetti Antincendio e Pronto Soccorso"},
         {tag : "D_12_11_08_DPI",	label : "Dichiarazione relativa ai DPI"},
@@ -76,20 +76,24 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
 
         { tag : "D_13_04_01_REQUISITI_PARTECIPAZIONE", label : "Dichiarazione possesso dei requisiti di partecipazione"},
         { tag : "D_13_04_02_MEZZI", label : "Dichiarazione dei mezzi e attrezzature"},
-        { tag : "D_13_04_03_FIRMA_LEGALE_RAPPRESENTANTE\n", label : "Dichiarazione firma legale rappresentante"},
+        { tag : "D_13_04_03_FIRMA_LEGALE_RAPPRESENTANTE", label : "Dichiarazione firma legale rappresentante"},
         { tag : "D_13_05_NOMINATIVI_FUNZIONI", label : "Nominativi funzioni di interesse"},
         { tag : "D_13_07_01_ATTIVITA_SUBAPPALTO", label : "Attivita' subappalto"},
         { tag : "D_13_07_02_IMPORTO_SUBAPPALTO", label : "Importo subappalto"},
         { tag : "D_13_08_ESCLUSIONE_COOPERAZIONE", label : "Nominativi, prestazioni e assenza motivi esclusione in caso di cooperazione"},
         { tag : "M_22_COSTI_CHIUSI", label : "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti chiusi"},
         { tag : "M_10_IDONEITA_TECNICA", label : "Autocertificazione idoneita' tecnica"},
-        { tag : "M_21_PROVENIENZA_PRODOTTI", label : "Dichiarazione provenienza prodotti"}
+        { tag : "M_21_PROVENIENZA_PRODOTTI", label : "Dichiarazione provenienza prodotti"},
+
+        { tag : "M_23_COSTI_APERTI", label : "Dichiarazione Costo della manodopera e oneri di sicurezza aziendale - Contratti aperti"},
+        { tag : "M_24_CONFERMA_COSTI", label : "Dichiarazione di conferma/integrazione costi già dichiariati"},
     ];
 
     $scope.requiredAttachments = [];
     $scope.notCompliants = 0;
     $scope.compliants = 0;
     $scope.requiredAttachmentsCommon.getFromParent = function(){
+        console.log('requiredAttachmentsCommon.getFromParent -- init --')
         var url = mainController.getHost() + '/supplier/getSupplierById/' + $scope.fornitoreOverview.id
         mainController.startProgressIndicator('#loading')
         $http.get(url).then(function (response) {
@@ -158,6 +162,11 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 $scope.notRequiredAttachments.push(document)
             }
         }
+        $scope.requiredAttachments.sort((att1 , att2) => {
+            if(att1.isPresent && att2.isPresent) return 0
+            if(att1.isPresent) return -1
+            return 1
+        })
         $scope.initProgressBar($scope.requiredAttachments)
     }
 
@@ -263,6 +272,13 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
     }
 
+    $scope.missingDataForUploadFileForTender = function(){
+        if($scope.listOfFiles === undefined || $scope.listOfFiles.length === 0){
+            return true
+        }
+        return false;
+    }
+
     $scope.updateAttachmentsForSupplier = function(){
         var fileToBeUploaded = {};
         fileToBeUploaded.files = [];
@@ -293,6 +309,8 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             fileToBeUploaded.idTender = $scope.bandoGara.id
             fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
             fileToBeUploaded.tenderNumber = $scope.bandoGara.sapNumber
+            fileToBeUploaded.supplierName = $scope.fornitoreOverview.name
+            fileToBeUploaded.userId = mainController.getUserId()
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         });
@@ -307,8 +325,6 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     console.log("$scope.showOptionalDocument: ", $scope.showOptionalDocument);
 
 
-    $scope.selectedDocuments = [];
-
     $scope.setDocument = function(data) {
         var file = new File([data], 'document.pdf', { type: 'application/pdf' });
         if ($scope.tempDocumentUrl) {
@@ -319,51 +335,46 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         $("embed.document-container").attr("src", $scope.tempDocumentUrl);
     }
 
-    $scope.checkDocument = function (document) {
-        for(i = 0;i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachment;
-            if(id === $scope.selectedDocuments[i]._idAttachment){
-                return true;
+    $scope.highlightCard = function(document){
+        if($scope.selectedDocument !== undefined) {
+            if (document._idAttachment === $scope.selectedDocument._idAttachment
+                && (document.tag === $scope.selectedDocument.tag || document.tag === "no_tag")) {
+                return {'background-color': '#DCF4F2'}
             }
         }
-        return false;
     }
 
     $scope.selectDocument = function (document, optional) {
-        var found = false;
-        for(var i = 0; i < $scope.selectedDocuments.length; i++){
-            var id = document._idAttachment;
-            if(id === $scope.selectedDocuments[i]._idAttachment){
-                found = true;
-                $scope.selectedDocuments.splice(i, 1)
+        if(document._idAttachment != undefined && document._idAttachment != null && document._idAttachment !== "N/A") {
+            if($scope.selectedDocument === undefined){
+                $scope.selectedDocument = document
+                if (optional != true) {
+                    $scope.show(document, 'show');
+                    location.href = '#page-requiredDoc-view';
+                } else {
+                    $scope.showOptionalDocumentFunction(document, 'show');
+                    location.href = '#page-notRequiredDoc-view';
+                }
             }
-        }
-        if (!found && $scope.selectedDocuments.length == 0) {
-            $scope.selectedDocuments.push(document);
-            if(optional != true){
-                $scope.show(document, 'show');
-                location.href = '#page-requiredDoc-view';
-            }else{
-                $scope.showOptionalDocumentFunction(document, 'show');
-                location.href = '#page-notRequiredDoc-view';
-            }
-        }else if(!found && !$scope.selectedDocuments.length == 0){
-            $scope.selectedDocuments = [];
-            $scope.selectedDocuments.push(document);
-            if(optional != true){
-                $scope.show(document, 'show');
-                location.href = '#page-requiredDoc-view';
-            }else{
-                $scope.showOptionalDocumentFunction(document, 'show');
-                location.href = '#page-notRequiredDoc-view';
-            }
-        }else if(found && $scope.selectedDocuments.length == 0){
-            if(optional != true){
-                $scope.show(document, 'hide');
-                location.href = '#page-requiredDoc-view';
-            }else{
-                $scope.showOptionalDocumentFunction(document, 'hide');
-                location.href = '#page-notRequiredDoc-view';
+            else if ($scope.selectedDocument._idAttachment == document._idAttachment &&
+                $scope.selectedDocument.tag == document.tag) {
+                $scope.selectedDocument = undefined
+                if (optional != true) {
+                    $scope.show(document, 'hide');
+                    location.href = '#page-requiredDoc-view';
+                } else {
+                    $scope.showOptionalDocumentFunction(document, 'hide');
+                    location.href = '#page-notRequiredDoc-view';
+                }
+            } else {
+                $scope.selectedDocument = document
+                if (optional != true) {
+                    $scope.show(document, 'show');
+                    location.href = '#page-requiredDoc-view';
+                } else {
+                    $scope.showOptionalDocumentFunction(document, 'show');
+                    location.href = '#page-notRequiredDoc-view';
+                }
             }
         }
     }

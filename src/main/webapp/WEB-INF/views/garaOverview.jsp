@@ -93,7 +93,7 @@
                         <li class="nav-item">
                             <p class="nav-link active" id="pills-supplier-tab" data-toggle="pill" role="tab"
                                 aria-controls="pills-suppliers" aria-selected="true"
-                                ng-click="makeVisibleTab('pills-supplier', 'pills-challenge')">Caricamenti Fornitori</p>
+                                ng-click="makeVisibleTab('pills-supplier', 'pills-challenge')">Caricamenti Offerenti</p>
                         </li>
                         <li class="nav-item">
                             <p class="nav-link" id="pills-challenge-tab" data-toggle="pill" role="tab"
@@ -108,15 +108,14 @@
                             aria-labelledby="pills-supplier-tab">
                             <div class="row mt-2">
                                 <div class="my-auto  col-lg-10 col-md-10 col-sm-12">
-                                    <p class="my-auto text-size-16 text-secondary ">{{suppliers.length}} FORNITORI
-                                        CARICATI</p>
+                                    <p class="my-auto text-size-16 text-secondary ">{{suppliers.length}} OFFERENTI CARICATI</p>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-12">
                                     <button
                                         ng-click="openModalUploadDocument('uploadDocumentModalNewFornitore','fileselect4','filedrag4','imageUpload4')"
                                         class="btn button-block button-primary-buyer">
                                         <i class="fa fa-plus"></i>
-                                        <span class="ml-2">AGGIUNGI FORNITORE</span>
+                                        <span class="ml-2">AGGIUNGI OFFERENTE</span>
                                     </button>
                                 </div>
                             </div>
@@ -160,18 +159,19 @@
                                             </div>
                                             <div class="break mt-3 mb-3"></div>
                                             <div class="row mb-3">
-                                                <div class="col-lg-9 col-md-9 col-sm-9">{{supplier.compliantAttachments}}/{{bandoGara.requiredAttachments.length}} documenti</div>
-                                                <!--<div class="danger-color text-center col-lg-3 col-md-3 col-sm-3">
-                                                     <span>3 </span> 
-                                                    <i class="mr-1 fas fa-exclamation-triangle" style="margin-left: 0.4em;"></i> 
-                                                </div>-->
+                                                <div class="col-lg-9 col-md-9 col-sm-9">{{countUploadedDocument(supplier)}}/{{bandoGara.requiredAttachments.length}} documenti</div>
+                                                <div ng-show="countNumberOfNotConformDocument(supplier) > 0" class="danger-color text-center col-lg-3 col-md-3 col-sm-3">
+                                                    <div class="justify-content-end">
+                                                        <span>{{countNumberOfNotConformDocument(supplier)}}</span>
+                                                        <i class="mr-1 fas fa-exclamation-triangle"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="progress" style="height:.5rem;">
-                                                <div class="progress-bar bg-info" ng-style="retrieveProgressBarLength(supplier)" role="progressbar"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-danger" style="width: 0%;"
-                                                    role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-info" role="progressbar" ng-style="retrieveProgressBarLengthOk(supplier)"
+                                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-danger" role="progressbar" ng-style="retrieveProgressBarLengthDanger(supplier)"
+                                                    role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -183,19 +183,19 @@
                             <div class="row mt-2">
                                 <!-- Show Lost -->
                                 <div ng-hide="showDocument" class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="d-flex justify-content-end">
+                                    <!--<div class="d-flex justify-content-end">
                                         <button
                                             ng-click="openModalUploadDocument('uploadDocumentModalOverviewGara','fileselect3','filedrag3','imageUpload3')"
                                             class="btn button-primary-buyer">
                                             <i class="fa fa-plus"></i>
                                             <span class="ml-2">AGGIUNGI DOCUMENTO</span>
                                         </button>
-                                    </div>
+                                    </div>-->
                                     <div class="card mt-2 no-border">
-                                        <div class="card-header background-color-application d-flex justify-content-center">
+                                        <div class="row card-header background-color-application d-flex justify-content-center">
                                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                             <div ng-click="sortCardsByColumnName('name')"
-                                                class="col-lg-7 col-md-7 col-sm-7 text-size-16 no-select">
+                                                class="col-lg-9 col-md-9 col-sm-9 text-size-16 no-select">
                                                 DOCUMENTO
                                                 <i ng-if="sort.name === 'desc'"
                                                     class="fas fa-sort-down hoverable sort-chev"></i>
@@ -203,7 +203,7 @@
                                                     class="fas fa-sort-up hoverable sort-chev"></i>
                                             </div>
                                             <div ng-click="sortCardsByColumnName('uploadedOn')"
-                                                class="col-lg-3 col-md-3 col-sm-3 text-size-16 no-select">
+                                                class="col-lg-2 col-md-2 col-sm-2 text-size-16 no-select">
                                                 CARICATO IL
                                                 <i ng-if="sort.uploadedOn === 'desc'"
                                                     class="fas fa-sort-down hoverable sort-chev"></i>
@@ -222,7 +222,7 @@
                                                         class="ml-3 my-auto pointer">-->
                                                     <i class="ml-4 fa fa-check-circle" style="color: limegreen"></i>
                                                 </div>
-                                                <div ng-click="selectDocument(document)" class="pointer col-lg-7 col-md-7 col-sm-7">
+                                                <div ng-click="selectDocument(document)" class="pointer col-lg-9 col-md-9 col-sm-9">
                                                     <div class="row flex-long-text">
                                                         <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x"
                                                             style="color: red;"></i>
@@ -231,12 +231,12 @@
                                                             {{document.fileName}}</p>
                                                     </div>
                                                 </div>
-                                                <div ng-click="selectDocument(document)" class="pointer my-auto col-lg-3 col-md-3 col-sm-3">
+                                                <div ng-click="selectDocument(document)" class="pointer my-auto col-lg-2 col-md-2 col-sm-2">
                                                     <p class="my-auto no-margin-bottom text-size-16 text-bold">
                                                         {{ document.uploadedOn.time | date: 'dd/MM/yyyy - HH:mm'}} </p>
                                                 </div>
-                                                <div class="col-lg-1 col-md-1 col-sm-1 d-flex justify-content-center"><i
-                                                        class="my-auto fa text-primary fa-ellipsis-h pointer"></i></div>
+                                                <!--<div class="col-lg-1 col-md-1 col-sm-1 d-flex justify-content-center"><i
+                                                        class="my-auto fa text-primary fa-ellipsis-h pointer"></i></div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 mb-5" ng-show="showDocument">
                                     <div class="row">
                                         <div class="col-lg-5 col-md-5 col-sm-5">
-                                            <div class="d-flex justify-content-end">
+                                            <!--<div class="d-flex justify-content-end">
                                                 <button class="btn button-neutral-compare-advise m-1">
                                                     <i class="fas fa-sync fa-flip-horizontal"></i>
                                                     <span class="ml-1 text-size-12">SOSTITUISCI</span>
@@ -255,21 +255,21 @@
                                                     <i class="far fa-trash-alt fa-fw fa-lg pointer"></i>
                                                     <span class="ml-1 text-size-12">ELIMINA</span>
                                                 </button>
-                                            </div>
+                                            </div>-->
                                             <div class="background-color-application card mt-2 no-border">
                                                 <div class="card-body row">
                                                     <div class="col-lg-1 col-md-1 col-sm-1"></div>
                                                     <div ng-click="sortCardsByColumnName('name')"
-                                                        class="col-lg-10 col-md-10 col-sm-10 text-size-16 no-select">
+                                                        class="col-lg-11 col-md-11 col-sm-11 text-size-16 no-select">
                                                         DOCUMENTO
                                                         <i ng-if="sort.name === 'desc'"
                                                             class="fas fa-sort-down hoverable sort-chev"></i>
                                                         <i ng-if="sort.name === 'asc'"
                                                             class="fas fa-sort-up hoverable sort-chev"></i>
                                                     </div>
-                                                    <div
+                                                    <!--<div
                                                         class="col-lg-1 col-md-1 col-sm-1 d-flex justify-content-center">
-                                                    </div>
+                                                    </div>-->
                                                 </div>
                                             </div>
                                             <div class="card" ng-repeat="document in tenderAttachments">
@@ -282,7 +282,7 @@
                                                                     class="my-auto pointer">-->
                                                             <i   class="ml-2 fa fa-check-circle" style="color: limegreen"></i>
                                                         </div>
-                                                        <div ng-click="selectDocument(document)" class="pointer col-lg-10 col-md-10 col-sm-10">
+                                                        <div ng-click="selectDocument(document)" class="pointer col-lg-11 col-md-11 col-sm-11">
                                                             <div class="row flex-long-text">
                                                                 <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-2x fa-lg"
                                                                     style="color: red;"></i>
@@ -291,9 +291,9 @@
                                                                     {{document.fileName}}</p>
                                                             </div>
                                                         </div>
-                                                        <div
+                                                        <!--<div
                                                             class="col-lg-1 col-md-1 col-sm-1 icon-group d-flex justify-content-center">
-                                                            <i class="my-auto fa fa-ellipsis-h pointer"></i></div>
+                                                            <i class="my-auto fa fa-ellipsis-h pointer"></i></div>-->
                                                     </div>
                                                 </div>
                                             </div>

@@ -12,6 +12,9 @@
                 <div class="mt-3">
                     <span class="text-medium-size-custom" style="padding-left: 12%;">Carica documenti*</span>
                 </div>
+                <div class="mt-3">
+                    <span>L'analisi dei documenti potrebbe richiedere tempo. Riceverai una notifica al termine dell'operazione. Puoi caricare file in formato .pdf, .docx e cartelle compresse (dimensione massima 16 MB)</span>
+                </div>
                 <div>
                     <div class="mt-3" id="filedrag2" style="display: block; width: 75%; height: 250px; text-align: center; margin-left: 12%;">
                         <div style="height: 20%; padding-top: 3%;"> <span style="margin-top: 5px; margin-bottom: 5%; color: grey; font-weight: 400;">  <b> Trascina qui </b> il documento </span> </div> 
@@ -53,12 +56,12 @@
             <div class="modal-footer" style="height: 100px;">
                 <div class="col-md-12 row">
                     <div class="text-center col-md-6">
-                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer" style="width: 50%; height: 50px;">
+                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer" >
                             ANNULLA
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button ng-click="updateAttachmentsForSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" style="width: 50%; height: 50px;">
+                        <button ng-click="updateAttachmentsForSupplier()" type="button" class="btn button-secondary-buyer" data-dismiss="modal" >
                             CARICA
                         </button>
                     </div>
