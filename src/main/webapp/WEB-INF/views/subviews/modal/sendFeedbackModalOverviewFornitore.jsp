@@ -19,7 +19,8 @@
                         <div>
                             <span class="text-medium-size-custom"
                                 style="font-family: Ubuntu; font-weight: bold; font-size: 16px; color: #1D2A30; letter-spacing: 0.89px;">
-                                {{ documentSelectedInModal.label ? documentSelectedInModal.label : documentSelectedInModal.fileName }} </span>
+                                {{ documentSelectedInModal.label ? documentSelectedInModal.label : documentSelectedInModal.fileName }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -36,16 +37,21 @@
                         </div>
                         <div ng-repeat="item in selectedTags"
                             style="font-family: Ubuntu; font-size: 16px; font-weight: bold; color: #1D2A30; letter-spacing: 0.89px; margin-bottom: 2%;">
-                            <span> {{ item }} </span>
-                            <i class="fas fa-times-circle" ng-click="deleteFromSelectedTags(item)"
+                            <span ng-class="{ true: 'unstriked', false: 'striked'}[item.active]"> {{ item.label }} </span>
+                            <i class="fas fa-times-circle" ng-click="deleteFromSelectedTags(item.label)"
                                 style="float: right; margin-top: 1%;"></i>
                         </div>
 
 
 
-                        <select id="select-tag" class="form-control selectpicker modal-select" ng-model="tagSelectedInModal" style="width: 85%; float: left; margin-top: 8%; background: #FFFFFF; border: 1px solid #CFD6DB; border-radius: 4px; border-radius: 4px;">
-                            <option ng-repeat="item in labelsAssociatedToTag" value="{{item.label}}"> {{ item.label }} </option>
-                        </select> 
+                        <form name="select-modal-form" autocomplete="off">
+                            <select id="select-tag" class="form-control modal-select" autocomplete="off"
+                                ng-model="tagSelectedInModal"
+                                style="width: 85%; float: left; margin-top: 8%; background: #FFFFFF; border: 1px solid #CFD6DB; border-radius: 4px; border-radius: 4px;">
+                                <option ng-repeat="item in labelsAssociatedToTag" value="{{item.label}}">
+                                    {{ item.label }} </option>
+                            </select>
+                        </form>
 
                         <!--<div class="dropdown" style="margin-top: 7%; float: left; width: 85%;">
                             <div class="col-lg-2 col-md-2 col-sm-2" data-toggle="dropdown"
@@ -65,7 +71,7 @@
                                     <span class="ml-2"> {{ item.label }} </span>
                                 </p>
                             </div>
-                        </div> --> 
+                        </div> -->
                         <div style="margin-top: 10%; float: right;">
                             <i class="fas fa-plus-circle hoverable" ng-click="addToSelectedTags()"
                                 style="float: left; width: 10%;"> </i>

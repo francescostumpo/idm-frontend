@@ -262,7 +262,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
         else if (elemWithLabelOfTag && !$scope.containsTagArraySelectedTag(elemWithLabelOfTag[0])) {
             $scope.docInitialTag = elemWithLabelOfTag[0].label; 
-            $scope.selectedTags.push(elemWithLabelOfTag[0].label);
+            $scope.selectedTags.push({"label": elemWithLabelOfTag[0].label, "active": true});
         }
 
         console.log("Doc conforme: ", $scope.isDocConforme(document)); 
@@ -313,6 +313,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
 
         $('#sendFeedbackModal').modal({ scope: $scope }); 
+
 
     }
 
@@ -528,20 +529,32 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.addToSelectedTags = function () {
         let select = document.getElementById("select-tag"); 
         let selectedTag = select.options[select.selectedIndex].value; 
-        if (selectedTag == "" || selectedTag.trim().startsWith("Scegli")) return;
+        if (selectedTag == "" || selectedTag.trim().startsWith("Scegli") || selectedTag.trim().includes("undefined")) return;
         if ($scope.containsTagArraySelectedTag(selectedTag)) return;
-        $scope.selectedTags.push(selectedTag);
+        $scope.selectedTags.push({"label": selectedTag, "active": true});
     }
 
     $scope.deleteFromSelectedTags = function (tag) {
-        $scope.selectedTags = $scope.selectedTags.filter(function (item) {
-            return item !== tag
+        $scope.selectedTags.forEach(item => {
+            if(item.label == tag) {
+                item.active = false;
+            }
         });
+        console.log("After deletion of tag, $scope.selectedTags is: ", $scope.selectedTags);
+       /* $scope.selectedTags = $scope.selectedTags.filter(function (item) {
+            return item.label !== tag
+        }); */
     }
 
     $scope.containsTagArraySelectedTag = function (tag) {
-        if ($scope.selectedTags.indexOf(tag) == -1) return false;
-        return true;
+        let containsTag = false; 
+        $scope.selectedTags.forEach((item) => {
+            if(item.label == tag) {
+                containsTag = true; 
+            }
+        })
+        //if ($scope.selectedTags.indexOf(tag) == -1) return false;
+        return containsTag;
     }
 
     $scope.isDocConforme = function (document) {
@@ -572,9 +585,20 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         feedback.tenderId = JSON.parse(sessionStorage.getItem("bandoGara")).id; 
         feedback.tenderSapNumber = JSON.parse(sessionStorage.getItem("bandoGara")).sapNumber; 
 
+
+        // L'inserimento dei tags può essere semplificato
+        let activeTagsArray = []; 
+        let activeTags = $scope.selectedTags.filter((item) => {
+            return item.active == true; 
+        }); 
+
+        activeTags.forEach(item => {
+            activeTagsArray.push(item.label); 
+        })
+
         let userFeedback = {
             initialTag: $scope.docInitialTag,
-            tags: $scope.selectedTags,
+            tags: activeTagsArray,
             isDocConforme: $scope.modalIsDocConforme,
             isDocRichiesto: $scope.modalIsDocRichiesto,
             comment: $("#comment-box").val()
@@ -607,5 +631,14 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     } 
 
     mainController.stopProgressIndicator('#loading');
+
+
+    $('#sendFeedbackModal').on('hidden.bs.modal', function (e) {
+        $scope.selectedTags = []; 
+        $scope.modalIsDocConforme = false;
+        $scope.modalIsDocRichiesto = false; 
+        $scope.documentFeedbackComment = ""; 
+        $("#comment-box").val() = ""; 
+      }); 
 
 }]);

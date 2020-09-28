@@ -2002,3 +2002,11 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
     border-radius: 0.25rem;
     box-shadow: none;
   }
+
+  .striked {
+      text-decoration: line-through;
+  }
+
+  .unstriked {
+      text-decoration: none;
+  }
