@@ -14,12 +14,12 @@
             <div class="modal-body" style="padding-left: 1%;">
                 <div class="row">
                     <div class="col-md-12 col-sm-12" style="padding-left: 7.5%; padding-right: 7.5%;">
-                        <div style="font-family: Ubuntu; font-size: 12px; color: #727888; letter-spacing: 0.67px;"> NOME
-                            DOCUMENTO </div>
+                        <div style="font-family: Ubuntu; font-size: 12px; color: #727888; letter-spacing: 0.67px;"> NOME DOCUMENTO </div>
                         <div>
                             <span class="text-medium-size-custom"
                                 style="font-family: Ubuntu; font-weight: bold; font-size: 16px; color: #1D2A30; letter-spacing: 0.89px;">
-                                {{ documentSelectedInModal.label ? documentSelectedInModal.label : documentSelectedInModal.fileName }} </span>
+                                {{ documentSelectedInModal.fileName }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 <div class="row" style="padding-top: 3%; padding-left: 7.5%; padding-right: 7.5%; ">
                     <div class="col-md-12 col-sm-12">
                         <div class="text-primary mt-3">
-                            <textarea id="comment-box" class="text-primary form-control"
+                            <textarea ng-model="feedbackComment.text" id="comment-box" class="text-primary form-control"
                                 style="height: 150px; float: left;"></textarea>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button ng-click="sendFeedback()" type="button" class="btn button-secondary-buyer" data-dismiss="modal">
+                        <button ng-disabled="missingCommentForFeedback()" ng-click="sendFeedback()" type="button" class="btn button-secondary-buyer" data-dismiss="modal">
                             <span>
                                 INVIA
                             </span>
