@@ -41,7 +41,13 @@
                                 style="float: right; margin-top: 1%;"></i>
                         </div>
 
-                        <div class="dropdown" style="margin-top: 7%; float: left; width: 85%;">
+
+
+                        <select id="select-tag" class="form-control selectpicker modal-select" ng-model="tagSelectedInModal" style="width: 85%; float: left; margin-top: 8%; background: #FFFFFF; border: 1px solid #CFD6DB; border-radius: 4px; border-radius: 4px;">
+                            <option ng-repeat="item in labelsAssociatedToTag" value="{{item.label}}"> {{ item.label }} </option>
+                        </select> 
+
+                        <!--<div class="dropdown" style="margin-top: 7%; float: left; width: 85%;">
                             <div class="col-lg-2 col-md-2 col-sm-2" data-toggle="dropdown"
                                 style="height: 3rem; margin-left: -2%;">
                                 <button class="btn button-primary-buyer" style="height: 2.5rem; width: 24rem;">
@@ -51,7 +57,7 @@
                                     <i class="fas fa-angle-down" style="float: right; margin-top: 1%;"></i>
                                 </button>
                             </div>
-                            <div class="dropdown-menu" style="width: 98%; overflow: scroll; max-height: 150px;"
+                            <div class="dropdown-menu" style="width: 98%; overflow: scroll; max-height: 150px; overflow-x: hidden;"
                                 aria-labelledby="dropdownMenuLink">
                                 <p ng-repeat="item in labelsAssociatedToTag"
                                     ng-click="changeButtonPlaceholder(item.label)"
@@ -59,8 +65,8 @@
                                     <span class="ml-2"> {{ item.label }} </span>
                                 </p>
                             </div>
-                        </div>
-                        <div style="float: left; margin-top: 9.5%; float: right;">
+                        </div> --> 
+                        <div style="margin-top: 10%; float: right;">
                             <i class="fas fa-plus-circle hoverable" ng-click="addToSelectedTags()"
                                 style="float: left; width: 10%;"> </i>
                         </div>

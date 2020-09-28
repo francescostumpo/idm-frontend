@@ -18,6 +18,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.tagDocumentSelectedInModal; 
     $scope.docInitialTag; 
     $scope.documentFeedbackComment = ""; 
+    $scope.tagSelectedInModal; 
 
     $scope.labelsAssociatedToTag = [
         { tag: "D_12_11_01_RSPP", label: "Nominativo del RSPP" },
@@ -264,6 +265,8 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             $scope.selectedTags.push(elemWithLabelOfTag[0].label);
         }
 
+        console.log("Doc conforme: ", $scope.isDocConforme(document)); 
+        console.log("Doc richiesto: ", $scope.isDocRichiesto(document)); 
 
         if($scope.isDocConforme(document)) {
             $scope.modalIsDocConforme = true; 
@@ -294,15 +297,18 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 $("#button-doc-richiesto").addClass("richiesto-selected"); 
                 $("#button-doc-non-richiesto").removeClass("richiesto-selected"); 
             } 
+            if($scope.checkElementInArray($("#button-doc-non-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
+                $("#button-doc-non-richiesto").removeClass("richiesto-selected"); 
+            } 
         } 
         else {
             $scope.modalIsDocRichiesto = false; 
-            if($scope.checkElementInArray($("#button-doc-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
+            if(!$scope.checkElementInArray($("#button-doc-non-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
                 $("#button-doc-richiesto").removeClass("richiesto-selected"); 
                 $("#button-doc-non-richiesto").addClass("richiesto-selected"); 
             } 
-            if(!$scope.checkElementInArray($("#button-doc-non-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
-                $("#button-doc-non-richiesto").addClass("richiesto-selected"); 
+            if($scope.checkElementInArray($("#button-doc-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
+                $("#button-doc-richiesto").removeClass("richiesto-selected"); 
             }
         }
 
@@ -510,7 +516,8 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     $scope.toggleButtonRichiesto = function () {
         document.getElementById("button-doc-richiesto").classList.toggle("richiesto-selected");
         document.getElementById("button-doc-non-richiesto").classList.toggle("richiesto-selected");
-        $scope.modalIsDocRichiesto = !$scope.modalIsDocRichiesto;
+        $scope.modalIsDocRichiesto = !$scope.modalIsDocRichiesto; 
+        console.log("$scope.modalIsDocConforme after toggle: ", $scope.modalIsDocRichiesto); 
     }
 
 
@@ -519,7 +526,8 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.addToSelectedTags = function () {
-        let selectedTag = document.getElementById("span-select-tag").innerHTML;
+        let select = document.getElementById("select-tag"); 
+        let selectedTag = select.options[select.selectedIndex].value; 
         if (selectedTag == "" || selectedTag.trim().startsWith("Scegli")) return;
         if ($scope.containsTagArraySelectedTag(selectedTag)) return;
         $scope.selectedTags.push(selectedTag);
@@ -541,9 +549,13 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.isDocRichiesto = function (document) {
+        console.log("isDocRichiesto, document: ", document); 
         let documentTag = document.tag;
         let bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
-        if (document.tag == "no_tag") return false; 
+        console.log("isDocRichiesto, bandoGara: ", bandoGara); 
+        console.log("isDocRichiesto, document.tag: ", document.tag); 
+
+        if (!document.tag || document.tag.includes("no_tag")) return false; 
         if (bandoGara.requiredAttachments.indexOf(documentTag) == -1) return false;
         return true;
     }
