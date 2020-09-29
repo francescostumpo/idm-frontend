@@ -14,8 +14,7 @@
             <div class="modal-body" style="padding-left: 1%;">
                 <div class="row">
                     <div class="col-md-12 col-sm-12" style="padding-left: 7.5%; padding-right: 7.5%;">
-                        <div style="font-family: Ubuntu; font-size: 12px; color: #727888; letter-spacing: 0.67px;"> NOME
-                            DOCUMENTO </div>
+                        <div style="font-family: Ubuntu; font-size: 12px; color: #727888; letter-spacing: 0.67px;"> NOME DOCUMENTO </div>
                         <div>
                             <span class="text-medium-size-custom"
                                 style="font-family: Ubuntu; font-weight: bold; font-size: 16px; color: #1D2A30; letter-spacing: 0.89px;">
@@ -118,11 +117,10 @@
             <div class="modal-footer">
                 <div class="col-md-12 row">
                     <div class="text-center col-md-6">
-                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer"
-                            style="float: left; border: 2px solid #004B9C; width: 65%; border-radius: 4px; border-radius: 4px;">
-                            <span
-                                style="font-family: Ubuntu; font-size: 16px; color: #004B9C; letter-spacing: 0.43px; text-align: center;">
-                                ANNULLA </span>
+                        <button type="button" data-dismiss="modal" class="btn button-primary-buyer">
+                            <span>
+                                ANNULLA
+                            </span>
                         </button>
                     </div>
                     <div class="text-center col-md-6">

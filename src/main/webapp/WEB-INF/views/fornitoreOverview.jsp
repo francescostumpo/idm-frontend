@@ -158,7 +158,7 @@
                             <div class="card" ng-repeat="document in requiredAttachments">
                                 <div ng-style="highlightCard(document)" class="card-body">
                                     <div class="row">
-                                        <div ng-click="selectDocument(document, false)" class="text-center pointer my-auto col-lg-1 col-md-1 col-sm-1">
+                                        <div ng-click="selectDocument(document, false)" class="pointer my-auto col-lg-1 col-md-1 col-sm-1">
                                             <i ng-if="document.isPresent" class="ok-color my-auto ml-2 fa fa-check-circle pointer"></i>
                                             <i  ng-if="!document.isPresent" class="danger-color my-auto fas fa-exclamation-triangle ml-2"></i>
                                         </div>
@@ -250,7 +250,7 @@
                                     <div class="card" ng-repeat="document in requiredAttachments">
                                         <div ng-style="highlightCard(document)"  class="card-body" >
                                             <div class="row">
-                                                <div ng-click="selectDocument(document)" class="text-center pointer col-lg-2 col-md-2 col-sm-2">
+                                                <div ng-click="selectDocument(document, false)" class="pointer col-lg-2 col-md-2 col-sm-2">
                                                     <i ng-if="!document.isPresent"
                                                         class="danger-color my-auto ml-2 fas fa-exclamation-triangle pointer"
                                                         ></i>
@@ -258,7 +258,7 @@
                                                         class="ok-color my-auto ml-2 fa fa-check-circle pointer"
                                                         ></i>
                                                 </div>
-                                                <div ng-click="selectDocument(document)" class="pointer  col-lg-6 col-md-6 col-sm-6">
+                                                <div ng-click="selectDocument(document, false)" class="pointer  col-lg-6 col-md-6 col-sm-6">
                                                     <div class="row flex-long-text">
                                                         <i class="my-auto  ml-2 mr-2 fas fa-file-pdf fa-lg"
                                                             style="color: red;"></i>
@@ -501,7 +501,7 @@
                             <div class="card mt-2 no-border">
                                 <div class="row card-body background-color-application justify-content-center">
                                     <div class="col-lg-1 col-md-1 col-sm-1 text-size-14">
-                                        CHECK
+
                                     </div>
                                     <div ng-click="sortCardsByColumnName('name')"
                                          class="col-lg-9 col-md-9 col-sm-9 text-size-14 no-select">

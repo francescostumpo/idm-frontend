@@ -5,14 +5,14 @@
     <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="text-primary font-weight-bold modal-header">
-                <div class="modal-title" id="exampleModalLabel">MODIFICA GARA {{bandoSelected.sapNumber}}</div>
+                <div class="modal-title" id="exampleModalLabel">MODIFICA GARA</div>
                 <span aria-hidden="true"><i data-dismiss="modal" class="text-primary fas fa-times pointer text-size-18"></i></span>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-8 col-sm-8">
                         <div>
-                            <span class="text-medium-size-custom">Oggetto gara*</span>
+                            <span class="text-medium-size-custom">Oggetto gara</span>
                         </div>
                         <div class="text-primary mt-3">
                             <input  ng-model="tenderModified.object" ng-value="bandoSelected.object" type="text" class="text-primary form-control" placeholder="Scrivi l'oggetto della gara">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div>
-                            <span class="text-medium-size-custom">CIG*</span>
+                            <span class="text-medium-size-custom">CIG</span>
                         </div>
                         <div class="text-primary mt-3">
                             <input ng-model="tenderModified.cig" ng-value="bandoSelected.cig" type="text" class="text-primary form-control" placeholder="000000000">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div>
-                            <span class="text-medium-size-custom">Società*</span>
+                            <span class="text-medium-size-custom">Società</span>
                         </div>
                         <div class="text-primary mt-3">
                             <input  ng-model="tenderModified.company" ng-value="bandoSelected.company" type="text" class="text-primary form-control" placeholder="Nome società">
@@ -50,7 +50,7 @@
                         </div>
                         <div class="text-primary mt-3">
                             <div class="input-group">
-                                <input  ng-model="tenderModified.endDate" ng-value="bandoSelected.endDate | date: 'dd/MM/yyyy'" id="datepickerModify" class="form-control" />
+                                <input ng-model="tenderModified.endDate" ng-value="bandoSelected.endDate | date: 'dd/MM/yyyy'" id="datepickerModify" class="text-primary form-control" />
                             </div>
                         </div>
                     </div>

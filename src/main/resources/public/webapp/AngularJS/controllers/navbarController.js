@@ -58,6 +58,7 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
                 $scope.tender.file = base64String;
                 $scope.tender.fileName = $scope.rdoAndLetterSelectedName;
             }
+            $scope.tender.userId = mainController.getUserId()
             $scope.tender.uploadOneFile = $scope.creatingTender.uploadOneFile
             stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
             mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
@@ -87,6 +88,7 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
                     $scope.tender.fileNameLetter = $scope.letterSelectedName;
                 }
                 $scope.tender.uploadOneFile = $scope.creatingTender.uploadOneFile
+                $scope.tender.userId = mainController.getUserId()
                 stompClient.send("/app/createTender", {}, JSON.stringify($scope.tender));
                 mainController.showNotification("bottom", "right", "Creazione gara in corso", '', 'info')
             }
@@ -179,6 +181,14 @@ snamApp.controller("navbarController", ['$scope', '$http', '$location', '$rootSc
             console.log(e.target.id)
             // fetch FileList object
             var files = e.target.files || e.dataTransfer.files;
+
+            var file = files[0]
+            var fileSize = file.size
+            var fileSizeInMB = fileSize * (0.0000009537)
+            if(fileSizeInMB >= 16){
+                mainController.showNotification('bottom', 'right', 'Il file ' + file.name + ' supera la dimensione massima di 16 MB' , '', 'danger')
+                return
+            }
             $scope.file = files[0]
             if(e.target.id === "filedrag" || e.target.id === "imageUpload" || e.target.id === "fileselect"){
                 var name = processName($scope.file.name);

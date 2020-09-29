@@ -11,6 +11,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     $scope.requiredAttachmentsCommon = {};
 
     $scope.selectedDocuments = [];
+    $scope.selectedDocument = undefined
 
     $scope.getNotificationForUser = function() {
         var url = mainController.getFrontendHost() + '/getUserNotification?userId=' + mainController.getUserId();
@@ -33,26 +34,26 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         });
         stompClientFiles.subscribe("/user/queue/reply/updateFiles", function(message) {
             console.log('message ', message)
-            var url = mainController.getFrontendHost() + '/createNotification'
             var response = JSON.parse(message.body)
             if(response.status === 200) {
                 mainController.showNotification('bottom', 'right', response.message, '', 'success')
                 if(response.updated === 'tender'){
                     $scope.getTenderAttachmentsByTenderId.getFromParent();
-                    var notification = $scope.createNotificationForUploadFile(response, 'uploadFileTender',response.creationStatus)
-                    $scope.sendNotification(url, notification)
+                    //var notification = $scope.createNotificationForUploadFile(response, 'uploadFileTender',response.creationStatus)
+                    //$scope.sendNotification(url, notification)
                 }
                 else if(response.updated === 'supplier'){
                     $scope.requiredAttachmentsCommon.getFromParent();
-                    var notification = $scope.createNotificationForUploadFile(response, 'uploadFileSupplier',response.creationStatus)
-                    $scope.sendNotification(url, notification)
+                    //var notification = $scope.createNotificationForUploadFile(response, 'uploadFileSupplier',response.creationStatus)
+                    //$scope.sendNotification(url, notification)
                 }
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
-                var notification = $scope.createNotificationForUploadFile({}, 'uploadFileSupplier',response.creationStatus)
-                $scope.sendNotification(url, notification)
+                //var notification = $scope.createNotificationForUploadFile({}, 'uploadFileSupplier',response.creationStatus)
+                //$scope.sendNotification(url, notification)
             }
+            $scope.getNotificationForUser()
         });
         stompClientFiles.subscribe("/user/queue/success", function(message) {
             console.log("Message " + message.body + ' ' + new Date());
@@ -80,16 +81,18 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 else if(creationStatus === 'SUPPLIER_CREATED_WITH_FILE_ERROR'){
                     mainController.showNotification('bottom', 'right', response.message, '', 'warning')
                 }
-                var url = mainController.getFrontendHost() + '/createNotification'
-                var supplierNotification = $scope.createNotificationForSupplier(response.supplier, 'supplierCreation', creationStatus)
-                $scope.sendNotification(url, supplierNotification, $scope.getSuppliersByTenderId)
+                $scope.getSuppliersByTenderId.getFromParent()
+                //var url = mainController.getFrontendHost() + '/createNotification'
+                //var supplierNotification = $scope.createNotificationForSupplier(response.supplier, 'supplierCreation', creationStatus)
+                //$scope.sendNotification(url, supplierNotification, $scope.getSuppliersByTenderId)
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
-                var url = mainController.getFrontendHost() + '/createNotification'
-                var supplierNotification = $scope.createNotificationForSupplier({}, 'supplierCreation', 'SUPPLIER_NOT_CREATED')
-                $scope.sendNotification(url, supplierNotification, $scope.getSuppliersByTenderId)
+                //var url = mainController.getFrontendHost() + '/createNotification'
+                //var supplierNotification = $scope.createNotificationForSupplier({}, 'supplierCreation', 'SUPPLIER_NOT_CREATED')
+                //$scope.sendNotification(url, supplierNotification, $scope.getSuppliersByTenderId)
             }
+            $scope.getNotificationForUser()
         });
         stompClientSupplier.subscribe("/user/queue/success", function(message) {
             console.log("Message " + message.body + ' ' + new Date());
@@ -119,15 +122,17 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
                 else if(creationStatus === 'TENDER_CREATED_WITH_MISSING_DATA'){
                     mainController.showNotification('bottom', 'right', response.message, '', 'warning')
                 }
-                var url = mainController.getFrontendHost() + '/createNotification'
-                var tenderNotification = $scope.createNotificationFromTender({}, 'tenderCreation', creationStatus)
-                $scope.sendNotification(url, tenderNotification, $scope.getAllTendersByDefault)
+                $scope.getAllTendersByDefault.getFromParent()
+                //var url = mainController.getFrontendHost() + '/createNotification'
+                //var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation', creationStatus)
+                //$scope.sendNotification(url, tenderNotification, $scope.getAllTendersByDefault)
             }
             else{
                 mainController.showNotification('bottom', 'right', response.message, '', 'danger')
-                var tenderNotification = $scope.createNotificationFromTender(response.tender, 'tenderCreation', 'TENDER_NOT_CREATED')
-                $scope.sendNotification(url, tenderNotification, $scope.getAllTendersByDefault)
+                //var tenderNotification = $scope.createNotificationFromTender({}, 'tenderCreation', 'TENDER_NOT_CREATED')
+                //$scope.sendNotification(url, tenderNotification, $scope.getAllTendersByDefault)
             }
+            $scope.getNotificationForUser()
         });
         stompClient.subscribe("/user/queue/success", function(message) {
             console.log("Message " + message.body + ' ' + new Date());
@@ -164,7 +169,7 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         var notification = {}
         notification.userId = mainController.getUserId()
         notification.tenderNumber = supplier.tenderSapNumber
-        notification.idTender = supplier.id
+        notification.idTender = supplier.idTender
         notification.notificationType = notificationType
         notification.status = statusCreation
         notification.idSupplier = supplier.id
@@ -182,14 +187,13 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
         return notification
     }
 
-    $scope.highlightCard = function(document){
-        for(var i = 0; i < $scope.selectedDocuments.length ; i++){
-            if(document._idAttachment === $scope.selectedDocuments[i]._idAttachment
-               && (document.tag === $scope.selectedDocuments[i].tag || document.tag === "no_tag")){
-                return {'background-color' : '#DCF4F2'}
-            }
+    $scope.checkIfIsSelected = function(element){
+        if(element !== undefined && element !== ''){
+            return {'color' : '#004B9C'}
         }
     }
+
+
 
     $scope.processName = function(name, length, subString){
         if(name != undefined) {
@@ -293,10 +297,18 @@ snamApp.controller("commonController", ['$scope', '$http', '$location', '$rootSc
     $scope.addFilesToListOfFile = function (files){
         var newFiles = []
         for (var i = 0; i < $scope.listOfFiles.length; i++){
-            newFiles.push($scope.listOfFiles[i])
+            var file = $scope.listOfFiles[i]
+            newFiles.push(file)
         }
         for (var i = 0; i < files.length; i++){
-            newFiles.push(files[i])
+            var file = files[i]
+            var fileSize = file.size
+            var fileSizeInMB = fileSize * (0.0000009537)
+            if(fileSizeInMB > 16 && !file.name.includes('.zip')) {
+                mainController.showNotification('bottom', 'right', 'Il file ' + file.name + ' supera la dimensione massima di 16 MB' , '', 'danger')
+            }else{
+                newFiles.push(files[i])
+            }
         }
         $scope.listOfFiles = newFiles
     }

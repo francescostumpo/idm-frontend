@@ -3,6 +3,8 @@ package com.ibm.snam.idm.web_socket;
 import com.ibm.snam.idm.common.Constants;
 import com.ibm.snam.idm.microservices.AnalyzerMicroservice;
 import com.ibm.snam.idm.microservices.BackendMicroservice;
+import com.ibm.snam.idm.model.UserNotification;
+import com.ibm.snam.idm.service.UserNotificationService;
 import com.ibm.snam.idm.util.Base64DecodedMultipartFile;
 import com.ibm.snam.idm.util.ZipHandler;
 import com.ibm.snam.idm.util.RarHandler;
@@ -38,6 +40,9 @@ public class UpdateFilesController {
 
     @Autowired
     UploadFileService uploadFileService;
+
+    @Autowired
+    UserNotificationService userNotificationService;
 
     @MessageMapping("/updateFiles")
     @SendToUser("/queue/reply/updateFiles")
@@ -123,15 +128,16 @@ public class UpdateFilesController {
                 UploadResult uploadResult = null;
                 try {
                     uploadResult = uploadResultFuture.get();
+                    if (uploadResult.isFailed()){
+                        failedDocuments.add(uploadResult.getFilename());
+                    }
                 } catch (InterruptedException | ExecutionException e) {
                     logger.error(e.getMessage());
                     e.printStackTrace();
                 }
-                if (uploadResult.isFailed()){
-                    failedDocuments.add(uploadResult.getFilename());
-                }
             }
             fillResponse(response, updated, updateFiles, failedDocuments);
+            createNotificationForUploadFile(response, "uploadFileSupplier", response.getString("creationStatus"), updateFiles.getString("userId"));
             return response.toString();
         }catch (Exception e){
             logger.error(e.getMessage());
@@ -139,8 +145,26 @@ public class UpdateFilesController {
             response.put("status", Constants.HTTP_STATUS_ERROR);
             response.put("message", Constants.ERROR_CALLING_BACKEND);
             response.put("creationStatus", Constants.FILE_NOT_UPDATED);
+            createNotificationForUploadFile(null, "uploadFileSupplier", response.getString("creationStatus"), updateFiles.getString("userId"));
             return response.toString();
         }
+    }
+
+    private void createNotificationForUploadFile(JSONObject response, String notificationType, String creationStatus, String userId){
+        logger.info("createNotificationForUploadFile -- INIT -- : " + userId);
+        JSONObject notification = new JSONObject();
+        notification.put("userId", userId);
+        notification.put("notificationType", notificationType);
+        notification.put("status", creationStatus);
+        if(response != null){
+            notification.put("idTender", response.getString("idTender"));
+            notification.put("idSupplier", response.getString("idSupplier"));
+            notification.put("tenderNumber", response.getString("sapNumber"));
+            notification.put("supplierName", response.getString("supplierName"));
+        }
+        UserNotification userNotification = userNotificationService.createNotification(notification);
+        logger.info("Created notification : " + userNotification);
+        logger.info("createNotificationForUploadFile -- END -- : ");
     }
 
     private void fillResponse(JSONObject response, String updated, JSONObject updateFiles, List<String> failedDocuments) {

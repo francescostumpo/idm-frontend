@@ -5,7 +5,7 @@
     <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="text-primary font-weight-bold modal-header">
-                <div class="modal-title" id="exampleModalLabel">AGGIUNGI FORNITORE</div>
+                <div class="modal-title" id="exampleModalLabel">AGGIUNGI OFFERENTE</div>
                 <!--<button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 </button>-->
                 <span aria-hidden="true"><i data-dismiss="modal" class="text-primary fas fa-times pointer text-size-18"></i></span>
@@ -13,14 +13,17 @@
             <div class="modal-body">
                 <div class="mt-3">
                     <div>
-                        <span class="text-medium-size-custom">Fornitore*</span>
+                        <span class="text-medium-size-custom">Offerente*</span>
                     </div>
                     <div class="text-primary mt-3">
-                        <input type="text" ng-model="supplier.name" class="text-primary form-control" placeholder="Nome fornitore">
+                        <input type="text" ng-model="supplier.name" class="text-primary form-control" placeholder="Nome offerente">
                     </div>
                 </div>
                 <div class="mt-3">
                     <span class="text-medium-size-custom">Carica documenti</span>
+                </div>
+                <div class="mt-3">
+                    <span>L'analisi dei documenti potrebbe richiedere tempo. Riceverai una notifica al termine dell'operazione. Puoi caricare file in formato .pdf, .docx e cartelle compresse (dimensione massima 16 MB)</span>
                 </div>
                 <div>
                     <div class="mt-3" id="filedrag4" style="display: block; width: 75%; height: 250px; text-align: center; margin-left: 12%;">

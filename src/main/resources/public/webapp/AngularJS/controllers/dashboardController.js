@@ -160,21 +160,36 @@ snamApp.controller("dashboardController", ['$scope', '$http', '$location', '$roo
 
         calendar.on("eventClick", function(info) {
             $timeout(function() {
-                var eventId = info.event.id
+                $scope.openFirstDateEvent(info.event, false)
+                /*var eventId = info.event.id
                 $scope.eventTitle = info.event.title;
                 $scope.selectedEventTender = Object.values(info.event.extendedProps);
                 console.log('$scope.selectedEventContracts', $scope.selectedEventTender)
                 moment.locale('it')
                 var idCardEvent = '#event_' + eventId;
                 $(idCardEvent)[0].scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
-                //location.href = idCardEvent
-                //$(idCardEvent).removeClass('highlightCardEvent')
                 $(idCardEvent).addClass('highlightCardEvent2')
                 setTimeout(function () {
                     $(idCardEvent).removeClass('highlightCardEvent2')
-                }, 2500)
+                }, 2500)*/
             }, 100)
         })
+    }
+
+    $scope.openFirstDateEvent = function(event, fromCalendarClosed){
+        if(fromCalendarClosed) {
+            $scope.toggleCalendarCard()
+        }
+        var eventId = event.id
+        $scope.eventTitle = event.title;
+        $scope.selectedEventTender = Object.values(event.extendedProps);
+        moment.locale('it')
+        var idCardEvent = '#event_' + eventId;
+        $(idCardEvent)[0].scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
+        $(idCardEvent).addClass('highlightCardEvent2')
+        setTimeout(function () {
+            $(idCardEvent).removeClass('highlightCardEvent2')
+        }, 2500)
     }
 
 }]);

@@ -244,18 +244,15 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         $scope.supplierModified = {}; 
         $scope.documentFeedbackComment = ""; 
         $scope.supplierSelected = $scope.fornitoreOverview
-        
-        $scope.documentSelectedInModal = document; 
-
-        let elemWithLabelOfTag; 
-
+        $scope.documentSelectedInModal = document;
+        $scope.feedbackComment.text = ""
+        let elemWithLabelOfTag;
         try{
             elemWithLabelOfTag = $scope.labelsAssociatedToTag.filter(item => { return item.tag == document.tag })
         } 
         catch(e) { 
             console.error("Doc not found in list of documents"); 
         }
-
         if(elemWithLabelOfTag.length == 0) {
             $scope.selectedTags = []; 
             $scope.initialTag = "no_tag"; 
@@ -287,10 +284,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             if($scope.checkElementInArray($("#button-doc-conforme").attr("class").split(/\s+/), "conforme-selected")){
                 $("#button-doc-conforme").removeClass("conforme-selected"); 
             } 
-        } 
-
-
-
+        }
         if($scope.isDocRichiesto(document)) {
             $scope.modalIsDocRichiesto = true; 
             if(!$scope.checkElementInArray($("#button-doc-richiesto").attr("class").split(/\s+/), "richiesto-selected")){
@@ -410,6 +404,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
             fileToBeUploaded.tenderNumber = $scope.bandoGara.sapNumber
             fileToBeUploaded.supplierName = $scope.fornitoreOverview.name
+            fileToBeUploaded.userId = mainController.getUserId()
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         });
@@ -534,11 +529,19 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.addToSelectedTags = function () {
-        let select = document.getElementById("select-tag"); 
+        let select = document.getElementById("select-tag");
+        if(select.selectedIndex === 0) return;
         let selectedTag = select.options[select.selectedIndex].value; 
         if (selectedTag == "" || selectedTag.trim().startsWith("Scegli") || selectedTag.trim().includes("undefined")) return;
         if ($scope.containsTagArraySelectedTag(selectedTag)) return;
         $scope.selectedTags.push({"label": selectedTag, "active": true});
+    }
+
+    $scope.feedbackComment = {}
+
+    $scope.missingCommentForFeedback = function() {
+        if($scope.feedbackComment.text === undefined || $scope.feedbackComment.text === "") return true
+        return false
     }
 
     $scope.deleteFromSelectedTags = function (tag) {
@@ -565,7 +568,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.isDocConforme = function (document) {
-        return document.conformity == 2;
+        return document.conformity !== 1;
     }
 
     $scope.isDocRichiesto = function (document) {
@@ -573,7 +576,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         let documentTag = document.tag;
         let bandoGara = JSON.parse(sessionStorage.getItem("bandoGara"));
         console.log("isDocRichiesto, bandoGara: ", bandoGara); 
-        console.log("isDocRichiesto, document.tag: ", document.tag); 
+        console.log("isDocRichiesto, document.tag: ", document.tag);
 
         if (!document.tag || document.tag.includes("no_tag")) return false; 
         if (bandoGara.requiredAttachments.indexOf(documentTag) == -1) return false;
