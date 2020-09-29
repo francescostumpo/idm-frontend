@@ -313,6 +313,13 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
 
         $('#sendFeedbackModal').modal({ scope: $scope }); 
+        $("#comment-box").html(""); 
+        $("option[value='choose_item']").attr('selected','selected'); 
+        $('#send-fb-button').attr('disabled', true);
+         $("#select-tag").css("color", "gray"); 
+
+        console.log("isEmptyCommentBox: ", $scope.isStringEmpty($scope.documentFeedbackComment)); 
+        console.log("is empty value: ", $scope.documentFeedbackComment); 
 
 
     }
@@ -630,6 +637,8 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         array.indexOf(element) == -1 ? false : true; 
     } 
 
+
+
     mainController.stopProgressIndicator('#loading');
 
 
@@ -638,7 +647,45 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         $scope.modalIsDocConforme = false;
         $scope.modalIsDocRichiesto = false; 
         $scope.documentFeedbackComment = ""; 
-        $("#comment-box").val() = ""; 
+        $("#comment-box").html(""); 
       }); 
+
+
+      $('#sendFeedbackModal').on('modalclosed', function (e) {
+        $("#comment-box").html(""); 
+        $scope.documentFeedbackComment = ""; 
+      }); 
+
+
+      let textArea = $('textarea')
+
+
+      $scope.checkIfTextareaIsEmpty = function () {
+        console.log('Textarea: ', $('textarea#comment-box')); 
+        console.log('checking textarea: ', $('textarea#comment-box').length); 
+        return $('textarea#comment-box').length() > 1 ? false : true; 
+      } 
+
+      $("#comment-box").on('keyup', function(event) {
+        console.log('keyup'); 
+        var currentString = $("#comment-box").val(); 
+        console.log('currentString: ', currentString); 
+        console.log('feedback button: ', $('#send-fb-button')); 
+        //console.log('Feedback button attributes: ', $('#send-fb-button').attr()); 
+        if (currentString.length == 0 )  {  /*or whatever your number is*/
+            $('#send-fb-button').attr('disabled', true); 
+        } else {
+           $('#send-fb-button').removeAttr('disabled'); 
+        }
+    });
+
+      //Util Functions 
+      $scope.isStringEmpty = function(str) {
+        return (!str || 0 === str.length);
+    } 
+
+    $scope.isStringBlank = function(str) {
+        return (!str || /^\s*$/.test(str)); 
+    }
 
 }]);
