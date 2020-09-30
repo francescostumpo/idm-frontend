@@ -2003,10 +2003,10 @@ a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
     box-shadow: none;
   }
 
-.striked {
-    text-decoration: line-through;
-}
+  .striked {
+      text-decoration: line-through;
+  }
 
-.unstriked {
-    text-decoration: none;
-}
+  .unstriked {
+      text-decoration: none;
+  }

@@ -36,18 +36,21 @@
                         </div>
                         <div ng-repeat="item in selectedTags"
                             style="font-family: Ubuntu; font-size: 16px; font-weight: bold; color: #1D2A30; letter-spacing: 0.89px; margin-bottom: 2%;">
-                            <span> {{ item }} </span>
-                            <i class="fas fa-times-circle" ng-click="deleteFromSelectedTags(item)"
+                            <span ng-class="{ true: 'unstriked', false: 'striked'}[item.active]"> {{ item.label }} </span>
+                            <i class="fas fa-times-circle" ng-click="deleteFromSelectedTags(item.label)"
                                 style="float: right; margin-top: 1%;"></i>
                         </div>
 
 
+                      <select id="select-tag" class="form-control modal-select" 
+                                style="width: 85%; float: left; margin-top: 8%; border: 1px solid #CFD6DB; border-radius: 4px; border-radius: 4px;"> 
+                                <!--<option ng-selected="true" value="{tag: 'none', label: 'Scegli un tag esistente'}"> Scegli un tag esistente </option> --> 
+                                <option value="choose_item" ng-selected="selected" disabled> Scegli un tag esistente </option>
+                                <option ng-repeat="item in labelsAssociatedToTag" ng-value="{{item.label}}">
+                                    {{ item.label }} </option>  
+                            </select> 
 
-                        <select id="select-tag" class="form-control selectpicker modal-select" ng-model="tagSelectedInModal" style="width: 85%; float: left; margin-top: 8%; background: #FFFFFF; border: 1px solid #CFD6DB; border-radius: 4px; border-radius: 4px;">
-                            <option ng-repeat="item in labelsAssociatedToTag" value="{{item.label}}"> {{ item.label }} </option>
-                        </select> 
-
-                        <!--<div class="dropdown" style="margin-top: 7%; float: left; width: 85%;">
+                            <!--<div class="dropdown" style="margin-top: 7%; float: left; width: 85%;">
                             <div class="col-lg-2 col-md-2 col-sm-2" data-toggle="dropdown"
                                 style="height: 3rem; margin-left: -2%;">
                                 <button class="btn button-primary-buyer" style="height: 2.5rem; width: 24rem;">
@@ -65,7 +68,7 @@
                                     <span class="ml-2"> {{ item.label }} </span>
                                 </p>
                             </div>
-                        </div> --> 
+                        </div> -->
                         <div style="margin-top: 10%; float: right;">
                             <i class="fas fa-plus-circle hoverable" ng-click="addToSelectedTags()"
                                 style="float: left; width: 10%;"> </i>
@@ -76,32 +79,32 @@
                 <div class="button-conformita" style="margin-bottom: 2%; text-align: center;">
                     <button id="button-doc-conforme" ng-click="toggleButtonConforme()"
                         class="btn button-primary-buyer col-md-5"
-                        style="font-family: Ubuntu; font-size: 14px; border: 1px solid #004AA2; letter-spacing: 0.32px; text-align: center;">
+                        style="margin-right: -2%; font-family: Ubuntu; font-size: 14px; border: 1px solid #004AA2; border-radius: 4px 0 0 4px; letter-spacing: 0.32px; text-align: center;">
                         DOC CONFORME
                     </button>
                     <button id="button-doc-non-conforme" ng-click="toggleButtonConforme()"
                         class="btn button-primary-buyer col-md-5"
-                        style="font-family: Ubuntu; font-size: 14px;  border: 1px solid #004AA2; letter-spacing: 0.32px; text-align: center;">
+                        style="font-family: Ubuntu; font-size: 14px;  border: 1px solid #004AA2; border-radius: 0 4px 4px 0; letter-spacing: 0.32px; text-align: center;">
                         DOC NON CONFORME
                     </button>
                 </div>
                 <div class="button-doc-richiesta" style="margin-bottom: 2%; text-align: center;">
                     <button id="button-doc-richiesto" ng-click="toggleButtonRichiesto()"
                         class="btn button-primary-buyer col-md-5"
-                        style="font-family: Ubuntu; font-size: 14px; border: 1px solid #004AA2; letter-spacing: 0.32px; text-align: center;">
+                        style="margin-right: -2%; font-family: Ubuntu; font-size: 14px; border: 1px solid #004AA2; border-radius: 4px 0 0 4px; letter-spacing: 0.32px; text-align: center;">
                         DOC RICHIESTO
                     </button>
                     <button id="button-doc-non-richiesto" ng-click="toggleButtonRichiesto()"
                         class="btn button-primary-buyer col-md-5"
-                        style="font-family: Ubuntu; font-size: 14px; border: 1px solid #004AA2; letter-spacing: 0.32px; text-align: center;">
+                        style="font-family: Ubuntu; font-size: 14px; border: 1px solid #004AA2; border-radius: 0 4px 4px 0; letter-spacing: 0.32px; text-align: center;">
                         DOC NON RICHIESTO
                     </button>
                 </div>
                 <div class="row" style="padding-top: 3%; padding-left: 7.5%; padding-right: 7.5%; ">
                     <div class="col-md-12 col-sm-12">
-                        <div class="text-primary mt-3">
-                            <textarea ng-model="feedbackComment.text" id="comment-box" class="text-primary form-control"
-                                style="height: 150px; float: left;"></textarea>
+                        <div id="textarea-div" class="text-primary mt-3">
+                            <textarea id="comment-box" class="text-primary form-control"
+                                style="height: 150px; float: left; resize: none;" placeholder="Tag associato errato"></textarea>
                         </div>
                     </div>
                 </div>
@@ -121,10 +124,12 @@
                         </button>
                     </div>
                     <div class="text-center col-md-6">
-                        <button ng-disabled="missingCommentForFeedback()" ng-click="sendFeedback()" type="button" class="btn button-secondary-buyer" data-dismiss="modal">
-                            <span>
-                                INVIA
-                            </span>
+                        <button ng-click="sendFeedback()" id="send-fb-button" type="button" class="btn button-secondary-buyer"  
+                            style="background: #004B9C; width: 65%; border-radius: 4px; border-radius: 4px;"
+                            data-dismiss="modal">
+                            <span
+                                style="font-family: Ubuntu; font-weight: bold; font-size: 16px; color: #FFFFFF; letter-spacing: 0.43px; text-align: center;">
+                                INVIA </span>
                         </button>
                     </div>
                 </div>
