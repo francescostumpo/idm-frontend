@@ -259,7 +259,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         }
         else if (elemWithLabelOfTag && !$scope.containsTagArraySelectedTag(elemWithLabelOfTag[0])) {
             $scope.docInitialTag = elemWithLabelOfTag[0].label; 
-            $scope.selectedTags.push(elemWithLabelOfTag[0].label);
+            $scope.selectedTags.push({"label": elemWithLabelOfTag[0].label, "active": true});
         }
 
         console.log("Doc conforme: ", $scope.isDocConforme(document)); 
@@ -305,7 +305,17 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
                 $("#button-doc-richiesto").removeClass("richiesto-selected"); 
             }
         }
-        $('#sendFeedbackModal').modal({ scope: $scope });
+
+        $('#sendFeedbackModal').modal({ scope: $scope }); 
+        $("#comment-box").html(""); 
+        $("option[value='choose_item']").attr('selected','selected'); 
+        $('#send-fb-button').attr('disabled', true);
+         $("#select-tag").css("color", "gray"); 
+
+        console.log("isEmptyCommentBox: ", $scope.isStringEmpty($scope.documentFeedbackComment)); 
+        console.log("is empty value: ", $scope.documentFeedbackComment); 
+
+
     }
 
     $scope.editSupplier = function () {
@@ -394,6 +404,7 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
             fileToBeUploaded.idSupplier = $scope.fornitoreOverview.id;
             fileToBeUploaded.tenderNumber = $scope.bandoGara.sapNumber
             fileToBeUploaded.supplierName = $scope.fornitoreOverview.name
+            fileToBeUploaded.userId = mainController.getUserId()
             stompClientFiles.send("/app/updateFiles", {}, JSON.stringify(fileToBeUploaded));
             mainController.showNotification("bottom", "right", "Caricamento file in corso", '', 'info');
         });
@@ -521,9 +532,9 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         let select = document.getElementById("select-tag");
         if(select.selectedIndex === 0) return;
         let selectedTag = select.options[select.selectedIndex].value; 
-        if (selectedTag == "" || selectedTag.trim().startsWith("Scegli")) return;
+        if (selectedTag == "" || selectedTag.trim().startsWith("Scegli") || selectedTag.trim().includes("undefined")) return;
         if ($scope.containsTagArraySelectedTag(selectedTag)) return;
-        $scope.selectedTags.push(selectedTag);
+        $scope.selectedTags.push({"label": selectedTag, "active": true});
     }
 
     $scope.feedbackComment = {}
@@ -534,14 +545,26 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
     }
 
     $scope.deleteFromSelectedTags = function (tag) {
-        $scope.selectedTags = $scope.selectedTags.filter(function (item) {
-            return item !== tag
+        $scope.selectedTags.forEach(item => {
+            if(item.label == tag) {
+                item.active = false;
+            }
         });
+        console.log("After deletion of tag, $scope.selectedTags is: ", $scope.selectedTags);
+       /* $scope.selectedTags = $scope.selectedTags.filter(function (item) {
+            return item.label !== tag
+        }); */
     }
 
     $scope.containsTagArraySelectedTag = function (tag) {
-        if ($scope.selectedTags.indexOf(tag) == -1) return false;
-        return true;
+        let containsTag = false; 
+        $scope.selectedTags.forEach((item) => {
+            if(item.label == tag) {
+                containsTag = true; 
+            }
+        })
+        //if ($scope.selectedTags.indexOf(tag) == -1) return false;
+        return containsTag;
     }
 
     $scope.isDocConforme = function (document) {
@@ -572,9 +595,20 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         feedback.tenderId = JSON.parse(sessionStorage.getItem("bandoGara")).id; 
         feedback.tenderSapNumber = JSON.parse(sessionStorage.getItem("bandoGara")).sapNumber; 
 
+
+        // L'inserimento dei tags può essere semplificato
+        let activeTagsArray = []; 
+        let activeTags = $scope.selectedTags.filter((item) => {
+            return item.active == true; 
+        }); 
+
+        activeTags.forEach(item => {
+            activeTagsArray.push(item.label); 
+        })
+
         let userFeedback = {
             initialTag: $scope.docInitialTag,
-            tags: $scope.selectedTags,
+            tags: activeTagsArray,
             isDocConforme: $scope.modalIsDocConforme,
             isDocRichiesto: $scope.modalIsDocRichiesto,
             comment: $("#comment-box").val()
@@ -606,6 +640,55 @@ snamApp.controller("overviewFornitoreController", ['$scope', '$http', '$location
         array.indexOf(element) == -1 ? false : true; 
     } 
 
+
+
     mainController.stopProgressIndicator('#loading');
+
+
+    $('#sendFeedbackModal').on('hidden.bs.modal', function (e) {
+        $scope.selectedTags = []; 
+        $scope.modalIsDocConforme = false;
+        $scope.modalIsDocRichiesto = false; 
+        $scope.documentFeedbackComment = ""; 
+        $("#comment-box").html(""); 
+      }); 
+
+
+      $('#sendFeedbackModal').on('modalclosed', function (e) {
+        $("#comment-box").html(""); 
+        $scope.documentFeedbackComment = ""; 
+      }); 
+
+
+      let textArea = $('textarea')
+
+
+      $scope.checkIfTextareaIsEmpty = function () {
+        console.log('Textarea: ', $('textarea#comment-box')); 
+        console.log('checking textarea: ', $('textarea#comment-box').length); 
+        return $('textarea#comment-box').length() > 1 ? false : true; 
+      } 
+
+      $("#comment-box").on('keyup', function(event) {
+        console.log('keyup'); 
+        var currentString = $("#comment-box").val(); 
+        console.log('currentString: ', currentString); 
+        console.log('feedback button: ', $('#send-fb-button')); 
+        //console.log('Feedback button attributes: ', $('#send-fb-button').attr()); 
+        if (currentString.length == 0 )  {  /*or whatever your number is*/
+            $('#send-fb-button').attr('disabled', true); 
+        } else {
+           $('#send-fb-button').removeAttr('disabled'); 
+        }
+    });
+
+      //Util Functions 
+      $scope.isStringEmpty = function(str) {
+        return (!str || 0 === str.length);
+    } 
+
+    $scope.isStringBlank = function(str) {
+        return (!str || /^\s*$/.test(str)); 
+    }
 
 }]);
